@@ -1,0 +1,3 @@
+Error[105]   E:\PRUEBAPIC\TEMPERATURA_LCD.X\TEMPERATURA_LCD.ASM 6 : Cannot open file (Include File "LCD.INC" not found)
+Warning[207] E:\PRUEBAPIC\TEMPERATURA_LCD.X\TEMPERATURA_LCD.ASM 7 : Found label after column 1. (?INCLUDE)
+Error[108]   E:\PRUEBAPIC\TEMPERATURA_LCD.X\TEMPERATURA_LCD.ASM 7 : Illegal character (<)

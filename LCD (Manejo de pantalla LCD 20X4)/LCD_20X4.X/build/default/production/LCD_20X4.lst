@@ -1,0 +1,1127 @@
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001     PROCESSOR 16F887
+                      00002     #INCLUDE <P16F887.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Oct 24 2019
+                      00005 ;  MPASM PIC16F887 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2019 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00810         LIST
+                      00003     LIST P=16F887
+                      00004     ; CONFIG1
+                      00005     ; __config 0xE3E2
+2007   23E2           00006     __CONFIG _CONFIG1, _FOSC_HS & _WDTE_OFF & _PWRTE_ON & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_ON & _
+                            IESO_OFF & _FCMEN_OFF & _LVP_OFF
+                      00007     ;    CONFIG2
+                      00008     ; __config 0xFFFF
+2008   3FFF           00009     __CONFIG _CONFIG2, _BOR4V_BOR40V & _WRT_OFF
+                      00010     CBLOCK 0x20
+                      00011     ENDC
+                      00012     ORG 0
+0000   2???           00013     GOTO INICIO
+                      00014     ORG 5
+0005                  00015 INICIO
+0005   1683           00016     BSF STATUS,RP0
+0006   1303           00017     BCF STATUS,RP1
+0007   3000           00018     MOVLW B'00000000'
+                      00019     ;MOVLW B'01101110'
+                      00020     ;MOVWF OSCCON
+                      00021     ;CLRF OSCTUNE
+                      00022     ;MOVLW 0xFF
+0008   3088           00023     MOVLW TRISD
+0009   1283           00024     BCF STATUS,RP0
+000A   1303           00025     BCF STATUS,RP1
+000B   0188           00026     CLRF PORTD
+000C   2???           00027     CALL RETARDO_50MICROS
+000D   2???           00028     CALL INICIALIZACION_DE_PANTALLA 
+000E   2???           00029     CALL RETARDO_50MICROS
+000F                  00030 START
+000F   3048           00031     MOVLW 'H'
+0010   2???           00032     CALL ESCRIBIR_CARACTER
+0011   304F           00033     MOVLW 'O'
+0012   2???           00034     CALL ESCRIBIR_CARACTER
+0013   304C           00035     MOVLW 'L'
+0014   2???           00036     CALL ESCRIBIR_CARACTER
+0015   3041           00037     MOVLW 'A'
+0016   2???           00038     CALL ESCRIBIR_CARACTER
+0017   3020           00039     MOVLW ' '
+0018   2???           00040     CALL ESCRIBIR_CARACTER
+0019   304D           00041     MOVLW 'M'
+001A   2???           00042     CALL ESCRIBIR_CARACTER
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+001B   3055           00043     MOVLW 'U'
+001C   2???           00044     CALL ESCRIBIR_CARACTER
+001D   304E           00045     MOVLW 'N'
+001E   2???           00046     CALL ESCRIBIR_CARACTER
+001F   3044           00047     MOVLW 'D'
+0020   2???           00048     CALL ESCRIBIR_CARACTER
+0021   304F           00049     MOVLW 'O'
+0022   2???           00050     CALL ESCRIBIR_CARACTER
+0023   3021           00051     MOVLW '!'
+0024   2???           00052     CALL ESCRIBIR_CARACTER
+0025   300C           00053     MOVLW SOLO_DISPLAY
+0026   2???           00054     CALL ESCRIBIR_COMANDO
+                      00055     ;CALL RETARDO_2S
+                      00056     ;MOVLW LIMPIAR_LCD
+                      00057     ;CALL ESCRIBIR_COMANDO
+                      00058     ;CALL RETARDO_2S
+                      00059     ;GOTO START
+0027   2???           00060     GOTO $
+                      00061     #INCLUDE <RETARDOS.INC>
+                      00001 ;**************************** Librería "RETARDOS.INC" *********************************
+                      00002 ;       ===================================================================
+                      00003 ;         Del libro "MICROCONTROLADOR PIC16F84. DESARROLLO DE PROYECTOS"
+                      00004 ;         E. Palacios, F. Remiro y L. López.
+                      00005 ;         Editorial Ra-Ma.  www.ra-ma.es
+                      00006 ;       ===================================================================
+                      00007 ;
+                      00008 ; Librería con múltiples subrutinas de retardos, desde 4 microsegundos hasta 20 segundos. 
+                      00009 ; Además se pueden implementar otras subrutinas muy fácilmente.
+                      00010 ;
+                      00011 ; Se han calculado para un sistema microcontrolador con un PIC trabajando con un cristal
+                      00012 ; de cuarzo a 4 MHz. Como cada ciclo máquina son 4 ciclos de reloj, resulta que cada
+                      00013 ; ciclo máquina tarda 4 x 1/4MHz = 1 µs.
+                      00014 ; En los comentarios, "cm" significa "ciclos máquina".
+                      00015 ; ZONA DE DATOS *********************************************************************
+                      00016     CBLOCK
+  00000020            00017     R_CONTA                             ; Contadores para los retardos.
+  00000021            00018     R_CONTB
+  00000022            00019     R_CONTC
+                      00020     ENDC
+                      00021 ; RETARDOS de 4 hasta 10 microsegundos ---------------------------------------------------
+                      00022 ; A continuación retardos pequeños teniendo en cuenta que para una frecuencia de 4 MHZ,
+                      00023 ; la llamada a subrutina "call" tarda 2 ciclos máquina, el retorno de subrutina
+                      00024 ; "return" toma otros 2 ciclos máquina y cada instrucción "nop" tarda 1 ciclo máquina.
+0028                  00025 RETARDO_10MICROS                                ; La llamada "call" aporta 2 ciclos máquina.
+0028   0000           00026     NOP                         ; Aporta 1 ciclo máquina.
+0029   0000           00027     NOP                         ; Aporta 1 ciclo máquina.
+002A   0000           00028     NOP                         ; Aporta 1 ciclo máquina.
+002B   0000           00029     NOP                         ; Aporta 1 ciclo máquina.
+002C   0000           00030     NOP                         ; Aporta 1 ciclo máquina.
+002D                  00031 RETARDO_5MICROS                 ; La llamada "call" aporta 2 ciclos máquina.
+002D   0000           00032     NOP                         ; Aporta 1 ciclo máquina.
+002E                  00033 RETARDO_4MICROS                 ; La llamada "call" aporta 2 ciclos máquina.
+002E   0008           00034     RETURN                              ; El salto del retorno aporta 2 ciclos máquina.
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00035 ; RETARDOS de 20 hasta 500 microsegundos ------------------------------------------------
+002F                  00036 RETARDO_500MICROS                       ; La llamada "call" aporta 2 ciclos máquina.
+002F   0000           00037     NOP                                 ; Aporta 1 ciclo máquina.
+0030   30A4           00038     MOVLW       D'164'                  ; Aporta 1 ciclo máquina. Este es el valor de "K".
+0031   2???           00039     GOTO        RETARDOMICROS           ; Aporta 2 ciclos máquina.
+0032                  00040 RETARDO_200MICROS                       ; La llamada "call" aporta 2 ciclos máquina.
+0032   0000           00041     NOP                                 ; Aporta 1 ciclo máquina.
+0033   3040           00042     MOVLW       D'64'                   ; Aporta 1 ciclo máquina. Este es el valor de "K".
+0034   2???           00043     GOTO        RETARDOMICROS           ; Aporta 2 ciclos máquina.
+0035                  00044 RETARDO_100MICROS                       ; La llamada "call" aporta 2 ciclos máquina.
+0035   301F           00045     MOVLW       D'31'                   ; Aporta 1 ciclo máquina. Este es el valor de "K".
+0036   2???           00046     GOTO        RETARDOMICROS           ; Aporta 2 ciclos máquina.
+0037                  00047 RETARDO_50MICROS                        ; La llamada "call" aporta 2 ciclos máquina.
+0037   0000           00048     NOP                                 ; Aporta 1 ciclo máquina.
+0038   300E           00049     MOVLW       D'14'                   ; Aporta 1 ciclo máquina. Este es el valor de "K".
+0039   2???           00050     GOTO        RETARDOMICROS           ; Aporta 2 ciclos máquina.
+003A                  00051 RETARDO_20MICROS                                ; La llamada "call" aporta 2 ciclos máquina.
+003A   3005           00052     MOVLW       D'5'                    ; Aporta 1 ciclo máquina. Este es el valor de "K".
+                      00053 ; El próximo bloque "RetardoMicros" tarda:
+                      00054 ; 1 + (K-1) + 2 + (K-1)x2 + 2 = (2 + 3K) ciclos máquina.
+003B                  00055 RETARDOMICROS
+003B   00A0           00056     MOVWF       R_CONTA                 ; Aporta 1 ciclo máquina.
+003C                  00057 RMICROS_BUCLE
+003C   0BA0           00058     DECFSZ      R_CONTA,F               ; (K-1)x1 cm (cuando no salta) + 2 cm (al saltar).
+003D   2???           00059     GOTO        RMICROS_BUCLE           ; Aporta (K-1)x2 ciclos máquina.
+003E   0008           00060     RETURN                              ; El salto del retorno aporta 2 ciclos máquina.
+                      00061 ;En total estas subrutinas tardan:
+                      00062 ; - Retardo_500micros:  2 + 1 + 1 + 2 + (2 + 3K) = 500 cm = 500 µs. (para K=164 y 4 MHz).
+                      00063 ; - Retardo_200micros:  2 + 1 + 1 + 2 + (2 + 3K) = 200 cm = 200 µs. (para K= 64 y 4 MHz).
+                      00064 ; - Retardo_100micros:  2     + 1 + 2 + (2 + 3K) = 100 cm = 100 µs. (para K= 31 y 4 MHz).
+                      00065 ; - Retardo_50micros :  2 + 1 + 1 + 2 + (2 + 3K) =  50 cm =  50 µs. (para K= 14 y 4 MHz).
+                      00066 ; - Retardo_20micros :  2     + 1     + (2 + 3K) =  20 cm =  20 µs. (para K=  5 y 4 MHz).
+                      00067 ; RETARDOS de 1 ms hasta 200 ms. --------------------------------------------------------
+003F                  00068 RETARDO_200MS                           ; La llamada "call" aporta 2 ciclos máquina.
+003F   30C8           00069     MOVLW       D'200'                  ; Aporta 1 ciclo máquina. Este es el valor de "M".
+0040   2???           00070     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
+0041                  00071 RETARDO_100MS                           ; La llamada "call" aporta 2 ciclos máquina.
+0041   3064           00072     MOVLW       D'100'                  ; Aporta 1 ciclo máquina. Este es el valor de "M".
+0042   2???           00073     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
+0043                  00074 RETARDO_50MS                            ; La llamada "call" aporta 2 ciclos máquina.
+0043   3032           00075     MOVLW       D'50'                   ; Aporta 1 ciclo máquina. Este es el valor de "M".
+0044   2???           00076     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
+0045                  00077 RETARDO_20MS                            ; La llamada "call" aporta 2 ciclos máquina.    
+0045   3014           00078     MOVLW       D'20'                   ; Aporta 1 ciclo máquina. Este es el valor de "M".
+0046   2???           00079     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
+0047                  00080 RETARDO_10MS                            ; La llamada "call" aporta 2 ciclos máquina.
+0047   300A           00081     MOVLW       D'10'                   ; Aporta 1 ciclo máquina. Este es el valor de "M".
+0048   2???           00082     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
+0049                  00083 RETARDO_5MS                             ; La llamada "call" aporta 2 ciclos máquina.
+0049   3005           00084     MOVLW       D'5'                    ; Aporta 1 ciclo máquina. Este es el valor de "M".
+004A   2???           00085     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
+004B                  00086 RETARDO_2MS                             ; La llamada "call" aporta 2 ciclos máquina.
+004B   3002           00087     MOVLW       D'2'                    ; Aporta 1 ciclo máquina. Este es el valor de "M".
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+004C   2???           00088     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
+004D                  00089 RETARDO_1MS                             ; La llamada "call" aporta 2 ciclos máquina.
+004D   3001           00090     MOVLW       D'1'                    ; Aporta 1 ciclo máquina. Este es el valor de "M".
+                      00091 ; El próximo bloque "Retardos_ms" tarda:
+                      00092 ; 1 + M + M + KxM + (K-1)xM + Mx2 + (K-1)Mx2 + (M-1) + 2 + (M-1)x2 + 2 =
+                      00093 ; = (2 + 4M + 4KM) ciclos máquina. Para K=249 y M=1 supone 1002 ciclos máquina
+                      00094 ; que a 4 MHz son 1002 µs = 1 ms.
+004E                  00095 RETARDOS_MS
+004E   00A1           00096     MOVWF       R_CONTB                 ; Aporta 1 ciclo máquina.
+004F                  00097 R1MS_BUCLEEXTERNO
+004F   30F9           00098     MOVLW       D'249'                  ; Aporta Mx1 ciclos máquina. Este es el valor de "K".   
+0050   00A0           00099     MOVWF       R_CONTA                 ; Aporta Mx1 ciclos máquina.
+0051                  00100 R1MS_BUCLEINTERNO
+0051   0000           00101     NOP                         ; Aporta KxMx1 ciclos máquina.
+0052   0BA0           00102     DECFSZ      R_CONTA,F               ; (K-1)xMx1 cm (cuando no salta) + Mx2 cm (al saltar).
+0053   2???           00103     GOTO        R1MS_BUCLEINTERNO       ; Aporta (K-1)xMx2 ciclos máquina.
+0054   0BA1           00104     DECFSZ      R_CONTB,F               ; (M-1)x1 cm (cuando no salta) + 2 cm (al saltar).
+0055   2???           00105     GOTO        R1MS_BUCLEEXTERNO       ; Aporta (M-1)x2 ciclos máquina.
+0056   0008           00106     RETURN                              ; El salto del retorno aporta 2 ciclos máquina.
+                      00107 ;En total estas subrutinas tardan:
+                      00108 ; - Retardo_200ms:      2 + 1 + 2 + (2 + 4M + 4KM) = 200007 cm = 200 ms. (M=200 y K=249).
+                      00109 ; - Retardo_100ms:      2 + 1 + 2 + (2 + 4M + 4KM) = 100007 cm = 100 ms. (M=100 y K=249).
+                      00110 ; - Retardo_50ms :      2 + 1 + 2 + (2 + 4M + 4KM) =  50007 cm =  50 ms. (M= 50 y K=249).
+                      00111 ; - Retardo_20ms :      2 + 1 + 2 + (2 + 4M + 4KM) =  20007 cm =  20 ms. (M= 20 y K=249).
+                      00112 ; - Retardo_10ms :      2 + 1 + 2 + (2 + 4M + 4KM) =  10007 cm =  10 ms. (M= 10 y K=249).
+                      00113 ; - Retardo_5ms  :      2 + 1 + 2 + (2 + 4M + 4KM) =   5007 cm =   5 ms. (M=  5 y K=249).
+                      00114 ; - Retardo_2ms  :      2 + 1 + 2 + (2 + 4M + 4KM) =   2007 cm =   2 ms. (M=  2 y K=249).
+                      00115 ; - Retardo_1ms  :      2 + 1     + (2 + 4M + 4KM) =   1005 cm =   1 ms. (M=  1 y K=249).
+                      00116 ; RETARDOS de 0.5 hasta 20 segundos ---------------------------------------------------
+0057                  00117 RETARDO_20S                             ; La llamada "call" aporta 2 ciclos máquina.
+0057   30C8           00118     MOVLW       D'200'                  ; Aporta 1 ciclo máquina. Este es el valor de "N".
+0058   2???           00119     GOTO        RETARDO_1DECIMA         ; Aporta 2 ciclos máquina.
+0059                  00120 RETARDO_10S                             ; La llamada "call" aporta 2 ciclos máquina.
+0059   3064           00121     MOVLW       D'100'                  ; Aporta 1 ciclo máquina. Este es el valor de "N".  
+005A   2???           00122     GOTO        RETARDO_1DECIMA         ; Aporta 2 ciclos máquina.
+005B                  00123 RETARDO_5S                              ; La llamada "call" aporta 2 ciclos máquina.
+005B   3032           00124     MOVLW       D'50'                   ; Aporta 1 ciclo máquina. Este es el valor de "N".
+005C   2???           00125     GOTO        RETARDO_1DECIMA         ; Aporta 2 ciclos máquina.
+005D                  00126 RETARDO_2S                              ; La llamada "call" aporta 2 ciclos máquina.
+005D   3014           00127     MOVLW       D'20'                   ; Aporta 1 ciclo máquina. Este es el valor de "N".  
+005E   2???           00128     GOTO        RETARDO_1DECIMA         ; Aporta 2 ciclos máquina.
+005F                  00129 RETARDO_1S                              ; La llamada "call" aporta 2 ciclos máquina.
+005F   300A           00130     MOVLW       D'10'                   ; Aporta 1 ciclo máquina. Este es el valor de "N".
+0060   2???           00131     GOTO        RETARDO_1DECIMA         ; Aporta 2 ciclos máquina.
+0061                  00132 RETARDO_500MS                           ; La llamada "call" aporta 2 ciclos máquina.
+0061   3005           00133     MOVLW       D'5'                    ; Aporta 1 ciclo máquina. Este es el valor de "N".
+                      00134 ; El próximo bloque "Retardo_1Decima" tarda:
+                      00135 ; 1 + N + N + MxN + MxN + KxMxN + (K-1)xMxN + MxNx2 + (K-1)xMxNx2 +
+                      00136 ;   + (M-1)xN + Nx2 + (M-1)xNx2 + (N-1) + 2 + (N-1)x2 + 2 =
+                      00137 ; = (2 + 4M + 4MN + 4KM) ciclos máquina. Para K=249, M=100 y N=1 supone 100011
+                      00138 ; ciclos máquina que a 4 MHz son 100011 µs = 100 ms = 0,1 s = 1 décima de segundo.
+0062                  00139 RETARDO_1DECIMA
+0062   00A2           00140     MOVWF       R_CONTC                 ; Aporta 1 ciclo máquina.
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0063                  00141 R1DECIMA_BUCLEEXTERNO2
+0063   3064           00142     MOVLW       D'100'                  ; Aporta Nx1 ciclos máquina. Este es el valor de "M".
+0064   00A1           00143     MOVWF       R_CONTB                 ; Aporta Nx1 ciclos máquina.
+0065                  00144 R1DECIMA_BUCLEEXTERNO
+0065   30F9           00145     MOVLW       D'249'                  ; Aporta MxNx1 ciclos máquina. Este es el valor de "K".
+0066   00A0           00146     MOVWF       R_CONTA                 ; Aporta MxNx1 ciclos máquina.
+0067                  00147 R1DECIMA_BUCLEINTERNO         
+0067   0000           00148     NOP                                 ; Aporta KxMxNx1 ciclos máquina.
+0068   0BA0           00149     DECFSZ      R_CONTA,F               ; (K-1)xMxNx1 cm (si no salta) + MxNx2 cm (al saltar).
+0069   2???           00150     GOTO        R1DECIMA_BUCLEINTERNO   ; Aporta (K-1)xMxNx2 ciclos máquina.
+006A   0BA1           00151     DECFSZ      R_CONTB,F               ; (M-1)xNx1 cm (cuando no salta) + Nx2 cm (al saltar).
+006B   2???           00152     GOTO        R1DECIMA_BUCLEEXTERNO   ; Aporta (M-1)xNx2 ciclos máquina.
+006C   0BA2           00153     DECFSZ      R_CONTC,F               ; (N-1)x1 cm (cuando no salta) + 2 cm (al saltar).
+006D   2???           00154     GOTO        R1DECIMA_BUCLEEXTERNO2  ; Aporta (N-1)x2 ciclos máquina.
+006E   0008           00155     RETURN                              ; El salto del retorno aporta 2 ciclos máquina.
+                      00156 ;En total estas subrutinas tardan:
+                      00157 ; - Retardo_20s:        2 + 1 + 2 + (2 + 4N + 4MN + 4KMN) = 20000807 cm = 20 s.
+                      00158 ;                       (N=200, M=100 y K=249).
+                      00159 ; - Retardo_10s:        2 + 1 + 2 + (2 + 4N + 4MN + 4KMN) = 10000407 cm = 10 s.
+                      00160 ;                       (N=100, M=100 y K=249).
+                      00161 ; - Retardo_5s:         2 + 1 + 2 + (2 + 4N + 4MN + 4KMN) =  5000207 cm =  5 s.
+                      00162 ;                       (N= 50, M=100 y K=249).
+                      00163 ; - Retardo_2s:         2 + 1 + 2 + (2 + 4N + 4MN + 4KMN) =  2000087 cm =  2 s.
+                      00164 ;                       (N= 20, M=100 y K=249).
+                      00165 ; - Retardo_1s:         2 + 1 + 2 + (2 + 4N + 4MN + 4KMN) =  1000047 cm =  1 s.
+                      00166 ;                       (N= 10, M=100 y K=249).
+                      00167 ; - Retardo_500ms:      2 + 1     + (2 + 4N + 4MN + 4KMN) =   500025 cm = 0,5 s.
+                      00168 ;                       (N=  5, M=100 y K=249).
+                      00169 ;       ===================================================================
+                      00170 ;         Del libro "MICROCONTROLADOR PIC16F84. DESARROLLO DE PROYECTOS"
+                      00171 ;         E. Palacios, F. Remiro y L. López.
+                      00172 ;         Editorial Ra-Ma.  www.ra-ma.es
+                      00173 ;       =====================================================
+                      00174 
+                      00175 
+                      00062     #INCLUDE <LCD.INC>  
+                      00001     CBLOCK
+  00000023            00002     memocaracter
+  00000024            00003     memoriaw
+  00000025            00004     caractertemp
+                      00005     ENDC
+                      00006     
+  00000008            00007 DATOS EQU PORTD ;LINEAS DE DATOS
+  00000008            00008 PINLCD EQU PORTD    ;LINEAS DE CONTROL
+                      00009  
+  00000001            00010 RS EQU 1    ;LINEA DE CONTROL RS 
+  00000002            00011 RW EQU 2        ;LINEA DE CONTROL RW
+  00000003            00012 E EQU 3 ;LINEA DE OCNTROL E
+                      00013  
+  0000000F            00014 ON_DISPLAY_CURSOR_BLINK EQU 0FH ;ACTIVA EL DISPLAY, EL CURSOR Y HACE PARPADEO
+  0000000C            00015 SOLO_DISPLAY EQU 0CH            ;APAGA EL CURSOR Y SU PARPADEO
+  00000001            00016 LIMPIAR_LCD EQU 01H                     ;LIMPIA LOS CARACTERES DE LA PANTALLA
+  00000008            00017 APAGAR_DISPLAY  EQU 08H         ;APAGA LA PANTALLA
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+  000000C0            00018 SALTO_ENTER EQU D'192'                  ;SE DIRIGE A LA SEGUNDA LINEA
+  00000002            00019 HOME_INICIO EQU 02H                     ;VUELVE AL INICIO
+  00000010            00020 MOVER_CURSOR_IZQ EQU 10H                ;MUEVE EL CURSOR A LA IZQUIERDA
+  00000014            00021 MOVER_CURSOR_DERECHA EQU 14H    ;MUEVE EL CURSOR A LA DERECHA
+  00000018            00022 MOVER_PANTALLA_IZQ EQU 18H              ;MUEVE LA PANTALLA A LA IZQUIERDA
+  0000001C            00023 MOVER_PANTALLA_DERECHA EQU 1CH  ;MUEVE LA PANTALLA A LA DERECHA
+  00000000            00024 OFF EQU 0
+  00000001            00025 ON EQU 1
+006F                  00026 ESCRIBIR_COMANDO
+006F   00A3           00027     MOVWF memocaracter
+0070   2???           00028     CALL COMPROBAR_OCUPADO
+0071   0823           00029     MOVF memocaracter,W
+0072   39F0           00030     ANDLW B'11110000'
+0073   0088           00031     MOVWF DATOS
+0074   1108           00032     BCF PINLCD,RW
+0075   1188           00033     BCF PINLCD,E
+0076   0000           00034     NOP
+0077   1588           00035     BSF PINLCD,E
+0078   0000           00036     NOP
+0079   1188           00037     BCF PINLCD,E
+007A   0E23           00038     SWAPF memocaracter,W
+007B   39F0           00039     ANDLW B'11110000'
+007C   0088           00040     MOVWF DATOS
+007D   0000           00041     NOP
+007E   1588           00042     BSF PINLCD,E
+007F   0000           00043     NOP
+0080   1188           00044     BCF PINLCD,E
+0081   0008           00045     RETURN
+                      00046     
+0082                  00047 COMPROBAR_OCUPADO
+0082   1683           00048     BSF STATUS,RP0
+0083   1303           00049     BCF STATUS,RP1
+0084   30F0           00050     MOVLW B'11110000'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0085   0088           00051     MOVWF TRISD
+0086   1283           00052     BCF STATUS,RP0
+0087   1303           00053     BCF STATUS,RP1
+0088   1088           00054     BCF PINLCD,RS
+0089   1508           00055     BSF PINLCD,RW
+008A   0000           00056     NOP
+008B   1588           00057     BSF PINLCD,E
+008C   0000           00058     NOP
+008D   0808           00059     MOVF DATOS,W
+008E   1188           00060     BCF PINLCD,E
+008F   390F           00061     ANDLW 0FH
+0090   00A5           00062     MOVWF caractertemp
+0091   0000           00063     NOP
+0092   1588           00064     BSF PINLCD,E
+0093   0000           00065     NOP
+0094   0E08           00066     SWAPF DATOS,W
+0095   1188           00067     BCF PINLCD,E
+0096   390F           00068     ANDLW 0FH
+0097   04A5           00069     IORWF caractertemp,1
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0098   1BA5           00070     BTFSC caractertemp,7
+0099   2???           00071     GOTO COMPROBAR_OCUPADO
+009A   1508           00072     BSF PINLCD,RW
+009B   1683           00073     BSF STATUS,RP0
+009C   1303           00074     BCF STATUS,RP1
+009D   3000           00075     MOVLW 0x00
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+009E   0088           00076     MOVWF TRISD
+009F   1283           00077     BCF STATUS,RP0
+00A0   1303           00078     BCF STATUS,RP1
+00A1   0008           00079     RETURN
+                      00080 
+00A2                  00081 ESCRIBIR_CARACTER
+00A2   00A4           00082     MOVWF memoriaw
+00A3   00A3           00083     MOVWF memocaracter
+00A4   2???           00084     CALL COMPROBAR_OCUPADO
+00A5   0823           00085     MOVF memocaracter,W
+00A6   39F0           00086     ANDLW B'11110000'
+00A7   0088           00087     MOVWF DATOS
+00A8   1108           00088     BCF PINLCD,RW
+00A9   1488           00089     BSF PINLCD,RS
+00AA   0000           00090     NOP
+00AB   1588           00091     BSF PINLCD,E
+00AC   0000           00092     NOP
+00AD   1188           00093     BCF PINLCD,E
+00AE   0E23           00094     SWAPF memocaracter,W
+00AF   39F0           00095     ANDLW B'11110000'
+00B0   0088           00096     MOVWF DATOS
+00B1   1108           00097     BCF PINLCD,RW
+00B2   1488           00098     BSF PINLCD,RS
+00B3   0000           00099     NOP
+00B4   1588           00100     BSF PINLCD,E
+00B5   0000           00101     NOP
+00B6   1188           00102     BCF PINLCD,E
+00B7   0824           00103     MOVF memoriaw,W
+00B8   0008           00104     RETURN
+                      00105     
+00B9                  00106 INICIALIZACION_DE_PANTALLA  ;SUBRUTINA DE SECUENCIA PARA INICIAR EL LCD
+00B9   1283           00107     BCF STATUS,RP0          ;BANCO 0
+00BA   1303           00108     BCF STATUS,RP1
+00BB   1188           00109     BCF PINLCD,E            ;SE APAGA EL PIN E
+00BC   1108           00110     BCF PINLCD,RW           ;SE APAGA EL PIN RW
+00BD   1088           00111     BCF PINLCD,RS           ;SE APAGA EL PIN RS
+00BE   300F           00112     MOVLW 0x0F              ;ENCENDEMOS LOS PINES DEL LCD
+00BF   0088           00113     MOVWF DATOS             ;EN EL PUERTO D
+00C0   1683           00114     BSF STATUS,RP0          ;BANCO 1
+00C1   1303           00115     BCF STATUS,RP1
+00C2   300F           00116     MOVLW B'00001111'       ;TODOS LOS PINES DEL PUERTO D SON DECLARADOS COMO SALIDA
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+00C3   0088           00117     MOVWF TRISD
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+00C4   1188           00118     BCF TRISD,E             ;EL PIN E ES SALIDA
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00C5   1108           00119     BCF TRISD,RW            ;EL PIN RW ES SALIDA
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+00C6   1088           00120     BCF TRISD,RS            ;EL PIN RS ES SALIDA
+00C7   1283           00121     BCF STATUS,RP0          ;BANCO 0
+00C8   1303           00122     BCF STATUS,RP1
+00C9   2???           00123     CALL RETARDO_20MICROS
+00CA   3030           00124     MOVLW B'00110000'       ;PRIMER VALOR PEDIDO POR EL FABRICANTE
+00CB   0088           00125     MOVWF DATOS             ;LO ESCRIBIMOS EN EL PUERTOD
+00CC   0000           00126     NOP
+00CD   1588           00127     BSF PINLCD,E            ;IMPULSO AL PIN ENABLE
+00CE   0000           00128     NOP                     ;ANCHO DE PULSO DE 0.2US
+00CF   1188           00129     BCF PINLCD,E            ;FIN DEL IMPULSO
+00D0   2???           00130     CALL RETARDO_5MS
+00D1   3030           00131     MOVLW B'00110000'       ;SEGUNDO PEDIDO POR EL FABRICANTE
+00D2   0088           00132     MOVWF DATOS             ;LO ESCRIBIMOS EN EL PUERTO D
+00D3   0000           00133     NOP
+00D4   1588           00134     BSF PINLCD,E            ;PULSO AL PIN ENABLE
+00D5   0000           00135     NOP                     ;ANCHO DE PULSO DE 0.2US
+00D6   1188           00136     BCF PINLCD,E            ;FIN DE PULSO
+00D7   3030           00137     MOVLW B'00110000'       ;TERCER VALOR PEDIDO POR EL FABRICANTE
+00D8   0088           00138     MOVWF DATOS             ;LO ESCRIBIMOS EN EL PUERTO D
+00D9   0000           00139     NOP
+00DA   1588           00140     BSF PINLCD,E            ;PULSO AL PIN ENABLE
+00DB   0000           00141     NOP
+00DC   1188           00142     BCF PINLCD,E            ;FIN DE PULSO
+00DD   2???           00143     CALL RETARDO_200MICROS
+00DE   2???           00144     CALL RETARDO_20MICROS
+00DF   3020           00145     MOVLW B'00100000'       ;CARGAMOS COMANDO DE CONFIGURACION DE COMUNICACION DE 4 BITS
+00E0   0088           00146     MOVWF DATOS             ;ESCRIBIMOS COMANDO EN EL PUERTOD
+00E1   0000           00147     NOP
+00E2   1588           00148     BSF PINLCD,E            ;PULSO AL PIN ENABLE
+00E3   0000           00149     NOP
+00E4   1188           00150     BCF PINLCD,E            ;FIN DE PULSO
+00E5   3028           00151     MOVLW B'00101000'
+00E6   2???           00152     CALL ESCRIBIR_COMANDO
+00E7   300F           00153     MOVLW ON_DISPLAY_CURSOR_BLINK
+00E8   2???           00154     CALL ESCRIBIR_COMANDO
+00E9   3001           00155     MOVLW LIMPIAR_LCD
+00EA   2???           00156     CALL ESCRIBIR_COMANDO
+00EB   3006           00157     MOVLW B'00000110'
+00EC   2???           00158     CALL ESCRIBIR_COMANDO
+00ED   3080           00159     MOVLW B'10000000'
+00EE   2???           00160     CALL ESCRIBIR_COMANDO
+00EF   0008           00161     RETURN
+23E2 3FFF             00063     END
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABDEN                             00000000
+ABDOVF                            00000007
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS12                             00000004
+ANS13                             00000005
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             00000188
+ANSELH                            00000189
+APAGAR_DISPLAY                    00000008
+BAUDCTL                           00000187
+BCLIE                             00000003
+BCLIF                             00000003
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BRG9                              00000001
+BRGH                              00000002
+C                                 00000000
+C1CH0                             00000000
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1RSEL                            00000005
+C1SEN                             00000005
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2RSEL                            00000004
+C2SYNC                            00000000
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2                             0000001B
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CM1CON0                           00000107
+CM2CON0                           00000108
+CM2CON1                           00000109
+COMPROBAR_OCUPADO                 00000082
+CREN                              00000004
+CSRC                              00000007
+D                                 00000005
+DATA_ADDRESS                      00000005
+DATOS                             00000008
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DC2B0                             00000004
+DC2B1                             00000005
+D_A                               00000005
+D_NOT_A                           00000005
+E                                 00000003
+ECCPAS                            0000009C
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDAT                             0000010C
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+ESCRIBIR_CARACTER                 000000A2
+ESCRIBIR_COMANDO                  0000006F
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+FVREN                             00000000
+GCEN                              00000007
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HOME_INICIO                       00000002
+HTS                               00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+INICIALIZACION_DE_PANTALLA        000000B9
+INICIO                            00000005
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+IOCB2                             00000002
+IOCB3                             00000003
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+LIMPIAR_LCD                       00000001
+LTS                               00000001
+MC1OUT                            00000007
+MC2OUT                            00000006
+MOVER_CURSOR_DERECHA              00000014
+MOVER_CURSOR_IZQ                  00000010
+MOVER_PANTALLA_DERECHA            0000001C
+MOVER_PANTALLA_IZQ                00000018
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+OFF                               00000000
+ON                                00000001
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ON_DISPLAY_CURSOR_BLINK           0000000F
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PINLCD                            00000008
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000009D
+PULSR                             00000002
+PULSS                             00000003
+PWM1CON                           0000009B
+R                                 00000002
+R1DECIMA_BUCLEEXTERNO             00000065
+R1DECIMA_BUCLEEXTERNO2            00000063
+R1DECIMA_BUCLEINTERNO             00000067
+R1MS_BUCLEEXTERNO                 0000004F
+R1MS_BUCLEINTERNO                 00000051
+RA0                               00000000
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RD0                               00000000
+RD1                               00000001
+RD2                               00000002
+RD3                               00000003
+RD4                               00000004
+RD5                               00000005
+RD6                               00000006
+RD7                               00000007
+RE0                               00000000
+RE1                               00000001
+RE2                               00000002
+RE3                               00000003
+READ_WRITE                        00000002
+RETARDOMICROS                     0000003B
+RETARDOS_MS                       0000004E
+RETARDO_100MICROS                 00000035
+RETARDO_100MS                     00000041
+RETARDO_10MICROS                  00000028
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RETARDO_10MS                      00000047
+RETARDO_10S                       00000059
+RETARDO_1DECIMA                   00000062
+RETARDO_1MS                       0000004D
+RETARDO_1S                        0000005F
+RETARDO_200MICROS                 00000032
+RETARDO_200MS                     0000003F
+RETARDO_20MICROS                  0000003A
+RETARDO_20MS                      00000045
+RETARDO_20S                       00000057
+RETARDO_2MS                       0000004B
+RETARDO_2S                        0000005D
+RETARDO_4MICROS                   0000002E
+RETARDO_500MICROS                 0000002F
+RETARDO_500MS                     00000061
+RETARDO_50MICROS                  00000037
+RETARDO_50MS                      00000043
+RETARDO_5MICROS                   0000002D
+RETARDO_5MS                       00000049
+RETARDO_5S                        0000005B
+RMICROS_BUCLE                     0000003C
+RP0                               00000005
+RP1                               00000006
+RS                                00000001
+RSEN                              00000001
+RW                                00000002
+RX9                               00000006
+RX9D                              00000000
+R_CONTA                           00000020
+R_CONTB                           00000021
+R_CONTC                           00000022
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SALTO_ENTER                       000000C0
+SBOREN                            00000004
+SCKP                              00000004
+SCS                               00000000
+SEN                               00000000
+SENDB                             00000003
+SMP                               00000007
+SOLO_DISPLAY                      0000000C
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SR0                               00000006
+SR1                               00000007
+SRCON                             00000185
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+START                             0000000F
+STATUS                            00000003
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GIV                             00000007
+T1GSS                             00000001
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRISD                             00000088
+TRISD0                            00000000
+TRISD1                            00000001
+TRISD2                            00000002
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
+TRISD6                            00000006
+TRISD7                            00000007
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRISE3                            00000003
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+ULPWUE                            00000005
+ULPWUIE                           00000002
+ULPWUIF                           00000002
+VCFG0                             00000004
+VCFG1                             00000005
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000097
+VREN                              00000007
+VROE                              00000006
+VRR                               00000005
+VRSS                              00000004
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000105
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WPUB                              00000095
+WPUB0                             00000000
+WPUB1                             00000001
+WPUB2                             00000002
+WPUB3                             00000003
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+Z                                 00000002
+_.org_1_0027                      00000027
+_BOR21V                           00003EFF
+_BOR40V                           00003FFF
+_BOR4V_BOR21V                     00003EFF
+_BOR4V_BOR40V                     00003FFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_CONFIG1                          00002007
+_CONFIG2                          00002008
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         00001FFF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+_FOSC_EXTRC_CLKOUT                00003FFF
+_FOSC_EXTRC_NOCLKOUT              00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRC_CLKOUT                00003FFD
+_FOSC_INTRC_NOCLKOUT              00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_LVP_OFF                          00002FFF
+_LVP_ON                           00003FFF
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FF9
+__16F887                          00000001
+caractertemp                      00000025
+MPASM 5.86                      LCD_20X4.ASM   1-5-2020  0:27:27         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+memocaracter                      00000023
+memoriaw                          00000024
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     6 reported,     0 suppressed
+
+

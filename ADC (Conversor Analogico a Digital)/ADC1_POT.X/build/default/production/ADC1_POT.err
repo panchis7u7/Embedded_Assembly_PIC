@@ -1,0 +1,11 @@
+Warning[205] E:\PRUEBAPIC\ADC1_POT.X\ADC1_POT.ASM 2 : Found directive in column 1. (LIST)
+Warning[205] E:\PRUEBAPIC\ADC1_POT.X\ADC1_POT.ASM 9 : Found directive in column 1. (CBLOCK)
+Message[313] E:\PRUEBAPIC\ADC1_POT.X\ADC1_POT.ASM 9 : CBLOCK constants will start with a value of 0.
+Warning[205] E:\PRUEBAPIC\ADC1_POT.X\ADC1_POT.ASM 11 : Found directive in column 1. (ENDC)
+Warning[205] E:\PRUEBAPIC\ADC1_POT.X\ADC1_POT.ASM 12 : Found directive in column 1. (ORG)
+Message[302] E:\PRUEBAPIC\ADC1_POT.X\ADC1_POT.ASM 16 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PRUEBAPIC\ADC1_POT.X\ADC1_POT.ASM 17 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PRUEBAPIC\ADC1_POT.X\ADC1_POT.ASM 20 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PRUEBAPIC\ADC1_POT.X\ADC1_POT.ASM 21 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PRUEBAPIC\ADC1_POT.X\ADC1_POT.ASM 24 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] E:\PRUEBAPIC\ADC1_POT.X\ADC1_POT.ASM 42 : Found directive in column 1. (END)
