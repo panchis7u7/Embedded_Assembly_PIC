@@ -1,0 +1,3 @@
+Message[313] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 10 : CBLOCK constants will start with a value of 0.
+Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 16 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 17 : Register in operand not in bank 0.  Ensure that bank bits are correct.

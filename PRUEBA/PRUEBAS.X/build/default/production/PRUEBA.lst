@@ -1,4 +1,4 @@
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE  1
+MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -15,8 +15,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00008 ;==========================================================================
                       00009 
                       00810         LIST
-Warning[205]: Found directive in column 1. (LIST)
-                      00002 LIST P=16F887
+                      00002     LIST P=16F887
                       00003 ; CONFIG1
                       00004 ; __config 0xFFE1
 2007   3FE1           00005  __CONFIG _CONFIG1, _FOSC_XT & _WDTE_OFF & _PWRTE_ON & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_ON & _IES
@@ -24,86 +23,33 @@ Warning[205]: Found directive in column 1. (LIST)
                       00006 ; CONFIG2
                       00007 ; __config 0xFFFF
 2008   3FFF           00008  __CONFIG _CONFIG2, _BOR4V_BOR40V & _WRT_OFF
-Warning[205]: Found directive in column 1. (CBLOCK)
+                      00009  
 Message[313]: CBLOCK constants will start with a value of 0.
-                      00009 CBLOCK
-  00000000            00010     CONTADOR
-                      00011  ENDC
-                      00012  ORG 0
-Warning[207]: Found label after column 1. (CONFIGURACION)
-0000                  00013     CONFIGURACION
-0000   1683           00014     BSF STATUS,RP0      ;BANCO 1
-0001   1303           00015     BCF STATUS,RP1
+                      00010  CBLOCK
+                      00011  
+                      00012  ENDC 
+                      00013  ORG 0
+0000   1683           00014     BSF STATUS, RP0
+0001   307C           00015     MOVLW D'124'
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0002   0188           00016     CLRF TRISD          ;SE DECLARAN TODOS LOS PINES DEL PUERTO D COMO SALIDA
+0002   0092           00016     MOVWF PR2
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0003   1405           00017     BSF TRISA,0         ;SE DECLARA EL PIN RA0 COMO ENTRADA
-                      00018     
-0004   30F9           00019     MOVLW D'249'        ;VALOR OBTENIDO DE PR2
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0005   0092           00020     MOVWF PR2           ;MOVER EL VALOR A PR2
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0006   1107           00021     BCF TRISC, 2        ;RC2 -> CCP1 COMO SALIDA 
-0007   1283           00022     BCF STATUS, RP0     ;banco 0
-                      00023     
-0008   1683           00024     BSF STATUS,RP0      ;BANCO 3
-0009   1703           00025     BSF STATUS,RP1
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000A   1408           00026     BSF ANSEL,0         ;AN0 TIENE ENTRADA ANALOGICA
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000B   0189           00027     CLRF ANSELH         ;TODOS LO PINES DIFERENTES A AN0 SON DIGITALES
-000C   1683           00028     BSF STATUS,RP0      ;BANCO 1
-000D   1303           00029     BCF STATUS,RP1
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000E   019F           00030     CLRF ADCON1         ;JUSTIFICACION A LA IZQUIERDA
-000F   1283           00031     BCF STATUS,RP0      ;BANCO 0
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE  2
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-0010   1303           00032     BCF STATUS,RP1
-0011   3001           00033     MOVLW B'00000001'   ;FOSC/2, AN0, ADC ENABLE 0
-0012   009F           00034     MOVWF ADCON0
-0013                  00035 DELAY
-0013   3013           00036     MOVLW D'19'         
-0014   0080           00037     MOVWF CONTADOR
-0015                  00038 DELAY_BUCLE             ;TIEMPE DE ADQUISICION
-0015   0B80           00039     DECFSZ CONTADOR,1
-0016   2???           00040     GOTO DELAY_BUCLE    
-0017   149F           00041     BSF ADCON0,GO       ;EL ADC EMPIEZA CON LA CONVERSION
-0018                  00042 ADC_INICIO
-0018   189F           00043     BTFSC ADCON0,GO     ;CHECA SI EL ADC TERMINO CON LA CONVERSION
-0019   2???           00044     GOTO ADC_INICIO
-                      00045     
-                      00046     ;MOVLW D'125'       ;DUTY CUCLE
-                      00047     ;MOVWF CCPR1L       ;MOVER DUTY CYCLE A CCPR1L
-                      00048     ;MOVF ADRESH, CCPR1L
-001A   081E           00049     MOVFW ADRESH
-001B   0095           00050     MOVWF CCPR1L
-001C   300C           00051     MOVLW B'00001100'   ;CONFIG DE CCP1CON
-001D   0097           00052     MOVWF CCP1CON
-001E   3005           00053     MOVLW B'00000101'   ;CONFIG T2CON
-001F   0092           00054     MOVWF T2CON 
-0020   2???           00055     GOTO DELAY
-                      00056  
-                      00057     ;BSF STATUS, RP0
-                      00058     ;BCF STATUS, RP1    ;BANCO 1
-                      00059     ;MOVLW D'249'       ;VALOR OBTENIDO DE PR2
-                      00060     ;MOVWF PR2          ;MOVER EL VALOR A PR2
-                      00061     ;BCF TRISC, 2       ;RC2 -> CCP1 COMO SALIDA 
-                      00062     ;BCF STATUS, RP0    ;banco 0
-                      00063     
-                      00064     ;MOVLW D'125'       ;DUTY CUCLE
-                      00065     ;MOVWF CCPR1L       ;MOVER DUTY CYCLE A CCPR1L
-                      00066     
-                      00067     ;MOVLW B'00001100'  ;CONFIG DE CCP1CON
-                      00068     ;MOVWF CCP1CON
-                      00069     ;MOVLW B'00000101'  ;CONFIG T2CON
-                      00070     ;MOVWF T2CON
-3FE1 3FFF             00071  END
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE  3
+0003   1107           00017     BCF TRISC, 2
+0004   1283           00018     BCF STATUS, RP0
+                      00019     
+0005   3025           00020     MOVLW D'37'
+0006   0095           00021     MOVWF CCPR1L
+                      00022     
+0007   300C           00023     MOVLW B'00001100'
+0008   0097           00024     MOVWF CCP1CON
+0009   3005           00025     MOVLW B'00000101'
+000A   0092           00026     MOVWF T2CON
+                      00027     
+000B                  00028 PROGRAMA:
+000B   0000           00029     NOP
+000C   2???           00030     GOTO PROGRAMA
+3FE1 3FFF             00031  END
+MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  2
 
 
 SYMBOL TABLE
@@ -118,7 +64,6 @@ ADCON0                            0000001F
 ADCON1                            0000009F
 ADCS0                             00000006
 ADCS1                             00000007
-ADC_INICIO                        00000018
 ADDEN                             00000003
 ADFM                              00000007
 ADIE                              00000006
@@ -162,13 +107,13 @@ BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE  4
+BRG9                              00000001
+MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  3
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-BRG9                              00000001
 BRGH                              00000002
 C                                 00000000
 C1CH0                             00000000
@@ -221,20 +166,18 @@ CCPR2L                            0000001B
 CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE  5
+CHS3                              00000005
+MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  4
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-CHS3                              00000005
 CKE                               00000006
 CKP                               00000004
 CM1CON0                           00000107
 CM2CON0                           00000108
 CM2CON1                           00000109
-CONFIGURACION                     00000000
-CONTADOR                          00000000
 CREN                              00000004
 CSRC                              00000007
 D                                 00000005
@@ -244,8 +187,6 @@ DC1B0                             00000004
 DC1B1                             00000005
 DC2B0                             00000004
 DC2B1                             00000005
-DELAY                             00000013
-DELAY_BUCLE                       00000015
 D_A                               00000005
 D_NOT_A                           00000005
 ECCPAS                            0000009C
@@ -280,17 +221,17 @@ I2C_STOP                          00000004
 INDF                              00000000
 INTCON                            0000000B
 INTE                              00000004
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE  6
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 INTEDG                            00000006
 INTF                              00000001
 IOCB                              00000096
 IOCB0                             00000000
 IOCB1                             00000001
+MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 IOCB2                             00000002
 IOCB3                             00000003
 IOCB4                             00000004
@@ -339,17 +280,17 @@ P1M0                              00000006
 P1M1                              00000007
 PCL                               00000002
 PCLATH                            0000000A
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE  7
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 PCON                              0000008E
 PDC0                              00000000
 PDC1                              00000001
 PDC2                              00000002
 PDC3                              00000003
+MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 PDC4                              00000004
 PDC5                              00000005
 PDC6                              00000006
@@ -365,6 +306,7 @@ PORTC                             00000007
 PORTD                             00000008
 PORTE                             00000009
 PR2                               00000092
+PROGRAMA                          0000000B
 PRSEN                             00000007
 PS0                               00000000
 PS1                               00000001
@@ -398,16 +340,16 @@ RB7                               00000007
 RBIE                              00000003
 RBIF                              00000000
 RC0                               00000000
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE  8
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  7
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-RC1                               00000001
-RC2                               00000002
-RC3                               00000003
-RC4                               00000004
 RC5                               00000005
 RC6                               00000006
 RC7                               00000007
@@ -457,16 +399,16 @@ SRCON                             00000185
 SREN                              00000005
 SSPADD                            00000093
 SSPBUF                            00000013
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE  9
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  8
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-SSPCON                            00000014
-SSPCON2                           00000091
-SSPEN                             00000005
-SSPIE                             00000003
 SSPIF                             00000003
 SSPM0                             00000000
 SSPM1                             00000001
@@ -516,16 +458,16 @@ TMR2IF                            00000001
 TMR2ON                            00000002
 TOUTPS0                           00000003
 TOUTPS1                           00000004
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE 10
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-TOUTPS2                           00000005
-TOUTPS3                           00000006
-TRISA                             00000085
-TRISA0                            00000000
 TRISA1                            00000001
 TRISA2                            00000002
 TRISA3                            00000003
@@ -575,16 +517,16 @@ TX8_9                             00000006
 TX9                               00000006
 TX9D                              00000000
 TXD8                              00000000
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE 11
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-TXEN                              00000005
-TXIE                              00000004
-TXIF                              00000004
-TXREG                             00000019
 TXSTA                             00000098
 UA                                00000001
 ULPWUE                            00000005
@@ -634,16 +576,16 @@ _BOR_NSLEEP                       00003EFF
 _BOR_OFF                          00003CFF
 _BOR_ON                           00003FFF
 _BOR_SBODEN                       00003DFF
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE 12
+_CONFIG1                          00002007
+_CONFIG2                          00002008
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-_CONFIG1                          00002007
-_CONFIG2                          00002008
-_CPD_OFF                          00003FFF
-_CPD_ON                           00003F7F
 _CP_OFF                           00003FFF
 _CP_ON                            00003FBF
 _DEBUG_OFF                        00003FFF
@@ -693,14 +635,8 @@ _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
 
-MPASM 5.86                   CONTROLADOR.ASM   6-9-2020  21:16:39         PAGE 13
-
-
-
-
-
 Errors   :     0
-Warnings :     3 reported,     0 suppressed
-Messages :     8 reported,     0 suppressed
+Warnings :     0 reported,     0 suppressed
+Messages :     3 reported,     0 suppressed
 
 
