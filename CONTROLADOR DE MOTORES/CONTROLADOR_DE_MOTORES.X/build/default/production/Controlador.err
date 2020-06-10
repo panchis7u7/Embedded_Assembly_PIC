@@ -1,11 +1,10 @@
 Warning[205] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 2 : Found directive in column 1. (LIST)
 Warning[205] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 9 : Found directive in column 1. (CBLOCK)
 Message[313] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 9 : CBLOCK constants will start with a value of 0.
-Warning[207] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 13 : Found label after column 1. (CONFIGURACION)
+Message[302] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 15 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 16 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 17 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 20 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 21 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 18 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 19 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 22 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 23 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 26 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 27 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\CONTROLADOR DE MOTORES\CONTROLADOR_DE_MOTORES.X\CONTROLADOR.ASM 30 : Register in operand not in bank 0.  Ensure that bank bits are correct.
