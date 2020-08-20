@@ -1,0 +1,9 @@
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\RECEPTOR_IR.ASM 13 : Found label after column 1. (SETUP)
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\RECEPTOR_IR.ASM 20 : Found label after column 1. (START)
+Message[302] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\LCD.INC 51 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\LCD.INC 76 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\LCD.INC 117 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\LCD.INC 118 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\LCD.INC 119 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\LCD.INC 120 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.INC 43 : Register in operand not in bank 0.  Ensure that bank bits are correct.
