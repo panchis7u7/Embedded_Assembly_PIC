@@ -25,6 +25,11 @@ REC_BYTE2       res     1       ; second byte that received bits are shifted int
 COUNTER         res     1       ; used as counter in various loops
 CONTADOR_2	res	1
 BITS_IR		res	1
+		
+cblock
+    BYTES:3
+    CONTADOR
+endc
 
 ;MACROS.
 ; if not(literal - 1 <= file <= literal + 1) goto toAdr
@@ -46,7 +51,7 @@ IRsetup:
     RETURN
     
 ;Saca una señal de 38MHz durante un tiempo (microsegundos).
-;void IRcarrier(int microsegundos)
+;void IRcarrier(int microsegundos) 
 IRcarrier:
     MOVWF BITS_IR
     MOVLW 0x00
@@ -59,11 +64,16 @@ BUCLE:
     SUBWF BITS_IR,W
     BTFSC STATUS,Z
     GOTO FINAL		
-    CALL RETARDO_20MICROS_16	
+    CALL RETARDO_13MICROS_16		
     BCF PORTD,0
-    CALL RETARDO_20MICROS_16
+    CALL RETARDO_13MICROS_16
     GOTO BUCLE
 FINAL:
     BCF PORTD,0
     RETURN
+    
+;Manda una señal de acuerdo al protocolo NEC, 1 -> 2.25ms y 0 -> 1.25ms
+;void IRsend(int dato)
+IRsend:
+    
     

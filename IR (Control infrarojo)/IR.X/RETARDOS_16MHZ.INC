@@ -133,6 +133,30 @@ RETARDO_20MICROS_16_0:
 
 			;4 cycles (including call)
 	return
+	
+	
+;----------------------------------------------------------------------------------------
+
+; Delay = 2e-05 seconds
+; Clock frequency = 16 MHz
+
+; Actual delay = 2e-05 seconds = 80 cycles
+; Error = 0 %
+
+	cblock
+	r52
+	endc
+
+RETARDO_13MICROS_16:
+			;49 cycles
+	movlw	0xE
+	movwf	r52
+RETARDO_13MICROS_16_0:
+	decfsz	r52, f
+	goto	RETARDO_13MICROS_16_0
+
+			;4 cycles (including call)
+	return
 
 ;----------------------------------------------------------------------------------------
 

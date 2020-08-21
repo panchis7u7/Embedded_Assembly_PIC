@@ -7,16 +7,23 @@
 ; __config 0xFFFF
  __CONFIG _CONFIG2, _BOR4V_BOR40V & _WRT_OFF
  
- CBLOCK 0x20
+ CBLOCK 
  ENDC
  ORG 0
  SETUP:
     CALL RETARDO_2S_16
     CALL IRsetup
+    MOVLW D'255'
+    CALL IRcarrier
+    MOVLW D'91'	;9ms de carrier
+    CALL IRcarrier
     MOVLW 0xFF
-    CALL IRcarrier
-    MOVLW D'146'	;9ms de carrier
-    CALL IRcarrier
+    MOVWF BYTES
+    MOVLW 0xA2
+    MOVWF BYTES+1
+    MOVLW 0x5D
+    MOVLW BYTES+2
+    
  START:
     CALL RETARDO_500MS_16
     BSF PORTD, 0
