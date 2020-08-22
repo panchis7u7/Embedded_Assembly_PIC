@@ -11,19 +11,20 @@
  ENDC
  ORG 0
  SETUP:
+    MOVLW 0xFF
+    MOVWF BYTES
+    MOVLW 0xA2
+    MOVWF BYTES+1
+    MOVLW 0x5D
+    MOVWF BYTES+2
     CALL RETARDO_2S_16
     CALL IRsetup
     MOVLW D'255'
     CALL IRcarrier
     MOVLW D'91'	;9ms de carrier
     CALL IRcarrier
-    MOVLW 0xFF
-    MOVWF BYTES
-    MOVLW 0xA2
-    MOVWF BYTES+1
-    MOVLW 0x5D
-    MOVLW BYTES+2
-    
+    CALL RETARDO_5MS_16
+    CALL IRsend   
  START:
     CALL RETARDO_500MS_16
     BSF PORTD, 0
