@@ -21,7 +21,7 @@
     CALL IRsetup
     MOVLW D'255'
     CALL IRcarrier
-    MOVLW D'91'	;9ms de carrier
+    MOVLW D'110'	;9ms de carrier
     CALL IRcarrier
     CALL RETARDO_5MS_16
     CALL IRsend   
@@ -31,9 +31,9 @@
     CALL RETARDO_500MS_16
     BCF PORTD, 0
     GOTO START
-    #INCLUDE <RETARDOS.inc>
+    ;#INCLUDE <RETARDOS.inc>
     #INCLUDE <RETARDOS_16MHZ.inc>
-    #INCLUDE <LCD.inc>
+    ;#INCLUDE <LCD.inc>
     #INCLUDE <IR.inc>
  END
 

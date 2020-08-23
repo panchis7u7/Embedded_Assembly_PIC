@@ -156,6 +156,7 @@ RETARDO_13MICROS_16_0:
 			;4 cycles (including call)
 	return
 	
+;----------------------------------------------------------------------------------------
 	
 	; Delay = 2e-05 seconds
 ; Clock frequency = 16 MHz
@@ -163,22 +164,46 @@ RETARDO_13MICROS_16_0:
 ; Actual delay = 2e-05 seconds = 80 cycles
 ; Error = 0 %
 
+;	cblock
+;	r54
+;	endc
+;
+;RETARDO_10MICROS_16:
+;			;49 cycles
+;	movlw	0xC
+;	movwf	r54
+;RETARDO_10MICROS_16_0:
+;	    decfsz	r54, f
+;	goto	RETARDO_10MICROS_16_0
+;
+;			;4 cycles (including call)
+;	return
+	
+;----------------------------------------------------------------------------------------
+	
+; Delay = 2e-05 seconds
+; Clock frequency = 16 MHz
+
+; Actual delay = 2e-05 seconds = 80 cycles
+; Error = 0 %
+
 	cblock
-	r54
+	R55
+	R56
 	endc
 
-RETARDO_10MICROS_16:
-			;49 cycles
-	movlw	0xC
-	movwf	r54
-RETARDO_10MICROS_16_0:
-	    decfsz	r54, f
-	goto	RETARDO_10MICROS_16_0
-
-			;4 cycles (including call)
-	return
-
-;----------------------------------------------------------------------------------------
+RETARDO_1686MICROS_16:	;49 cycles
+	MOVLW D'10'
+	MOVWF R55
+BUCLE_1:
+	MOVLW D'255'
+	MOVWF R56
+BUCLE_2:
+	DECFSZ R56,1
+	GOTO BUCLE_2
+	DECFSZ R55,1
+	GOTO BUCLE_1
+	RETURN
 
 ;----------------------------------------------------------------------------------------
 

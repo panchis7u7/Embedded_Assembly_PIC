@@ -1,4 +1,4 @@
-MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  1
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -18,38 +18,69 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00002     LIST P=16F887
                       00003 ; CONFIG1
                       00004 ; __config 0xFFE1
-2007   3FE1           00005  __CONFIG _CONFIG1, _FOSC_XT & _WDTE_OFF & _PWRTE_ON & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_ON & _IES
+2007   3FE2           00005  __CONFIG _CONFIG1, _FOSC_HS & _WDTE_OFF & _PWRTE_ON & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_ON & _IES
                             O_ON & _FCMEN_ON & _LVP_ON
                       00006 ; CONFIG2
                       00007 ; __config 0xFFFF
 2008   3FFF           00008  __CONFIG _CONFIG2, _BOR4V_BOR40V & _WRT_OFF
                       00009  
+                      00010  udata
+Warning[207]: Found label after column 1. (BYTES)
+0000                  00011  BYTES RES 3
+                      00012  
 Message[313]: CBLOCK constants will start with a value of 0.
-                      00010  CBLOCK
-                      00011  
-                      00012  ENDC 
-                      00013  ORG 0
-0000   1683           00014     BSF STATUS, RP0
-0001   307C           00015     MOVLW D'124'
+                      00013  CBLOCK
+  00000000            00014  C1
+                      00015  ENDC
+                      00016  
+                      00017  ORG 0
+0000                  00018 SETUP:
+0000   3080           00019     MOVLW 0x80
+0001   00??           00020     MOVWF BYTES
+0002   30A2           00021     MOVLW 0xA2
+0003   00??           00022     MOVWF BYTES+1
+0004   305D           00023     MOVLW 0x5D
+0005   00??           00024     MOVWF BYTES+2
+0006   1683           00025     BSF STATUS,RP0
+0007   1303           00026     BCF STATUS,RP1
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0002   0092           00016     MOVWF PR2
+0008   0186           00027     CLRF TRISB
+0009   0187           00028     CLRF PORTC
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0003   1107           00017     BCF TRISC, 2
-0004   1283           00018     BCF STATUS, RP0
-                      00019     
-0005   3025           00020     MOVLW D'37'
-0006   0095           00021     MOVWF CCPR1L
-                      00022     
-0007   300C           00023     MOVLW B'00001100'
-0008   0097           00024     MOVWF CCP1CON
-0009   3005           00025     MOVLW B'00000101'
-000A   0092           00026     MOVWF T2CON
-                      00027     
-000B                  00028 PROGRAMA:
-000B   0000           00029     NOP
-000C   2???           00030     GOTO PROGRAMA
-3FE1 3FFF             00031  END
-MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  2
+000A   0188           00029     CLRF TRISD
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000B   1605           00030     BSF TRISA,4
+000C   1283           00031     BCF STATUS,RP0
+000D   0186           00032     CLRF PORTB
+000E   0187           00033     CLRF PORTC
+000F   0188           00034     CLRF PORTD
+0010                  00035 PROGRAMA:
+0010   08??           00036     MOVFW BYTES
+0011   0086           00037     MOVWF PORTB
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0012   08??           00038     MOVFW BYTES+1
+0013   0088           00039     MOVWF PORTD
+0014   08??           00040     MOVFW BYTES+2
+0015   0087           00041     MOVWF PORTC
+0016                  00042 REC:
+0016   1A05           00043     BTFSC PORTA,4
+0017   2???           00044     GOTO ACT_RLF
+0018   2???           00045     GOTO REC
+0019                  00046 ACT_RLF:
+0019   1A05           00047     BTFSC PORTA,4
+001A   2???           00048     GOTO ACT_RLF
+001B   0D??           00049     RLF BYTES+2, 1
+001C   0D??           00050     RLF BYTES+1, 1
+001D   0D??           00051     RLF BYTES, 1
+001E   1000           00052     BCF BYTES+2,0
+001F   2???           00053     GOTO PROGRAMA
+3FE2 3FFF             00054  END
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  3
 
 
 SYMBOL TABLE
@@ -60,6 +91,7 @@ ABDOVF                            00000007
 ACKDT                             00000005
 ACKEN                             00000004
 ACKSTAT                           00000006
+ACT_RLF                           00000019
 ADCON0                            0000001F
 ADCON1                            0000009F
 ADCS0                             00000006
@@ -107,15 +139,17 @@ BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
-BRG9                              00000001
-MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  3
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  4
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+BRG9                              00000001
 BRGH                              00000002
+BYTES                             00000000
 C                                 00000000
+C1                                00000000
 C1CH0                             00000000
 C1CH1                             00000001
 C1IE                              00000005
@@ -164,15 +198,15 @@ CCPR2                             0000001B
 CCPR2H                            0000001C
 CCPR2L                            0000001B
 CHS0                              00000002
-CHS1                              00000003
-CHS2                              00000004
-CHS3                              00000005
-MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  4
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  5
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
 CKE                               00000006
 CKP                               00000004
 CM1CON0                           00000107
@@ -223,15 +257,15 @@ INTCON                            0000000B
 INTE                              00000004
 INTEDG                            00000006
 INTF                              00000001
-IOCB                              00000096
-IOCB0                             00000000
-IOCB1                             00000001
-MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  5
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  6
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
 IOCB2                             00000002
 IOCB3                             00000003
 IOCB4                             00000004
@@ -282,15 +316,15 @@ PCL                               00000002
 PCLATH                            0000000A
 PCON                              0000008E
 PDC0                              00000000
-PDC1                              00000001
-PDC2                              00000002
-PDC3                              00000003
-MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  6
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  7
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
 PDC4                              00000004
 PDC5                              00000005
 PDC6                              00000006
@@ -306,7 +340,7 @@ PORTC                             00000007
 PORTD                             00000008
 PORTE                             00000009
 PR2                               00000092
-PROGRAMA                          0000000B
+PROGRAMA                          00000010
 PRSEN                             00000007
 PS0                               00000000
 PS1                               00000001
@@ -341,15 +375,15 @@ RBIE                              00000003
 RBIF                              00000000
 RC0                               00000000
 RC1                               00000001
-RC2                               00000002
-RC3                               00000003
-RC4                               00000004
-MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  7
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  8
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
 RC5                               00000005
 RC6                               00000006
 RC7                               00000007
@@ -376,6 +410,7 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
+REC                               00000016
 RP0                               00000005
 RP1                               00000006
 RSEN                              00000001
@@ -389,6 +424,7 @@ SCKP                              00000004
 SCS                               00000000
 SEN                               00000000
 SENDB                             00000003
+SETUP                             00000000
 SMP                               00000007
 SPBRG                             00000099
 SPBRGH                            0000009A
@@ -398,17 +434,17 @@ SR1                               00000007
 SRCON                             00000185
 SREN                              00000005
 SSPADD                            00000093
-SSPBUF                            00000013
-SSPCON                            00000014
-SSPCON2                           00000091
-SSPEN                             00000005
-SSPIE                             00000003
-MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  8
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
 SSPIF                             00000003
 SSPM0                             00000000
 SSPM1                             00000001
@@ -457,17 +493,17 @@ TMR2IE                            00000001
 TMR2IF                            00000001
 TMR2ON                            00000002
 TOUTPS0                           00000003
-TOUTPS1                           00000004
-TOUTPS2                           00000005
-TOUTPS3                           00000006
-TRISA                             00000085
-TRISA0                            00000000
-MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE  9
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
 TRISA1                            00000001
 TRISA2                            00000002
 TRISA3                            00000003
@@ -516,17 +552,17 @@ TUN4                              00000004
 TX8_9                             00000006
 TX9                               00000006
 TX9D                              00000000
-TXD8                              00000000
-TXEN                              00000005
-TXIE                              00000004
-TXIF                              00000004
-TXREG                             00000019
-MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE 10
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
 TXSTA                             00000098
 UA                                00000001
 ULPWUE                            00000005
@@ -575,17 +611,17 @@ _BOREN_SBODEN                     00003DFF
 _BOR_NSLEEP                       00003EFF
 _BOR_OFF                          00003CFF
 _BOR_ON                           00003FFF
-_BOR_SBODEN                       00003DFF
-_CONFIG1                          00002007
-_CONFIG2                          00002008
-_CPD_OFF                          00003FFF
-_CPD_ON                           00003F7F
-MPASM 5.86                        PRUEBA.ASM   6-9-2020  20:34:19         PAGE 11
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_BOR_SBODEN                       00003DFF
+_CONFIG1                          00002007
+_CONFIG2                          00002008
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
 _CP_OFF                           00003FFF
 _CP_ON                            00003FBF
 _DEBUG_OFF                        00003FFF
@@ -634,9 +670,15 @@ _WRT_HALF                         000039FF
 _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
+MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE 13
+
+
+
+
+
 
 Errors   :     0
-Warnings :     0 reported,     0 suppressed
-Messages :     3 reported,     0 suppressed
+Warnings :     1 reported,     0 suppressed
+Messages :     4 reported,     0 suppressed
 
 

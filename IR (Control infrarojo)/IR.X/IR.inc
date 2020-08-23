@@ -2,6 +2,7 @@
 IRTRIS equ TRISB
 IRPORT equ PORTB
 IRBIT equ 4	    ;IR EN PORTB<4>
+SEND_BITS_IR equ D'24'
  
  ;PARAMETROS DE CONTROL REMOTO.
 HEADER_LENGTH   equ     D'24'      ; header length = 2300 - 2500 us
@@ -23,14 +24,13 @@ SPACE_TIME      res     1       ; length (/100us) of last space
 REC_BYTE1       res     1       ; first byte that received bits are shifted into
 REC_BYTE2       res     1       ; second byte that received bits are shifted into
 COUNTER         res     1       ; used as counter in various loops
-CONTADOR_2	res	1
-BITS_IR		res	1
+BYTES		res	3
 		
-cblock
-    BYTES:3
+CBLOCK
     CONTADOR
+    CONTADOR_2
     r52
-endc
+ENDC
 
 ;MACROS.
 ; if not(literal - 1 <= file <= literal + 1) goto toAdr
@@ -54,18 +54,13 @@ IRsetup:
 ;Saca una señal de 38MHz durante un tiempo (microsegundos).
 ;void IRcarrier(int microsegundos) 
 IRcarrier:
-    MOVWF BITS_IR
-    MOVLW 0x00
-    MOVWF CONTADOR_2
+    MOVWF CONTADOR
 BUCLE:
     BSF PORTD,0
-    MOVFW CONTADOR_2
-    ADDLW D'1'
-    MOVWF CONTADOR_2
-    SUBWF BITS_IR,W
-    BTFSC STATUS,Z
+    DECFSZ CONTADOR,1
+    GOTO RETARDO_13
     GOTO FINAL		
-    ;CALL RETARDO_13MICROS_16	
+RETARDO_13:	
     movlw	0xE
     movwf	r52
 RETARDO_13MICROS_16_0_1:
@@ -86,19 +81,20 @@ FINAL:
 ;Manda una señal de acuerdo al protocolo NEC, 1 -> 2.25ms y 0 -> 1.25ms
 ;void IRsend(int dato)
 IRsend:
-    MOVLW 0x00
-    MOVWF CONTADOR
+    MOVLW SEND_BITS_IR
+    MOVWF CONTADOR_2
 BUCLE_SEND:
-    MOVFW CONTADOR
-    ADDLW D'1' 
-    MOVWF CONTADOR
-    SUBLW D'32'
-    BTFSC STATUS,Z
+    DECFSZ CONTADOR_2,1
+    GOTO ENVIO
     GOTO FINAL_SEND ;SI ES 0.
+ENVIO:
     MOVFW BYTES
-    ANDLW 0x80
-    RLF BYTES
-    BTFSS W,7
+    ANDLW 0x80,1
+    RLF BYTES+2, 1
+    RLF BYTES+1, 1
+    RLF BYTES, 1
+    BCF BYTES+2,0
+    BTFSC W,7
     GOTO SEND_1	;SI ES 1.
     GOTO SEND_0	;SI ES 0.
 SEND_1:
@@ -107,18 +103,14 @@ SEND_1:
     CALL RETARDO_500MICROS_16
     CALL RETARDO_500MICROS_16
     CALL RETARDO_500MICROS_16
-    CALL RETARDO_100MICROS_16
     CALL RETARDO_50MICROS_16
-    CALL RETARDO_10MICROS_16
-    CALL RETARDO_13MICROS_16
-    CALL RETARDO_13MICROS_16
     GOTO BUCLE_SEND
 SEND_0:
     MOVLW D'22'
     CALL IRcarrier
     CALL RETARDO_500MICROS_16
-    CALL RETARDO_50MICROS_16
-    CALL RETARDO_13MICROS_16
+    ;CALL RETARDO_50MICROS_16
+    ;CALL RETARDO_13MICROS_16
     GOTO BUCLE_SEND
 FINAL_SEND:
     RETURN

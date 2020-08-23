@@ -1,4 +1,4 @@
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE  1
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -31,16 +31,16 @@ Message[313]: CBLOCK constants will start with a value of 0.
 Warning[207]: Found label after column 1. (SETUP)
 0000                  00013  SETUP:
 0000   30FF           00014     MOVLW 0xFF
-0001   00BB           00015     MOVWF BYTES
+0001   00??           00015     MOVWF BYTES
 0002   30A2           00016     MOVLW 0xA2
-0003   00BC           00017     MOVWF BYTES+1
+0003   00??           00017     MOVWF BYTES+1
 0004   305D           00018     MOVLW 0x5D
-0005   00BD           00019     MOVWF BYTES+2
+0005   00??           00019     MOVWF BYTES+2
 0006   2???           00020     CALL RETARDO_2S_16
 0007   2???           00021     CALL IRsetup
 0008   30FF           00022     MOVLW D'255'
 0009   2???           00023     CALL IRcarrier
-000A   305B           00024     MOVLW D'91' ;9ms de carrier
+000A   306E           00024     MOVLW D'110'        ;9ms de carrier
 000B   2???           00025     CALL IRcarrier
 000C   2???           00026     CALL RETARDO_5MS_16
 000D   2???           00027     CALL IRsend   
@@ -51,214 +51,18 @@ Warning[207]: Found label after column 1. (START)
 0010   2???           00031     CALL RETARDO_500MS_16
 0011   1008           00032     BCF PORTD, 0
 0012   2???           00033     GOTO START
-                      00034     #INCLUDE <RETARDOS.inc>
-                      00001 ;**************************** Librería "RETARDOS.INC" *********************************
-                      00002 ;       ===================================================================
-                      00003 ;         Del libro "MICROCONTROLADOR PIC16F84. DESARROLLO DE PROYECTOS"
-                      00004 ;         E. Palacios, F. Remiro y L. López.
-                      00005 ;         Editorial Ra-Ma.  www.ra-ma.es
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE  2
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-                      00006 ;       ===================================================================
-                      00007 ;
-                      00008 ; Librería con múltiples subrutinas de retardos, desde 4 microsegundos hasta 20 segundos. 
-                      00009 ; Además se pueden implementar otras subrutinas muy fácilmente.
-                      00010 ;
-                      00011 ; Se han calculado para un sistema microcontrolador con un PIC trabajando con un cristal
-                      00012 ; de cuarzo a 4 MHz. Como cada ciclo máquina son 4 ciclos de reloj, resulta que cada
-                      00013 ; ciclo máquina tarda 4 x 1/4MHz = 1 µs.
-                      00014 ; En los comentarios, "cm" significa "ciclos máquina".
-                      00015 ; ZONA DE DATOS *********************************************************************
-                      00016     CBLOCK
-  00000000            00017     R_CONTA                             ; Contadores para los retardos.
-  00000001            00018     R_CONTB
-  00000002            00019     R_CONTC
-                      00020     ENDC
-                      00021 ; RETARDOS de 4 hasta 10 microsegundos ---------------------------------------------------
-                      00022 ; A continuación retardos pequeños teniendo en cuenta que para una frecuencia de 4 MHZ,
-                      00023 ; la llamada a subrutina "call" tarda 2 ciclos máquina, el retorno de subrutina
-                      00024 ; "return" toma otros 2 ciclos máquina y cada instrucción "nop" tarda 1 ciclo máquina.
-0013                  00025 RETARDO_12MICROS:
-0013   0000           00026     NOP
-0014   0000           00027     NOP
-0015                  00028 RETARDO_10MICROS:                               ; La llamada "call" aporta 2 ciclos máquina.
-0015   0000           00029     NOP                         ; Aporta 1 ciclo máquina.
-0016   0000           00030     NOP                         ; Aporta 1 ciclo máquina.
-0017   0000           00031     NOP                         ; Aporta 1 ciclo máquina.
-0018   0000           00032     NOP                         ; Aporta 1 ciclo máquina.
-0019   0000           00033     NOP                         ; Aporta 1 ciclo máquina.
-001A                  00034 RETARDO_5MICROS:                ; La llamada "call" aporta 2 ciclos máquina.
-001A   0000           00035     NOP                         ; Aporta 1 ciclo máquina.
-001B                  00036 RETARDO_4MICROS:                ; La llamada "call" aporta 2 ciclos máquina.
-001B   0008           00037     RETURN                              ; El salto del retorno aporta 2 ciclos máquina.
-                      00038 ; RETARDOS de 20 hasta 500 microsegundos ------------------------------------------------
-001C                  00039 RETARDO_500MICROS:                      ; La llamada "call" aporta 2 ciclos máquina.
-001C   0000           00040     NOP                                 ; Aporta 1 ciclo máquina.
-001D   30A4           00041     MOVLW       D'164'                  ; Aporta 1 ciclo máquina. Este es el valor de "K".
-001E   2???           00042     GOTO        RETARDOMICROS           ; Aporta 2 ciclos máquina.
-001F                  00043 RETARDO_200MICROS:                      ; La llamada "call" aporta 2 ciclos máquina.
-001F   0000           00044     NOP                                 ; Aporta 1 ciclo máquina.
-0020   3040           00045     MOVLW       D'64'                   ; Aporta 1 ciclo máquina. Este es el valor de "K".
-0021   2???           00046     GOTO        RETARDOMICROS           ; Aporta 2 ciclos máquina.
-0022                  00047 RETARDO_100MICROS:                      ; La llamada "call" aporta 2 ciclos máquina.
-0022   301F           00048     MOVLW       D'31'                   ; Aporta 1 ciclo máquina. Este es el valor de "K".
-0023   2???           00049     GOTO        RETARDOMICROS           ; Aporta 2 ciclos máquina.
-0024                  00050 RETARDO_50MICROS:                       ; La llamada "call" aporta 2 ciclos máquina.
-0024   0000           00051     NOP                                 ; Aporta 1 ciclo máquina.
-0025   300E           00052     MOVLW       D'14'                   ; Aporta 1 ciclo máquina. Este es el valor de "K".
-0026   2???           00053     GOTO        RETARDOMICROS           ; Aporta 2 ciclos máquina.
-0027                  00054 RETARDO_20MICROS:                               ; La llamada "call" aporta 2 ciclos máquina.
-0027   3005           00055     MOVLW       D'5'                    ; Aporta 1 ciclo máquina. Este es el valor de "K".
-                      00056 ; El próximo bloque "RetardoMicros" tarda:
-                      00057 ; 1 + (K-1) + 2 + (K-1)x2 + 2 = (2 + 3K) ciclos máquina.
-0028                  00058 RETARDOMICROS:
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE  3
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-0028   0080           00059     MOVWF       R_CONTA                 ; Aporta 1 ciclo máquina.
-0029                  00060 RMICROS_BUCLE:
-0029   0B80           00061     DECFSZ      R_CONTA,F               ; (K-1)x1 cm (cuando no salta) + 2 cm (al saltar).
-002A   2???           00062     GOTO        RMICROS_BUCLE           ; Aporta (K-1)x2 ciclos máquina.
-002B   0008           00063     RETURN                              ; El salto del retorno aporta 2 ciclos máquina.
-                      00064 ;En total estas subrutinas tardan:
-                      00065 ; - Retardo_500micros:  2 + 1 + 1 + 2 + (2 + 3K) = 500 cm = 500 µs. (para K=164 y 4 MHz).
-                      00066 ; - Retardo_200micros:  2 + 1 + 1 + 2 + (2 + 3K) = 200 cm = 200 µs. (para K= 64 y 4 MHz).
-                      00067 ; - Retardo_100micros:  2     + 1 + 2 + (2 + 3K) = 100 cm = 100 µs. (para K= 31 y 4 MHz).
-                      00068 ; - Retardo_50micros :  2 + 1 + 1 + 2 + (2 + 3K) =  50 cm =  50 µs. (para K= 14 y 4 MHz).
-                      00069 ; - Retardo_20micros :  2     + 1     + (2 + 3K) =  20 cm =  20 µs. (para K=  5 y 4 MHz).
-                      00070 ; RETARDOS de 1 ms hasta 200 ms. --------------------------------------------------------
-002C                  00071 RETARDO_200MS:                          ; La llamada "call" aporta 2 ciclos máquina.
-002C   30C8           00072     MOVLW       D'200'                  ; Aporta 1 ciclo máquina. Este es el valor de "M".
-002D   2???           00073     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
-002E                  00074 RETARDO_100MS:                          ; La llamada "call" aporta 2 ciclos máquina.
-002E   3064           00075     MOVLW       D'100'                  ; Aporta 1 ciclo máquina. Este es el valor de "M".
-002F   2???           00076     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
-0030                  00077 RETARDO_50MS:                           ; La llamada "call" aporta 2 ciclos máquina.
-0030   3032           00078     MOVLW       D'50'                   ; Aporta 1 ciclo máquina. Este es el valor de "M".
-0031   2???           00079     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
-0032                  00080 RETARDO_20MS:                           ; La llamada "call" aporta 2 ciclos máquina.    
-0032   3014           00081     MOVLW       D'20'                   ; Aporta 1 ciclo máquina. Este es el valor de "M".
-0033   2???           00082     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
-0034                  00083 RETARDO_10MS:                           ; La llamada "call" aporta 2 ciclos máquina.
-0034   300A           00084     MOVLW       D'10'                   ; Aporta 1 ciclo máquina. Este es el valor de "M".
-0035   2???           00085     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
-0036                  00086 RETARDO_5MS:                            ; La llamada "call" aporta 2 ciclos máquina.
-0036   3005           00087     MOVLW       D'5'                    ; Aporta 1 ciclo máquina. Este es el valor de "M".
-0037   2???           00088     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
-0038                  00089 RETARDO_2MS:                            ; La llamada "call" aporta 2 ciclos máquina.
-0038   3002           00090     MOVLW       D'2'                    ; Aporta 1 ciclo máquina. Este es el valor de "M".
-0039   2???           00091     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
-003A                  00092 RETARDO_1MS:                            ; La llamada "call" aporta 2 ciclos máquina.
-003A   3001           00093     MOVLW       D'1'                    ; Aporta 1 ciclo máquina. Este es el valor de "M".
-                      00094 ; El próximo bloque "Retardos_ms" tarda:
-                      00095 ; 1 + M + M + KxM + (K-1)xM + Mx2 + (K-1)Mx2 + (M-1) + 2 + (M-1)x2 + 2 =
-                      00096 ; = (2 + 4M + 4KM) ciclos máquina. Para K=249 y M=1 supone 1002 ciclos máquina
-                      00097 ; que a 4 MHz son 1002 µs = 1 ms.
-003B                  00098 RETARDOS_MS:
-003B   0081           00099     MOVWF       R_CONTB                 ; Aporta 1 ciclo máquina.
-003C                  00100 R1MS_BUCLEEXTERNO:
-003C   30F9           00101     MOVLW       D'249'                  ; Aporta Mx1 ciclos máquina. Este es el valor de "K".   
-003D   0080           00102     MOVWF       R_CONTA                 ; Aporta Mx1 ciclos máquina.
-003E                  00103 R1MS_BUCLEINTERNO:
-003E   0000           00104     NOP                         ; Aporta KxMx1 ciclos máquina.
-003F   0B80           00105     DECFSZ      R_CONTA,F               ; (K-1)xMx1 cm (cuando no salta) + Mx2 cm (al saltar).
-0040   2???           00106     GOTO        R1MS_BUCLEINTERNO       ; Aporta (K-1)xMx2 ciclos máquina.
-0041   0B81           00107     DECFSZ      R_CONTB,F               ; (M-1)x1 cm (cuando no salta) + 2 cm (al saltar).
-0042   2???           00108     GOTO        R1MS_BUCLEEXTERNO       ; Aporta (M-1)x2 ciclos máquina.
-0043   0008           00109     RETURN                              ; El salto del retorno aporta 2 ciclos máquina.
-                      00110 ;En total estas subrutinas tardan:
-                      00111 ; - Retardo_200ms:      2 + 1 + 2 + (2 + 4M + 4KM) = 200007 cm = 200 ms. (M=200 y K=249).
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE  4
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-                      00112 ; - Retardo_100ms:      2 + 1 + 2 + (2 + 4M + 4KM) = 100007 cm = 100 ms. (M=100 y K=249).
-                      00113 ; - Retardo_50ms :      2 + 1 + 2 + (2 + 4M + 4KM) =  50007 cm =  50 ms. (M= 50 y K=249).
-                      00114 ; - Retardo_20ms :      2 + 1 + 2 + (2 + 4M + 4KM) =  20007 cm =  20 ms. (M= 20 y K=249).
-                      00115 ; - Retardo_10ms :      2 + 1 + 2 + (2 + 4M + 4KM) =  10007 cm =  10 ms. (M= 10 y K=249).
-                      00116 ; - Retardo_5ms  :      2 + 1 + 2 + (2 + 4M + 4KM) =   5007 cm =   5 ms. (M=  5 y K=249).
-                      00117 ; - Retardo_2ms  :      2 + 1 + 2 + (2 + 4M + 4KM) =   2007 cm =   2 ms. (M=  2 y K=249).
-                      00118 ; - Retardo_1ms  :      2 + 1     + (2 + 4M + 4KM) =   1005 cm =   1 ms. (M=  1 y K=249).
-                      00119 ; RETARDOS de 0.5 hasta 20 segundos ---------------------------------------------------
-0044                  00120 RETARDO_20S:                            ; La llamada "call" aporta 2 ciclos máquina.
-0044   30C8           00121     MOVLW       D'200'                  ; Aporta 1 ciclo máquina. Este es el valor de "N".
-0045   2???           00122     GOTO        RETARDO_1DECIMA         ; Aporta 2 ciclos máquina.
-0046                  00123 RETARDO_10S:                            ; La llamada "call" aporta 2 ciclos máquina.
-0046   3064           00124     MOVLW       D'100'                  ; Aporta 1 ciclo máquina. Este es el valor de "N".  
-0047   2???           00125     GOTO        RETARDO_1DECIMA         ; Aporta 2 ciclos máquina.
-0048                  00126 RETARDO_5S:                             ; La llamada "call" aporta 2 ciclos máquina.
-0048   3032           00127     MOVLW       D'50'                   ; Aporta 1 ciclo máquina. Este es el valor de "N".
-0049   2???           00128     GOTO        RETARDO_1DECIMA         ; Aporta 2 ciclos máquina.
-004A                  00129 RETARDO_2S:                             ; La llamada "call" aporta 2 ciclos máquina.
-004A   3014           00130     MOVLW       D'20'                   ; Aporta 1 ciclo máquina. Este es el valor de "N".  
-004B   2???           00131     GOTO        RETARDO_1DECIMA         ; Aporta 2 ciclos máquina.
-004C                  00132 RETARDO_1S:                             ; La llamada "call" aporta 2 ciclos máquina.
-004C   300A           00133     MOVLW       D'10'                   ; Aporta 1 ciclo máquina. Este es el valor de "N".
-004D   2???           00134     GOTO        RETARDO_1DECIMA         ; Aporta 2 ciclos máquina.
-004E                  00135 RETARDO_500MS:                          ; La llamada "call" aporta 2 ciclos máquina.
-004E   3005           00136     MOVLW       D'5'                    ; Aporta 1 ciclo máquina. Este es el valor de "N".
-                      00137 ; El próximo bloque "Retardo_1Decima" tarda:
-                      00138 ; 1 + N + N + MxN + MxN + KxMxN + (K-1)xMxN + MxNx2 + (K-1)xMxNx2 +
-                      00139 ;   + (M-1)xN + Nx2 + (M-1)xNx2 + (N-1) + 2 + (N-1)x2 + 2 =
-                      00140 ; = (2 + 4M + 4MN + 4KM) ciclos máquina. Para K=249, M=100 y N=1 supone 100011
-                      00141 ; ciclos máquina que a 4 MHz son 100011 µs = 100 ms = 0,1 s = 1 décima de segundo.
-004F                  00142 RETARDO_1DECIMA:
-004F   0082           00143     MOVWF       R_CONTC                 ; Aporta 1 ciclo máquina.
-0050                  00144 R1DECIMA_BUCLEEXTERNO2:
-0050   3064           00145     MOVLW       D'100'                  ; Aporta Nx1 ciclos máquina. Este es el valor de "M".
-0051   0081           00146     MOVWF       R_CONTB                 ; Aporta Nx1 ciclos máquina.
-0052                  00147 R1DECIMA_BUCLEEXTERNO:
-0052   30F9           00148     MOVLW       D'249'                  ; Aporta MxNx1 ciclos máquina. Este es el valor de "K".
-0053   0080           00149     MOVWF       R_CONTA                 ; Aporta MxNx1 ciclos máquina.
-0054                  00150 R1DECIMA_BUCLEINTERNO:       
-0054   0000           00151     NOP                                 ; Aporta KxMxNx1 ciclos máquina.
-0055   0B80           00152     DECFSZ      R_CONTA,F               ; (K-1)xMxNx1 cm (si no salta) + MxNx2 cm (al saltar).
-0056   2???           00153     GOTO        R1DECIMA_BUCLEINTERNO   ; Aporta (K-1)xMxNx2 ciclos máquina.
-0057   0B81           00154     DECFSZ      R_CONTB,F               ; (M-1)xNx1 cm (cuando no salta) + Nx2 cm (al saltar).
-0058   2???           00155     GOTO        R1DECIMA_BUCLEEXTERNO   ; Aporta (M-1)xNx2 ciclos máquina.
-0059   0B82           00156     DECFSZ      R_CONTC,F               ; (N-1)x1 cm (cuando no salta) + 2 cm (al saltar).
-005A   2???           00157     GOTO        R1DECIMA_BUCLEEXTERNO2  ; Aporta (N-1)x2 ciclos máquina.
-005B   0008           00158     RETURN                              ; El salto del retorno aporta 2 ciclos máquina.
-                      00159 ;En total estas subrutinas tardan:
-                      00160 ; - Retardo_20s:        2 + 1 + 2 + (2 + 4N + 4MN + 4KMN) = 20000807 cm = 20 s.
-                      00161 ;                       (N=200, M=100 y K=249).
-                      00162 ; - Retardo_10s:        2 + 1 + 2 + (2 + 4N + 4MN + 4KMN) = 10000407 cm = 10 s.
-                      00163 ;                       (N=100, M=100 y K=249).
-                      00164 ; - Retardo_5s:         2 + 1 + 2 + (2 + 4N + 4MN + 4KMN) =  5000207 cm =  5 s.
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE  5
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-                      00165 ;                       (N= 50, M=100 y K=249).
-                      00166 ; - Retardo_2s:         2 + 1 + 2 + (2 + 4N + 4MN + 4KMN) =  2000087 cm =  2 s.
-                      00167 ;                       (N= 20, M=100 y K=249).
-                      00168 ; - Retardo_1s:         2 + 1 + 2 + (2 + 4N + 4MN + 4KMN) =  1000047 cm =  1 s.
-                      00169 ;                       (N= 10, M=100 y K=249).
-                      00170 ; - Retardo_500ms:      2 + 1     + (2 + 4N + 4MN + 4KMN) =   500025 cm = 0,5 s.
-                      00171 ;                       (N=  5, M=100 y K=249).
-                      00172 ;       ===================================================================
-                      00173 ;         Del libro "MICROCONTROLADOR PIC16F84. DESARROLLO DE PROYECTOS"
-                      00174 ;         E. Palacios, F. Remiro y L. López.
-                      00175 ;         Editorial Ra-Ma.  www.ra-ma.es
-                      00176 ;       =====================================================
-                      00177 
-                      00178 
+                      00034     ;#INCLUDE <RETARDOS.inc>
                       00035     #INCLUDE <RETARDOS_16MHZ.inc>
                       00001 ;************************* Librería "RETARDOS_16MHZ.INC"******************************
                       00002 ;
                       00003 ;      Librería de retardos para oscilador de 16 MHz.
                       00004 ;
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00005 ;      Web: http://electronica-pic.blogspot.com
                       00006 ;
                       00007 ;*************************************************************************************
@@ -270,22 +74,22 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00013 ; Error = 0 %
                       00014 
                       00015         cblock
-  00000003            00016         r1
-  00000004            00017         r2
+  00000000            00016         r1
+  00000001            00017         r2
                       00018         endc
-005C                  00019 RETARDO_500MICROS_16:  ;1993 cycles
-005C   308E           00020         movlw   0x8E
-005D   0083           00021         movwf   r1
-005E   3002           00022         movlw   0x02
-005F   0084           00023         movwf   r2
-0060                  00024 RETARDO_500MICROS_16_0:
-0060   0B83           00025         decfsz  r1, f
-0061   2???           00026         goto    $+2
-0062   0B84           00027         decfsz  r2, f
-0063   2???           00028         goto    RETARDO_500MICROS_16_0 ;3 cycles
-0064   2???           00029         goto    $+1
-0065   0000           00030         nop             ;4 cycles (including call)
-0066   0008           00031         return
+0013                  00019 RETARDO_500MICROS_16:  ;1993 cycles
+0013   308E           00020         movlw   0x8E
+0014   0080           00021         movwf   r1
+0015   3002           00022         movlw   0x02
+0016   0081           00023         movwf   r2
+0017                  00024 RETARDO_500MICROS_16_0:
+0017   0B80           00025         decfsz  r1, f
+0018   2???           00026         goto    $+2
+0019   0B81           00027         decfsz  r2, f
+001A   2???           00028         goto    RETARDO_500MICROS_16_0 ;3 cycles
+001B   2???           00029         goto    $+1
+001C   0000           00030         nop             ;4 cycles (including call)
+001D   0008           00031         return
                       00032 
                       00033 ;----------------------------------------------------------------------------------------
                       00034 
@@ -293,37 +97,37 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00036 ; Clock frequency = 16 MHz
                       00037 
                       00038 ; Actual delay = 0.0002 seconds = 800 cycles
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE  6
+                      00039 ; Error = 0 %
+                      00040 
+                      00041         cblock
+  00000002            00042         r3
+  00000003            00043         r4
+                      00044         endc
+                      00045 
+001E                  00046 Retardo_200micros
+                      00047                         ;793 cycles
+001E   309E           00048         movlw   0x9E
+001F   0082           00049         movwf   r3
+0020   3001           00050         movlw   0x01
+0021   0083           00051         movwf   r4
+0022                  00052 Retardo_200micros_0
+0022   0B82           00053         decfsz  r3, f
+0023   2???           00054         goto    $+2
+0024   0B83           00055         decfsz  r4, f
+0025   2???           00056         goto    Retardo_200micros_0
+                      00057 
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00039 ; Error = 0 %
-                      00040 
-                      00041         cblock
-  00000005            00042         r3
-  00000006            00043         r4
-                      00044         endc
-                      00045 
-0067                  00046 Retardo_200micros
-                      00047                         ;793 cycles
-0067   309E           00048         movlw   0x9E
-0068   0085           00049         movwf   r3
-0069   3001           00050         movlw   0x01
-006A   0086           00051         movwf   r4
-006B                  00052 Retardo_200micros_0
-006B   0B85           00053         decfsz  r3, f
-006C   2???           00054         goto    $+2
-006D   0B86           00055         decfsz  r4, f
-006E   2???           00056         goto    Retardo_200micros_0
-                      00057 
                       00058                         ;3 cycles
-006F   2???           00059         goto    $+1
-0070   0000           00060         nop
+0026   2???           00059         goto    $+1
+0027   0000           00060         nop
                       00061 
                       00062                         ;4 cycles (including call)
-0071   0008           00063         return
+0028   0008           00063         return
                       00064 
                       00065 ;----------------------------------------------------------------------------------------
                       00066 
@@ -334,30 +138,24 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00071 ; Error = 0 %
                       00072 
                       00073         cblock
-  00000007            00074         r5
+  00000004            00074         r5
                       00075         endc
                       00076 
-0072                  00077 RETARDO_100MICROS_16:   ;394 cycles
-0072   3083           00078         movlw   0x83
-0073   0087           00079         movwf   r5
-0074                  00080 RETARDO_100MICROS_16_0:
-0074   0B87           00081         decfsz  r5, f
-0075   2???           00082         goto    RETARDO_100MICROS_16_0
+0029                  00077 RETARDO_100MICROS_16:   ;394 cycles
+0029   3083           00078         movlw   0x83
+002A   0084           00079         movwf   r5
+002B                  00080 RETARDO_100MICROS_16_0:
+002B   0B84           00081         decfsz  r5, f
+002C   2???           00082         goto    RETARDO_100MICROS_16_0
                       00083 
                       00084                         ;2 cycles
-0076   2???           00085         goto    $+1
+002D   2???           00085         goto    $+1
                       00086 
                       00087                         ;4 cycles (including call)
-0077   0008           00088         return
+002E   0008           00088         return
                       00089 
                       00090 ;----------------------------------------------------------------------------------------
                       00091 
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE  7
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                       00092 ; Delay = 5e-05 seconds
                       00093 ; Clock frequency = 16 MHz
                       00094 
@@ -365,18 +163,24 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00096 ; Error = 0 %
                       00097 
                       00098         cblock
-  00000008            00099         r6
+  00000005            00099         r6
                       00100         endc
                       00101 
-0078                  00102 RETARDO_50MICROS_16:   ;196 cycles
-0078   3041           00103         movlw   0x41
-0079   0088           00104         movwf   r6
-007A                  00105 RETARDO_50MICROS_16_0:
-007A   0B88           00106         decfsz  r6, f
-007B   2???           00107         goto    RETARDO_50MICROS_16_0
+002F                  00102 RETARDO_50MICROS_16:   ;196 cycles
+002F   3041           00103         movlw   0x41
+0030   0085           00104         movwf   r6
+0031                  00105 RETARDO_50MICROS_16_0:
+0031   0B85           00106         decfsz  r6, f
+0032   2???           00107         goto    RETARDO_50MICROS_16_0
                       00108 
                       00109                         ;4 cycles (including call)
-007C   0008           00110         return
+0033   0008           00110         return
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00111 
                       00112 ;----------------------------------------------------------------------------------------
                       00113 
@@ -387,19 +191,19 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00118 ; Error = 0 %
                       00119 
                       00120         cblock
-  00000009            00121         r7
+  00000006            00121         r7
                       00122         endc
                       00123 
-007D                  00124 RETARDO_20MICROS_16:
+0034                  00124 RETARDO_20MICROS_16:
                       00125                         ;76 cycles
-007D   3019           00126         movlw   0x19
-007E   0089           00127         movwf   r7
-007F                  00128 RETARDO_20MICROS_16_0:
-007F   0B89           00129         decfsz  r7, f
-0080   2???           00130         goto    RETARDO_20MICROS_16_0
+0034   3019           00126         movlw   0x19
+0035   0086           00127         movwf   r7
+0036                  00128 RETARDO_20MICROS_16_0:
+0036   0B86           00129         decfsz  r7, f
+0037   2???           00130         goto    RETARDO_20MICROS_16_0
                       00131 
                       00132                         ;4 cycles (including call)
-0081   0008           00133         return
+0038   0008           00133         return
                       00134         
                       00135         
                       00136 ;----------------------------------------------------------------------------------------
@@ -411,916 +215,756 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00142 ; Error = 0 %
                       00143 
                       00144         cblock
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE  8
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-  0000000A            00145         r53
+  00000007            00145         r53
                       00146         endc
                       00147 
-0082                  00148 RETARDO_13MICROS_16:
+0039                  00148 RETARDO_13MICROS_16:
                       00149                         ;49 cycles
-0082   300E           00150         movlw   0xE
-0083   008A           00151         movwf   r53
-0084                  00152 RETARDO_13MICROS_16_0:
-0084   0B8A           00153         decfsz  r53, f
-0085   2???           00154         goto    RETARDO_13MICROS_16_0
+0039   300E           00150         movlw   0xE
+003A   0087           00151         movwf   r53
+003B                  00152 RETARDO_13MICROS_16_0:
+003B   0B87           00153         decfsz  r53, f
+003C   2???           00154         goto    RETARDO_13MICROS_16_0
                       00155 
                       00156                         ;4 cycles (including call)
-0086   0008           00157         return
+003D   0008           00157         return
                       00158         
-                      00159         
-                      00160         ; Delay = 2e-05 seconds
-                      00161 ; Clock frequency = 16 MHz
-                      00162 
-                      00163 ; Actual delay = 2e-05 seconds = 80 cycles
-                      00164 ; Error = 0 %
-                      00165 
-                      00166         cblock
-  0000000B            00167         r54
-                      00168         endc
-                      00169 
-0087                  00170 RETARDO_10MICROS_16:
-                      00171                         ;49 cycles
-0087   300C           00172         movlw   0xC
-0088   008B           00173         movwf   r54
-0089                  00174 RETARDO_10MICROS_16_0:
-0089   0B8B           00175             decfsz      r54, f
-008A   2???           00176         goto    RETARDO_10MICROS_16_0
-                      00177 
-                      00178                         ;4 cycles (including call)
-008B   0008           00179         return
-                      00180 
-                      00181 ;----------------------------------------------------------------------------------------
-                      00182 
-                      00183 ;----------------------------------------------------------------------------------------
-                      00184 
-                      00185 ; Delay = 0.2 seconds
-                      00186 ; Clock frequency = 16 MHz
-                      00187 
-                      00188 ; Actual delay = 0.2 seconds = 800000 cycles
-                      00189 ; Error = 0 %
-                      00190 
-                      00191         cblock
-  0000000C            00192         r8
-  0000000D            00193         r9
-  0000000E            00194         r10
-                      00195         endc
-                      00196 
-008C                  00197 Retardo_200ms
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE  9
+                      00159 ;----------------------------------------------------------------------------------------
+                      00160         
+                      00161         ; Delay = 2e-05 seconds
+                      00162 ; Clock frequency = 16 MHz
+                      00163 
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00198                         ;799993 cycles
-008C   306C           00199         movlw   0x6C
-008D   008C           00200         movwf   r8
-008E   30BF           00201         movlw   0xBF
-008F   008D           00202         movwf   r9
-0090   3002           00203         movlw   0x02
-0091   008E           00204         movwf   r10
-0092                  00205 Retardo_200ms_0
-0092   0B8C           00206         decfsz  r8, f
-0093   2???           00207         goto    $+2
-0094   0B8D           00208         decfsz  r9, f
-0095   2???           00209         goto    $+2
-0096   0B8E           00210         decfsz  r10, f
-0097   2???           00211         goto    Retardo_200ms_0
+                      00164 ; Actual delay = 2e-05 seconds = 80 cycles
+                      00165 ; Error = 0 %
+                      00166 
+                      00167 ;       cblock
+                      00168 ;       r54
+                      00169 ;       endc
+                      00170 ;
+                      00171 ;RETARDO_10MICROS_16:
+                      00172 ;                       ;49 cycles
+                      00173 ;       movlw   0xC
+                      00174 ;       movwf   r54
+                      00175 ;RETARDO_10MICROS_16_0:
+                      00176 ;           decfsz      r54, f
+                      00177 ;       goto    RETARDO_10MICROS_16_0
+                      00178 ;
+                      00179 ;                       ;4 cycles (including call)
+                      00180 ;       return
+                      00181         
+                      00182 ;----------------------------------------------------------------------------------------
+                      00183         
+                      00184 ; Delay = 2e-05 seconds
+                      00185 ; Clock frequency = 16 MHz
+                      00186 
+                      00187 ; Actual delay = 2e-05 seconds = 80 cycles
+                      00188 ; Error = 0 %
+                      00189 
+                      00190         cblock
+  00000008            00191         R55
+  00000009            00192         R56
+                      00193         endc
+                      00194 
+003E                  00195 RETARDO_1686MICROS_16:  ;49 cycles
+003E   300A           00196         MOVLW D'10'
+003F   0088           00197         MOVWF R55
+0040                  00198 BUCLE_1:
+0040   30FF           00199         MOVLW D'255'
+0041   0089           00200         MOVWF R56
+0042                  00201 BUCLE_2:
+0042   0B89           00202         DECFSZ R56,1
+0043   2???           00203         GOTO BUCLE_2
+0044   0B88           00204         DECFSZ R55,1
+0045   2???           00205         GOTO BUCLE_1
+0046   0008           00206         RETURN
+                      00207 
+                      00208 ;----------------------------------------------------------------------------------------
+                      00209 
+                      00210 ; Delay = 0.2 seconds
+                      00211 ; Clock frequency = 16 MHz
                       00212 
-                      00213                         ;3 cycles
-0098   2???           00214         goto    $+1
-0099   0000           00215         nop
-                      00216 
-                      00217                         ;4 cycles (including call)
-009A   0008           00218         return
-                      00219 
-                      00220 ;----------------------------------------------------------------------------------------
+                      00213 ; Actual delay = 0.2 seconds = 800000 cycles
+                      00214 ; Error = 0 %
+                      00215 
+                      00216         cblock
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+  0000000A            00217         r8
+  0000000B            00218         r9
+  0000000C            00219         r10
+                      00220         endc
                       00221 
-                      00222 ; Delay = 0.1 seconds
-                      00223 ; Clock frequency = 16 MHz
-                      00224 
-                      00225 ; Actual delay = 0.1 seconds = 400000 cycles
-                      00226 ; Error = 0 %
-                      00227 
-                      00228         cblock
-  0000000F            00229         r11
-  00000010            00230         r12
-  00000011            00231         r13
-                      00232         endc
-                      00233 
-009B                  00234 Retardo_100ms
-                      00235                         ;399992 cycles
-009B   3035           00236         movlw   0x35
-009C   008F           00237         movwf   r11
-009D   30E0           00238         movlw   0xE0
-009E   0090           00239         movwf   r12
-009F   3001           00240         movlw   0x01
-00A0   0091           00241         movwf   r13
-00A1                  00242 Retardo_100ms_0
-00A1   0B8F           00243         decfsz  r11, f
-00A2   2???           00244         goto    $+2
-00A3   0B90           00245         decfsz  r12, f
-00A4   2???           00246         goto    $+2
-00A5   0B91           00247         decfsz  r13, f
-00A6   2???           00248         goto    Retardo_100ms_0
+0047                  00222 Retardo_200ms
+                      00223                         ;799993 cycles
+0047   306C           00224         movlw   0x6C
+0048   008A           00225         movwf   r8
+0049   30BF           00226         movlw   0xBF
+004A   008B           00227         movwf   r9
+004B   3002           00228         movlw   0x02
+004C   008C           00229         movwf   r10
+004D                  00230 Retardo_200ms_0
+004D   0B8A           00231         decfsz  r8, f
+004E   2???           00232         goto    $+2
+004F   0B8B           00233         decfsz  r9, f
+0050   2???           00234         goto    $+2
+0051   0B8C           00235         decfsz  r10, f
+0052   2???           00236         goto    Retardo_200ms_0
+                      00237 
+                      00238                         ;3 cycles
+0053   2???           00239         goto    $+1
+0054   0000           00240         nop
+                      00241 
+                      00242                         ;4 cycles (including call)
+0055   0008           00243         return
+                      00244 
+                      00245 ;----------------------------------------------------------------------------------------
+                      00246 
+                      00247 ; Delay = 0.1 seconds
+                      00248 ; Clock frequency = 16 MHz
                       00249 
-                      00250                         ;4 cycles
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 10
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-00A7   2???           00251         goto    $+1
-00A8   2???           00252         goto    $+1
-                      00253 
-                      00254                         ;4 cycles (including call)
-00A9   0008           00255         return
-                      00256 
-                      00257 ;----------------------------------------------------------------------------------------
+                      00250 ; Actual delay = 0.1 seconds = 400000 cycles
+                      00251 ; Error = 0 %
+                      00252 
+                      00253         cblock
+  0000000D            00254         r11
+  0000000E            00255         r12
+  0000000F            00256         r13
+                      00257         endc
                       00258 
-                      00259 ; Delay = 0.05 seconds
-                      00260 ; Clock frequency = 16 MHz
-                      00261 
-                      00262 ; Actual delay = 0.05 seconds = 200000 cycles
-                      00263 ; Error = 0 %
-                      00264 
-                      00265         cblock
-  00000012            00266         r14
-  00000013            00267         r15
-                      00268         endc
-                      00269 
-00AA                  00270 Retardo_50ms
-                      00271                         ;199993 cycles
-00AA   303E           00272         movlw   0x3E
-00AB   0092           00273         movwf   r14
-00AC   309D           00274         movlw   0x9D
-00AD   0093           00275         movwf   r15
-00AE                  00276 Retardo_50ms_0
-00AE   0B92           00277         decfsz  r14, f
-00AF   2???           00278         goto    $+2
-00B0   0B93           00279         decfsz  r15, f
-00B1   2???           00280         goto    Retardo_50ms_0
+0056                  00259 Retardo_100ms
+                      00260                         ;399992 cycles
+0056   3035           00261         movlw   0x35
+0057   008D           00262         movwf   r11
+0058   30E0           00263         movlw   0xE0
+0059   008E           00264         movwf   r12
+005A   3001           00265         movlw   0x01
+005B   008F           00266         movwf   r13
+005C                  00267 Retardo_100ms_0
+005C   0B8D           00268         decfsz  r11, f
+005D   2???           00269         goto    $+2
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+005E   0B8E           00270         decfsz  r12, f
+005F   2???           00271         goto    $+2
+0060   0B8F           00272         decfsz  r13, f
+0061   2???           00273         goto    Retardo_100ms_0
+                      00274 
+                      00275                         ;4 cycles
+0062   2???           00276         goto    $+1
+0063   2???           00277         goto    $+1
+                      00278 
+                      00279                         ;4 cycles (including call)
+0064   0008           00280         return
                       00281 
-                      00282                         ;3 cycles
-00B2   2???           00283         goto    $+1
-00B3   0000           00284         nop
-                      00285 
-                      00286                         ;4 cycles (including call)
-00B4   0008           00287         return
-                      00288 
-                      00289 ;----------------------------------------------------------------------------------------
-                      00290 
-                      00291 ; Delay = 0.02 seconds
-                      00292 ; Clock frequency = 16 MHz
-                      00293 
-                      00294 ; Actual delay = 0.02 seconds = 80000 cycles
-                      00295 ; Error = 0 %
-                      00296 
-                      00297         cblock
-  00000014            00298         r16
-  00000015            00299         r17
-                      00300         endc
-                      00301 
-00B5                  00302 Retardo_20ms
-                      00303                         ;79993 cycles
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 11
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-00B5   307E           00304         movlw   0x7E
-00B6   0094           00305         movwf   r16
-00B7   303F           00306         movlw   0x3F
-00B8   0095           00307         movwf   r17
-00B9                  00308 Retardo_20ms_0
-00B9   0B94           00309         decfsz  r16, f
-00BA   2???           00310         goto    $+2
-00BB   0B95           00311         decfsz  r17, f
-00BC   2???           00312         goto    Retardo_20ms_0
+                      00282 ;----------------------------------------------------------------------------------------
+                      00283 
+                      00284 ; Delay = 0.05 seconds
+                      00285 ; Clock frequency = 16 MHz
+                      00286 
+                      00287 ; Actual delay = 0.05 seconds = 200000 cycles
+                      00288 ; Error = 0 %
+                      00289 
+                      00290         cblock
+  00000010            00291         r14
+  00000011            00292         r15
+                      00293         endc
+                      00294 
+0065                  00295 Retardo_50ms
+                      00296                         ;199993 cycles
+0065   303E           00297         movlw   0x3E
+0066   0090           00298         movwf   r14
+0067   309D           00299         movlw   0x9D
+0068   0091           00300         movwf   r15
+0069                  00301 Retardo_50ms_0
+0069   0B90           00302         decfsz  r14, f
+006A   2???           00303         goto    $+2
+006B   0B91           00304         decfsz  r15, f
+006C   2???           00305         goto    Retardo_50ms_0
+                      00306 
+                      00307                         ;3 cycles
+006D   2???           00308         goto    $+1
+006E   0000           00309         nop
+                      00310 
+                      00311                         ;4 cycles (including call)
+006F   0008           00312         return
                       00313 
-                      00314                         ;3 cycles
-00BD   2???           00315         goto    $+1
-00BE   0000           00316         nop
-                      00317 
-                      00318                         ;4 cycles (including call)
-00BF   0008           00319         return
-                      00320 
-                      00321 ;----------------------------------------------------------------------------------------
-                      00322 
-                      00323 ; Delay = 0.01 seconds
-                      00324 ; Clock frequency = 16 MHz
-                      00325 
-                      00326 ; Actual delay = 0.01 seconds = 40000 cycles
-                      00327 ; Error = 0 %
-                      00328 
-                      00329         cblock
-  00000016            00330         r18
-  00000017            00331         r19
-                      00332         endc
-                      00333 
-00C0                  00334 Retardo_10ms
-                      00335                         ;39993 cycles
-00C0   303E           00336         movlw   0x3E
-00C1   0096           00337         movwf   r18
-00C2   3020           00338         movlw   0x20
-00C3   0097           00339         movwf   r19
-00C4                  00340 Retardo_10ms_0
-00C4   0B96           00341         decfsz  r18, f
-00C5   2???           00342         goto    $+2
-00C6   0B97           00343         decfsz  r19, f
-00C7   2???           00344         goto    Retardo_10ms_0
+                      00314 ;----------------------------------------------------------------------------------------
+                      00315 
+                      00316 ; Delay = 0.02 seconds
+                      00317 ; Clock frequency = 16 MHz
+                      00318 
+                      00319 ; Actual delay = 0.02 seconds = 80000 cycles
+                      00320 ; Error = 0 %
+                      00321 
+                      00322         cblock
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+  00000012            00323         r16
+  00000013            00324         r17
+                      00325         endc
+                      00326 
+0070                  00327 Retardo_20ms
+                      00328                         ;79993 cycles
+0070   307E           00329         movlw   0x7E
+0071   0092           00330         movwf   r16
+0072   303F           00331         movlw   0x3F
+0073   0093           00332         movwf   r17
+0074                  00333 Retardo_20ms_0
+0074   0B92           00334         decfsz  r16, f
+0075   2???           00335         goto    $+2
+0076   0B93           00336         decfsz  r17, f
+0077   2???           00337         goto    Retardo_20ms_0
+                      00338 
+                      00339                         ;3 cycles
+0078   2???           00340         goto    $+1
+0079   0000           00341         nop
+                      00342 
+                      00343                         ;4 cycles (including call)
+007A   0008           00344         return
                       00345 
-                      00346                         ;3 cycles
-00C8   2???           00347         goto    $+1
-00C9   0000           00348         nop
-                      00349 
-                      00350                         ;4 cycles (including call)
-00CA   0008           00351         return
-                      00352 
-                      00353 ;----------------------------------------------------------------------------------------
-                      00354 
-                      00355 ; Delay = 0.005 seconds
-                      00356 ; Clock frequency = 16 MHz
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 12
+                      00346 ;----------------------------------------------------------------------------------------
+                      00347 
+                      00348 ; Delay = 0.01 seconds
+                      00349 ; Clock frequency = 16 MHz
+                      00350 
+                      00351 ; Actual delay = 0.01 seconds = 40000 cycles
+                      00352 ; Error = 0 %
+                      00353 
+                      00354         cblock
+  00000014            00355         r18
+  00000015            00356         r19
+                      00357         endc
+                      00358 
+007B                  00359 Retardo_10ms
+                      00360                         ;39993 cycles
+007B   303E           00361         movlw   0x3E
+007C   0094           00362         movwf   r18
+007D   3020           00363         movlw   0x20
+007E   0095           00364         movwf   r19
+007F                  00365 Retardo_10ms_0
+007F   0B94           00366         decfsz  r18, f
+0080   2???           00367         goto    $+2
+0081   0B95           00368         decfsz  r19, f
+0082   2???           00369         goto    Retardo_10ms_0
+                      00370 
+                      00371                         ;3 cycles
+0083   2???           00372         goto    $+1
+0084   0000           00373         nop
+                      00374 
+                      00375                         ;4 cycles (including call)
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00357 
-                      00358 ; Actual delay = 0.005 seconds = 20000 cycles
-                      00359 ; Error = 0 %
-                      00360 
-                      00361         cblock
-  00000018            00362         r20
-  00000019            00363         r21
-                      00364         endc
-                      00365 
-00CB                  00366 RETARDO_5MS_16:
-                      00367                         ;19993 cycles
-00CB   309E           00368         movlw   0x9E
-00CC   0098           00369         movwf   r20
-00CD   3010           00370         movlw   0x10
-00CE   0099           00371         movwf   r21
-00CF                  00372 RETARDO_5MS_16_0:
-00CF   0B98           00373         decfsz  r20, f
-00D0   2???           00374         goto    $+2
-00D1   0B99           00375         decfsz  r21, f
-00D2   2???           00376         goto    RETARDO_5MS_16_0
+0085   0008           00376         return
                       00377 
-                      00378                         ;3 cycles
-00D3   2???           00379         goto    $+1
-00D4   0000           00380         nop
-                      00381 
-                      00382                         ;4 cycles (including call)
-00D5   0008           00383         return
-                      00384 
-                      00385 ;----------------------------------------------------------------------------------------
-                      00386 
-                      00387 ; Delay = 0.002 seconds
-                      00388 ; Clock frequency = 16 MHz
-                      00389 
-                      00390 ; Actual delay = 0.002 seconds = 8000 cycles
-                      00391 ; Error = 0 %
-                      00392 
-                      00393         cblock
-  0000001A            00394         r22
-  0000001B            00395         r23
-                      00396         endc
-                      00397 
-00D6                  00398 Retardo_2ms
-                      00399                         ;7993 cycles
-00D6   303E           00400         movlw   0x3E
-00D7   009A           00401         movwf   r22
-00D8   3007           00402         movlw   0x07
-00D9   009B           00403         movwf   r23
-00DA                  00404 Retardo_2ms_0
-00DA   0B9A           00405         decfsz  r22, f
-00DB   2???           00406         goto    $+2
-00DC   0B9B           00407         decfsz  r23, f
-00DD   2???           00408         goto    Retardo_2ms_0
+                      00378 ;----------------------------------------------------------------------------------------
+                      00379 
+                      00380 ; Delay = 0.005 seconds
+                      00381 ; Clock frequency = 16 MHz
+                      00382 
+                      00383 ; Actual delay = 0.005 seconds = 20000 cycles
+                      00384 ; Error = 0 %
+                      00385 
+                      00386         cblock
+  00000016            00387         r20
+  00000017            00388         r21
+                      00389         endc
+                      00390 
+0086                  00391 RETARDO_5MS_16:
+                      00392                         ;19993 cycles
+0086   309E           00393         movlw   0x9E
+0087   0096           00394         movwf   r20
+0088   3010           00395         movlw   0x10
+0089   0097           00396         movwf   r21
+008A                  00397 RETARDO_5MS_16_0:
+008A   0B96           00398         decfsz  r20, f
+008B   2???           00399         goto    $+2
+008C   0B97           00400         decfsz  r21, f
+008D   2???           00401         goto    RETARDO_5MS_16_0
+                      00402 
+                      00403                         ;3 cycles
+008E   2???           00404         goto    $+1
+008F   0000           00405         nop
+                      00406 
+                      00407                         ;4 cycles (including call)
+0090   0008           00408         return
                       00409 
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 13
+                      00410 ;----------------------------------------------------------------------------------------
+                      00411 
+                      00412 ; Delay = 0.002 seconds
+                      00413 ; Clock frequency = 16 MHz
+                      00414 
+                      00415 ; Actual delay = 0.002 seconds = 8000 cycles
+                      00416 ; Error = 0 %
+                      00417 
+                      00418         cblock
+  00000018            00419         r22
+  00000019            00420         r23
+                      00421         endc
+                      00422 
+0091                  00423 Retardo_2ms
+                      00424                         ;7993 cycles
+0091   303E           00425         movlw   0x3E
+0092   0098           00426         movwf   r22
+0093   3007           00427         movlw   0x07
+0094   0099           00428         movwf   r23
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00410                         ;3 cycles
-00DE   2???           00411         goto    $+1
-00DF   0000           00412         nop
-                      00413 
-                      00414                         ;4 cycles (including call)
-00E0   0008           00415         return
-                      00416 
-                      00417 ;----------------------------------------------------------------------------------------
-                      00418 
-                      00419 ; Delay = 0.001 seconds
-                      00420 ; Clock frequency = 16 MHz
-                      00421 
-                      00422 ; Actual delay = 0.001 seconds = 4000 cycles
-                      00423 ; Error = 0 %
-                      00424 
-                      00425         cblock
-  0000001C            00426         r24
-  0000001D            00427         r25
-                      00428         endc
-                      00429 
-00E1                  00430 Retardo_1ms
-                      00431                         ;3993 cycles
-00E1   301E           00432         movlw   0x1E
-00E2   009C           00433         movwf   r24
-00E3   3004           00434         movlw   0x04
-00E4   009D           00435         movwf   r25
-00E5                  00436 Retardo_1ms_0
-00E5   0B9C           00437         decfsz  r24, f
-00E6   2???           00438         goto    $+2
-00E7   0B9D           00439         decfsz  r25, f
-00E8   2???           00440         goto    Retardo_1ms_0
+0095                  00429 Retardo_2ms_0
+0095   0B98           00430         decfsz  r22, f
+0096   2???           00431         goto    $+2
+0097   0B99           00432         decfsz  r23, f
+0098   2???           00433         goto    Retardo_2ms_0
+                      00434 
+                      00435                         ;3 cycles
+0099   2???           00436         goto    $+1
+009A   0000           00437         nop
+                      00438 
+                      00439                         ;4 cycles (including call)
+009B   0008           00440         return
                       00441 
-                      00442                         ;3 cycles
-00E9   2???           00443         goto    $+1
-00EA   0000           00444         nop
-                      00445 
-                      00446                         ;4 cycles (including call)
-00EB   0008           00447         return
-                      00448 
-                      00449 ;----------------------------------------------------------------------------------------
-                      00450 
-                      00451 ; Delay = 20 seconds
-                      00452 ; Clock frequency = 16 MHz
-                      00453 
-                      00454 ; Actual delay = 20 seconds = 80000000 cycles
-                      00455 ; Error = 0 %
-                      00456 
-                      00457         cblock
-  0000001E            00458         r26
-  0000001F            00459         r27
-  00000020            00460         r28
-                      00461         endc
-                      00462 
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 14
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-00EC                  00463 Retardo_20s
-                      00464                         ;79999995 cycles
-00EC   30DA           00465         movlw   0xDA
-00ED   009E           00466         movwf   r26
-00EE   3063           00467         movlw   0x63
-00EF   009F           00468         movwf   r27
-00F0   30AF           00469         movlw   0xAF
-00F1   00A0           00470         movwf   r28
-00F2                  00471 Retardo_20s_0
-00F2   0B9E           00472         decfsz  r26, f
-00F3   2???           00473         goto    $+2
-00F4   0B9F           00474         decfsz  r27, f
-00F5   2???           00475         goto    $+2
-00F6   0BA0           00476         decfsz  r28, f
-00F7   2???           00477         goto    Retardo_20s_0
+                      00442 ;----------------------------------------------------------------------------------------
+                      00443 
+                      00444 ; Delay = 0.001 seconds
+                      00445 ; Clock frequency = 16 MHz
+                      00446 
+                      00447 ; Actual delay = 0.001 seconds = 4000 cycles
+                      00448 ; Error = 0 %
+                      00449 
+                      00450         cblock
+  0000001A            00451         r24
+  0000001B            00452         r25
+                      00453         endc
+                      00454 
+009C                  00455 Retardo_1ms
+                      00456                         ;3993 cycles
+009C   301E           00457         movlw   0x1E
+009D   009A           00458         movwf   r24
+009E   3004           00459         movlw   0x04
+009F   009B           00460         movwf   r25
+00A0                  00461 Retardo_1ms_0
+00A0   0B9A           00462         decfsz  r24, f
+00A1   2???           00463         goto    $+2
+00A2   0B9B           00464         decfsz  r25, f
+00A3   2???           00465         goto    Retardo_1ms_0
+                      00466 
+                      00467                         ;3 cycles
+00A4   2???           00468         goto    $+1
+00A5   0000           00469         nop
+                      00470 
+                      00471                         ;4 cycles (including call)
+00A6   0008           00472         return
+                      00473 
+                      00474 ;----------------------------------------------------------------------------------------
+                      00475 
+                      00476 ; Delay = 20 seconds
+                      00477 ; Clock frequency = 16 MHz
                       00478 
-                      00479                         ;1 cycle
-00F8   0000           00480         nop
+                      00479 ; Actual delay = 20 seconds = 80000000 cycles
+                      00480 ; Error = 0 %
                       00481 
-                      00482                         ;4 cycles (including call)
-00F9   0008           00483         return
-                      00484 
-                      00485 ;----------------------------------------------------------------------------------------
-                      00486 
-                      00487 ; Delay = 10 seconds
-                      00488 ; Clock frequency = 16 MHz
-                      00489 
-                      00490 ; Actual delay = 10 seconds = 40000000 cycles
-                      00491 ; Error = 0 %
-                      00492 
-                      00493         cblock
-  00000021            00494         r29
-  00000022            00495         r30
-  00000023            00496         r31
-                      00497         endc
-                      00498 
-00FA                  00499 Retardo_10s
-                      00500                         ;39999993 cycles
-00FA   306C           00501         movlw   0x6C
-00FB   00A1           00502         movwf   r29
-00FC   3032           00503         movlw   0x32
-00FD   00A2           00504         movwf   r30
-00FE   3058           00505         movlw   0x58
-00FF   00A3           00506         movwf   r31
-0100                  00507 Retardo_10s_0
-0100   0BA1           00508         decfsz  r29, f
-0101   2???           00509         goto    $+2
-0102   0BA2           00510         decfsz  r30, f
-0103   2???           00511         goto    $+2
-0104   0BA3           00512         decfsz  r31, f
-0105   2???           00513         goto    Retardo_10s_0
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00482         cblock
+  0000001C            00483         r26
+  0000001D            00484         r27
+  0000001E            00485         r28
+                      00486         endc
+                      00487 
+00A7                  00488 Retardo_20s
+                      00489                         ;79999995 cycles
+00A7   30DA           00490         movlw   0xDA
+00A8   009C           00491         movwf   r26
+00A9   3063           00492         movlw   0x63
+00AA   009D           00493         movwf   r27
+00AB   30AF           00494         movlw   0xAF
+00AC   009E           00495         movwf   r28
+00AD                  00496 Retardo_20s_0
+00AD   0B9C           00497         decfsz  r26, f
+00AE   2???           00498         goto    $+2
+00AF   0B9D           00499         decfsz  r27, f
+00B0   2???           00500         goto    $+2
+00B1   0B9E           00501         decfsz  r28, f
+00B2   2???           00502         goto    Retardo_20s_0
+                      00503 
+                      00504                         ;1 cycle
+00B3   0000           00505         nop
+                      00506 
+                      00507                         ;4 cycles (including call)
+00B4   0008           00508         return
+                      00509 
+                      00510 ;----------------------------------------------------------------------------------------
+                      00511 
+                      00512 ; Delay = 10 seconds
+                      00513 ; Clock frequency = 16 MHz
                       00514 
-                      00515                         ;3 cycles
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 15
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-0106   2???           00516         goto    $+1
-0107   0000           00517         nop
-                      00518 
-                      00519                         ;4 cycles (including call)
-0108   0008           00520         return
-                      00521 
-                      00522 ;----------------------------------------------------------------------------------------
+                      00515 ; Actual delay = 10 seconds = 40000000 cycles
+                      00516 ; Error = 0 %
+                      00517 
+                      00518         cblock
+  0000001F            00519         r29
+  00000020            00520         r30
+  00000021            00521         r31
+                      00522         endc
                       00523 
-                      00524 ; Delay = 5 seconds
-                      00525 ; Clock frequency = 16 MHz
-                      00526 
-                      00527 ; Actual delay = 5 seconds = 20000000 cycles
-                      00528 ; Error = 0 %
-                      00529 
-                      00530         cblock
-  00000024            00531         r32
-  00000025            00532         r33
-  00000026            00533         r34
-                      00534         endc
-                      00535 
-0109                  00536 Retardo_5s
-                      00537                         ;19999992 cycles
-0109   30B5           00538         movlw   0xB5
-010A   00A4           00539         movwf   r32
-010B   3099           00540         movlw   0x99
-010C   00A5           00541         movwf   r33
-010D   302C           00542         movlw   0x2C
-010E   00A6           00543         movwf   r34
-010F                  00544 Retardo_5s_0
-010F   0BA4           00545         decfsz  r32, f
-0110   2???           00546         goto    $+2
-0111   0BA5           00547         decfsz  r33, f
-0112   2???           00548         goto    $+2
-0113   0BA6           00549         decfsz  r34, f
-0114   2???           00550         goto    Retardo_5s_0
+00B5                  00524 Retardo_10s
+                      00525                         ;39999993 cycles
+00B5   306C           00526         movlw   0x6C
+00B6   009F           00527         movwf   r29
+00B7   3032           00528         movlw   0x32
+00B8   00A0           00529         movwf   r30
+00B9   3058           00530         movlw   0x58
+00BA   00A1           00531         movwf   r31
+00BB                  00532 Retardo_10s_0
+00BB   0B9F           00533         decfsz  r29, f
+00BC   2???           00534         goto    $+2
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00BD   0BA0           00535         decfsz  r30, f
+00BE   2???           00536         goto    $+2
+00BF   0BA1           00537         decfsz  r31, f
+00C0   2???           00538         goto    Retardo_10s_0
+                      00539 
+                      00540                         ;3 cycles
+00C1   2???           00541         goto    $+1
+00C2   0000           00542         nop
+                      00543 
+                      00544                         ;4 cycles (including call)
+00C3   0008           00545         return
+                      00546 
+                      00547 ;----------------------------------------------------------------------------------------
+                      00548 
+                      00549 ; Delay = 5 seconds
+                      00550 ; Clock frequency = 16 MHz
                       00551 
-                      00552                         ;4 cycles
-0115   2???           00553         goto    $+1
-0116   2???           00554         goto    $+1
-                      00555 
-                      00556                         ;4 cycles (including call)
-0117   0008           00557         return
-                      00558 
-                      00559 ;----------------------------------------------------------------------------------------
+                      00552 ; Actual delay = 5 seconds = 20000000 cycles
+                      00553 ; Error = 0 %
+                      00554 
+                      00555         cblock
+  00000022            00556         r32
+  00000023            00557         r33
+  00000024            00558         r34
+                      00559         endc
                       00560 
-                      00561 ; Delay = 2 seconds
-                      00562 ; Clock frequency = 16 MHz
-                      00563 
-                      00564 ; Actual delay = 2 seconds = 8000000 cycles
-                      00565 ; Error = 0 %
-                      00566 
-                      00567         cblock
-  00000027            00568         r35
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 16
+00C4                  00561 Retardo_5s
+                      00562                         ;19999992 cycles
+00C4   30B5           00563         movlw   0xB5
+00C5   00A2           00564         movwf   r32
+00C6   3099           00565         movlw   0x99
+00C7   00A3           00566         movwf   r33
+00C8   302C           00567         movlw   0x2C
+00C9   00A4           00568         movwf   r34
+00CA                  00569 Retardo_5s_0
+00CA   0BA2           00570         decfsz  r32, f
+00CB   2???           00571         goto    $+2
+00CC   0BA3           00572         decfsz  r33, f
+00CD   2???           00573         goto    $+2
+00CE   0BA4           00574         decfsz  r34, f
+00CF   2???           00575         goto    Retardo_5s_0
+                      00576 
+                      00577                         ;4 cycles
+00D0   2???           00578         goto    $+1
+00D1   2???           00579         goto    $+1
+                      00580 
+                      00581                         ;4 cycles (including call)
+00D2   0008           00582         return
+                      00583 
+                      00584 ;----------------------------------------------------------------------------------------
+                      00585 
+                      00586 ; Delay = 2 seconds
+                      00587 ; Clock frequency = 16 MHz
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-  00000028            00569         r36
-  00000029            00570         r37
-                      00571         endc
-                      00572 
-0118                  00573 RETARDO_2S_16:      ;7999990 cycles
-0118   3047           00574         movlw   0x47
-0119   00A7           00575         movwf   r35
-011A   3071           00576         movlw   0x71
-011B   00A8           00577         movwf   r36
-011C   3012           00578         movlw   0x12
-011D   00A9           00579         movwf   r37
-011E                  00580 RETARDO_2S_16_0:
-011E   0BA7           00581         decfsz  r35, f
-011F   2???           00582         goto    $+2
-0120   0BA8           00583         decfsz  r36, f
-0121   2???           00584         goto    $+2
-0122   0BA9           00585         decfsz  r37, f
-0123   2???           00586         goto    RETARDO_2S_16_0
-                      00587 
-                      00588                         ;6 cycles
-0124   2???           00589         goto    $+1
-0125   2???           00590         goto    $+1
-0126   2???           00591         goto    $+1
-                      00592 
-                      00593                         ;4 cycles (including call)
-0127   0008           00594         return
-                      00595 
-                      00596 ;----------------------------------------------------------------------------------------
+                      00588 
+                      00589 ; Actual delay = 2 seconds = 8000000 cycles
+                      00590 ; Error = 0 %
+                      00591 
+                      00592         cblock
+  00000025            00593         r35
+  00000026            00594         r36
+  00000027            00595         r37
+                      00596         endc
                       00597 
-                      00598 ; Delay = 1 seconds
-                      00599 ; Clock frequency = 16 MHz
-                      00600 
-                      00601 ; Actual delay = 1 seconds = 4000000 cycles
-                      00602 ; Error = 0 %
-                      00603 
-                      00604         cblock
-  0000002A            00605         r38
-  0000002B            00606         r39
-  0000002C            00607         r40
-                      00608         endc
-                      00609 
-0128                  00610 Retardo_1s
-                      00611                         ;3999994 cycles
-0128   3023           00612         movlw   0x23
-0129   00AA           00613         movwf   r38
-012A   30B9           00614         movlw   0xB9
-012B   00AB           00615         movwf   r39
-012C   3009           00616         movlw   0x09
-012D   00AC           00617         movwf   r40
-012E                  00618 Retardo_1s_0
-012E   0BAA           00619         decfsz  r38, f
-012F   2???           00620         goto    $+2
-0130   0BAB           00621         decfsz  r39, f
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 17
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-0131   2???           00622         goto    $+2
-0132   0BAC           00623         decfsz  r40, f
-0133   2???           00624         goto    Retardo_1s_0
+00D3                  00598 RETARDO_2S_16:      ;7999990 cycles
+00D3   3047           00599         movlw   0x47
+00D4   00A5           00600         movwf   r35
+00D5   3071           00601         movlw   0x71
+00D6   00A6           00602         movwf   r36
+00D7   3012           00603         movlw   0x12
+00D8   00A7           00604         movwf   r37
+00D9                  00605 RETARDO_2S_16_0:
+00D9   0BA5           00606         decfsz  r35, f
+00DA   2???           00607         goto    $+2
+00DB   0BA6           00608         decfsz  r36, f
+00DC   2???           00609         goto    $+2
+00DD   0BA7           00610         decfsz  r37, f
+00DE   2???           00611         goto    RETARDO_2S_16_0
+                      00612 
+                      00613                         ;6 cycles
+00DF   2???           00614         goto    $+1
+00E0   2???           00615         goto    $+1
+00E1   2???           00616         goto    $+1
+                      00617 
+                      00618                         ;4 cycles (including call)
+00E2   0008           00619         return
+                      00620 
+                      00621 ;----------------------------------------------------------------------------------------
+                      00622 
+                      00623 ; Delay = 1 seconds
+                      00624 ; Clock frequency = 16 MHz
                       00625 
-                      00626                         ;2 cycles
-0134   2???           00627         goto    $+1
+                      00626 ; Actual delay = 1 seconds = 4000000 cycles
+                      00627 ; Error = 0 %
                       00628 
-                      00629                         ;4 cycles (including call)
-0135   0008           00630         return
-                      00631 
-                      00632 ;----------------------------------------------------------------------------------------
-                      00633 
-                      00634 ; Delay = 0.5 seconds
-                      00635 ; Clock frequency = 16 MHz
-                      00636 
-                      00637 ; Actual delay = 0.5 seconds = 2000000 cycles
-                      00638 ; Error = 0 %
-                      00639 
-                      00640         cblock
-  0000002D            00641         r41
-  0000002E            00642         r42
-  0000002F            00643         r43
-                      00644         endc
-                      00645 
-0136                  00646 RETARDO_500MS_16:       ;1999996 cycles
-0136   3011           00647         movlw   0x11
-0137   00AD           00648         movwf   r41
-0138   305D           00649         movlw   0x5D
-0139   00AE           00650         movwf   r42
-013A   3005           00651         movlw   0x05
-013B   00AF           00652         movwf   r43
-013C                  00653 RETARDO_500MS_16_0:
-013C   0BAD           00654         decfsz  r41, f
-013D   2???           00655         goto    $+2
-013E   0BAE           00656         decfsz  r42, f
-013F   2???           00657         goto    $+2
-0140   0BAF           00658         decfsz  r43, f
-0141   2???           00659         goto    RETARDO_500MS_16_0
-                      00660 
-                      00661                         ;4 cycles (including call)
-0142   0008           00662         return
-                      00663 
-                      00664 ;----------------------------------------------------------------------------------------
-                      00665 
-                      00666 ; Delay = 30 seconds
-                      00667 ; Clock frequency = 16 MHz
-                      00668 
-                      00669 ; Actual delay = 30 seconds = 120000000 cycles
-                      00670 ; Error = 0 %
-                      00671 
-                      00672         cblock
-  00000030            00673         r44
-  00000031            00674         r45
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 18
+                      00629         cblock
+  00000028            00630         r38
+  00000029            00631         r39
+  0000002A            00632         r40
+                      00633         endc
+                      00634 
+00E3                  00635 Retardo_1s
+                      00636                         ;3999994 cycles
+00E3   3023           00637         movlw   0x23
+00E4   00A8           00638         movwf   r38
+00E5   30B9           00639         movlw   0xB9
+00E6   00A9           00640         movwf   r39
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 14
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-  00000032            00675         r46
-  00000033            00676         r47
-                      00677         endc
-                      00678 
-0143                  00679 Retardo_30s
-                      00680                         ;119999995 cycles
-0143   3054           00681         movlw   0x54
-0144   00B0           00682         movwf   r44
-0145   3074           00683         movlw   0x74
-0146   00B1           00684         movwf   r45
-0147   30CC           00685         movlw   0xCC
-0148   00B2           00686         movwf   r46
-0149   3001           00687         movlw   0x01
-014A   00B3           00688         movwf   r47
-014B                  00689 Retardo_30s_0
-014B   0BB0           00690         decfsz  r44, f
-014C   2???           00691         goto    $+2
-014D   0BB1           00692         decfsz  r45, f
-014E   2???           00693         goto    $+2
-014F   0BB2           00694         decfsz  r46, f
-0150   2???           00695         goto    $+2
-0151   0BB3           00696         decfsz  r47, f
-0152   2???           00697         goto    Retardo_30s_0
-                      00698 
-                      00699                         ;1 cycle
-0153   0000           00700         nop
-                      00701 
-                      00702                         ;4 cycles (including call)
-0154   0008           00703         return
-                      00704 
-                      00705 ;----------------------------------------------------------------------------------------
-                      00706 
-                      00707 ; Delay = 60 seconds
-                      00708 ; Clock frequency = 16 MHz
-                      00709 
-                      00710 ; Actual delay = 60 seconds = 240000000 cycles
-                      00711 ; Error = 0 %
-                      00712 
-                      00713         cblock
-  00000034            00714         r48
-  00000035            00715         r49
-  00000036            00716         r50
-  00000037            00717         r51
-                      00718         endc
-                      00719 
-0155                  00720 Retardo_60s
-                      00721                         ;239999992 cycles
-0155   30A9           00722         movlw   0xA9
-0156   00B4           00723         movwf   r48
-0157   30E7           00724         movlw   0xE7
-0158   00B5           00725         movwf   r49
-0159   3097           00726         movlw   0x97
-015A   00B6           00727         movwf   r50
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 19
+00E7   3009           00641         movlw   0x09
+00E8   00AA           00642         movwf   r40
+00E9                  00643 Retardo_1s_0
+00E9   0BA8           00644         decfsz  r38, f
+00EA   2???           00645         goto    $+2
+00EB   0BA9           00646         decfsz  r39, f
+00EC   2???           00647         goto    $+2
+00ED   0BAA           00648         decfsz  r40, f
+00EE   2???           00649         goto    Retardo_1s_0
+                      00650 
+                      00651                         ;2 cycles
+00EF   2???           00652         goto    $+1
+                      00653 
+                      00654                         ;4 cycles (including call)
+00F0   0008           00655         return
+                      00656 
+                      00657 ;----------------------------------------------------------------------------------------
+                      00658 
+                      00659 ; Delay = 0.5 seconds
+                      00660 ; Clock frequency = 16 MHz
+                      00661 
+                      00662 ; Actual delay = 0.5 seconds = 2000000 cycles
+                      00663 ; Error = 0 %
+                      00664 
+                      00665         cblock
+  0000002B            00666         r41
+  0000002C            00667         r42
+  0000002D            00668         r43
+                      00669         endc
+                      00670 
+00F1                  00671 RETARDO_500MS_16:       ;1999996 cycles
+00F1   3011           00672         movlw   0x11
+00F2   00AB           00673         movwf   r41
+00F3   305D           00674         movlw   0x5D
+00F4   00AC           00675         movwf   r42
+00F5   3005           00676         movlw   0x05
+00F6   00AD           00677         movwf   r43
+00F7                  00678 RETARDO_500MS_16_0:
+00F7   0BAB           00679         decfsz  r41, f
+00F8   2???           00680         goto    $+2
+00F9   0BAC           00681         decfsz  r42, f
+00FA   2???           00682         goto    $+2
+00FB   0BAD           00683         decfsz  r43, f
+00FC   2???           00684         goto    RETARDO_500MS_16_0
+                      00685 
+                      00686                         ;4 cycles (including call)
+00FD   0008           00687         return
+                      00688 
+                      00689 ;----------------------------------------------------------------------------------------
+                      00690 
+                      00691 ; Delay = 30 seconds
+                      00692 ; Clock frequency = 16 MHz
+                      00693 
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 15
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-015B   3002           00728         movlw   0x02
-015C   00B7           00729         movwf   r51
-015D                  00730 Retardo_60s_0
-015D   0BB4           00731         decfsz  r48, f
-015E   2???           00732         goto    $+2
-015F   0BB5           00733         decfsz  r49, f
-0160   2???           00734         goto    $+2
-0161   0BB6           00735         decfsz  r50, f
-0162   2???           00736         goto    $+2
-0163   0BB7           00737         decfsz  r51, f
-0164   2???           00738         goto    Retardo_60s_0
-                      00739 
-                      00740                         ;4 cycles
-0165   2???           00741         goto    $+1
-0166   2???           00742         goto    $+1
-                      00743 
-                      00744                         ;4 cycles (including call)
-0167   0008           00745         return
-                      00746 
-                      00747 ;----------------------------------------------------------------------------------------
-                      00748 ;
-                      00749 ;      Librería de retardos para oscilador de 16 MHz.
-                      00750 ;
-                      00751 ;      Web: http://electronica-pic.blogspot.com
-                      00752 ;
-                      00753 ;*****************************************************************************************
-                      00754 
-                      00036     #INCLUDE <LCD.inc>
-                      00001     CBLOCK
-  00000038            00002     memocaracter
-  00000039            00003     memoriaw
-  0000003A            00004     caractertemp
-                      00005     ENDC
-                      00006     
-  00000008            00007 DATOS EQU PORTD ;LINEAS DE DATOS
-  00000008            00008 PINLCD EQU PORTD    ;LINEAS DE CONTROL
-                      00009  
-  00000001            00010 RS EQU 1    ;LINEA DE CONTROL RS 
-  00000002            00011 RW EQU 2        ;LINEA DE CONTROL RW
-  00000003            00012 E EQU 3 ;LINEA DE OCNTROL E
-                      00013  
-  0000000F            00014 ON_DISPLAY_CURSOR_BLINK EQU 0FH ;ACTIVA EL DISPLAY, EL CURSOR Y HACE PARPADEO
-  0000000C            00015 SOLO_DISPLAY EQU 0CH            ;APAGA EL CURSOR Y SU PARPADEO
-  00000001            00016 LIMPIAR_LCD EQU 01H                     ;LIMPIA LOS CARACTERES DE LA PANTALLA
-  00000008            00017 APAGAR_DISPLAY  EQU 08H         ;APAGA LA PANTALLA
-  000000C0            00018 SALTO_ENTER EQU D'192'                  ;SE DIRIGE A LA SEGUNDA LINEA
-  00000002            00019 HOME_INICIO EQU 02H                     ;VUELVE AL INICIO
-  00000010            00020 MOVER_CURSOR_IZQ EQU 10H                ;MUEVE EL CURSOR A LA IZQUIERDA
-  00000014            00021 MOVER_CURSOR_DERECHA EQU 14H    ;MUEVE EL CURSOR A LA DERECHA
-  00000018            00022 MOVER_PANTALLA_IZQ EQU 18H              ;MUEVE LA PANTALLA A LA IZQUIERDA
-  0000001C            00023 MOVER_PANTALLA_DERECHA EQU 1CH  ;MUEVE LA PANTALLA A LA DERECHA
-  00000000            00024 OFF EQU 0
-  00000001            00025 ON EQU 1
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 20
+                      00694 ; Actual delay = 30 seconds = 120000000 cycles
+                      00695 ; Error = 0 %
+                      00696 
+                      00697         cblock
+  0000002E            00698         r44
+  0000002F            00699         r45
+  00000030            00700         r46
+  00000031            00701         r47
+                      00702         endc
+                      00703 
+00FE                  00704 Retardo_30s
+                      00705                         ;119999995 cycles
+00FE   3054           00706         movlw   0x54
+00FF   00AE           00707         movwf   r44
+0100   3074           00708         movlw   0x74
+0101   00AF           00709         movwf   r45
+0102   30CC           00710         movlw   0xCC
+0103   00B0           00711         movwf   r46
+0104   3001           00712         movlw   0x01
+0105   00B1           00713         movwf   r47
+0106                  00714 Retardo_30s_0
+0106   0BAE           00715         decfsz  r44, f
+0107   2???           00716         goto    $+2
+0108   0BAF           00717         decfsz  r45, f
+0109   2???           00718         goto    $+2
+010A   0BB0           00719         decfsz  r46, f
+010B   2???           00720         goto    $+2
+010C   0BB1           00721         decfsz  r47, f
+010D   2???           00722         goto    Retardo_30s_0
+                      00723 
+                      00724                         ;1 cycle
+010E   0000           00725         nop
+                      00726 
+                      00727                         ;4 cycles (including call)
+010F   0008           00728         return
+                      00729 
+                      00730 ;----------------------------------------------------------------------------------------
+                      00731 
+                      00732 ; Delay = 60 seconds
+                      00733 ; Clock frequency = 16 MHz
+                      00734 
+                      00735 ; Actual delay = 60 seconds = 240000000 cycles
+                      00736 ; Error = 0 %
+                      00737 
+                      00738         cblock
+  00000032            00739         r48
+  00000033            00740         r49
+  00000034            00741         r50
+  00000035            00742         r51
+                      00743         endc
+                      00744 
+0110                  00745 Retardo_60s
+                      00746                         ;239999992 cycles
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 16
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0168                  00026 ESCRIBIR_COMANDO:
-0168   00B8           00027     MOVWF memocaracter
-0169   2???           00028     CALL COMPROBAR_OCUPADO
-016A   0838           00029     MOVF memocaracter,W
-016B   39F0           00030     ANDLW B'11110000'
-016C   0088           00031     MOVWF DATOS
-016D   1108           00032     BCF PINLCD,RW
-016E   1188           00033     BCF PINLCD,E
-016F   0000           00034     NOP
-0170   1588           00035     BSF PINLCD,E
-0171   0000           00036     NOP
-0172   1188           00037     BCF PINLCD,E
-0173   0E38           00038     SWAPF memocaracter,W
-0174   39F0           00039     ANDLW B'11110000'
-0175   0088           00040     MOVWF DATOS
-0176   0000           00041     NOP
-0177   1588           00042     BSF PINLCD,E
-0178   0000           00043     NOP
-0179   1188           00044     BCF PINLCD,E
-017A   0008           00045     RETURN
-                      00046     
-017B                  00047 COMPROBAR_OCUPADO:
-017B   1683           00048     BSF STATUS,RP0
-017C   1303           00049     BCF STATUS,RP1
-017D   30F0           00050     MOVLW B'11110000'
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-017E   0088           00051     MOVWF TRISD
-017F   1283           00052     BCF STATUS,RP0
-0180   1303           00053     BCF STATUS,RP1
-0181   1088           00054     BCF PINLCD,RS
-0182   1508           00055     BSF PINLCD,RW
-0183   0000           00056     NOP
-0184   1588           00057     BSF PINLCD,E
-0185   0000           00058     NOP
-0186   0808           00059     MOVF DATOS,W
-0187   1188           00060     BCF PINLCD,E
-0188   390F           00061     ANDLW 0FH
-0189   00BA           00062     MOVWF caractertemp
-018A   0000           00063     NOP
-018B   1588           00064     BSF PINLCD,E
-018C   0000           00065     NOP
-018D   0E08           00066     SWAPF DATOS,W
-018E   1188           00067     BCF PINLCD,E
-018F   390F           00068     ANDLW 0FH
-0190   04BA           00069     IORWF caractertemp,1
-0191   1BBA           00070     BTFSC caractertemp,7
-0192   2???           00071     GOTO COMPROBAR_OCUPADO
-0193   1508           00072     BSF PINLCD,RW
-0194   1683           00073     BSF STATUS,RP0
-0195   1303           00074     BCF STATUS,RP1
-0196   3000           00075     MOVLW 0x00
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0197   0088           00076     MOVWF TRISD
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 21
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-0198   1283           00077     BCF STATUS,RP0
-0199   1303           00078     BCF STATUS,RP1
-019A   0008           00079     RETURN
-                      00080 
-019B                  00081 ESCRIBIR_CARACTER:
-019B   00B9           00082     MOVWF memoriaw
-019C   00B8           00083     MOVWF memocaracter
-019D   2???           00084     CALL COMPROBAR_OCUPADO
-019E   0838           00085     MOVF memocaracter,W
-019F   39F0           00086     ANDLW B'11110000'
-01A0   0088           00087     MOVWF DATOS
-01A1   1108           00088     BCF PINLCD,RW
-01A2   1488           00089     BSF PINLCD,RS
-01A3   0000           00090     NOP
-01A4   1588           00091     BSF PINLCD,E
-01A5   0000           00092     NOP
-01A6   1188           00093     BCF PINLCD,E
-01A7   0E38           00094     SWAPF memocaracter,W
-01A8   39F0           00095     ANDLW B'11110000'
-01A9   0088           00096     MOVWF DATOS
-01AA   1108           00097     BCF PINLCD,RW
-01AB   1488           00098     BSF PINLCD,RS
-01AC   0000           00099     NOP
-01AD   1588           00100     BSF PINLCD,E
-01AE   0000           00101     NOP
-01AF   1188           00102     BCF PINLCD,E
-01B0   0839           00103     MOVF memoriaw,W
-01B1   0008           00104     RETURN
-                      00105     
-01B2                  00106 INICIALIZACION_DE_PANTALLA: ;SUBRUTINA DE SECUENCIA PARA INICIAR EL LCD
-01B2   1283           00107     BCF STATUS,RP0          ;BANCO 0
-01B3   1303           00108     BCF STATUS,RP1
-01B4   1188           00109     BCF PINLCD,E            ;SE APAGA EL PIN E
-01B5   1108           00110     BCF PINLCD,RW           ;SE APAGA EL PIN RW
-01B6   1088           00111     BCF PINLCD,RS           ;SE APAGA EL PIN RS
-01B7   300F           00112     MOVLW 0x0F              ;ENCENDEMOS LOS PINES DEL LCD
-01B8   0088           00113     MOVWF DATOS             ;EN EL PUERTO D
-01B9   1683           00114     BSF STATUS,RP0          ;BANCO 1
-01BA   1303           00115     BCF STATUS,RP1
-01BB   300F           00116     MOVLW B'00001111'       ;TODOS LOS PINES DEL PUERTO D SON DECLARADOS COMO SALIDA
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-01BC   0088           00117     MOVWF TRISD
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-01BD   1188           00118     BCF TRISD,E             ;EL PIN E ES SALIDA
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-01BE   1108           00119     BCF TRISD,RW            ;EL PIN RW ES SALIDA
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-01BF   1088           00120     BCF TRISD,RS            ;EL PIN RS ES SALIDA
-01C0   1283           00121     BCF STATUS,RP0          ;BANCO 0
-01C1   1303           00122     BCF STATUS,RP1
-01C2   2???           00123     CALL RETARDO_20MICROS
-01C3   3030           00124     MOVLW B'00110000'       ;PRIMER VALOR PEDIDO POR EL FABRICANTE
-01C4   0088           00125     MOVWF DATOS             ;LO ESCRIBIMOS EN EL PUERTOD
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 22
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-01C5   0000           00126     NOP
-01C6   1588           00127     BSF PINLCD,E            ;IMPULSO AL PIN ENABLE
-01C7   0000           00128     NOP                     ;ANCHO DE PULSO DE 0.2US
-01C8   1188           00129     BCF PINLCD,E            ;FIN DEL IMPULSO
-01C9   2???           00130     CALL RETARDO_5MS
-01CA   3030           00131     MOVLW B'00110000'       ;SEGUNDO PEDIDO POR EL FABRICANTE
-01CB   0088           00132     MOVWF DATOS             ;LO ESCRIBIMOS EN EL PUERTO D
-01CC   0000           00133     NOP
-01CD   1588           00134     BSF PINLCD,E            ;PULSO AL PIN ENABLE
-01CE   0000           00135     NOP                     ;ANCHO DE PULSO DE 0.2US
-01CF   1188           00136     BCF PINLCD,E            ;FIN DE PULSO
-01D0   3030           00137     MOVLW B'00110000'       ;TERCER VALOR PEDIDO POR EL FABRICANTE
-01D1   0088           00138     MOVWF DATOS             ;LO ESCRIBIMOS EN EL PUERTO D
-01D2   0000           00139     NOP
-01D3   1588           00140     BSF PINLCD,E            ;PULSO AL PIN ENABLE
-01D4   0000           00141     NOP
-01D5   1188           00142     BCF PINLCD,E            ;FIN DE PULSO
-01D6   2???           00143     CALL RETARDO_200MICROS
-01D7   2???           00144     CALL RETARDO_20MICROS
-01D8   3020           00145     MOVLW B'00100000'       ;CARGAMOS COMANDO DE CONFIGURACION DE COMUNICACION DE 4 BITS
-01D9   0088           00146     MOVWF DATOS             ;ESCRIBIMOS COMANDO EN EL PUERTOD
-01DA   0000           00147     NOP
-01DB   1588           00148     BSF PINLCD,E            ;PULSO AL PIN ENABLE
-01DC   0000           00149     NOP
-01DD   1188           00150     BCF PINLCD,E            ;FIN DE PULSO
-01DE   3028           00151     MOVLW B'00101000'
-01DF   2???           00152     CALL ESCRIBIR_COMANDO
-01E0   300F           00153     MOVLW ON_DISPLAY_CURSOR_BLINK
-01E1   2???           00154     CALL ESCRIBIR_COMANDO
-01E2   3001           00155     MOVLW LIMPIAR_LCD
-01E3   2???           00156     CALL ESCRIBIR_COMANDO
-01E4   3006           00157     MOVLW B'00000110'
-01E5   2???           00158     CALL ESCRIBIR_COMANDO
-01E6   3080           00159     MOVLW B'10000000'
-01E7   2???           00160     CALL ESCRIBIR_COMANDO
-01E8   0008           00161     RETURN
+0110   30A9           00747         movlw   0xA9
+0111   00B2           00748         movwf   r48
+0112   30E7           00749         movlw   0xE7
+0113   00B3           00750         movwf   r49
+0114   3097           00751         movlw   0x97
+0115   00B4           00752         movwf   r50
+0116   3002           00753         movlw   0x02
+0117   00B5           00754         movwf   r51
+0118                  00755 Retardo_60s_0
+0118   0BB2           00756         decfsz  r48, f
+0119   2???           00757         goto    $+2
+011A   0BB3           00758         decfsz  r49, f
+011B   2???           00759         goto    $+2
+011C   0BB4           00760         decfsz  r50, f
+011D   2???           00761         goto    $+2
+011E   0BB5           00762         decfsz  r51, f
+011F   2???           00763         goto    Retardo_60s_0
+                      00764 
+                      00765                         ;4 cycles
+0120   2???           00766         goto    $+1
+0121   2???           00767         goto    $+1
+                      00768 
+                      00769                         ;4 cycles (including call)
+0122   0008           00770         return
+                      00771 
+                      00772 ;----------------------------------------------------------------------------------------
+                      00773 ;
+                      00774 ;      Librería de retardos para oscilador de 16 MHz.
+                      00775 ;
+                      00776 ;      Web: http://electronica-pic.blogspot.com
+                      00777 ;
+                      00778 ;*****************************************************************************************
+                      00779 
+                      00036     ;#INCLUDE <LCD.inc>
                       00037     #INCLUDE <IR.inc>
                       00001 ;CONFIGURACIONES DE PUERTOS.
   00000086            00002 IRTRIS equ TRISB
   00000006            00003 IRPORT equ PORTB
   00000004            00004 IRBIT equ 4         ;IR EN PORTB<4>
-                      00005  
-                      00006  ;PARAMETROS DE CONTROL REMOTO.
-  00000018            00007 HEADER_LENGTH   equ     D'24'      ; header length = 2300 - 2500 us
-  00000006            00008 SPACE_LENGTH    equ     D'6'       ; space length = 500 - 700 us
-  0000000B            00009 ONE_LENGTH      equ     D'11'      ; one length = 1000 - 1200 us
-  00000006            00010 ZERO_LENGTH     equ     D'6'       ; zero length = 500 - 700 us
-  0000000C            00011 END_LENGTH      equ     D'12'      ; tail length = 1100 - 1300 us
-                      00012       
-                      00013 ;BITS EN IR_FLAGS.
-  00000000            00014 BYTE_READY      equ     0       ; there is a signal in REC_BYTE2:REC_BYTE1
-  00000001            00015 PREV            equ     1       ; value (1 = pulse, 0 = space) of last sample
-  00000002            00016 RCV             equ     2       ; set if receiving a signal
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 23
+  00000018            00005 SEND_BITS_IR equ D'24'
+                      00006  
+                      00007  ;PARAMETROS DE CONTROL REMOTO.
+  00000018            00008 HEADER_LENGTH   equ     D'24'      ; header length = 2300 - 2500 us
+  00000006            00009 SPACE_LENGTH    equ     D'6'       ; space length = 500 - 700 us
+  0000000B            00010 ONE_LENGTH      equ     D'11'      ; one length = 1000 - 1200 us
+  00000006            00011 ZERO_LENGTH     equ     D'6'       ; zero length = 500 - 700 us
+  0000000C            00012 END_LENGTH      equ     D'12'      ; tail length = 1100 - 1300 us
+                      00013       
+                      00014 ;BITS EN IR_FLAGS.
+  00000000            00015 BYTE_READY      equ     0       ; there is a signal in REC_BYTE2:REC_BYTE1
+  00000001            00016 PREV            equ     1       ; value (1 = pulse, 0 = space) of last sample
+  00000002            00017 RCV             equ     2       ; set if receiving a signal
+                      00018  
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 17
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00017  
-                      00018 ;VARIABLES.
-01E9   3FFF           00019 IR_FLAGS        res     1       ; flags for IR reception
-01EA   3FFF           00020 CURR_TIME       res     1       ; time (/100us) so far in current pulse/space
-01EB   3FFF           00021 PULSE_TIME      res     1       ; length (/100us) of last pulse
-01EC   3FFF           00022 SPACE_TIME      res     1       ; length (/100us) of last space
-01ED   3FFF           00023 REC_BYTE1       res     1       ; first byte that received bits are shifted into
-01EE   3FFF           00024 REC_BYTE2       res     1       ; second byte that received bits are shifted into
-01EF   3FFF           00025 COUNTER         res     1       ; used as counter in various loops
-01F0   3FFF           00026 CONTADOR_2      res     1
-01F1   3FFF           00027 BITS_IR         res     1
+                      00019 ;VARIABLES.
+0123   3FFF           00020 IR_FLAGS        res     1       ; flags for IR reception
+0124   3FFF           00021 CURR_TIME       res     1       ; time (/100us) so far in current pulse/space
+0125   3FFF           00022 PULSE_TIME      res     1       ; length (/100us) of last pulse
+0126   3FFF           00023 SPACE_TIME      res     1       ; length (/100us) of last space
+0127   3FFF           00024 REC_BYTE1       res     1       ; first byte that received bits are shifted into
+0128   3FFF           00025 REC_BYTE2       res     1       ; second byte that received bits are shifted into
+0129   3FFF           00026 COUNTER         res     1       ; used as counter in various loops
+012A   3FFF 3FFF 3FFF 00027 BYTES           res     3
                       00028                 
-Warning[205]: Found directive in column 1. (cblock)
-                      00029 cblock
-  0000003B            00030     BYTES:3
-  0000003E            00031     CONTADOR
-  0000003F            00032     r52
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00029 CBLOCK
+  00000036            00030     CONTADOR
+  00000037            00031     CONTADOR_2
+  00000038            00032     r52
 Warning[205]: Found directive in column 1. (ENDC)
-                      00033 endc
+                      00033 ENDC
                       00034 
                       00035 ;MACROS.
                       00036 ; if not(literal - 1 <= file <= literal + 1) goto toAdr
@@ -1333,101 +977,87 @@ Warning[205]: Found directive in column 1. (ENDC)
                       00043     ENDM
                       00044     
                       00045 ;Inicializa los pines de entrada y salida del microcontrolador.
-01F2                  00046 IRsetup:
-01F2   1683           00047     BSF STATUS, RP0 ;BANCO 1
-01F3   1303           00048     BCF STATUS, RP1
+012D                  00046 IRsetup:
+012D   1683           00047     BSF STATUS, RP0 ;BANCO 1
+012E   1303           00048     BCF STATUS, RP1
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-01F4   1008           00049     BCF TRISD, 0    ;RD0 -> PIN DE SALIDA DIGITAL.
-01F5   1283           00050     BCF STATUS, RP0 ;BANCO 0
-01F6   1008           00051     BCF PORTD, 0    ;INICIALIZAR EL PIN RD0 EN 0.
-01F7   0008           00052     RETURN
+012F   1008           00049     BCF TRISD, 0    ;RD0 -> PIN DE SALIDA DIGITAL.
+0130   1283           00050     BCF STATUS, RP0 ;BANCO 0
+0131   1008           00051     BCF PORTD, 0    ;INICIALIZAR EL PIN RD0 EN 0.
+0132   0008           00052     RETURN
                       00053     
                       00054 ;Saca una señal de 38MHz durante un tiempo (microsegundos).
                       00055 ;void IRcarrier(int microsegundos) 
-01F8                  00056 IRcarrier:
-01F8   00??           00057     MOVWF BITS_IR
-01F9   3000           00058     MOVLW 0x00
-01FA   00??           00059     MOVWF CONTADOR_2
-01FB                  00060 BUCLE:
-01FB   1408           00061     BSF PORTD,0
-01FC   08??           00062     MOVFW CONTADOR_2
-01FD   3E01           00063     ADDLW D'1'
-01FE   00??           00064     MOVWF CONTADOR_2
-01FF   02??           00065     SUBWF BITS_IR,W
-0200   1903           00066     BTFSC STATUS,Z
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 24
+0133                  00056 IRcarrier:
+0133   00B6           00057     MOVWF CONTADOR
+0134                  00058 BUCLE:
+0134   1408           00059     BSF PORTD,0
+0135   0BB6           00060     DECFSZ CONTADOR,1
+0136   2???           00061     GOTO RETARDO_13
+0137   2???           00062     GOTO FINAL          
+0138                  00063 RETARDO_13:     
+0138   300E           00064     movlw       0xE
+0139   00B8           00065     movwf       r52
+013A                  00066 RETARDO_13MICROS_16_0_1:
+013A   0BB8           00067     decfsz      r52, f
+013B   2???           00068     goto        RETARDO_13MICROS_16_0_1
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 18
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0201   2???           00067     GOTO FINAL          
-                      00068     ;CALL RETARDO_13MICROS_16   
-0202   300E           00069     movlw       0xE
-0203   00BF           00070     movwf       r52
-0204                  00071 RETARDO_13MICROS_16_0_1:
-0204   0BBF           00072     decfsz      r52, f
-0205   2???           00073     goto        RETARDO_13MICROS_16_0_1
-0206   1008           00074     BCF PORTD,0
-                      00075     ;CALL RETARDO_13MICROS_16
-0207   300E           00076     movlw       0xE
-0208   00BF           00077     movwf       r52
-0209                  00078 RETARDO_13MICROS_16_0_2:
-0209   0BBF           00079     decfsz      r52, f
-020A   2???           00080     goto        RETARDO_13MICROS_16_0_2
-020B   2???           00081     GOTO BUCLE
-020C                  00082 FINAL:
-020C   1008           00083     BCF PORTD,0
-020D   0008           00084     RETURN
-                      00085     
-                      00086 ;Manda una señal de acuerdo al protocolo NEC, 1 -> 2.25ms y 0 -> 1.25ms
-                      00087 ;void IRsend(int dato)
-020E                  00088 IRsend:
-020E   3000           00089     MOVLW 0x00
-020F   00BE           00090     MOVWF CONTADOR
-0210                  00091 BUCLE_SEND:
-0210   083E           00092     MOVFW CONTADOR
-0211   3E01           00093     ADDLW D'1' 
-0212   00BE           00094     MOVWF CONTADOR
-0213   3C20           00095     SUBLW D'32'
-0214   1903           00096     BTFSC STATUS,Z
-0215   2???           00097     GOTO FINAL_SEND ;SI ES 0.
-0216   083B           00098     MOVFW BYTES
-0217   3980           00099     ANDLW 0x80
-Message[305]: Using default destination of 1 (file).
-0218   0DBB           00100     RLF BYTES
-0219   1F80           00101     BTFSS W,7
-021A   2???           00102     GOTO SEND_1 ;SI ES 1.
-021B   2???           00103     GOTO SEND_0 ;SI ES 0.
-021C                  00104 SEND_1:
-021C   3016           00105     MOVLW D'22'
-021D   2???           00106     CALL IRcarrier
-021E   2???           00107     CALL RETARDO_500MICROS_16
-021F   2???           00108     CALL RETARDO_500MICROS_16
-0220   2???           00109     CALL RETARDO_500MICROS_16
-0221   2???           00110     CALL RETARDO_100MICROS_16
-0222   2???           00111     CALL RETARDO_50MICROS_16
-0223   2???           00112     CALL RETARDO_10MICROS_16
-0224   2???           00113     CALL RETARDO_13MICROS_16
-0225   2???           00114     CALL RETARDO_13MICROS_16
-0226   2???           00115     GOTO BUCLE_SEND
-0227                  00116 SEND_0:
-0227   3016           00117     MOVLW D'22'
-0228   2???           00118     CALL IRcarrier
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 25
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-0229   2???           00119     CALL RETARDO_500MICROS_16
-022A   2???           00120     CALL RETARDO_50MICROS_16
-022B   2???           00121     CALL RETARDO_13MICROS_16
-022C   2???           00122     GOTO BUCLE_SEND
-022D                  00123 FINAL_SEND:
-022D   0008           00124     RETURN
+013C   1008           00069     BCF PORTD,0
+                      00070     ;CALL RETARDO_13MICROS_16
+013D   300E           00071     movlw       0xE
+013E   00B8           00072     movwf       r52
+013F                  00073 RETARDO_13MICROS_16_0_2:
+013F   0BB8           00074     decfsz      r52, f
+0140   2???           00075     goto        RETARDO_13MICROS_16_0_2
+0141   2???           00076     GOTO BUCLE
+0142                  00077 FINAL:
+0142   1008           00078     BCF PORTD,0
+0143   0008           00079     RETURN
+                      00080     
+                      00081 ;Manda una señal de acuerdo al protocolo NEC, 1 -> 2.25ms y 0 -> 1.25ms
+                      00082 ;void IRsend(int dato)
+0144                  00083 IRsend:
+0144   3018           00084     MOVLW SEND_BITS_IR
+0145   00B7           00085     MOVWF CONTADOR_2
+0146                  00086 BUCLE_SEND:
+0146   0BB7           00087     DECFSZ CONTADOR_2,1
+0147   2???           00088     GOTO ENVIO
+0148   2???           00089     GOTO FINAL_SEND ;SI ES 0.
+0149                  00090 ENVIO:
+0149   08??           00091     MOVFW BYTES
+Error[108]  : Illegal character (,)
+014A   3900           00092     ANDLW 0x80,1
+014B   0D??           00093     RLF BYTES+2, 1
+014C   0D??           00094     RLF BYTES+1, 1
+014D   0D??           00095     RLF BYTES, 1
+014E   1000           00096     BCF BYTES+2,0
+014F   1B80           00097     BTFSC W,7
+0150   2???           00098     GOTO SEND_1 ;SI ES 1.
+0151   2???           00099     GOTO SEND_0 ;SI ES 0.
+0152                  00100 SEND_1:
+0152   3016           00101     MOVLW D'22'
+0153   2???           00102     CALL IRcarrier
+0154   2???           00103     CALL RETARDO_500MICROS_16
+0155   2???           00104     CALL RETARDO_500MICROS_16
+0156   2???           00105     CALL RETARDO_500MICROS_16
+0157   2???           00106     CALL RETARDO_50MICROS_16
+0158   2???           00107     GOTO BUCLE_SEND
+0159                  00108 SEND_0:
+0159   3016           00109     MOVLW D'22'
+015A   2???           00110     CALL IRcarrier
+015B   2???           00111     CALL RETARDO_500MICROS_16
+                      00112     ;CALL RETARDO_50MICROS_16
+                      00113     ;CALL RETARDO_13MICROS_16
+015C   2???           00114     GOTO BUCLE_SEND
+015D                  00115 FINAL_SEND:
+015D   0008           00116     RETURN
 3FE2 3FFF             00038  END
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 26
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 19
 
 
 SYMBOL TABLE
@@ -1465,12 +1095,10 @@ ANS8                              00000000
 ANS9                              00000001
 ANSEL                             00000188
 ANSELH                            00000189
-APAGAR_DISPLAY                    00000008
 BAUDCTL                           00000187
 BCLIE                             00000003
 BCLIF                             00000003
 BF                                00000000
-BITS_IR                           000001F1
 BRG0                              00000000
 BRG1                              00000001
 BRG10                             00000002
@@ -1486,18 +1114,20 @@ BRG4                              00000004
 BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 27
+BRG8                              00000000
+BRG9                              00000001
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 20
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-BRG8                              00000000
-BRG9                              00000001
 BRGH                              00000002
-BUCLE                             000001FB
-BUCLE_SEND                        00000210
-BYTES                             0000003B
+BUCLE                             00000134
+BUCLE_1                           00000040
+BUCLE_2                           00000042
+BUCLE_SEND                        00000146
+BYTES                             0000012A
 BYTE_READY                        00000000
 C                                 00000000
 C1CH0                             00000000
@@ -1545,7 +1175,7 @@ CCPR1                             00000015
 CCPR1H                            00000016
 CCPR1L                            00000015
 CCPR2                             0000001B
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 28
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 21
 
 
 SYMBOL TABLE
@@ -1562,16 +1192,14 @@ CKP                               00000004
 CM1CON0                           00000107
 CM2CON0                           00000108
 CM2CON1                           00000109
-COMPROBAR_OCUPADO                 0000017B
-CONTADOR                          0000003E
-CONTADOR_2                        000001F0
-COUNTER                           000001EF
+CONTADOR                          00000036
+CONTADOR_2                        00000037
+COUNTER                           00000129
 CREN                              00000004
 CSRC                              00000007
-CURR_TIME                         000001EA
+CURR_TIME                         00000124
 D                                 00000005
 DATA_ADDRESS                      00000005
-DATOS                             00000008
 DC                                00000001
 DC1B0                             00000004
 DC1B1                             00000005
@@ -1579,7 +1207,6 @@ DC2B0                             00000004
 DC2B1                             00000005
 D_A                               00000005
 D_NOT_A                           00000005
-E                                 00000003
 ECCPAS                            0000009C
 ECCPAS0                           00000004
 ECCPAS1                           00000005
@@ -1596,34 +1223,31 @@ EEIE                              00000004
 EEIF                              00000004
 EEPGD                             00000007
 END_LENGTH                        0000000C
-ESCRIBIR_CARACTER                 0000019B
-ESCRIBIR_COMANDO                  00000168
+ENVIO                             00000149
 F                                 00000001
 FERR                              00000002
-FINAL                             0000020C
-FINAL_SEND                        0000022D
+FINAL                             00000142
+FINAL_SEND                        0000015D
 FSR                               00000004
 FVREN                             00000000
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 29
+GCEN                              00000007
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 22
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-GCEN                              00000007
-GIE                               00000007
-GO                                00000001
-GO_DONE                           00000001
 GO_NOT_DONE                       00000001
 HEADER_LENGTH                     00000018
-HOME_INICIO                       00000002
 HTS                               00000002
 I2C_DATA                          00000005
 I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
 INDF                              00000000
-INICIALIZACION_DE_PANTALLA        000001B2
 INTCON                            0000000B
 INTE                              00000004
 INTEDG                            00000006
@@ -1644,18 +1268,13 @@ IRCF2                             00000006
 IRP                               00000007
 IRPORT                            00000006
 IRTRIS                            00000086
-IR_FLAGS                          000001E9
-IRcarrier                         000001F8
-IRsend                            0000020E
-IRsetup                           000001F2
-LIMPIAR_LCD                       00000001
+IR_FLAGS                          00000123
+IRcarrier                         00000133
+IRsend                            00000144
+IRsetup                           0000012D
 LTS                               00000001
 MC1OUT                            00000007
 MC2OUT                            00000006
-MOVER_CURSOR_DERECHA              00000014
-MOVER_CURSOR_IZQ                  00000010
-MOVER_PANTALLA_DERECHA            0000001C
-MOVER_PANTALLA_IZQ                00000018
 MSK                               00000093
 MSK0                              00000000
 MSK1                              00000001
@@ -1663,12 +1282,6 @@ MSK2                              00000002
 MSK3                              00000003
 MSK4                              00000004
 MSK5                              00000005
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 30
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 MSK6                              00000006
 MSK7                              00000007
 NOT_A                             00000005
@@ -1680,16 +1293,19 @@ NOT_PD                            00000003
 NOT_POR                           00000001
 NOT_RBPU                          00000007
 NOT_RC8                           00000006
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 NOT_T1SYNC                        00000002
 NOT_TO                            00000004
 NOT_TX8                           00000006
 NOT_W                             00000002
 NOT_WRITE                         00000002
 OERR                              00000001
-OFF                               00000000
-ON                                00000001
 ONE_LENGTH                        0000000B
-ON_DISPLAY_CURSOR_BLINK           0000000F
 OPTION_REG                        00000081
 OSCCON                            0000008F
 OSCTUNE                           00000090
@@ -1713,7 +1329,6 @@ PEIE                              00000006
 PEN                               00000002
 PIE1                              0000008C
 PIE2                              0000008D
-PINLCD                            00000008
 PIR1                              0000000C
 PIR2                              0000000D
 PORTA                             00000005
@@ -1722,12 +1337,6 @@ PORTC                             00000007
 PORTD                             00000008
 PORTE                             00000009
 PR2                               00000092
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 31
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 PREV                              00000001
 PRSEN                             00000007
 PS0                               00000000
@@ -1739,16 +1348,19 @@ PSSAC1                            00000003
 PSSBD0                            00000000
 PSSBD1                            00000001
 PSTRCON                           0000009D
-PULSE_TIME                        000001EB
+PULSE_TIME                        00000125
 PULSR                             00000002
 PULSS                             00000003
 PWM1CON                           0000009B
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 24
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 R                                 00000002
-R1DECIMA_BUCLEEXTERNO             00000052
-R1DECIMA_BUCLEEXTERNO2            00000050
-R1DECIMA_BUCLEINTERNO             00000054
-R1MS_BUCLEEXTERNO                 0000003C
-R1MS_BUCLEINTERNO                 0000003E
+R55                               00000008
+R56                               00000009
 RA0                               00000000
 RA1                               00000001
 RA2                               00000002
@@ -1781,12 +1393,6 @@ RCD8                              00000000
 RCEN                              00000003
 RCIDL                             00000006
 RCIE                              00000005
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 32
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 RCIF                              00000005
 RCREG                             0000001A
 RCSTA                             00000018
@@ -1805,121 +1411,88 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-REC_BYTE1                         000001ED
-REC_BYTE2                         000001EE
-RETARDOMICROS                     00000028
-RETARDOS_MS                       0000003B
-RETARDO_100MICROS                 00000022
-RETARDO_100MICROS_16              00000072
-RETARDO_100MICROS_16_0            00000074
-RETARDO_100MS                     0000002E
-RETARDO_10MICROS                  00000015
-RETARDO_10MICROS_16               00000087
-RETARDO_10MICROS_16_0             00000089
-RETARDO_10MS                      00000034
-RETARDO_10S                       00000046
-RETARDO_12MICROS                  00000013
-RETARDO_13MICROS_16               00000082
-RETARDO_13MICROS_16_0             00000084
-RETARDO_13MICROS_16_0_1           00000204
-RETARDO_13MICROS_16_0_2           00000209
-RETARDO_1DECIMA                   0000004F
-RETARDO_1MS                       0000003A
-RETARDO_1S                        0000004C
-RETARDO_200MICROS                 0000001F
-RETARDO_200MS                     0000002C
-RETARDO_20MICROS                  00000027
-RETARDO_20MICROS_16               0000007D
-RETARDO_20MICROS_16_0             0000007F
-RETARDO_20MS                      00000032
-RETARDO_20S                       00000044
-RETARDO_2MS                       00000038
-RETARDO_2S                        0000004A
-RETARDO_2S_16                     00000118
-RETARDO_2S_16_0                   0000011E
-RETARDO_4MICROS                   0000001B
-RETARDO_500MICROS                 0000001C
-RETARDO_500MICROS_16              0000005C
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 33
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 25
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-RETARDO_500MICROS_16_0            00000060
-RETARDO_500MS                     0000004E
-RETARDO_500MS_16                  00000136
-RETARDO_500MS_16_0                0000013C
-RETARDO_50MICROS                  00000024
-RETARDO_50MICROS_16               00000078
-RETARDO_50MICROS_16_0             0000007A
-RETARDO_50MS                      00000030
-RETARDO_5MICROS                   0000001A
-RETARDO_5MS                       00000036
-RETARDO_5MS_16                    000000CB
-RETARDO_5MS_16_0                  000000CF
-RETARDO_5S                        00000048
-RMICROS_BUCLE                     00000029
+REC_BYTE1                         00000127
+REC_BYTE2                         00000128
+RETARDO_100MICROS_16              00000029
+RETARDO_100MICROS_16_0            0000002B
+RETARDO_13                        00000138
+RETARDO_13MICROS_16               00000039
+RETARDO_13MICROS_16_0             0000003B
+RETARDO_13MICROS_16_0_1           0000013A
+RETARDO_13MICROS_16_0_2           0000013F
+RETARDO_1686MICROS_16             0000003E
+RETARDO_20MICROS_16               00000034
+RETARDO_20MICROS_16_0             00000036
+RETARDO_2S_16                     000000D3
+RETARDO_2S_16_0                   000000D9
+RETARDO_500MICROS_16              00000013
+RETARDO_500MICROS_16_0            00000017
+RETARDO_500MS_16                  000000F1
+RETARDO_500MS_16_0                000000F7
+RETARDO_50MICROS_16               0000002F
+RETARDO_50MICROS_16_0             00000031
+RETARDO_5MS_16                    00000086
+RETARDO_5MS_16_0                  0000008A
 RP0                               00000005
 RP1                               00000006
-RS                                00000001
 RSEN                              00000001
-RW                                00000002
 RX9                               00000006
 RX9D                              00000000
-R_CONTA                           00000000
-R_CONTB                           00000001
-R_CONTC                           00000002
 R_NOT_W                           00000002
 R_W                               00000002
-Retardo_100ms                     0000009B
-Retardo_100ms_0                   000000A1
-Retardo_10ms                      000000C0
-Retardo_10ms_0                    000000C4
-Retardo_10s                       000000FA
-Retardo_10s_0                     00000100
-Retardo_1ms                       000000E1
-Retardo_1ms_0                     000000E5
-Retardo_1s                        00000128
-Retardo_1s_0                      0000012E
-Retardo_200micros                 00000067
-Retardo_200micros_0               0000006B
-Retardo_200ms                     0000008C
-Retardo_200ms_0                   00000092
-Retardo_20ms                      000000B5
-Retardo_20ms_0                    000000B9
-Retardo_20s                       000000EC
-Retardo_20s_0                     000000F2
-Retardo_2ms                       000000D6
-Retardo_2ms_0                     000000DA
-Retardo_30s                       00000143
-Retardo_30s_0                     0000014B
-Retardo_50ms                      000000AA
-Retardo_50ms_0                    000000AE
-Retardo_5s                        00000109
-Retardo_5s_0                      0000010F
-Retardo_60s                       00000155
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 34
+Retardo_100ms                     00000056
+Retardo_100ms_0                   0000005C
+Retardo_10ms                      0000007B
+Retardo_10ms_0                    0000007F
+Retardo_10s                       000000B5
+Retardo_10s_0                     000000BB
+Retardo_1ms                       0000009C
+Retardo_1ms_0                     000000A0
+Retardo_1s                        000000E3
+Retardo_1s_0                      000000E9
+Retardo_200micros                 0000001E
+Retardo_200micros_0               00000022
+Retardo_200ms                     00000047
+Retardo_200ms_0                   0000004D
+Retardo_20ms                      00000070
+Retardo_20ms_0                    00000074
+Retardo_20s                       000000A7
+Retardo_20s_0                     000000AD
+Retardo_2ms                       00000091
+Retardo_2ms_0                     00000095
+Retardo_30s                       000000FE
+Retardo_30s_0                     00000106
+Retardo_50ms                      00000065
+Retardo_50ms_0                    00000069
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 26
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-Retardo_60s_0                     0000015D
+Retardo_5s                        000000C4
+Retardo_5s_0                      000000CA
+Retardo_60s                       00000110
+Retardo_60s_0                     00000118
 S                                 00000003
-SALTO_ENTER                       000000C0
 SBOREN                            00000004
 SCKP                              00000004
 SCS                               00000000
 SEN                               00000000
 SENDB                             00000003
-SEND_0                            00000227
-SEND_1                            0000021C
+SEND_0                            00000159
+SEND_1                            00000152
+SEND_BITS_IR                      00000018
 SETUP                             00000000
 SMP                               00000007
-SOLO_DISPLAY                      0000000C
 SPACE_LENGTH                      00000006
-SPACE_TIME                        000001EC
+SPACE_TIME                        00000126
 SPBRG                             00000099
 SPBRGH                            0000009A
 SPEN                              00000007
@@ -1956,14 +1529,14 @@ T0IF                              00000002
 T0SE                              00000004
 T1CKPS0                           00000004
 T1CKPS1                           00000005
-T1CON                             00000010
-T1GINV                            00000007
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 35
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 27
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+T1CON                             00000010
+T1GINV                            00000007
 T1GIV                             00000007
 T1GSS                             00000001
 T1INSYNC                          00000002
@@ -2015,14 +1588,14 @@ TRISC1                            00000001
 TRISC2                            00000002
 TRISC3                            00000003
 TRISC4                            00000004
-TRISC5                            00000005
-TRISC6                            00000006
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 36
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 28
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TRISC5                            00000005
+TRISC6                            00000006
 TRISC7                            00000007
 TRISD                             00000088
 TRISD0                            00000000
@@ -2074,14 +1647,14 @@ WDTCON                            00000105
 WDTPS0                            00000001
 WDTPS1                            00000002
 WDTPS2                            00000003
-WDTPS3                            00000004
-WPUB                              00000095
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 37
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 29
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+WDTPS3                            00000004
+WPUB                              00000095
 WPUB0                             00000000
 WPUB1                             00000001
 WPUB2                             00000002
@@ -2096,63 +1669,63 @@ WRERR                             00000003
 WUE                               00000001
 Z                                 00000002
 ZERO_LENGTH                       00000006
-_.org_0_0061                      00000061
-_.org_0_0064                      00000064
-_.org_0_006C                      0000006C
-_.org_0_006F                      0000006F
-_.org_0_0076                      00000076
-_.org_0_0093                      00000093
-_.org_0_0095                      00000095
-_.org_0_0098                      00000098
-_.org_0_00A2                      000000A2
+_.org_0_0018                      00000018
+_.org_0_001B                      0000001B
+_.org_0_0023                      00000023
+_.org_0_0026                      00000026
+_.org_0_002D                      0000002D
+_.org_0_004E                      0000004E
+_.org_0_0050                      00000050
+_.org_0_0053                      00000053
+_.org_0_005D                      0000005D
+_.org_0_005F                      0000005F
+_.org_0_0062                      00000062
+_.org_0_0063                      00000063
+_.org_0_006A                      0000006A
+_.org_0_006D                      0000006D
+_.org_0_0075                      00000075
+_.org_0_0078                      00000078
+_.org_0_0080                      00000080
+_.org_0_0083                      00000083
+_.org_0_008B                      0000008B
+_.org_0_008E                      0000008E
+_.org_0_0096                      00000096
+_.org_0_0099                      00000099
+_.org_0_00A1                      000000A1
 _.org_0_00A4                      000000A4
-_.org_0_00A7                      000000A7
-_.org_0_00A8                      000000A8
-_.org_0_00AF                      000000AF
-_.org_0_00B2                      000000B2
-_.org_0_00BA                      000000BA
-_.org_0_00BD                      000000BD
-_.org_0_00C5                      000000C5
-_.org_0_00C8                      000000C8
+_.org_0_00AE                      000000AE
+_.org_0_00B0                      000000B0
+_.org_0_00BC                      000000BC
+_.org_0_00BE                      000000BE
+_.org_0_00C1                      000000C1
+_.org_0_00CB                      000000CB
+_.org_0_00CD                      000000CD
 _.org_0_00D0                      000000D0
-_.org_0_00D3                      000000D3
-_.org_0_00DB                      000000DB
-_.org_0_00DE                      000000DE
-_.org_0_00E6                      000000E6
-_.org_0_00E9                      000000E9
-_.org_0_00F3                      000000F3
-_.org_0_00F5                      000000F5
-_.org_0_0101                      00000101
-_.org_0_0103                      00000103
-_.org_0_0106                      00000106
-_.org_0_0110                      00000110
-_.org_0_0112                      00000112
-_.org_0_0115                      00000115
-_.org_0_0116                      00000116
-_.org_0_011F                      0000011F
-_.org_0_0121                      00000121
-_.org_0_0124                      00000124
-_.org_0_0125                      00000125
-_.org_0_0126                      00000126
-_.org_0_012F                      0000012F
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 38
+_.org_0_00D1                      000000D1
+_.org_0_00DA                      000000DA
+_.org_0_00DC                      000000DC
+_.org_0_00DF                      000000DF
+_.org_0_00E0                      000000E0
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 30
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-_.org_0_0131                      00000131
-_.org_0_0134                      00000134
-_.org_0_013D                      0000013D
-_.org_0_013F                      0000013F
-_.org_0_014C                      0000014C
-_.org_0_014E                      0000014E
-_.org_0_0150                      00000150
-_.org_0_015E                      0000015E
-_.org_0_0160                      00000160
-_.org_0_0162                      00000162
-_.org_0_0165                      00000165
-_.org_0_0166                      00000166
+_.org_0_00E1                      000000E1
+_.org_0_00EA                      000000EA
+_.org_0_00EC                      000000EC
+_.org_0_00EF                      000000EF
+_.org_0_00F8                      000000F8
+_.org_0_00FA                      000000FA
+_.org_0_0107                      00000107
+_.org_0_0109                      00000109
+_.org_0_010B                      0000010B
+_.org_0_0119                      00000119
+_.org_0_011B                      0000011B
+_.org_0_011D                      0000011D
+_.org_0_0120                      00000120
+_.org_0_0121                      00000121
 _BOR21V                           00003EFF
 _BOR40V                           00003FFF
 _BOR4V_BOR21V                     00003EFF
@@ -2192,14 +1765,14 @@ _FOSC_XT                          00003FF9
 _HS_OSC                           00003FFA
 _IDLOC0                           00002000
 _IDLOC1                           00002001
-_IDLOC2                           00002002
-_IDLOC3                           00002003
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 39
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 31
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_IDLOC2                           00002002
+_IDLOC3                           00002003
 _IESO_OFF                         00003BFF
 _IESO_ON                          00003FFF
 _INTOSC                           00003FFD
@@ -2224,72 +1797,68 @@ _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
 bNotClose                         
-caractertemp                      0000003A
-memocaracter                      00000038
-memoriaw                          00000039
-r1                                00000003
-r10                               0000000E
-r11                               0000000F
-r12                               00000010
-r13                               00000011
-r14                               00000012
-r15                               00000013
-r16                               00000014
-r17                               00000015
-r18                               00000016
-r19                               00000017
-r2                                00000004
-r20                               00000018
-r21                               00000019
-r22                               0000001A
-r23                               0000001B
-r24                               0000001C
-r25                               0000001D
-r26                               0000001E
-r27                               0000001F
-r28                               00000020
-r29                               00000021
-r3                                00000005
-r30                               00000022
-r31                               00000023
-r32                               00000024
-MPASM 5.86                   RECEPTOR_IR.ASM   8-21-2020  19:59:23         PAGE 40
+r1                                00000000
+r10                               0000000C
+r11                               0000000D
+r12                               0000000E
+r13                               0000000F
+r14                               00000010
+r15                               00000011
+r16                               00000012
+r17                               00000013
+r18                               00000014
+r19                               00000015
+r2                                00000001
+r20                               00000016
+r21                               00000017
+r22                               00000018
+r23                               00000019
+r24                               0000001A
+r25                               0000001B
+r26                               0000001C
+r27                               0000001D
+r28                               0000001E
+r29                               0000001F
+r3                                00000002
+r30                               00000020
+r31                               00000021
+r32                               00000022
+r33                               00000023
+MPASM 5.86                   RECEPTOR_IR.ASM   8-23-2020  1:24:21         PAGE 32
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-r33                               00000025
-r34                               00000026
-r35                               00000027
-r36                               00000028
-r37                               00000029
-r38                               0000002A
-r39                               0000002B
-r4                                00000006
-r40                               0000002C
-r41                               0000002D
-r42                               0000002E
-r43                               0000002F
-r44                               00000030
-r45                               00000031
-r46                               00000032
-r47                               00000033
-r48                               00000034
-r49                               00000035
-r5                                00000007
-r50                               00000036
-r51                               00000037
-r52                               0000003F
-r53                               0000000A
-r54                               0000000B
-r6                                00000008
-r7                                00000009
-r8                                0000000C
-r9                                0000000D
+r34                               00000024
+r35                               00000025
+r36                               00000026
+r37                               00000027
+r38                               00000028
+r39                               00000029
+r4                                00000003
+r40                               0000002A
+r41                               0000002B
+r42                               0000002C
+r43                               0000002D
+r44                               0000002E
+r45                               0000002F
+r46                               00000030
+r47                               00000031
+r48                               00000032
+r49                               00000033
+r5                                00000004
+r50                               00000034
+r51                               00000035
+r52                               00000038
+r53                               00000007
+r6                                00000005
+r7                                00000006
+r8                                0000000A
+r9                                0000000B
 
-Errors   :     0
+Errors   :     1
 Warnings :     4 reported,     0 suppressed
-Messages :     9 reported,     0 suppressed
+Messages :     2 reported,     0 suppressed
 
 
