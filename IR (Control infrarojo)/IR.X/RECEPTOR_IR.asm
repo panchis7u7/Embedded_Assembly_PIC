@@ -9,22 +9,34 @@
  
  CBLOCK 
  ENDC
- ORG 0
- SETUP:
-    CALL RETARDO_2S_16
+ ORG 0x00
     CALL IRsetup
+REC:
+    BTFSC PORTA,4
+    GOTO ACT_RLF
+    GOTO REC
+ACT_RLF:
+    BTFSC PORTA,4
+    GOTO ACT_RLF
+    MOVLW 0xFF
+    MOVWF BYTES
+    MOVLW 0xA2
+    MOVWF BYTES+1
+    MOVLW 0x5D
+    MOVWF BYTES+2
     MOVLW D'255'
-    CALL IRcarrier
-    MOVLW D'110'	;9ms de carrier
+    CALL IRcarrier  ;9ms de carrier
+    MOVLW D'110'
     CALL IRcarrier
     CALL RETARDO_5MS_16
-    CALL IRsend   
- START:
-    CALL RETARDO_500MS_16
-    BSF PORTD, 0
-    CALL RETARDO_500MS_16
-    BCF PORTD, 0
-    GOTO START
+    CALL IRsend
+GOTO REC
+; START:
+;    CALL RETARDO_500MS_16
+;    BSF PORTD, 0
+;    CALL RETARDO_500MS_16
+;    BCF PORTD, 0
+;    GOTO START
     ;#INCLUDE <RETARDOS.inc>
     #INCLUDE <RETARDOS_16MHZ.inc>
     ;#INCLUDE <LCD.inc>

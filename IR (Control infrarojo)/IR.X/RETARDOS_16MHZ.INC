@@ -43,17 +43,17 @@ RETARDO_500MICROS_16_0:
 	r4
 	endc
 
-Retardo_200micros
+RETARDO_200MICROS_16:
 			;793 cycles
 	movlw	0x9E
 	movwf	r3
 	movlw	0x01
 	movwf	r4
-Retardo_200micros_0
+RETARDO_200MICROS_16_0:
 	decfsz	r3, f
 	goto	$+2
 	decfsz	r4, f
-	goto	Retardo_200micros_0
+	goto	RETARDO_200MICROS_16_0
 
 			;3 cycles
 	goto	$+1
@@ -158,29 +158,6 @@ RETARDO_13MICROS_16_0:
 	
 ;----------------------------------------------------------------------------------------
 	
-	; Delay = 2e-05 seconds
-; Clock frequency = 16 MHz
-
-; Actual delay = 2e-05 seconds = 80 cycles
-; Error = 0 %
-
-;	cblock
-;	r54
-;	endc
-;
-;RETARDO_10MICROS_16:
-;			;49 cycles
-;	movlw	0xC
-;	movwf	r54
-;RETARDO_10MICROS_16_0:
-;	    decfsz	r54, f
-;	goto	RETARDO_10MICROS_16_0
-;
-;			;4 cycles (including call)
-;	return
-	
-;----------------------------------------------------------------------------------------
-	
 ; Delay = 2e-05 seconds
 ; Clock frequency = 16 MHz
 
@@ -188,22 +165,23 @@ RETARDO_13MICROS_16_0:
 ; Error = 0 %
 
 	cblock
-	R55
-	R56
+	r55
+	r56
 	endc
 
-RETARDO_1686MICROS_16:	;49 cycles
-	MOVLW D'10'
-	MOVWF R55
-BUCLE_1:
-	MOVLW D'255'
-	MOVWF R56
-BUCLE_2:
-	DECFSZ R56,1
-	GOTO BUCLE_2
-	DECFSZ R55,1
-	GOTO BUCLE_1
-	RETURN
+RETARDO_562MICROS_16:	;49 cycles
+	movlw	0x90
+	movwf	r55
+	movlw	0x02
+	movwf	r56
+RETARDO_562MICROS_16_0:
+	decfsz	r55, f
+	goto	$+2
+	decfsz	r56, f
+	goto	RETARDO_562MICROS_16_0 ;3 cycles
+	goto	$+1
+	nop		;4 cycles (including call)
+	return
 
 ;----------------------------------------------------------------------------------------
 
@@ -452,17 +430,16 @@ Retardo_2ms_0
 	r25
 	endc
 
-Retardo_1ms
-			;3993 cycles
+RETARDO_1MS_16:	    ;3993 cycles
 	movlw	0x1E
 	movwf	r24
 	movlw	0x04
 	movwf	r25
-Retardo_1ms_0
+RETARDO_1MS_16_0:
 	decfsz	r24, f
 	goto	$+2
 	decfsz	r25, f
-	goto	Retardo_1ms_0
+	goto	RETARDO_1MS_16_0
 
 			;3 cycles
 	goto	$+1

@@ -23,7 +23,7 @@ PULSE_TIME      res     1       ; length (/100us) of last pulse
 SPACE_TIME      res     1       ; length (/100us) of last space
 REC_BYTE1       res     1       ; first byte that received bits are shifted into
 REC_BYTE2       res     1       ; second byte that received bits are shifted into
-COUNTER         res     1       ; used as counter in various loops
+;COUNTER         res     1       ; used as counter in various loops
 BYTES		res	3
 		
 CBLOCK
@@ -44,15 +44,10 @@ bNotClose MACRO file, literal, toAdr
     
 ;Inicializa los pines de entrada y salida del microcontrolador.
 IRsetup:
-    MOVLW 0xFF
-    MOVWF BYTES
-    MOVLW 0xA2
-    MOVWF BYTES+1
-    MOVLW 0x5D
-    MOVWF BYTES+2
     BSF STATUS, RP0 ;BANCO 1
     BCF STATUS, RP1
     BCF TRISD, 0    ;RD0 -> PIN DE SALIDA DIGITAL.
+    BSF TRISA, 4
     BCF STATUS, RP0 ;BANCO 0
     BCF PORTD, 0    ;INICIALIZAR EL PIN RD0 EN 0.
     RETURN
@@ -92,7 +87,9 @@ IRsend:
 BUCLE_SEND:
     DECFSZ CONTADOR_2,1
     GOTO ENVIO
-    GOTO FINAL_SEND ;SI ES 0.
+    MOVLW D'24'
+    CALL IRcarrier
+    RETURN ;SI ES 0.
 ENVIO:
     MOVFW BYTES
     ANDLW 0x80
@@ -108,18 +105,11 @@ ROTACION:
 SEND_1:
     MOVLW D'24'
     CALL IRcarrier
+    CALL RETARDO_1MS_16
     CALL RETARDO_500MICROS_16
-    CALL RETARDO_500MICROS_16
-    ;CALL RETARDO_500MICROS_16
-    ;CALL RETARDO_50MICROS_16
     GOTO ROTACION
 SEND_0:
     MOVLW D'24'
     CALL IRcarrier
     CALL RETARDO_500MICROS_16
-    ;CALL RETARDO_50MICROS_16
-    ;CALL RETARDO_13MICROS_16
-    ;CALL RETARDO_13MICROS_16
     GOTO ROTACION
-FINAL_SEND:
-    RETURN
