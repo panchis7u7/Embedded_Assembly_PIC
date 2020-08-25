@@ -1,6 +1,6 @@
-Message[302] E:\PRUEBAPIC\LCD_20X4.X\LCD.INC 51 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PRUEBAPIC\LCD_20X4.X\LCD.INC 76 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PRUEBAPIC\LCD_20X4.X\LCD.INC 117 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PRUEBAPIC\LCD_20X4.X\LCD.INC 118 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PRUEBAPIC\LCD_20X4.X\LCD.INC 119 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PRUEBAPIC\LCD_20X4.X\LCD.INC 120 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\LCD (MANEJO DE PANTALLA LCD 20X4)\LCD_20X4.X\LCD.INC 51 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\LCD (MANEJO DE PANTALLA LCD 20X4)\LCD_20X4.X\LCD.INC 76 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\LCD (MANEJO DE PANTALLA LCD 20X4)\LCD_20X4.X\LCD.INC 117 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\LCD (MANEJO DE PANTALLA LCD 20X4)\LCD_20X4.X\LCD.INC 118 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\LCD (MANEJO DE PANTALLA LCD 20X4)\LCD_20X4.X\LCD.INC 119 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\LCD (MANEJO DE PANTALLA LCD 20X4)\LCD_20X4.X\LCD.INC 120 : Register in operand not in bank 0.  Ensure that bank bits are correct.

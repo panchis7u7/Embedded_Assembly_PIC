@@ -2,7 +2,7 @@
 IRTRIS equ TRISB
 IRPORT equ PORTB
 IRBIT equ 4	    ;IR EN PORTB<4>
-SEND_BITS_IR equ D'25'
+SEND_BITS_IR equ D'33'
  
  ;PARAMETROS DE CONTROL REMOTO.
 HEADER_LENGTH   equ     D'24'      ; header length = 2300 - 2500 us
@@ -24,7 +24,7 @@ SPACE_TIME      res     1       ; length (/100us) of last space
 REC_BYTE1       res     1       ; first byte that received bits are shifted into
 REC_BYTE2       res     1       ; second byte that received bits are shifted into
 ;COUNTER         res     1       ; used as counter in various loops
-BYTES		res	3
+BYTES		res	4
 		
 CBLOCK
     CONTADOR
@@ -97,10 +97,11 @@ ENVIO:
     GOTO SEND_1	;SI ES 1.
     GOTO SEND_0	;SI ES 0.
 ROTACION:
+    RLF BYTES+3,1
     RLF BYTES+2,1
     RLF BYTES+1,1
     RLF BYTES,1
-    BCF BYTES+2,0
+    BCF BYTES+3,0
     GOTO BUCLE_SEND
 SEND_1:
     MOVLW D'24'

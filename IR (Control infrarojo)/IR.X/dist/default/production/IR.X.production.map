@@ -1,11 +1,11 @@
 MPLINK 5.09, LINKER
-Linker Map File - Created Mon Aug 24 02:35:15 2020
+Linker Map File - Created Tue Aug 25 02:07:59 2020
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
-                   .org_0       code   0x000000    program   0x0002c0
-                   .cinit    romdata   0x000160    program   0x000004
+                   .org_0       code   0x000000    program   0x0002c8
+                   .cinit    romdata   0x000164    program   0x000004
 .config_2007_BUILD/DEFAULT/PRODUCTION/RECEPTO       code   0x002007    program   0x000002
 .config_2008_BUILD/DEFAULT/PRODUCTION/RECEPTO       code   0x002008    program   0x000002
 
@@ -14,9 +14,9 @@ Linker Map File - Created Mon Aug 24 02:35:15 2020
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000161      
+                            0x000000    0x000165      
                             0x002007    0x002008      
-            356 out of 8455 program addresses used, program memory utilization is 4%
+            360 out of 8455 program addresses used, program memory utilization is 4%
 
 
 
@@ -24,126 +24,126 @@ Linker Map File - Created Mon Aug 24 02:35:15 2020
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
                   ACT_RLF   0x000004    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RECEPTOR_IR.asm
-                    BUCLE   0x000136    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-               BUCLE_SEND   0x000148    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                    BYTES   0x00012b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                CURR_TIME   0x000126    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                    ENVIO   0x00014d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                    FINAL   0x000144    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                 IR_FLAGS   0x000125    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                IRcarrier   0x000135    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                   IRsend   0x000146    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                  IRsetup   0x00012e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-               PULSE_TIME   0x000127    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                    BUCLE   0x000139    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+               BUCLE_SEND   0x00014b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                    BYTES   0x00012d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                CURR_TIME   0x000128    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                    ENVIO   0x000150    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                    FINAL   0x000147    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                 IR_FLAGS   0x000127    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                IRcarrier   0x000138    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                   IRsend   0x000149    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                  IRsetup   0x000131    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+               PULSE_TIME   0x000129    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
                       REC   0x000001    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RECEPTOR_IR.asm
-                REC_BYTE1   0x000129    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                REC_BYTE2   0x00012a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-     RETARDO_100MICROS_16   0x000029    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-   RETARDO_100MICROS_16_0   0x00002b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-               RETARDO_13   0x00013a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-      RETARDO_13MICROS_16   0x000039    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-    RETARDO_13MICROS_16_0   0x00003b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-  RETARDO_13MICROS_16_0_1   0x00013c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-  RETARDO_13MICROS_16_0_2   0x000141    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-           RETARDO_1MS_16   0x00009e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-         RETARDO_1MS_16_0   0x0000a2    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-     RETARDO_200MICROS_16   0x00001e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-   RETARDO_200MICROS_16_0   0x000022    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-      RETARDO_20MICROS_16   0x000034    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-    RETARDO_20MICROS_16_0   0x000036    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            RETARDO_2S_16   0x0000d5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-          RETARDO_2S_16_0   0x0000db    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-     RETARDO_500MICROS_16   0x000013    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-   RETARDO_500MICROS_16_0   0x000017    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-         RETARDO_500MS_16   0x0000f3    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-       RETARDO_500MS_16_0   0x0000f9    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-      RETARDO_50MICROS_16   0x00002f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-    RETARDO_50MICROS_16_0   0x000031    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-     RETARDO_562MICROS_16   0x00003e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-   RETARDO_562MICROS_16_0   0x000042    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-           RETARDO_5MS_16   0x000088    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-         RETARDO_5MS_16_0   0x00008c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-                 ROTACION   0x000152    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-            Retardo_100ms   0x000058    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-          Retardo_100ms_0   0x00005e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             Retardo_10ms   0x00007d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-           Retardo_10ms_0   0x000081    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-              Retardo_10s   0x0000b7    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_10s_0   0x0000bd    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-               Retardo_1s   0x0000e5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             Retardo_1s_0   0x0000eb    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_200ms   0x000049    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-          Retardo_200ms_0   0x00004f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             Retardo_20ms   0x000072    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-           Retardo_20ms_0   0x000076    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-              Retardo_20s   0x0000a9    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_20s_0   0x0000af    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-              Retardo_2ms   0x000093    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_2ms_0   0x000097    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-              Retardo_30s   0x000100    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_30s_0   0x000108    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             Retardo_50ms   0x000067    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-           Retardo_50ms_0   0x00006b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-               Retardo_5s   0x0000c6    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             Retardo_5s_0   0x0000cc    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-              Retardo_60s   0x000112    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_60s_0   0x00011a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-                   SEND_0   0x00015c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                   SEND_1   0x000157    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-               SPACE_TIME   0x000128    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-             _.org_0_0018   0x000018    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_001B   0x00001b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0023   0x000023    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0026   0x000026    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_002D   0x00002d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0043   0x000043    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0046   0x000046    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0050   0x000050    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+                REC_BYTE1   0x00012b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                REC_BYTE2   0x00012c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+     RETARDO_100MICROS_16   0x00002b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+   RETARDO_100MICROS_16_0   0x00002d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+               RETARDO_13   0x00013d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+      RETARDO_13MICROS_16   0x00003b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+    RETARDO_13MICROS_16_0   0x00003d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+  RETARDO_13MICROS_16_0_1   0x00013f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+  RETARDO_13MICROS_16_0_2   0x000144    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+           RETARDO_1MS_16   0x0000a0    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+         RETARDO_1MS_16_0   0x0000a4    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+     RETARDO_200MICROS_16   0x000020    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+   RETARDO_200MICROS_16_0   0x000024    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+      RETARDO_20MICROS_16   0x000036    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+    RETARDO_20MICROS_16_0   0x000038    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            RETARDO_2S_16   0x0000d7    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+          RETARDO_2S_16_0   0x0000dd    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+     RETARDO_500MICROS_16   0x000015    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+   RETARDO_500MICROS_16_0   0x000019    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+         RETARDO_500MS_16   0x0000f5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+       RETARDO_500MS_16_0   0x0000fb    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+      RETARDO_50MICROS_16   0x000031    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+    RETARDO_50MICROS_16_0   0x000033    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+     RETARDO_562MICROS_16   0x000040    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+   RETARDO_562MICROS_16_0   0x000044    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+           RETARDO_5MS_16   0x00008a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+         RETARDO_5MS_16_0   0x00008e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+                 ROTACION   0x000155    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+            Retardo_100ms   0x00005a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+          Retardo_100ms_0   0x000060    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             Retardo_10ms   0x00007f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+           Retardo_10ms_0   0x000083    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+              Retardo_10s   0x0000b9    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_10s_0   0x0000bf    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+               Retardo_1s   0x0000e7    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             Retardo_1s_0   0x0000ed    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_200ms   0x00004b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+          Retardo_200ms_0   0x000051    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             Retardo_20ms   0x000074    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+           Retardo_20ms_0   0x000078    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+              Retardo_20s   0x0000ab    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_20s_0   0x0000b1    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+              Retardo_2ms   0x000095    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_2ms_0   0x000099    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+              Retardo_30s   0x000102    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_30s_0   0x00010a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             Retardo_50ms   0x000069    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+           Retardo_50ms_0   0x00006d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+               Retardo_5s   0x0000c8    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             Retardo_5s_0   0x0000ce    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+              Retardo_60s   0x000114    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_60s_0   0x00011c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+                   SEND_0   0x000160    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                   SEND_1   0x00015b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+               SPACE_TIME   0x00012a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+             _.org_0_001A   0x00001a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_001D   0x00001d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0025   0x000025    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0028   0x000028    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_002F   0x00002f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0045   0x000045    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0048   0x000048    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_0052   0x000052    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0055   0x000055    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_005F   0x00005f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0054   0x000054    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0057   0x000057    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_0061   0x000061    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0064   0x000064    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0065   0x000065    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_006C   0x00006c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_006F   0x00006f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0077   0x000077    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_007A   0x00007a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0082   0x000082    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0085   0x000085    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_008D   0x00008d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0090   0x000090    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0098   0x000098    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_009B   0x00009b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00A3   0x0000a3    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00A6   0x0000a6    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00B0   0x0000b0    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0063   0x000063    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0066   0x000066    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0067   0x000067    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_006E   0x00006e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0071   0x000071    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0079   0x000079    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_007C   0x00007c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0084   0x000084    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0087   0x000087    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_008F   0x00008f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0092   0x000092    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_009A   0x00009a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_009D   0x00009d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00A5   0x0000a5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00A8   0x0000a8    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00B2   0x0000b2    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00BE   0x0000be    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00B4   0x0000b4    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00C0   0x0000c0    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00C3   0x0000c3    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00CD   0x0000cd    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00C2   0x0000c2    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00C5   0x0000c5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00CF   0x0000cf    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00D2   0x0000d2    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00D3   0x0000d3    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00DC   0x0000dc    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00D1   0x0000d1    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00D4   0x0000d4    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00D5   0x0000d5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00DE   0x0000de    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00E1   0x0000e1    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00E2   0x0000e2    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00E0   0x0000e0    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00E3   0x0000e3    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00EC   0x0000ec    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00E4   0x0000e4    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00E5   0x0000e5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00EE   0x0000ee    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00F1   0x0000f1    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00FA   0x0000fa    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00F0   0x0000f0    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00F3   0x0000f3    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00FC   0x0000fc    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0109   0x000109    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00FE   0x0000fe    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_010B   0x00010b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_010D   0x00010d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_011B   0x00011b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_010F   0x00010f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_011D   0x00011d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_011F   0x00011f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0122   0x000122    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0123   0x000123    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0121   0x000121    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0124   0x000124    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0125   0x000125    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
 
 
 
@@ -152,124 +152,124 @@ Linker Map File - Created Mon Aug 24 02:35:15 2020
                 ---------  ---------  ---------  --------- ---------                
                       REC   0x000001    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RECEPTOR_IR.asm
                   ACT_RLF   0x000004    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RECEPTOR_IR.asm
-     RETARDO_500MICROS_16   0x000013    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-   RETARDO_500MICROS_16_0   0x000017    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0018   0x000018    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_001B   0x00001b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-     RETARDO_200MICROS_16   0x00001e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-   RETARDO_200MICROS_16_0   0x000022    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0023   0x000023    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0026   0x000026    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-     RETARDO_100MICROS_16   0x000029    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-   RETARDO_100MICROS_16_0   0x00002b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_002D   0x00002d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-      RETARDO_50MICROS_16   0x00002f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-    RETARDO_50MICROS_16_0   0x000031    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-      RETARDO_20MICROS_16   0x000034    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-    RETARDO_20MICROS_16_0   0x000036    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-      RETARDO_13MICROS_16   0x000039    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-    RETARDO_13MICROS_16_0   0x00003b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-     RETARDO_562MICROS_16   0x00003e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-   RETARDO_562MICROS_16_0   0x000042    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0043   0x000043    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0046   0x000046    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_200ms   0x000049    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-          Retardo_200ms_0   0x00004f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0050   0x000050    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+     RETARDO_500MICROS_16   0x000015    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+   RETARDO_500MICROS_16_0   0x000019    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_001A   0x00001a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_001D   0x00001d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+     RETARDO_200MICROS_16   0x000020    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+   RETARDO_200MICROS_16_0   0x000024    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0025   0x000025    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0028   0x000028    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+     RETARDO_100MICROS_16   0x00002b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+   RETARDO_100MICROS_16_0   0x00002d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_002F   0x00002f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+      RETARDO_50MICROS_16   0x000031    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+    RETARDO_50MICROS_16_0   0x000033    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+      RETARDO_20MICROS_16   0x000036    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+    RETARDO_20MICROS_16_0   0x000038    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+      RETARDO_13MICROS_16   0x00003b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+    RETARDO_13MICROS_16_0   0x00003d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+     RETARDO_562MICROS_16   0x000040    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+   RETARDO_562MICROS_16_0   0x000044    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0045   0x000045    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0048   0x000048    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_200ms   0x00004b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+          Retardo_200ms_0   0x000051    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_0052   0x000052    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0055   0x000055    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_100ms   0x000058    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-          Retardo_100ms_0   0x00005e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_005F   0x00005f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0054   0x000054    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0057   0x000057    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_100ms   0x00005a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+          Retardo_100ms_0   0x000060    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_0061   0x000061    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0064   0x000064    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0065   0x000065    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             Retardo_50ms   0x000067    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-           Retardo_50ms_0   0x00006b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_006C   0x00006c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_006F   0x00006f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             Retardo_20ms   0x000072    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-           Retardo_20ms_0   0x000076    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0077   0x000077    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_007A   0x00007a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             Retardo_10ms   0x00007d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-           Retardo_10ms_0   0x000081    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0082   0x000082    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0085   0x000085    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-           RETARDO_5MS_16   0x000088    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-         RETARDO_5MS_16_0   0x00008c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_008D   0x00008d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0090   0x000090    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-              Retardo_2ms   0x000093    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_2ms_0   0x000097    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0098   0x000098    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_009B   0x00009b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-           RETARDO_1MS_16   0x00009e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-         RETARDO_1MS_16_0   0x0000a2    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00A3   0x0000a3    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00A6   0x0000a6    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-              Retardo_20s   0x0000a9    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_20s_0   0x0000af    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00B0   0x0000b0    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0063   0x000063    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0066   0x000066    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0067   0x000067    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             Retardo_50ms   0x000069    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+           Retardo_50ms_0   0x00006d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_006E   0x00006e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0071   0x000071    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             Retardo_20ms   0x000074    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+           Retardo_20ms_0   0x000078    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0079   0x000079    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_007C   0x00007c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             Retardo_10ms   0x00007f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+           Retardo_10ms_0   0x000083    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0084   0x000084    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0087   0x000087    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+           RETARDO_5MS_16   0x00008a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+         RETARDO_5MS_16_0   0x00008e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_008F   0x00008f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0092   0x000092    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+              Retardo_2ms   0x000095    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_2ms_0   0x000099    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_009A   0x00009a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_009D   0x00009d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+           RETARDO_1MS_16   0x0000a0    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+         RETARDO_1MS_16_0   0x0000a4    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00A5   0x0000a5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00A8   0x0000a8    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+              Retardo_20s   0x0000ab    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_20s_0   0x0000b1    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00B2   0x0000b2    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-              Retardo_10s   0x0000b7    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_10s_0   0x0000bd    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00BE   0x0000be    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00B4   0x0000b4    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+              Retardo_10s   0x0000b9    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_10s_0   0x0000bf    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00C0   0x0000c0    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00C3   0x0000c3    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-               Retardo_5s   0x0000c6    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             Retardo_5s_0   0x0000cc    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00CD   0x0000cd    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00C2   0x0000c2    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00C5   0x0000c5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+               Retardo_5s   0x0000c8    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             Retardo_5s_0   0x0000ce    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00CF   0x0000cf    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00D2   0x0000d2    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00D3   0x0000d3    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            RETARDO_2S_16   0x0000d5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-          RETARDO_2S_16_0   0x0000db    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00DC   0x0000dc    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00D1   0x0000d1    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00D4   0x0000d4    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00D5   0x0000d5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            RETARDO_2S_16   0x0000d7    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+          RETARDO_2S_16_0   0x0000dd    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00DE   0x0000de    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00E1   0x0000e1    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00E2   0x0000e2    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00E0   0x0000e0    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00E3   0x0000e3    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-               Retardo_1s   0x0000e5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             Retardo_1s_0   0x0000eb    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00EC   0x0000ec    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00E4   0x0000e4    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00E5   0x0000e5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+               Retardo_1s   0x0000e7    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             Retardo_1s_0   0x0000ed    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00EE   0x0000ee    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00F1   0x0000f1    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-         RETARDO_500MS_16   0x0000f3    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-       RETARDO_500MS_16_0   0x0000f9    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_00FA   0x0000fa    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00F0   0x0000f0    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00F3   0x0000f3    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+         RETARDO_500MS_16   0x0000f5    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+       RETARDO_500MS_16_0   0x0000fb    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_00FC   0x0000fc    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-              Retardo_30s   0x000100    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_30s_0   0x000108    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0109   0x000109    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_00FE   0x0000fe    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+              Retardo_30s   0x000102    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_30s_0   0x00010a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_010B   0x00010b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_010D   0x00010d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-              Retardo_60s   0x000112    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-            Retardo_60s_0   0x00011a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_011B   0x00011b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_010F   0x00010f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+              Retardo_60s   0x000114    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+            Retardo_60s_0   0x00011c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_011D   0x00011d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
              _.org_0_011F   0x00011f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0122   0x000122    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-             _.org_0_0123   0x000123    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
-                 IR_FLAGS   0x000125    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                CURR_TIME   0x000126    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-               PULSE_TIME   0x000127    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-               SPACE_TIME   0x000128    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                REC_BYTE1   0x000129    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                REC_BYTE2   0x00012a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                    BYTES   0x00012b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                  IRsetup   0x00012e    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                IRcarrier   0x000135    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                    BUCLE   0x000136    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-               RETARDO_13   0x00013a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-  RETARDO_13MICROS_16_0_1   0x00013c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-  RETARDO_13MICROS_16_0_2   0x000141    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                    FINAL   0x000144    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                   IRsend   0x000146    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-               BUCLE_SEND   0x000148    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                    ENVIO   0x00014d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                 ROTACION   0x000152    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                   SEND_1   0x000157    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
-                   SEND_0   0x00015c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+             _.org_0_0121   0x000121    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0124   0x000124    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+             _.org_0_0125   0x000125    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\RETARDOS_16MHZ.inc
+                 IR_FLAGS   0x000127    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                CURR_TIME   0x000128    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+               PULSE_TIME   0x000129    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+               SPACE_TIME   0x00012a    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                REC_BYTE1   0x00012b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                REC_BYTE2   0x00012c    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                    BYTES   0x00012d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                  IRsetup   0x000131    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                IRcarrier   0x000138    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                    BUCLE   0x000139    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+               RETARDO_13   0x00013d    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+  RETARDO_13MICROS_16_0_1   0x00013f    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+  RETARDO_13MICROS_16_0_2   0x000144    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                    FINAL   0x000147    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                   IRsend   0x000149    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+               BUCLE_SEND   0x00014b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                    ENVIO   0x000150    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                 ROTACION   0x000155    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                   SEND_1   0x00015b    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
+                   SEND_0   0x000160    program     static E:\Proyectos\PIC\IR (Control infrarojo)\IR.X\IR.inc
 
 
