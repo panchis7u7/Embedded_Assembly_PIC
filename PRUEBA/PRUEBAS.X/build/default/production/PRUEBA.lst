@@ -1,4 +1,4 @@
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  1
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -24,63 +24,233 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00007 ; __config 0xFFFF
 2008   3FFF           00008  __CONFIG _CONFIG2, _BOR4V_BOR40V & _WRT_OFF
                       00009  
-                      00010  udata
-Warning[207]: Found label after column 1. (BYTES)
-0000                  00011  BYTES RES 3
-                      00012  
-Message[313]: CBLOCK constants will start with a value of 0.
-                      00013  CBLOCK
-  00000000            00014  C1
-                      00015  ENDC
-                      00016  
-                      00017  ORG 0
-0000                  00018 SETUP:
-0000   3080           00019     MOVLW 0x80
-0001   00??           00020     MOVWF BYTES
-0002   30A2           00021     MOVLW 0xA2
-0003   00??           00022     MOVWF BYTES+1
-0004   305D           00023     MOVLW 0x5D
-0005   00??           00024     MOVWF BYTES+2
-0006   1683           00025     BSF STATUS,RP0
-0007   1303           00026     BCF STATUS,RP1
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0008   0186           00027     CLRF TRISB
-0009   0187           00028     CLRF PORTC
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000A   0188           00029     CLRF TRISD
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000B   1605           00030     BSF TRISA,4
-000C   1283           00031     BCF STATUS,RP0
-000D   0186           00032     CLRF PORTB
-000E   0187           00033     CLRF PORTC
-000F   0188           00034     CLRF PORTD
-0010                  00035 PROGRAMA:
-0010   08??           00036     MOVFW BYTES
-0011   0086           00037     MOVWF PORTB
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  2
+                      00010  ;udata
+                      00011  ;BYTES RES 3
+Warning[207]: Found label after column 1. (SEND_BITS_IR)
+  00000009            00012  SEND_BITS_IR EQU D'9'
+                      00013  
+                      00014  
+                      00015  CBLOCK 0x20
+  00000020            00016     BYTE
+  00000021            00017     CONTADOR
+  00000022            00018     CONTADOR_2
+  00000023            00019     r52
+                      00020  ENDC
+                      00021  
+                      00022  ORG 0
+0000                  00023 SETUP:
+                      00024 ;    MOVLW 0x80
+                      00025 ;    MOVWF BYTES
+                      00026 ;    MOVLW 0xA2
+                      00027 ;    MOVWF BYTES+1
+                      00028 ;    MOVLW 0x5D
+                      00029 ;    MOVWF BYTES+2
+                      00030 ;    BSF STATUS,RP0
+                      00031 ;    BCF STATUS,RP1
+                      00032 ;    CLRF TRISB
+                      00033 ;    CLRF PORTC
+                      00034 ;    CLRF TRISD
+                      00035 ;    BSF TRISA,4
+                      00036 ;    BCF STATUS,RP0
+                      00037 ;    CLRF PORTB
+                      00038 ;    CLRF PORTC
+                      00039 ;    CLRF PORTD
+                      00040 ;PROGRAMA:
+                      00041 ;    MOVFW BYTES
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0012   08??           00038     MOVFW BYTES+1
-0013   0088           00039     MOVWF PORTD
-0014   08??           00040     MOVFW BYTES+2
-0015   0087           00041     MOVWF PORTC
-0016                  00042 REC:
-0016   1A05           00043     BTFSC PORTA,4
-0017   2???           00044     GOTO ACT_RLF
-0018   2???           00045     GOTO REC
-0019                  00046 ACT_RLF:
-0019   1A05           00047     BTFSC PORTA,4
-001A   2???           00048     GOTO ACT_RLF
-001B   0D??           00049     RLF BYTES+2, 1
-001C   0D??           00050     RLF BYTES+1, 1
-001D   0D??           00051     RLF BYTES, 1
-001E   1000           00052     BCF BYTES+2,0
-001F   2???           00053     GOTO PROGRAMA
-3FE2 3FFF             00054  END
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  3
+                      00042 ;    MOVWF PORTB
+                      00043 ;    MOVFW BYTES+1
+                      00044 ;    MOVWF PORTD
+                      00045 ;    MOVFW BYTES+2
+                      00046 ;    MOVWF PORTC
+                      00047 ;REC:
+                      00048 ;    BTFSC PORTA,4
+                      00049 ;    GOTO ACT_RLF
+                      00050 ;    GOTO REC
+                      00051 ;ACT_RLF:
+                      00052 ;    BTFSC PORTA,4
+                      00053 ;    GOTO ACT_RLF
+                      00054 ;    RLF BYTES+2, 1
+                      00055 ;    RLF BYTES+1, 1
+                      00056 ;    RLF BYTES, 1
+                      00057 ;    BCF BYTES+2,0
+                      00058 ;    GOTO PROGRAMA
+                      00059 ;SETUP:
+                      00060 ;    BSF STATUS,RP0
+                      00061 ;    BCF STATUS,RP1
+                      00062 ;    BCF TRISE,0
+                      00063 ;    BCF STATUS,RP0
+                      00064 ;    CLRF PORTE
+                      00065 ;PROGRAMA:
+                      00066 ;    BSF PORTE,0
+                      00067 ;    CALL RETARDO_4500MICROS_16
+                      00068 ;    BSF STATUS,RP0
+                      00069 ;    MOVLW B'11010100'
+                      00070 ;    MOVWF OPTION_REG
+                      00071 ;    BCF STATUS,RP0
+                      00072 ;    BCF PORTE,0
+                      00073 ;    CALL RETARDO_562MICROS_16
+                      00074 ;    GOTO PROGRAMA
+                      00075     
+0000   1683           00076     BSF STATUS, RP0 ;BANCO 1
+0001   1303           00077     BCF STATUS, RP1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0002   1008           00078     BCF TRISD, 0    ;RD0 -> PIN DE SALIDA DIGITAL.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0003   1605           00079     BSF TRISA, 4
+0004   30D4           00080     MOVLW B'11010100'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0005   0081           00081     MOVWF OPTION_REG
+0006   1283           00082     BCF STATUS, RP0 ;BANCO 0
+0007   1008           00083     BCF PORTD, 0    ;INICIALIZAR EL PIN RD0 EN 0.
+Warning[207]: Found label after column 1. (REC)
+0008                  00084  REC:
+0008   1A05           00085     BTFSC PORTA,4
+0009   2???           00086     GOTO ACT_RLF
+000A   2???           00087     GOTO REC
+000B                  00088 ACT_RLF:
+000B   1A05           00089     BTFSC PORTA,4
+000C   2???           00090     GOTO ACT_RLF
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000D   30FF           00091     MOVLW D'255'
+000E   2???           00092     CALL IRcarrier
+000F   306E           00093     MOVLW D'110'
+0010   2???           00094     CALL IRcarrier
+0011   2???           00095     CALL RETARDO_4500MICROS_16
+0012   30FF           00096     MOVLW 0xFF
+0013   2???           00097     CALL IRsend
+0014   30A2           00098     MOVLW 0xA2
+0015   2???           00099     CALL IRsend
+0016   305D           00100     MOVLW 0x5D
+0017   2???           00101     CALL IRsend
+0018   30FF           00102     MOVLW 0xFF
+0019   2???           00103     CALL IRsend
+001A   3018           00104     MOVLW D'24'
+001B   2???           00105     CALL IRcarrier
+001C   2???           00106     GOTO REC
+                      00107 
+Warning[207]: Found label after column 1. (RETARDO_1686MICROS_16)
+001D                  00108  RETARDO_1686MICROS_16:
+001D   110B           00109     BCF INTCON,T0IF
+001E   302D           00110     MOVLW D'45'
+001F   0081           00111     MOVWF TMR0
+Warning[207]: Found label after column 1. (RETARDO_1686MICROS_16_0)
+0020                  00112  RETARDO_1686MICROS_16_0:
+0020   1D0B           00113     BTFSS INTCON,T0IF
+0021   2???           00114     GOTO RETARDO_1686MICROS_16_0
+0022   0008           00115     RETURN
+                      00116     
+Warning[207]: Found label after column 1. (RETARDO_562MICROS_16)
+0023                  00117  RETARDO_562MICROS_16:
+0023   110B           00118     BCF INTCON,T0IF
+0024   30BA           00119     MOVLW D'186'
+0025   0081           00120     MOVWF TMR0
+Warning[207]: Found label after column 1. (RETARDO_562MICROS_16_0)
+0026                  00121  RETARDO_562MICROS_16_0:
+0026   1D0B           00122     BTFSS INTCON,T0IF
+0027   2???           00123     GOTO RETARDO_562MICROS_16_0
+0028   0008           00124     RETURN
+                      00125     
+Warning[207]: Found label after column 1. (RETARDO_4500MICROS_16)
+0029                  00126  RETARDO_4500MICROS_16:
+0029   1683           00127     BSF STATUS,RP0
+002A   30D6           00128     MOVLW B'11010110'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+002B   0081           00129     MOVWF OPTION_REG
+002C   1283           00130     BCF STATUS,RP0
+002D   1283           00131     BCF STATUS,RP0
+002E   110B           00132     BCF INTCON,T0IF
+002F   3073           00133     MOVLW D'115'
+0030   0081           00134     MOVWF TMR0
+Warning[207]: Found label after column 1. (RETARDO_4500MICROS_16_0)
+0031                  00135  RETARDO_4500MICROS_16_0:
+0031   1D0B           00136     BTFSS INTCON,T0IF
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0032   2???           00137     GOTO RETARDO_4500MICROS_16_0
+0033   0008           00138     RETURN
+                      00139     
+0034                  00140 IRcarrier:
+0034   00A1           00141     MOVWF CONTADOR
+0035                  00142 BUCLE:
+0035   1408           00143     BSF PORTD,0
+0036   0BA1           00144     DECFSZ CONTADOR,1
+0037   2???           00145     GOTO RETARDO_13
+0038   2???           00146     GOTO FINAL          
+0039                  00147 RETARDO_13:     
+0039   300E           00148     movlw       0xE
+003A   00A3           00149     movwf       r52
+003B                  00150 RETARDO_13MICROS_16_0_1:
+003B   0BA3           00151     decfsz      r52, f
+003C   2???           00152     goto        RETARDO_13MICROS_16_0_1
+003D   1008           00153     BCF PORTD,0
+003E   300E           00154     movlw       0xE
+003F   00A3           00155     movwf       r52
+0040                  00156 RETARDO_13MICROS_16_0_2:
+0040   0BA3           00157     decfsz      r52, f
+0041   2???           00158     goto        RETARDO_13MICROS_16_0_2
+0042   2???           00159     GOTO BUCLE
+Warning[207]: Found label after column 1. (FINAL)
+0043                  00160  FINAL:
+0043   1008           00161     BCF PORTD,0
+0044   0008           00162     RETURN
+                      00163     
+Warning[207]: Found label after column 1. (IRsend)
+0045                  00164  IRsend:
+0045   00A0           00165     MOVWF BYTE
+0046   3009           00166     MOVLW SEND_BITS_IR
+0047   00A2           00167     MOVWF CONTADOR_2
+0048   1683           00168     BSF STATUS,RP0
+0049   30D4           00169     MOVLW B'11010100'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+004A   0081           00170     MOVWF OPTION_REG
+004B   1283           00171     BCF STATUS,RP0
+004C                  00172 BUCLE_SEND:
+004C   0BA2           00173     DECFSZ CONTADOR_2,1
+004D   2???           00174     GOTO ENVIO
+004E   0008           00175     RETURN ;SI ES 0.
+004F                  00176 ENVIO:
+004F   0820           00177     MOVFW BYTE
+0050   3901           00178     ANDLW 0x1
+0051   1D03           00179     BTFSS STATUS,Z
+0052   2???           00180     GOTO SEND_1 ;SI ES 1.
+0053   2???           00181     GOTO SEND_0 ;SI ES 0.
+0054                  00182 ROTACION:
+0054   0CA0           00183     RRF BYTE,1
+0055   13A0           00184     BCF BYTE,7
+0056   2???           00185     GOTO BUCLE_SEND
+0057                  00186 SEND_1:
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0057   3018           00187     MOVLW D'24'
+0058   2???           00188     CALL IRcarrier
+0059   2???           00189     CALL RETARDO_1686MICROS_16
+005A   2???           00190     GOTO ROTACION
+005B                  00191 SEND_0:
+005B   3018           00192     MOVLW D'24'
+005C   2???           00193     CALL IRcarrier
+005D   2???           00194     CALL RETARDO_562MICROS_16
+005E   2???           00195     GOTO ROTACION
+3FE2 3FFF             00196     END
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE  6
 
 
 SYMBOL TABLE
@@ -91,7 +261,7 @@ ABDOVF                            00000007
 ACKDT                             00000005
 ACKEN                             00000004
 ACKSTAT                           00000006
-ACT_RLF                           00000019
+ACT_RLF                           0000000B
 ADCON0                            0000001F
 ADCON1                            0000009F
 ADCS0                             00000006
@@ -139,7 +309,7 @@ BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  4
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE  7
 
 
 SYMBOL TABLE
@@ -147,9 +317,10 @@ SYMBOL TABLE
 
 BRG9                              00000001
 BRGH                              00000002
-BYTES                             00000000
+BUCLE                             00000035
+BUCLE_SEND                        0000004C
+BYTE                              00000020
 C                                 00000000
-C1                                00000000
 C1CH0                             00000000
 C1CH1                             00000001
 C1IE                              00000005
@@ -197,13 +368,13 @@ CCPR1L                            00000015
 CCPR2                             0000001B
 CCPR2H                            0000001C
 CCPR2L                            0000001B
-CHS0                              00000002
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  5
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE  8
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
@@ -212,6 +383,8 @@ CKP                               00000004
 CM1CON0                           00000107
 CM2CON0                           00000108
 CM2CON1                           00000109
+CONTADOR                          00000021
+CONTADOR_2                        00000022
 CREN                              00000004
 CSRC                              00000007
 D                                 00000005
@@ -238,8 +411,10 @@ EEDATH                            0000010E
 EEIE                              00000004
 EEIF                              00000004
 EEPGD                             00000007
+ENVIO                             0000004F
 F                                 00000001
 FERR                              00000002
+FINAL                             00000043
 FSR                               00000004
 FVREN                             00000000
 GCEN                              00000007
@@ -252,17 +427,17 @@ I2C_DATA                          00000005
 I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
-INDF                              00000000
-INTCON                            0000000B
-INTE                              00000004
-INTEDG                            00000006
-INTF                              00000001
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  6
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
 IOCB                              00000096
 IOCB0                             00000000
 IOCB1                             00000001
@@ -276,6 +451,8 @@ IRCF0                             00000004
 IRCF1                             00000005
 IRCF2                             00000006
 IRP                               00000007
+IRcarrier                         00000034
+IRsend                            00000045
 LTS                               00000001
 MC1OUT                            00000007
 MC2OUT                            00000006
@@ -309,6 +486,12 @@ OSCTUNE                           00000090
 OSFIE                             00000007
 OSFIF                             00000007
 OSTS                              00000003
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 P                                 00000004
 P1M0                              00000006
 P1M1                              00000007
@@ -316,12 +499,6 @@ PCL                               00000002
 PCLATH                            0000000A
 PCON                              0000008E
 PDC0                              00000000
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  7
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 PDC1                              00000001
 PDC2                              00000002
 PDC3                              00000003
@@ -340,7 +517,6 @@ PORTC                             00000007
 PORTD                             00000008
 PORTE                             00000009
 PR2                               00000092
-PROGRAMA                          00000010
 PRSEN                             00000007
 PS0                               00000000
 PS1                               00000001
@@ -369,18 +545,18 @@ RB2                               00000002
 RB3                               00000003
 RB4                               00000004
 RB5                               00000005
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 RB6                               00000006
 RB7                               00000007
 RBIE                              00000003
 RBIF                              00000000
 RC0                               00000000
 RC1                               00000001
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  8
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 RC2                               00000002
 RC3                               00000003
 RC4                               00000004
@@ -410,7 +586,17 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-REC                               00000016
+REC                               00000008
+RETARDO_13                        00000039
+RETARDO_13MICROS_16_0_1           0000003B
+RETARDO_13MICROS_16_0_2           00000040
+RETARDO_1686MICROS_16             0000001D
+RETARDO_1686MICROS_16_0           00000020
+RETARDO_4500MICROS_16             00000029
+RETARDO_4500MICROS_16_0           00000031
+RETARDO_562MICROS_16              00000023
+RETARDO_562MICROS_16_0            00000026
+ROTACION                          00000054
 RP0                               00000005
 RP1                               00000006
 RSEN                              00000001
@@ -418,12 +604,21 @@ RX9                               00000006
 RX9D                              00000000
 R_NOT_W                           00000002
 R_W                               00000002
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 S                                 00000003
 SBOREN                            00000004
 SCKP                              00000004
 SCS                               00000000
 SEN                               00000000
 SENDB                             00000003
+SEND_0                            0000005B
+SEND_1                            00000057
+SEND_BITS_IR                      00000009
 SETUP                             00000000
 SMP                               00000007
 SPBRG                             00000099
@@ -434,12 +629,6 @@ SR1                               00000007
 SRCON                             00000185
 SREN                              00000005
 SSPADD                            00000093
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE  9
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 SSPBUF                            00000013
 SSPCON                            00000014
 SSPCON2                           00000091
@@ -474,6 +663,12 @@ T1GSS                             00000001
 T1INSYNC                          00000002
 T1OSCEN                           00000003
 T1SYNC                            00000002
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 T2CKPS0                           00000000
 T2CKPS1                           00000001
 T2CON                             00000012
@@ -493,12 +688,6 @@ TMR2IE                            00000001
 TMR2IF                            00000001
 TMR2ON                            00000002
 TOUTPS0                           00000003
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE 10
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 TOUTPS1                           00000004
 TOUTPS2                           00000005
 TOUTPS3                           00000006
@@ -533,6 +722,12 @@ TRISD                             00000088
 TRISD0                            00000000
 TRISD1                            00000001
 TRISD2                            00000002
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 TRISD3                            00000003
 TRISD4                            00000004
 TRISD5                            00000005
@@ -552,12 +747,6 @@ TUN4                              00000004
 TX8_9                             00000006
 TX9                               00000006
 TX9D                              00000000
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE 11
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 TXD8                              00000000
 TXEN                              00000005
 TXIE                              00000004
@@ -592,6 +781,12 @@ WPUB1                             00000001
 WPUB2                             00000002
 WPUB3                             00000003
 WPUB4                             00000004
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 WPUB5                             00000005
 WPUB6                             00000006
 WPUB7                             00000007
@@ -611,12 +806,6 @@ _BOREN_SBODEN                     00003DFF
 _BOR_NSLEEP                       00003EFF
 _BOR_OFF                          00003CFF
 _BOR_ON                           00003FFF
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE 12
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 _BOR_SBODEN                       00003DFF
 _CONFIG1                          00002007
 _CONFIG2                          00002008
@@ -651,6 +840,12 @@ _IESO_OFF                         00003BFF
 _IESO_ON                          00003FFF
 _INTOSC                           00003FFD
 _INTOSCIO                         00003FFC
+MPASM 5.86                        PRUEBA.ASM   8-25-2020  20:59:30         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 _INTRC_OSC_CLKOUT                 00003FFD
 _INTRC_OSC_NOCLKOUT               00003FFC
 _LP_OSC                           00003FF8
@@ -670,15 +865,10 @@ _WRT_HALF                         000039FF
 _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
-MPASM 5.86                        PRUEBA.ASM   8-22-2020  18:05:44         PAGE 13
-
-
-
-
-
+r52                               00000023
 
 Errors   :     0
-Warnings :     1 reported,     0 suppressed
-Messages :     4 reported,     0 suppressed
+Warnings :    10 reported,     0 suppressed
+Messages :     5 reported,     0 suppressed
 
 

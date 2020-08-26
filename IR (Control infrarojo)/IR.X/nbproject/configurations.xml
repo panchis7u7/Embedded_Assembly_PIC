@@ -8,6 +8,7 @@
       <itemPath>RETARDOS.inc</itemPath>
       <itemPath>IR.inc</itemPath>
       <itemPath>RETARDOS_16MHZ.INC</itemPath>
+      <itemPath>RETARDOS_TMR0.inc</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

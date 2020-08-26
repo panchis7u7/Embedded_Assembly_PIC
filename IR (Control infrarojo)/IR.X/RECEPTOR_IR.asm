@@ -18,22 +18,22 @@ REC:
 ACT_RLF:
     BTFSC PORTA,4
     GOTO ACT_RLF
-    MOVLW 0x00
-    MOVWF BYTES
-    MOVLW 0xFF
-    MOVWF BYTES+1
-    MOVLW 0xA2
-    MOVWF BYTES+2
-    MOVLW 0x5D
-    MOVWF BYTES+3
     MOVLW D'255'
     CALL IRcarrier  ;9ms de carrier
     MOVLW D'110'
     CALL IRcarrier
     CALL RETARDO_5MS_16
+    MOVLW 0x00
+    CALL IRsend
+    MOVLW 0xFF
+    CALL IRsend
+    MOVLW 0xA2
+    CALL IRsend
+    MOVLW 0x5D
     CALL IRsend
 GOTO REC
     #INCLUDE <RETARDOS_16MHZ.inc>
+    ;#INCLUDE <RETARDOS_TMR0.inc>
     #INCLUDE <IR.inc>
  END
 

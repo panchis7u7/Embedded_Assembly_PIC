@@ -1,5 +1,15 @@
-Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 11 : Found label after column 1. (BYTES)
-Message[313] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 13 : CBLOCK constants will start with a value of 0.
-Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 27 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 29 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 30 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 12 : Found label after column 1. (SEND_BITS_IR)
+Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 78 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 79 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 81 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 84 : Found label after column 1. (REC)
+Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 108 : Found label after column 1. (RETARDO_1686MICROS_16)
+Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 112 : Found label after column 1. (RETARDO_1686MICROS_16_0)
+Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 117 : Found label after column 1. (RETARDO_562MICROS_16)
+Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 121 : Found label after column 1. (RETARDO_562MICROS_16_0)
+Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 126 : Found label after column 1. (RETARDO_4500MICROS_16)
+Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 129 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 135 : Found label after column 1. (RETARDO_4500MICROS_16_0)
+Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 160 : Found label after column 1. (FINAL)
+Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 164 : Found label after column 1. (IRsend)
+Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 170 : Register in operand not in bank 0.  Ensure that bank bits are correct.
