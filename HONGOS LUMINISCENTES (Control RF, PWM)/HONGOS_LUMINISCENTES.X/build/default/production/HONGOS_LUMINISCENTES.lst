@@ -1,4 +1,4 @@
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE  1
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -18,56 +18,94 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00810         LIST
                       00003     LIST P=16F887
                       00004     ; CONFIG1
-                      00005     ; __config 0xFFE2
-2007   3FC1           00006      __CONFIG _CONFIG1, _FOSC_XT & _WDTE_OFF & _PWRTE_ON & _MCLRE_OFF & _CP_OFF & _CPD_OFF & _BOREN_ON &
-                             _IESO_ON & _FCMEN_ON & _LVP_ON
+                      00005     ; __config 0xFFE1
+2007   3FE1           00006     __CONFIG _CONFIG1, _FOSC_XT & _WDTE_OFF & _PWRTE_ON & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_ON & _
+                            IESO_ON & _FCMEN_ON & _LVP_ON
                       00007     ; CONFIG2
                       00008     ; __config 0xFFFF
 2008   3FFF           00009     __CONFIG _CONFIG2, _BOR4V_BOR40V & _WRT_OFF
+                      00010     UDATA
 Message[313]: CBLOCK constants will start with a value of 0.
-                      00010     CBLOCK
-                      00011     ENDC
-                      00012     ORG 0x00
-Warning[207]: Found label after column 1. (INICIO)
-0000                  00013  INICIO:
-0000   1683           00014     BSF STATUS,RP0  
-0001   1303           00015     BCF STATUS,RP1
+                      00011     CBLOCK
+                      00012     ENDC
+                      00013     ORG 0
+0000   2???           00014     GOTO SETUP
+                      00015     ORG 4
+0004   2???           00016     GOTO INTERRUPCION
+Warning[207]: Found label after column 1. (SETUP)
+0005                  00017  SETUP:
+0005   1683           00018     BSF STATUS,RP0          ;BANCO 1.
+0006   1303           00019     BCF STATUS, RP1
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0002   1008           00016     BCF TRISD,0
-0003   1283           00017     BCF STATUS, RP0
-Warning[202]: Argument out of range.  Least significant bits used.
-0004   30B0           00018     MOVLW D'00110000'
-0005   0090           00019     MOVWF T1CON
-Warning[207]: Found label after column 1. (PROGRAMA)
-0006                  00020  PROGRAMA:
-0006   1408           00021     BSF PORTD,0
-0007   2???           00022     CALL RETARDO_500MST1
-0008   1008           00023     BCF PORTD,0
-0009   2???           00024     CALL RETARDO_500MST1
-000A   2???           00025     GOTO PROGRAMA
-                      00026     
-Warning[207]: Found label after column 1. (RETARDO_500MST1)
-000B                  00027  RETARDO_500MST1:
-000B   1010           00028     BCF T1CON,TMR1ON
-000C   300B           00029     MOVLW 0xB
-000D   008F           00030     MOVWF TMR1H
-000E   30DC           00031     MOVLW 0xDC
-000F   008E           00032     MOVWF TMR1L
-0010   1410           00033     BSF T1CON,TMR1ON
-Warning[207]: Found label after column 1. (COMPROBAR)
-0011                  00034  COMPROBAR:
-0011   1C0C           00035     BTFSS PIR1,TMR1IF
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE  2
+0007   1107           00020     BCF TRISC,2             ;RC2 (CCP1) SALIDA.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0008   1381           00021     BCF OPTION_REG,NOT_RBPU ;PULL UP PORTB
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0009   1301           00022     BCF OPTION_REG,INTEDG   ;FLANCO DESCENDENTE INT.
+000A   30F9           00023     MOVLW D'249'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000B   0092           00024     MOVWF PR2
+000C   1703           00025     BSF STATUS,RP1          ;BANCO 3.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000D   0188           00026     CLRF ANSEL
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000E   0189           00027     CLRF ANSELH
+000F   1283           00028     BCF STATUS,RP0          ;BANCO 0.
+0010   1303           00029     BCF STATUS,RP1
+0011   3090           00030     MOVLW B'10010000'
+0012   008B           00031     MOVWF INTCON
+0013   300C           00032     MOVLW B'00001100'
+0014   0097           00033     MOVWF CCP1CON
+0015   307D           00034     MOVLW D'125'
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0012   2???           00036     GOTO COMPROBAR
-0013   100C           00037     BCF PIR1,TMR1IF
-0014   0008           00038     RETURN
-3FC1 3FFF             00039     END
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE  3
+0016   0095           00035     MOVWF CCPR1L
+0017   0188           00036     CLRF PORTD
+0018   1408           00037     BSF PORTD,0
+Warning[207]: Found label after column 1. (PROGRAMA)
+0019                  00038  PROGRAMA:
+0019   0000           00039     NOP
+001A   2???           00040     GOTO PROGRAMA
+                      00041     
+                      00042     CBLOCK
+  00000000            00043     GUARDA_W
+  00000001            00044     GUARDA_STATUS
+                      00045     ENDC
+                      00046     
+Warning[207]: Found label after column 1. (INTERRUPCION)
+001B                  00047  INTERRUPCION:
+001B   0080           00048     MOVWF GUARDA_W
+001C   0E03           00049     SWAPF STATUS,W
+001D   0081           00050     MOVWF GUARDA_STATUS
+001E   1283           00051     BCF STATUS,RP0
+001F   1003           00052     BCF STATUS,C
+                      00053     ;COMIENZO INTERRUPCION:
+0020   303F           00054     MOVLW D'63'
+0021   0795           00055     ADDWF CCPR1L,1
+                      00056 ;    BTFSS STATUS,C
+                      00057 ;    GOTO FALSE
+                      00058 ;    GOTO TRUE
+                      00059 ; FALSE:
+                      00060 ;    MOVLW D'63'
+                      00061 ;    MOVWF CCPR1L
+                      00062 ;    GOTO FIN_INTERRUPCION
+                      00063 ; TRUE:
+                      00064 ;    MOVWF CCPR1L
+                      00065 ;    GOTO FIN_INTERRUPCION
+Warning[207]: Found label after column 1. (FIN_INTERRUPCION)
+0022                  00066  FIN_INTERRUPCION:
+0022   0E01           00067     SWAPF GUARDA_STATUS,W
+0023   0083           00068     MOVWF STATUS
+0024   0E80           00069     SWAPF GUARDA_W,F
+0025   0E00           00070     SWAPF GUARDA_W,W
+0026   108B           00071     BCF INTCON,INTF
+0027   0009           00072     RETFIE
+3FE1 3FFF             00073     END
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE  3
 
 
 SYMBOL TABLE
@@ -126,7 +164,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE  4
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE  4
 
 
 SYMBOL TABLE
@@ -185,7 +223,7 @@ CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE  5
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE  5
 
 
 SYMBOL TABLE
@@ -196,7 +234,6 @@ CKP                               00000004
 CM1CON0                           00000107
 CM2CON0                           00000108
 CM2CON1                           00000109
-COMPROBAR                         00000011
 CREN                              00000004
 CSRC                              00000007
 D                                 00000005
@@ -225,6 +262,7 @@ EEIF                              00000004
 EEPGD                             00000007
 F                                 00000001
 FERR                              00000002
+FIN_INTERRUPCION                  00000022
 FSR                               00000004
 FVREN                             00000000
 GCEN                              00000007
@@ -232,24 +270,26 @@ GIE                               00000007
 GO                                00000001
 GO_DONE                           00000001
 GO_NOT_DONE                       00000001
+GUARDA_STATUS                     00000001
+GUARDA_W                          00000000
 HTS                               00000002
 I2C_DATA                          00000005
 I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
 INDF                              00000000
-INICIO                            00000000
 INTCON                            0000000B
 INTE                              00000004
 INTEDG                            00000006
-INTF                              00000001
-IOCB                              00000096
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE  6
+INTERRUPCION                      0000001B
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE  6
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+INTF                              00000001
+IOCB                              00000096
 IOCB0                             00000000
 IOCB1                             00000001
 IOCB2                             00000002
@@ -301,14 +341,14 @@ P1M1                              00000007
 PCL                               00000002
 PCLATH                            0000000A
 PCON                              0000008E
-PDC0                              00000000
-PDC1                              00000001
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE  7
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE  7
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PDC0                              00000000
+PDC1                              00000001
 PDC2                              00000002
 PDC3                              00000003
 PDC4                              00000004
@@ -326,7 +366,7 @@ PORTC                             00000007
 PORTD                             00000008
 PORTE                             00000009
 PR2                               00000092
-PROGRAMA                          00000006
+PROGRAMA                          00000019
 PRSEN                             00000007
 PS0                               00000000
 PS1                               00000001
@@ -360,14 +400,14 @@ RB7                               00000007
 RBIE                              00000003
 RBIF                              00000000
 RC0                               00000000
-RC1                               00000001
-RC2                               00000002
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE  8
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE  8
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RC1                               00000001
+RC2                               00000002
 RC3                               00000003
 RC4                               00000004
 RC5                               00000005
@@ -396,7 +436,6 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-RETARDO_500MST1                   0000000B
 RP0                               00000005
 RP1                               00000006
 RSEN                              00000001
@@ -410,6 +449,7 @@ SCKP                              00000004
 SCS                               00000000
 SEN                               00000000
 SENDB                             00000003
+SETUP                             00000005
 SMP                               00000007
 SPBRG                             00000099
 SPBRGH                            0000009A
@@ -419,14 +459,14 @@ SR1                               00000007
 SRCON                             00000185
 SREN                              00000005
 SSPADD                            00000093
-SSPBUF                            00000013
-SSPCON                            00000014
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE  9
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SSPBUF                            00000013
+SSPCON                            00000014
 SSPCON2                           00000091
 SSPEN                             00000005
 SSPIE                             00000003
@@ -478,14 +518,14 @@ TMR2IE                            00000001
 TMR2IF                            00000001
 TMR2ON                            00000002
 TOUTPS0                           00000003
-TOUTPS1                           00000004
-TOUTPS2                           00000005
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE 10
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TOUTPS1                           00000004
+TOUTPS2                           00000005
 TOUTPS3                           00000006
 TRISA                             00000085
 TRISA0                            00000000
@@ -537,14 +577,14 @@ TUN4                              00000004
 TX8_9                             00000006
 TX9                               00000006
 TX9D                              00000000
-TXD8                              00000000
-TXEN                              00000005
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE 11
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TXD8                              00000000
+TXEN                              00000005
 TXIE                              00000004
 TXIF                              00000004
 TXREG                             00000019
@@ -596,14 +636,14 @@ _BOREN_SBODEN                     00003DFF
 _BOR_NSLEEP                       00003EFF
 _BOR_OFF                          00003CFF
 _BOR_ON                           00003FFF
-_BOR_SBODEN                       00003DFF
-_CONFIG1                          00002007
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE 12
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_BOR_SBODEN                       00003DFF
+_CONFIG1                          00002007
 _CONFIG2                          00002008
 _CPD_OFF                          00003FFF
 _CPD_ON                           00003F7F
@@ -655,15 +695,15 @@ _WRT_HALF                         000039FF
 _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
+MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  18:20:56         PAGE 13
 
-MPASM 5.86                  LED_PARPADEO.ASM   8-30-2020  20:12:34         PAGE 13
 
 
 
 
 
 Errors   :     0
-Warnings :     5 reported,     0 suppressed
-Messages :     2 reported,     0 suppressed
+Warnings :     4 reported,     0 suppressed
+Messages :     7 reported,     0 suppressed
 
 

@@ -1,11 +1,11 @@
 MPLINK 5.09, LINKER
-Linker Map File - Created Sun Jan 05 00:06:50 2020
+Linker Map File - Created Sun Aug 30 20:12:35 2020
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
-                   .org_0       code   0x000000    program   0x0000a4
-                   .cinit    romdata   0x000052    program   0x000004
+                   .org_0       code   0x000000    program   0x00002a
+                   .cinit    romdata   0x000015    program   0x000004
 .config_2007_BUILD/DEFAULT/PRODUCTION/LED_PAR       code   0x002007    program   0x000002
 .config_2008_BUILD/DEFAULT/PRODUCTION/LED_PAR       code   0x002008    program   0x000002
 
@@ -14,84 +14,28 @@ Linker Map File - Created Sun Jan 05 00:06:50 2020
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000053      
+                            0x000000    0x000016      
                             0x002007    0x002008      
-            86 out of 8455 program addresses used, program memory utilization is 1%
+            25 out of 8455 program addresses used, program memory utilization is 0%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                   INICIO   0x000000    program     static E:\PruebaPIC\LED_PARPADEO.X\LED_PARPADEO.asm
-    R1DECIMA_BUCLEEXTERNO   0x000048    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-   R1DECIMA_BUCLEEXTERNO2   0x000046    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-    R1DECIMA_BUCLEINTERNO   0x00004a    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-        R1MS_BUCLEEXTERNO   0x000032    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-        R1MS_BUCLEINTERNO   0x000034    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-            RETARDOMICROS   0x00001e    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-              RETARDOS_MS   0x000031    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-        RETARDO_100MICROS   0x000018    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-            RETARDO_100MS   0x000024    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-         RETARDO_10MICROS   0x00000b    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-             RETARDO_10MS   0x00002a    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-              RETARDO_10S   0x00003c    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-          RETARDO_1DECIMA   0x000045    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-              RETARDO_1MS   0x000030    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-               RETARDO_1S   0x000042    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-        RETARDO_200MICROS   0x000015    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-            RETARDO_200MS   0x000022    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-         RETARDO_20MICROS   0x00001d    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-             RETARDO_20MS   0x000028    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-              RETARDO_20S   0x00003a    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-              RETARDO_2MS   0x00002e    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-               RETARDO_2S   0x000040    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-          RETARDO_4MICROS   0x000011    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-        RETARDO_500MICROS   0x000012    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-            RETARDO_500MS   0x000044    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-         RETARDO_50MICROS   0x00001a    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-             RETARDO_50MS   0x000026    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-          RETARDO_5MICROS   0x000010    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-              RETARDO_5MS   0x00002c    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-               RETARDO_5S   0x00003e    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-            RMICROS_BUCLE   0x00001f    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
+                COMPROBAR   0x000011    program     static E:\Proyectos\PIC\LED (Parpadeo)\LED_PARPADEO.X\LED_PARPADEO.asm
+                   INICIO   0x000000    program     static E:\Proyectos\PIC\LED (Parpadeo)\LED_PARPADEO.X\LED_PARPADEO.asm
+                 PROGRAMA   0x000006    program     static E:\Proyectos\PIC\LED (Parpadeo)\LED_PARPADEO.X\LED_PARPADEO.asm
+          RETARDO_500MST1   0x00000b    program     static E:\Proyectos\PIC\LED (Parpadeo)\LED_PARPADEO.X\LED_PARPADEO.asm
 
 
 
                               Symbols - Sorted by Address
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                   INICIO   0x000000    program     static E:\PruebaPIC\LED_PARPADEO.X\LED_PARPADEO.asm
-         RETARDO_10MICROS   0x00000b    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-          RETARDO_5MICROS   0x000010    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-          RETARDO_4MICROS   0x000011    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-        RETARDO_500MICROS   0x000012    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-        RETARDO_200MICROS   0x000015    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-        RETARDO_100MICROS   0x000018    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-         RETARDO_50MICROS   0x00001a    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-         RETARDO_20MICROS   0x00001d    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-            RETARDOMICROS   0x00001e    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-            RMICROS_BUCLE   0x00001f    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-            RETARDO_200MS   0x000022    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-            RETARDO_100MS   0x000024    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-             RETARDO_50MS   0x000026    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-             RETARDO_20MS   0x000028    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-             RETARDO_10MS   0x00002a    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-              RETARDO_5MS   0x00002c    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-              RETARDO_2MS   0x00002e    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-              RETARDO_1MS   0x000030    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-              RETARDOS_MS   0x000031    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-        R1MS_BUCLEEXTERNO   0x000032    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-        R1MS_BUCLEINTERNO   0x000034    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-              RETARDO_20S   0x00003a    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-              RETARDO_10S   0x00003c    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-               RETARDO_5S   0x00003e    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-               RETARDO_2S   0x000040    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-               RETARDO_1S   0x000042    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-            RETARDO_500MS   0x000044    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-          RETARDO_1DECIMA   0x000045    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-   R1DECIMA_BUCLEEXTERNO2   0x000046    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-    R1DECIMA_BUCLEEXTERNO   0x000048    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
-    R1DECIMA_BUCLEINTERNO   0x00004a    program     static E:\PruebaPIC\LED_PARPADEO.X\RETARDOS.INC
+                   INICIO   0x000000    program     static E:\Proyectos\PIC\LED (Parpadeo)\LED_PARPADEO.X\LED_PARPADEO.asm
+                 PROGRAMA   0x000006    program     static E:\Proyectos\PIC\LED (Parpadeo)\LED_PARPADEO.X\LED_PARPADEO.asm
+          RETARDO_500MST1   0x00000b    program     static E:\Proyectos\PIC\LED (Parpadeo)\LED_PARPADEO.X\LED_PARPADEO.asm
+                COMPROBAR   0x000011    program     static E:\Proyectos\PIC\LED (Parpadeo)\LED_PARPADEO.X\LED_PARPADEO.asm
 
 

@@ -1,1 +1,7 @@
-Message[302] E:\PRUEBAPIC\LED_PARPADEO.X\LED_PARPADEO.ASM 17 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[313] E:\PROYECTOS\PIC\LED (PARPADEO)\LED_PARPADEO.X\LED_PARPADEO.ASM 10 : CBLOCK constants will start with a value of 0.
+Warning[207] E:\PROYECTOS\PIC\LED (PARPADEO)\LED_PARPADEO.X\LED_PARPADEO.ASM 13 : Found label after column 1. (INICIO)
+Message[302] E:\PROYECTOS\PIC\LED (PARPADEO)\LED_PARPADEO.X\LED_PARPADEO.ASM 16 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[202] E:\PROYECTOS\PIC\LED (PARPADEO)\LED_PARPADEO.X\LED_PARPADEO.ASM 18 : Argument out of range.  Least significant bits used.
+Warning[207] E:\PROYECTOS\PIC\LED (PARPADEO)\LED_PARPADEO.X\LED_PARPADEO.ASM 20 : Found label after column 1. (PROGRAMA)
+Warning[207] E:\PROYECTOS\PIC\LED (PARPADEO)\LED_PARPADEO.X\LED_PARPADEO.ASM 27 : Found label after column 1. (RETARDO_500MST1)
+Warning[207] E:\PROYECTOS\PIC\LED (PARPADEO)\LED_PARPADEO.X\LED_PARPADEO.ASM 34 : Found label after column 1. (COMPROBAR)
