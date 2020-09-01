@@ -1,11 +1,10 @@
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE  1
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00001     PROCESSOR 16F887
-                      00002     #INCLUDE <P16F887.INC>
+                      00001 #INCLUDE <P16F887.INC>
                       00001         LIST
                       00002 
                       00003 ;==========================================================================
@@ -16,114 +15,57 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00008 ;==========================================================================
                       00009 
                       00810         LIST
-                      00003     LIST P=16F887
-                      00004     ; CONFIG1
-                      00005     ; __config 0xFFE1
-2007   3FE1           00006     __CONFIG _CONFIG1, _FOSC_XT & _WDTE_OFF & _PWRTE_ON & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_ON & _
-                            IESO_ON & _FCMEN_ON & _LVP_ON
-                      00007     ; CONFIG2
-                      00008     ; __config 0xFFFF
-2008   3FFF           00009     __CONFIG _CONFIG2, _BOR4V_BOR40V & _WRT_OFF
-                      00010     
-                      00011     #DEFINE RED PORTD,0
-                      00012     #DEFINE GREEN PORTD,1
-                      00013     #DEFINE BLUE PORTD,2
-                      00014     
-                      00015     UDATA
-                      00016     
-                      00017     CBLOCK 0x20
-  00000020            00018     CONTADOR
-                      00019     ENDC
-                      00020     
-                      00021     ORG 0
-0000   2???           00022     GOTO SETUP
-                      00023     ORG 4
-0004   2???           00024     GOTO INTERRUPCION
+                      00002     LIST P=16F887
+                      00003 ; CONFIG1
+                      00004 ; __config 0xFFE1
+2007   3FE2           00005  __CONFIG _CONFIG1, _FOSC_HS & _WDTE_OFF & _PWRTE_ON & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_ON & _IES
+                            O_ON & _FCMEN_ON & _LVP_ON
+                      00006 ; CONFIG2
+                      00007 ; __config 0xFFFF
+2008   3FFF           00008  __CONFIG _CONFIG2, _BOR4V_BOR40V & _WRT_OFF
+                      00009  
+                      00010  udata
+                      00011  
+                      00012  CBLOCK 0x20
+                      00013  ENDC
+                      00014  
+                      00015  ORG 0
 Warning[207]: Found label after column 1. (SETUP)
-0005                  00025  SETUP:
-0005   1683           00026     BSF STATUS,RP0          ;BANCO 1.
-0006   1303           00027     BCF STATUS, RP1
+0000                  00016  SETUP:
+0000   1683           00017     BSF STATUS,RP0
+0001   1303           00018     BCF STATUS,RP1      ;BANCO 1.
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0007   1107           00028     BCF TRISC,2
+0002   1307           00019     BCF TRISC,6 
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0008   1605           00029     BSF TRISA,4
+0003   1787           00020     BSF TRISC,7
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0009   0188           00030     CLRF TRISD
+0004   0188           00021     CLRF TRISD
+0005   3006           00022     MOVLW D'6'
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000A   1381           00031     BCF OPTION_REG,NOT_RBPU ;PULL UP PORTB
+0006   0099           00023     MOVWF SPBRG
+0007   3020           00024     MOVLW B'00100000'
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000B   1301           00032     BCF OPTION_REG,INTEDG   ;FLANCO DESCENDENTE INT.
-000C   30F9           00033     MOVLW D'249'
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000D   0092           00034     MOVWF PR2
-000E   1703           00035     BSF STATUS,RP1          ;BANCO 3.
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE  2
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000F   0188           00036     CLRF ANSEL
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0010   0189           00037     CLRF ANSELH
-0011   1283           00038     BCF STATUS,RP0          ;BANCO 0.
-0012   1303           00039     BCF STATUS,RP1
-0013   3090           00040     MOVLW B'10010000'
-0014   008B           00041     MOVWF INTCON
-0015   300C           00042     MOVLW B'00001100'
-0016   0097           00043     MOVWF CCP1CON
-0017   307D           00044     MOVLW D'125'
-0018   0095           00045     MOVWF CCPR1L
-0019   0188           00046     CLRF PORTD
-001A   3000           00047     MOVLW 0x00
-001B   00A0           00048     MOVWF CONTADOR
+0008   0098           00025     MOVWF TXSTA
+0009   1283           00026     BCF STATUS,RP0      ;BANCO 0.
+000A   3090           00027     MOVLW B'10010000'
+000B   0098           00028     MOVWF RCSTA
+Warning[202]: Argument out of range.  Least significant bits used.
+000C   30B0           00029     MOVLW D'00110000'
+000D   0090           00030     MOVWF T1CON
+000E   0188           00031     CLRF PORTD
 Warning[207]: Found label after column 1. (PROGRAMA)
-001C                  00049  PROGRAMA:
-001C   1A05           00050     BTFSC PORTA,4
-001D   2???           00051     GOTO BOTON_PRESIONADO
-001E   2???           00052     GOTO PROGRAMA
-001F                  00053 BOTON_PRESIONADO:
-001F   1A05           00054     BTFSC PORTA,4
-0020   2???           00055     GOTO BOTON_PRESIONADO
-0021   3001           00056     MOVLW D'1'
-0022   07A0           00057     ADDWF CONTADOR,1
-0023   0820           00058     MOVFW CONTADOR
-0024   3907           00059     ANDLW D'7'
-0025   0088           00060     MOVWF PORTD
-0026   2???           00061     GOTO PROGRAMA
-                      00062     
-                      00063     CBLOCK
-  00000021            00064     GUARDA_W
-  00000022            00065     GUARDA_STATUS
-                      00066     ENDC
-                      00067     
-Warning[207]: Found label after column 1. (INTERRUPCION)
-0027                  00068  INTERRUPCION:
-0027   00A1           00069     MOVWF GUARDA_W
-0028   0E03           00070     SWAPF STATUS,W
-0029   00A2           00071     MOVWF GUARDA_STATUS
-002A   1283           00072     BCF STATUS,RP0
-002B   1003           00073     BCF STATUS,C
-                      00074     ;COMIENZO INTERRUPCION:
-002C   301F           00075     MOVLW D'31'
-002D   0795           00076     ADDWF CCPR1L,1
-Warning[207]: Found label after column 1. (FIN_INTERRUPCION)
-002E                  00077  FIN_INTERRUPCION:
-002E   0E22           00078     SWAPF GUARDA_STATUS,W
-002F   0083           00079     MOVWF STATUS
-0030   0EA1           00080     SWAPF GUARDA_W,F
-0031   0E21           00081     SWAPF GUARDA_W,W
-0032   108B           00082     BCF INTCON,INTF
-0033   0009           00083     RETFIE
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE  3
+000F                  00032   PROGRAMA:
+000F   081A           00033     MOVFW RCREG
+0010   0088           00034     MOVWF PORTD
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-3FE1 3FFF             00084     END
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE  4
+0011   2???           00035     GOTO PROGRAMA
+3FE2 3FFF             00036     END
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  3
 
 
 SYMBOL TABLE
@@ -165,8 +107,6 @@ BAUDCTL                           00000187
 BCLIE                             00000003
 BCLIF                             00000003
 BF                                00000000
-BLUE                              PORTD,2
-BOTON_PRESIONADO                  0000001F
 BRG0                              00000000
 BRG1                              00000001
 BRG10                             00000002
@@ -182,14 +122,14 @@ BRG4                              00000004
 BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE  5
+BRG8                              00000000
+BRG9                              00000001
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  4
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-BRG8                              00000000
-BRG9                              00000001
 BRGH                              00000002
 C                                 00000000
 C1CH0                             00000000
@@ -241,20 +181,19 @@ CCPR2H                            0000001C
 CCPR2L                            0000001B
 CHS0                              00000002
 CHS1                              00000003
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE  6
+CHS2                              00000004
+CHS3                              00000005
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  5
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-CHS2                              00000004
-CHS3                              00000005
 CKE                               00000006
 CKP                               00000004
 CM1CON0                           00000107
 CM2CON0                           00000108
 CM2CON1                           00000109
-CONTADOR                          00000020
 CREN                              00000004
 CSRC                              00000007
 D                                 00000005
@@ -283,7 +222,6 @@ EEIF                              00000004
 EEPGD                             00000007
 F                                 00000001
 FERR                              00000002
-FIN_INTERRUPCION                  0000002E
 FSR                               00000004
 FVREN                             00000000
 GCEN                              00000007
@@ -291,29 +229,25 @@ GIE                               00000007
 GO                                00000001
 GO_DONE                           00000001
 GO_NOT_DONE                       00000001
-GREEN                             PORTD,1
-GUARDA_STATUS                     00000022
-GUARDA_W                          00000021
 HTS                               00000002
 I2C_DATA                          00000005
 I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
 INDF                              00000000
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE  7
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  6
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-INTCON                            0000000B
-INTE                              00000004
-INTEDG                            00000006
-INTERRUPCION                      00000027
-INTF                              00000001
-IOCB                              00000096
-IOCB0                             00000000
-IOCB1                             00000001
 IOCB2                             00000002
 IOCB3                             00000003
 IOCB4                             00000004
@@ -359,12 +293,6 @@ OSFIF                             00000007
 OSTS                              00000003
 P                                 00000004
 P1M0                              00000006
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE  8
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 P1M1                              00000007
 PCL                               00000002
 PCLATH                            0000000A
@@ -373,6 +301,12 @@ PDC0                              00000000
 PDC1                              00000001
 PDC2                              00000002
 PDC3                              00000003
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 PDC4                              00000004
 PDC5                              00000005
 PDC6                              00000006
@@ -388,7 +322,7 @@ PORTC                             00000007
 PORTD                             00000008
 PORTE                             00000009
 PR2                               00000092
-PROGRAMA                          0000001C
+PROGRAMA                          0000000F
 PRSEN                             00000007
 PS0                               00000000
 PS1                               00000001
@@ -418,12 +352,6 @@ RB3                               00000003
 RB4                               00000004
 RB5                               00000005
 RB6                               00000006
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE  9
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 RB7                               00000007
 RBIE                              00000003
 RBIF                              00000000
@@ -432,6 +360,12 @@ RC1                               00000001
 RC2                               00000002
 RC3                               00000003
 RC4                               00000004
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 RC5                               00000005
 RC6                               00000006
 RC7                               00000007
@@ -458,7 +392,6 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-RED                               PORTD,0
 RP0                               00000005
 RP1                               00000006
 RSEN                              00000001
@@ -472,17 +405,11 @@ SCKP                              00000004
 SCS                               00000000
 SEN                               00000000
 SENDB                             00000003
-SETUP                             00000005
+SETUP                             00000000
 SMP                               00000007
 SPBRG                             00000099
 SPBRGH                            0000009A
 SPEN                              00000007
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE 10
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 SR0                               00000006
 SR1                               00000007
 SRCON                             00000185
@@ -492,6 +419,12 @@ SSPBUF                            00000013
 SSPCON                            00000014
 SSPCON2                           00000091
 SSPEN                             00000005
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 SSPIE                             00000003
 SSPIF                             00000003
 SSPM0                             00000000
@@ -536,12 +469,6 @@ TMR1IE                            00000000
 TMR1IF                            00000000
 TMR1L                             0000000E
 TMR1ON                            00000000
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE 11
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 TMR2                              00000011
 TMR2IE                            00000001
 TMR2IF                            00000001
@@ -551,6 +478,12 @@ TOUTPS1                           00000004
 TOUTPS2                           00000005
 TOUTPS3                           00000006
 TRISA                             00000085
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 TRISA0                            00000000
 TRISA1                            00000001
 TRISA2                            00000002
@@ -595,12 +528,6 @@ TRMT                              00000001
 TUN0                              00000000
 TUN1                              00000001
 TUN2                              00000002
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE 12
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 TUN3                              00000003
 TUN4                              00000004
 TX8_9                             00000006
@@ -610,6 +537,12 @@ TXD8                              00000000
 TXEN                              00000005
 TXIE                              00000004
 TXIF                              00000004
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 TXREG                             00000019
 TXSTA                             00000098
 UA                                00000001
@@ -654,12 +587,6 @@ _BOR4V_BOR21V                     00003EFF
 _BOR4V_BOR40V                     00003FFF
 _BOREN_NSLEEP                     00003EFF
 _BOREN_OFF                        00003CFF
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE 13
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 _BOREN_ON                         00003FFF
 _BOREN_SBODEN                     00003DFF
 _BOR_NSLEEP                       00003EFF
@@ -669,6 +596,12 @@ _BOR_SBODEN                       00003DFF
 _CONFIG1                          00002007
 _CONFIG2                          00002008
 _CPD_OFF                          00003FFF
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 _CPD_ON                           00003F7F
 _CP_OFF                           00003FFF
 _CP_ON                            00003FBF
@@ -713,20 +646,20 @@ _WDTE_ON                          00003FFF
 _WDT_OFF                          00003FF7
 _WDT_ON                           00003FFF
 _WRT_1FOURTH                      00003BFF
-MPASM 5.86          HONGOS_LUMINISCENTES.ASM   8-31-2020  21:23:58         PAGE 14
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 _WRT_256                          00003DFF
 _WRT_HALF                         000039FF
 _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
 
+MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE 13
+
+
+
+
+
 Errors   :     0
-Warnings :     4 reported,     0 suppressed
-Messages :     8 reported,     0 suppressed
+Warnings :     3 reported,     0 suppressed
+Messages :     5 reported,     0 suppressed
 
 
