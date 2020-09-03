@@ -1,4 +1,4 @@
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  1
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -56,16 +56,20 @@ Warning[202]: Argument out of range.  Least significant bits used.
 Warning[207]: Found label after column 1. (PROGRAMA)
 000F                  00032   PROGRAMA:
 000F   081A           00033     MOVFW RCREG
-0010   0088           00034     MOVWF PORTD
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  2
+0010   3C00           00034     SUBLW 0x00
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0011   2???           00035     GOTO PROGRAMA
-3FE2 3FFF             00036     END
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  3
+0011   1903           00035     BTFSC STATUS,Z
+0012   2???           00036     GOTO PROGRAMA
+0013   081A           00037     MOVFW RCREG
+0014   0088           00038     MOVWF PORTD
+0015   2???           00039     GOTO PROGRAMA
+3FE2 3FFF             00040     END
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE  3
 
 
 SYMBOL TABLE
@@ -124,7 +128,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  4
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE  4
 
 
 SYMBOL TABLE
@@ -183,7 +187,7 @@ CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  5
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE  5
 
 
 SYMBOL TABLE
@@ -242,7 +246,7 @@ INTF                              00000001
 IOCB                              00000096
 IOCB0                             00000000
 IOCB1                             00000001
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  6
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE  6
 
 
 SYMBOL TABLE
@@ -301,7 +305,7 @@ PDC0                              00000000
 PDC1                              00000001
 PDC2                              00000002
 PDC3                              00000003
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  7
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE  7
 
 
 SYMBOL TABLE
@@ -360,7 +364,7 @@ RC1                               00000001
 RC2                               00000002
 RC3                               00000003
 RC4                               00000004
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  8
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE  8
 
 
 SYMBOL TABLE
@@ -419,7 +423,7 @@ SSPBUF                            00000013
 SSPCON                            00000014
 SSPCON2                           00000091
 SSPEN                             00000005
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE  9
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE  9
 
 
 SYMBOL TABLE
@@ -478,7 +482,7 @@ TOUTPS1                           00000004
 TOUTPS2                           00000005
 TOUTPS3                           00000006
 TRISA                             00000085
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE 10
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE 10
 
 
 SYMBOL TABLE
@@ -537,7 +541,7 @@ TXD8                              00000000
 TXEN                              00000005
 TXIE                              00000004
 TXIF                              00000004
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE 11
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE 11
 
 
 SYMBOL TABLE
@@ -596,7 +600,7 @@ _BOR_SBODEN                       00003DFF
 _CONFIG1                          00002007
 _CONFIG2                          00002008
 _CPD_OFF                          00003FFF
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE 12
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE 12
 
 
 SYMBOL TABLE
@@ -652,7 +656,7 @@ _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
 
-MPASM 5.86                            RX.ASM   9-1-2020  2:01:51         PAGE 13
+MPASM 5.86                            RX.ASM   9-2-2020  19:43:16         PAGE 13
 
 
 

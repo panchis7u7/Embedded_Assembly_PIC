@@ -1,9 +1,8 @@
-Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 16 : Found label after column 1. (SETUP)
-Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 19 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 17 : Found label after column 1. (SETUP)
 Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 20 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 22 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 24 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[202] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 28 : Argument out of range.  Least significant bits used.
-Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 30 : Found label after column 1. (PROGRAMA)
-Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 39 : Found label after column 1. (RETARDO_500MST1)
-Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 46 : Found label after column 1. (COMPROBAR)
+Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 21 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 23 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 25 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 27 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[202] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 32 : Argument out of range.  Least significant bits used.
+Warning[207] E:\PROYECTOS\PIC\PRUEBA\PRUEBAS.X\PRUEBA.ASM 34 : Found label after column 1. (PROGRAMA)
