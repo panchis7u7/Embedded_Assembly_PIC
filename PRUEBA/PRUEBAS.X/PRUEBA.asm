@@ -13,6 +13,7 @@
  
  CBLOCK 0x20
  R_CONTA
+ R_CONTB
  ENDC
  
  ORG 0
@@ -43,35 +44,40 @@ PROGRAMA:
     GOTO PROGRAMA 
 
 CAMBIO_RGB:
+    BTFSC PORTD,0
+    GOTO CAMBIO_RGB
     MOVLW CAMBIO_COLOR
     MOVWF TXREG
-    CALL RETARDO_500MICROS
-    CALL RETARDO_500MICROS
-    CALL RETARDO_500MICROS
+    CALL RETARDO_20MS
     GOTO PROGRAMA
     
 CAMBIO_PWM:
+    BTFSC PORTD,1
+    GOTO CAMBIO_PWM
     MOVLW CAMBIO_BRILLO
     MOVWF TXREG
-    CALL RETARDO_500MICROS
-    CALL RETARDO_500MICROS
-    CALL RETARDO_500MICROS
+    CALL RETARDO_20MS
     GOTO PROGRAMA
     
 CAMBIO_AUTO:
+    BTFSC PORTD,2
+    GOTO CAMBIO_AUTO
     MOVLW MODO_AUTO
     MOVWF TXREG
-    CALL RETARDO_500MICROS
-    CALL RETARDO_500MICROS
-    CALL RETARDO_500MICROS
+    CALL RETARDO_20MS
     GOTO PROGRAMA
-    
-RETARDO_500MICROS:			; La llamada "call" aporta 2 ciclos máquina.
-    NOP					; Aporta 1 ciclo máquina.
-    MOVLW	D'164'			; Aporta 1 ciclo máquina. Este es el valor de "K".
-    MOVWF	R_CONTA			; Aporta 1 ciclo máquina.
-RMICROS_BUCLE:
-    DECFSZ	R_CONTA,F		; (K-1)x1 cm (cuando no salta) + 2 cm (al saltar).
-    GOTO	RMICROS_BUCLE		; Aporta (K-1)x2 ciclos máquina.
+
+RETARDO_20MS:				; La llamada "call" aporta 2 ciclos máquina.
+    MOVLW	D'20'			; Aporta 1 ciclo máquina. Este es el valor de "M".
+    MOVWF	R_CONTB			; Aporta 1 ciclo máquina.
+R1MS_BUCLEEXTERNO:
+    MOVLW	D'249'			; Aporta Mx1 ciclos máquina. Este es el valor de "K".	
+    MOVWF	R_CONTA			; Aporta Mx1 ciclos máquina.
+R1MS_BUCLEINTERNO:
+    NOP				; Aporta KxMx1 ciclos máquina.
+    DECFSZ	R_CONTA,F		; (K-1)xMx1 cm (cuando no salta) + Mx2 cm (al saltar).
+    GOTO	R1MS_BUCLEINTERNO	; Aporta (K-1)xMx2 ciclos máquina.
+    DECFSZ	R_CONTB,F		; (M-1)x1 cm (cuando no salta) + 2 cm (al saltar).
+    GOTO	R1MS_BUCLEEXTERNO	; Aporta (M-1)x2 ciclos máquina.
     RETURN
     END

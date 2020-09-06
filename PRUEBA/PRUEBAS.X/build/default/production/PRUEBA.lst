@@ -1,4 +1,4 @@
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE  1
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -33,82 +33,88 @@ Warning[207]: Found label after column 1. (MODO_AUTO)
                       00013  
                       00014  CBLOCK 0x20
   00000020            00015  R_CONTA
-                      00016  ENDC
-                      00017  
-                      00018  ORG 0
+  00000021            00016  R_CONTB
+                      00017  ENDC
+                      00018  
+                      00019  ORG 0
 Warning[207]: Found label after column 1. (SETUP)
-0000                  00019  SETUP:
-0000   1683           00020     BSF STATUS,RP0
-0001   1303           00021     BCF STATUS,RP1      ;BANCO 1.
+0000                  00020  SETUP:
+0000   1683           00021     BSF STATUS,RP0
+0001   1303           00022     BCF STATUS,RP1      ;BANCO 1.
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0002   1307           00022     BCF TRISC,6 
+0002   1307           00023     BCF TRISC,6 
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0003   1787           00023     BSF TRISC,7
-0004   306F           00024     MOVLW D'00000111'
+0003   1787           00024     BSF TRISC,7
+0004   306F           00025     MOVLW D'00000111'
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0005   0088           00025     MOVWF TRISD
-0006   3019           00026     MOVLW D'25'         ;2400 BAUDIOS.
+0005   0088           00026     MOVWF TRISD
+0006   3019           00027     MOVLW D'25'         ;2400 BAUDIOS.
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0007   0099           00027     MOVWF SPBRG
-0008   3020           00028     MOVLW B'00100000'
+0007   0099           00028     MOVWF SPBRG
+0008   3020           00029     MOVLW B'00100000'
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0009   0098           00029     MOVWF TXSTA
-000A   1283           00030     BCF STATUS,RP0      ;BANCO 0.
-000B   0188           00031     CLRF PORTD
-000C   3090           00032     MOVLW B'10010000'
-000D   0098           00033     MOVWF RCSTA
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE  2
+0009   0098           00030     MOVWF TXSTA
+000A   1283           00031     BCF STATUS,RP0      ;BANCO 0.
+000B   0188           00032     CLRF PORTD
+000C   3090           00033     MOVLW B'10010000'
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+000D   0098           00034     MOVWF RCSTA
 Warning[202]: Argument out of range.  Least significant bits used.
-000E   30B0           00034     MOVLW D'00110000'
-000F   0090           00035     MOVWF T1CON
-0010                  00036 PROGRAMA:
-0010   1808           00037     BTFSC PORTD,0
-0011   2???           00038     GOTO CAMBIO_RGB
-0012   1888           00039     BTFSC PORTD,1
-0013   2???           00040     GOTO CAMBIO_PWM
-0014   1908           00041     BTFSC PORTD,2
-0015   2???           00042     GOTO CAMBIO_AUTO
-0016   2???           00043     GOTO PROGRAMA 
-                      00044 
-0017                  00045 CAMBIO_RGB:
-0017   3055           00046     MOVLW CAMBIO_COLOR
-0018   0099           00047     MOVWF TXREG
-0019   2???           00048     CALL RETARDO_500MICROS
-001A   2???           00049     CALL RETARDO_500MICROS
-001B   2???           00050     CALL RETARDO_500MICROS
-001C   2???           00051     GOTO PROGRAMA
-                      00052     
-001D                  00053 CAMBIO_PWM:
-001D   30AA           00054     MOVLW CAMBIO_BRILLO
-001E   0099           00055     MOVWF TXREG
-001F   2???           00056     CALL RETARDO_500MICROS
-0020   2???           00057     CALL RETARDO_500MICROS
-0021   2???           00058     CALL RETARDO_500MICROS
-0022   2???           00059     GOTO PROGRAMA
-                      00060     
-0023                  00061 CAMBIO_AUTO:
-0023   30FF           00062     MOVLW MODO_AUTO
-0024   0099           00063     MOVWF TXREG
-0025   2???           00064     CALL RETARDO_500MICROS
-0026   2???           00065     CALL RETARDO_500MICROS
-0027   2???           00066     CALL RETARDO_500MICROS
-0028   2???           00067     GOTO PROGRAMA
-                      00068     
-0029                  00069 RETARDO_500MICROS:                      ; La llamada "call" aporta 2 ciclos máquina.
-0029   0000           00070     NOP                                 ; Aporta 1 ciclo máquina.
-002A   30A4           00071     MOVLW       D'164'                  ; Aporta 1 ciclo máquina. Este es el valor de "K".
-002B   00A0           00072     MOVWF       R_CONTA                 ; Aporta 1 ciclo máquina.
-002C                  00073 RMICROS_BUCLE:
-002C   0BA0           00074     DECFSZ      R_CONTA,F               ; (K-1)x1 cm (cuando no salta) + 2 cm (al saltar).
-002D   2???           00075     GOTO        RMICROS_BUCLE           ; Aporta (K-1)x2 ciclos máquina.
-002E   0008           00076     RETURN
-2FC2 3FFF             00077     END
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE  3
+000E   30B0           00035     MOVLW D'00110000'
+000F   0090           00036     MOVWF T1CON
+0010                  00037 PROGRAMA:
+0010   1808           00038     BTFSC PORTD,0
+0011   2???           00039     GOTO CAMBIO_RGB
+0012   1888           00040     BTFSC PORTD,1
+0013   2???           00041     GOTO CAMBIO_PWM
+0014   1908           00042     BTFSC PORTD,2
+0015   2???           00043     GOTO CAMBIO_AUTO
+0016   2???           00044     GOTO PROGRAMA 
+                      00045 
+0017                  00046 CAMBIO_RGB:
+0017   1808           00047     BTFSC PORTD,0
+0018   2???           00048     GOTO CAMBIO_RGB
+0019   3055           00049     MOVLW CAMBIO_COLOR
+001A   0099           00050     MOVWF TXREG
+001B   2???           00051     CALL RETARDO_20MS
+001C   2???           00052     GOTO PROGRAMA
+                      00053     
+001D                  00054 CAMBIO_PWM:
+001D   1888           00055     BTFSC PORTD,1
+001E   2???           00056     GOTO CAMBIO_PWM
+001F   30AA           00057     MOVLW CAMBIO_BRILLO
+0020   0099           00058     MOVWF TXREG
+0021   2???           00059     CALL RETARDO_20MS
+0022   2???           00060     GOTO PROGRAMA
+                      00061     
+0023                  00062 CAMBIO_AUTO:
+0023   1908           00063     BTFSC PORTD,2
+0024   2???           00064     GOTO CAMBIO_AUTO
+0025   30FF           00065     MOVLW MODO_AUTO
+0026   0099           00066     MOVWF TXREG
+0027   2???           00067     CALL RETARDO_20MS
+0028   2???           00068     GOTO PROGRAMA
+                      00069 
+0029                  00070 RETARDO_20MS:                           ; La llamada "call" aporta 2 ciclos máquina.
+0029   3014           00071     MOVLW       D'20'                   ; Aporta 1 ciclo máquina. Este es el valor de "M".
+002A   00A1           00072     MOVWF       R_CONTB                 ; Aporta 1 ciclo máquina.
+002B                  00073 R1MS_BUCLEEXTERNO:
+002B   30F9           00074     MOVLW       D'249'                  ; Aporta Mx1 ciclos máquina. Este es el valor de "K".   
+002C   00A0           00075     MOVWF       R_CONTA                 ; Aporta Mx1 ciclos máquina.
+002D                  00076 R1MS_BUCLEINTERNO:
+002D   0000           00077     NOP                         ; Aporta KxMx1 ciclos máquina.
+002E   0BA0           00078     DECFSZ      R_CONTA,F               ; (K-1)xMx1 cm (cuando no salta) + Mx2 cm (al saltar).
+002F   2???           00079     GOTO        R1MS_BUCLEINTERNO       ; Aporta (K-1)xMx2 ciclos máquina.
+0030   0BA1           00080     DECFSZ      R_CONTB,F               ; (M-1)x1 cm (cuando no salta) + 2 cm (al saltar).
+0031   2???           00081     GOTO        R1MS_BUCLEEXTERNO       ; Aporta (M-1)x2 ciclos máquina.
+0032   0008           00082     RETURN
+2FC2 3FFF             00083     END
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE  3
 
 
 SYMBOL TABLE
@@ -167,7 +173,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE  4
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE  4
 
 
 SYMBOL TABLE
@@ -226,7 +232,7 @@ CCPR1H                            00000016
 CCPR1L                            00000015
 CCPR2                             0000001B
 CCPR2H                            0000001C
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE  5
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE  5
 
 
 SYMBOL TABLE
@@ -285,7 +291,7 @@ I2C_STOP                          00000004
 INDF                              00000000
 INTCON                            0000000B
 INTE                              00000004
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE  6
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE  6
 
 
 SYMBOL TABLE
@@ -344,7 +350,7 @@ P                                 00000004
 P1M0                              00000006
 P1M1                              00000007
 PCL                               00000002
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE  7
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE  7
 
 
 SYMBOL TABLE
@@ -386,6 +392,8 @@ PULSR                             00000002
 PULSS                             00000003
 PWM1CON                           0000009B
 R                                 00000002
+R1MS_BUCLEEXTERNO                 0000002B
+R1MS_BUCLEINTERNO                 0000002D
 RA0                               00000000
 RA1                               00000001
 RA2                               00000002
@@ -401,14 +409,14 @@ RB3                               00000003
 RB4                               00000004
 RB5                               00000005
 RB6                               00000006
-RB7                               00000007
-RBIE                              00000003
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE  8
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE  8
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RB7                               00000007
+RBIE                              00000003
 RBIF                              00000000
 RC0                               00000000
 RC1                               00000001
@@ -441,14 +449,14 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-RETARDO_500MICROS                 00000029
-RMICROS_BUCLE                     0000002C
+RETARDO_20MS                      00000029
 RP0                               00000005
 RP1                               00000006
 RSEN                              00000001
 RX9                               00000006
 RX9D                              00000000
 R_CONTA                           00000020
+R_CONTB                           00000021
 R_NOT_W                           00000002
 R_W                               00000002
 S                                 00000003
@@ -460,14 +468,14 @@ SENDB                             00000003
 SETUP                             00000000
 SMP                               00000007
 SPBRG                             00000099
-SPBRGH                            0000009A
-SPEN                              00000007
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE  9
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SPBRGH                            0000009A
+SPEN                              00000007
 SR0                               00000006
 SR1                               00000007
 SRCON                             00000185
@@ -519,14 +527,14 @@ TMR1GE                            00000006
 TMR1H                             0000000F
 TMR1IE                            00000000
 TMR1IF                            00000000
-TMR1L                             0000000E
-TMR1ON                            00000000
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE 10
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TMR1L                             0000000E
+TMR1ON                            00000000
 TMR2                              00000011
 TMR2IE                            00000001
 TMR2IF                            00000001
@@ -578,14 +586,14 @@ TRISE2                            00000002
 TRISE3                            00000003
 TRMT                              00000001
 TUN0                              00000000
-TUN1                              00000001
-TUN2                              00000002
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE 11
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TUN1                              00000001
+TUN2                              00000002
 TUN3                              00000003
 TUN4                              00000004
 TX8_9                             00000006
@@ -637,14 +645,14 @@ _BOR21V                           00003EFF
 _BOR40V                           00003FFF
 _BOR4V_BOR21V                     00003EFF
 _BOR4V_BOR40V                     00003FFF
-_BOREN_NSLEEP                     00003EFF
-_BOREN_OFF                        00003CFF
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE 12
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
 _BOREN_ON                         00003FFF
 _BOREN_SBODEN                     00003DFF
 _BOR_NSLEEP                       00003EFF
@@ -696,14 +704,14 @@ _PWRTE_ON                         00003FEF
 _WDTE_OFF                         00003FF7
 _WDTE_ON                          00003FFF
 _WDT_OFF                          00003FF7
-_WDT_ON                           00003FFF
-_WRT_1FOURTH                      00003BFF
-MPASM 5.86                        PRUEBA.ASM   9-6-2020  2:07:50         PAGE 13
+MPASM 5.86                        PRUEBA.ASM   9-6-2020  17:05:50         PAGE 13
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
 _WRT_256                          00003DFF
 _WRT_HALF                         000039FF
 _WRT_OFF                          00003FFF

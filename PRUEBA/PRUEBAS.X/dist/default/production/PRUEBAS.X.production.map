@@ -1,11 +1,11 @@
 MPLINK 5.09, LINKER
-Linker Map File - Created Sun Sep 06 02:07:51 2020
+Linker Map File - Created Sun Sep 06 17:05:51 2020
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
-                   .org_0       code   0x000000    program   0x00005e
-                   .cinit    romdata   0x00002f    program   0x000004
+                   .org_0       code   0x000000    program   0x000066
+                   .cinit    romdata   0x000033    program   0x000004
 .config_2007_BUILD/DEFAULT/PRODUCTION/PRUEBA.       code   0x002007    program   0x000002
 .config_2008_BUILD/DEFAULT/PRODUCTION/PRUEBA.       code   0x002008    program   0x000002
 
@@ -14,9 +14,9 @@ Linker Map File - Created Sun Sep 06 02:07:51 2020
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000030      
+                            0x000000    0x000034      
                             0x002007    0x002008      
-            51 out of 8455 program addresses used, program memory utilization is 0%
+            55 out of 8455 program addresses used, program memory utilization is 0%
 
 
 
@@ -27,8 +27,9 @@ Linker Map File - Created Sun Sep 06 02:07:51 2020
                CAMBIO_PWM   0x00001d    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
                CAMBIO_RGB   0x000017    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
                  PROGRAMA   0x000010    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
-        RETARDO_500MICROS   0x000029    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
-            RMICROS_BUCLE   0x00002c    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
+        R1MS_BUCLEEXTERNO   0x00002b    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
+        R1MS_BUCLEINTERNO   0x00002d    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
+             RETARDO_20MS   0x000029    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
                     SETUP   0x000000    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
 
 
@@ -41,7 +42,8 @@ Linker Map File - Created Sun Sep 06 02:07:51 2020
                CAMBIO_RGB   0x000017    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
                CAMBIO_PWM   0x00001d    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
               CAMBIO_AUTO   0x000023    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
-        RETARDO_500MICROS   0x000029    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
-            RMICROS_BUCLE   0x00002c    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
+             RETARDO_20MS   0x000029    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
+        R1MS_BUCLEEXTERNO   0x00002b    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
+        R1MS_BUCLEINTERNO   0x00002d    program     static E:\Proyectos\PIC\PRUEBA\PRUEBAS.X\PRUEBA.asm
 
 
