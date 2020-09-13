@@ -1,16 +1,15 @@
-Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 12 : Found label after column 1. (SEND_BITS_IR)
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 13 : Found label after column 1. (SEND_BITS_IR)
 Warning[203] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 23 : Found opcode in column 1. (BSF)
 Message[302] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 25 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 26 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 28 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 31 : Found label after column 1. (REC)
-Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 55 : Found label after column 1. (RETARDO_1686MICROS_16)
-Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 59 : Found label after column 1. (RETARDO_1686MICROS_16_0)
-Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 64 : Found label after column 1. (RETARDO_562MICROS_16)
-Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 68 : Found label after column 1. (RETARDO_562MICROS_16_0)
-Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 73 : Found label after column 1. (RETARDO_4500MICROS_16)
-Message[302] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 76 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 82 : Found label after column 1. (RETARDO_4500MICROS_16_0)
-Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 107 : Found label after column 1. (FINAL)
-Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 111 : Found label after column 1. (IRsend)
-Message[302] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 117 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 32 : Found label after column 1. (REC)
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 56 : Found label after column 1. (RETARDO_1686MICROS_16)
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 60 : Found label after column 1. (RETARDO_1686MICROS_16_0)
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 66 : Found label after column 1. (RETARDO_562MICROS_16)
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 70 : Found label after column 1. (RETARDO_562MICROS_16_0)
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 75 : Found label after column 1. (RETARDO_4.5MS_4)
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 84 : Found label after column 1. (RETARDO_4.5MS_4_0)
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 109 : Found label after column 1. (RETARDO_12MICROS_4_2)
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 121 : Found label after column 1. (FINAL)
+Warning[207] E:\PROYECTOS\PIC\IR (CONTROL INFRAROJO)\IR.X\IR.ASM 125 : Found label after column 1. (IRsend)

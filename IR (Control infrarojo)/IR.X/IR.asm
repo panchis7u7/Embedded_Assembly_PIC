@@ -9,25 +9,26 @@
  
  ;udata
  ;BYTES RES 3
+ 
  SEND_BITS_IR EQU D'9'
  
  CBLOCK 0x20
     BYTE
     CONTADOR
     CONTADOR_2
-    r52
  ENDC
  
  ORG 0
 SETUP:
-BSF STATUS, RP0 ;BANCO 1
+BSF STATUS, RP0		;BANCO 1
     BCF STATUS, RP1
-    BCF TRISD, 0    ;RD0 -> PIN DE SALIDA DIGITAL.
+    BCF TRISD, 0	;RD0 -> PIN DE SALIDA DIGITAL.
     BSF TRISA, 4
-    MOVLW B'11010100'
+    MOVLW B'11010011'	;PRESCALLER:16.
     MOVWF OPTION_REG
-    BCF STATUS, RP0 ;BANCO 0
-    BCF PORTD, 0    ;INICIALIZAR EL PIN RD0 EN 0.
+    BCF STATUS, RP0	;BANCO 0
+    BCF PORTD, 0	;INICIALIZAR EL PIN RD0 EN 0.
+    CLRF T1CON		;PRESCALLER:1.
  REC:
     BTFSC PORTA,4
     GOTO ACT_RLF
@@ -37,16 +38,16 @@ ACT_RLF:
     GOTO ACT_RLF
     MOVLW D'255'
     CALL IRcarrier
-    MOVLW D'110'
+    MOVLW D'92'
     CALL IRcarrier
-    CALL RETARDO_4500MICROS_16
-    MOVLW 0xFF
+    CALL RETARDO_4.5MS_4
+    MOVLW 0xFF	    ;FF
     CALL IRsend
-    MOVLW 0xA2
+    MOVLW 0x00	    ;00
     CALL IRsend
-    MOVLW 0x5D
+    MOVLW 0xA2	    ;A2
     CALL IRsend
-    MOVLW 0xFF
+    MOVLW 0x5D	    ;5D
     CALL IRsend
     MOVLW D'24'
     CALL IRcarrier
@@ -54,34 +55,37 @@ ACT_RLF:
 
  RETARDO_1686MICROS_16:
     BCF INTCON,T0IF
-    MOVLW D'45'
+    MOVLW D'152'
     MOVWF TMR0
  RETARDO_1686MICROS_16_0:
     BTFSS INTCON,T0IF
     GOTO RETARDO_1686MICROS_16_0
+    NOP
     RETURN
     
  RETARDO_562MICROS_16:
     BCF INTCON,T0IF
-    MOVLW D'186'
+    MOVLW D'222'
     MOVWF TMR0
  RETARDO_562MICROS_16_0:
     BTFSS INTCON,T0IF
     GOTO RETARDO_562MICROS_16_0
     RETURN
     
- RETARDO_4500MICROS_16:
-    BSF STATUS,RP0
-    MOVLW B'11010110'
-    MOVWF OPTION_REG
-    BCF STATUS,RP0
-    BCF STATUS,RP0
-    BCF INTCON,T0IF
+ RETARDO_4.5MS_4:   
+    BCF T1CON,TMR1ON
+    MOVLW 0xEE
+    MOVWF TMR1H
+    MOVLW 0x6C
+    MOVWF TMR1L
+    BSF T1CON,TMR1ON
     MOVLW D'115'
     MOVWF TMR0
- RETARDO_4500MICROS_16_0:
-    BTFSS INTCON,T0IF
-    GOTO RETARDO_4500MICROS_16_0
+ RETARDO_4.5MS_4_0:
+    BTFSS PIR1,TMR1IF
+    GOTO RETARDO_4.5MS_4_0
+    BCF T1CON,TMR1ON
+    BCF PIR1,TMR1IF
     RETURN
     
 IRcarrier:
@@ -89,20 +93,30 @@ IRcarrier:
 BUCLE:
     BSF PORTD,0
     DECFSZ CONTADOR,1
-    GOTO RETARDO_13
+    GOTO RETARDO_12MICROS_4
     GOTO FINAL		
-RETARDO_13:	
-    movlw	0xE
-    movwf	r52
-RETARDO_13MICROS_16_0_1:
-    decfsz	r52, f
-    goto	RETARDO_13MICROS_16_0_1
+RETARDO_12MICROS_4:
+    NOP
+    NOP
+    NOP				; Aporta 1 ciclo máquina.
+    NOP				; Aporta 1 ciclo máquina.
+    NOP				; Aporta 1 ciclo máquina.
+    NOP				; Aporta 1 ciclo máquina.
+    NOP				; Aporta 1 ciclo máquina.
+    NOP				; Aporta 1 ciclo máquina.
+    NOP
     BCF PORTD,0
-    movlw	0xE
-    movwf	r52
-RETARDO_13MICROS_16_0_2:
-    decfsz	r52, f
-    goto	RETARDO_13MICROS_16_0_2
+    RETARDO_12MICROS_4_2:
+    NOP
+    NOP
+    NOP				; Aporta 1 ciclo máquina.
+    NOP				; Aporta 1 ciclo máquina.
+    NOP				; Aporta 1 ciclo máquina.
+    NOP				; Aporta 1 ciclo máquina.
+    NOP				; Aporta 1 ciclo máquina.
+    NOP				; Aporta 1 ciclo máquina.
+    NOP
+    NOP
     GOTO BUCLE
  FINAL:
     BCF PORTD,0
@@ -112,23 +126,19 @@ RETARDO_13MICROS_16_0_2:
     MOVWF BYTE
     MOVLW SEND_BITS_IR
     MOVWF CONTADOR_2
-    BSF STATUS,RP0
-    MOVLW B'11010100'
-    MOVWF OPTION_REG
-    BCF STATUS,RP0
 BUCLE_SEND:
     DECFSZ CONTADOR_2,1
     GOTO ENVIO
     RETURN ;SI ES 0.
 ENVIO:
     MOVFW BYTE
-    ANDLW 0x1
+    ANDLW 0x80
     BTFSS STATUS,Z
     GOTO SEND_1	;SI ES 1.
     GOTO SEND_0	;SI ES 0.
 ROTACION:
-    RRF BYTE,1
-    BCF BYTE,7
+    RLF BYTE,1
+    BCF BYTE,0
     GOTO BUCLE_SEND
 SEND_1:
     MOVLW D'24'
