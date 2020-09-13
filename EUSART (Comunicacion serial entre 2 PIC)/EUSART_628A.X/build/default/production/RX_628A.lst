@@ -1,12 +1,13 @@
-MPASM 5.86                       RX_628A.ASM   9-12-2020  18:57:47         PAGE  1
+MPASM 5.86                       RX_628A.ASM   9-12-2020  22:53:19         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+                      00001  LIST P=16F628A
 Warning[215]: Processor superseded by command line.  Verify processor symbol.
-                      00001  PROCESSOR P16F628A
-                      00002  #INCLUDE<P16F628A.INC>
+                      00002  PROCESSOR P16F628A
+                      00003  #INCLUDE<P16F628A.INC>
                       00001         LIST
                       00002 
                       00003 ;==========================================================================
@@ -17,18 +18,13 @@ Warning[215]: Processor superseded by command line.  Verify processor symbol.
                       00008 ;==========================================================================
                       00009 
                       00386         LIST
-Warning[215]: Processor superseded by command line.  Verify processor symbol.
-                      00003  LIST P=16F28A
                       00004 ; CONFIG
                       00005 ; __config 0xFF42
 2007   3F42           00006  __CONFIG _FOSC_HS & _WDTE_OFF & _PWRTE_ON & _MCLRE_OFF & _BOREN_ON & _LVP_OFF & _CPD_OFF & _CP_OFF
                       00007  
-Warning[207]: Found label after column 1. (CAMBIO_COLOR)
-  00000055            00008  CAMBIO_COLOR EQU 0x55
-Warning[207]: Found label after column 1. (CAMBIO_BRILLO)
-  000000AA            00009  CAMBIO_BRILLO EQU 0xAA
-Warning[207]: Found label after column 1. (MODO_AUTO)
-  000000FF            00010  MODO_AUTO EQU 0xFF
+  00000055            00008 CAMBIO_COLOR EQU 0x55
+  000000AA            00009 CAMBIO_BRILLO EQU 0xAA
+  000000FF            00010 MODO_AUTO EQU 0xFF
                       00011  
                       00012  CBLOCK 0x20
   00000020            00013     R_CONTA
@@ -38,72 +34,78 @@ Warning[207]: Found label after column 1. (MODO_AUTO)
                       00017  ORG 0
 0000                  00018 SETUP:
 0000   1683           00019     BSF STATUS,RP0
-0001   1303           00020     BCF STATUS,RP1      ;BANCO 1.       
-Warning[202]: Argument out of range.  Least significant bits used.
-0002   3096           00021     MOVLW D'01001110'   ;BOTONES, ;SALIDA TX -> B2, ENTRADA RX -> B1.
+0001   1303           00020     BCF STATUS,RP1      ;BANCO 1.
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0003   0086           00022     MOVWF TRISB
-0004   3019           00023     MOVLW D'25'         ;2400 BAUDIOS.
+0002   1005           00021     BCF TRISA,0
+0003   3072           00022     MOVLW B'01110010'   ;BOTONES, ;SALIDA TX -> B2, ENTRADA RX -> B1.
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0005   0099           00024     MOVWF SPBRG
-0006   3020           00025     MOVLW B'00100000'
+0004   0086           00023     MOVWF TRISB
+0005   3024           00024     MOVLW B'00100100'
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0007   0098           00026     MOVWF TXSTA
-0008   1283           00027     BCF STATUS,RP0      ;BANCO 0.
-0009                  00028 PROGRAMA:
-0009   1B06           00029     BTFSC PORTB,6
-000A   2???           00030     GOTO CAMBIO_RGB
-000B   1A86           00031     BTFSC PORTB,5
-000C   2???           00032     GOTO CAMBIO_PWM
-000D   1A06           00033     BTFSC PORTB,4
-000E   2???           00034     GOTO CAMBIO_AUTO
-MPASM 5.86                       RX_628A.ASM   9-12-2020  18:57:47         PAGE  2
+0006   0098           00025     MOVWF TXSTA
+0007   3019           00026     MOVLW D'25'         ;2400 BAUDIOS.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0008   0099           00027     MOVWF SPBRG
+0009   1283           00028     BCF STATUS,RP0      ;BANCO 0.
+000A   3007           00029     MOVLW 0x07
+000B   009F           00030     MOVWF CMCON         ;APAGA LOS COMPARADORES.
+000C   3088           00031     MOVLW B'10001000'
+000D   0098           00032     MOVWF RCSTA
+000E                  00033 PROGRAMA:
+000E   1A06           00034     BTFSC PORTB,4
+000F   2???           00035     GOTO CAMBIO_RGB
+0010   1A86           00036     BTFSC PORTB,5
+0011   2???           00037     GOTO CAMBIO_PWM
+0012   1A06           00038     BTFSC PORTB,4
+MPASM 5.86                       RX_628A.ASM   9-12-2020  22:53:19         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-000F   2???           00035     GOTO PROGRAMA 
-                      00036 
-0010                  00037 CAMBIO_RGB:
-0010   1B06           00038     BTFSC PORTB,6
-0011   2???           00039     GOTO CAMBIO_RGB
-0012   3055           00040     MOVLW CAMBIO_COLOR
-0013   0099           00041     MOVWF TXREG
-0014   2???           00042     CALL RETARDO_20MS
-0015   2???           00043     GOTO PROGRAMA
-                      00044     
-0016                  00045 CAMBIO_PWM:
-0016   1A86           00046     BTFSC PORTB,5
-0017   2???           00047     GOTO CAMBIO_PWM
-0018   30AA           00048     MOVLW CAMBIO_BRILLO
-0019   0099           00049     MOVWF TXREG
-001A   2???           00050     CALL RETARDO_20MS
-001B   2???           00051     GOTO PROGRAMA
-                      00052     
-001C                  00053 CAMBIO_AUTO:
-001C   1A06           00054     BTFSC PORTB,4
-001D   2???           00055     GOTO CAMBIO_AUTO
-001E   30FF           00056     MOVLW MODO_AUTO
-001F   0099           00057     MOVWF TXREG
-0020   2???           00058     CALL RETARDO_20MS
-0021   2???           00059     GOTO PROGRAMA
-                      00060 
-0022                  00061 RETARDO_20MS:                           ; La llamada "call" aporta 2 ciclos máquina.
-0022   3014           00062     MOVLW       D'20'                   ; Aporta 1 ciclo máquina. Este es el valor de "M".
-0023   00A1           00063     MOVWF       R_CONTB                 ; Aporta 1 ciclo máquina.
-0024                  00064 R1MS_BUCLEEXTERNO:
-0024   30F9           00065     MOVLW       D'249'                  ; Aporta Mx1 ciclos máquina. Este es el valor de "K".   
-0025   00A0           00066     MOVWF       R_CONTA                 ; Aporta Mx1 ciclos máquina.
-0026                  00067 R1MS_BUCLEINTERNO:
-0026   0000           00068     NOP                         ; Aporta KxMx1 ciclos máquina.
-0027   0BA0           00069     DECFSZ      R_CONTA,F               ; (K-1)xMx1 cm (cuando no salta) + Mx2 cm (al saltar).
-0028   2???           00070     GOTO        R1MS_BUCLEINTERNO       ; Aporta (K-1)xMx2 ciclos máquina.
-0029   0BA1           00071     DECFSZ      R_CONTB,F               ; (M-1)x1 cm (cuando no salta) + 2 cm (al saltar).
-002A   2???           00072     GOTO        R1MS_BUCLEEXTERNO       ; Aporta (M-1)x2 ciclos máquina.
-002B   0008           00073     RETURN
-3F42                  00074     END
-MPASM 5.86                       RX_628A.ASM   9-12-2020  18:57:47         PAGE  3
+0013   2???           00039     GOTO CAMBIO_AUTO
+0014   2???           00040     GOTO PROGRAMA 
+                      00041 
+0015                  00042 CAMBIO_RGB:
+0015   1A06           00043     BTFSC PORTB,4
+0016   2???           00044     GOTO CAMBIO_RGB
+0017   1405           00045     BSF PORTA,0
+0018   3055           00046     MOVLW CAMBIO_COLOR
+0019   0099           00047     MOVWF TXREG
+001A   2???           00048     CALL RETARDO_20MS
+001B   2???           00049     GOTO PROGRAMA
+                      00050     
+001C                  00051 CAMBIO_PWM:
+001C   1A86           00052     BTFSC PORTB,5
+001D   2???           00053     GOTO CAMBIO_PWM
+001E   30AA           00054     MOVLW CAMBIO_BRILLO
+001F   0099           00055     MOVWF TXREG
+0020   2???           00056     CALL RETARDO_20MS
+0021   2???           00057     GOTO PROGRAMA
+                      00058     
+0022                  00059 CAMBIO_AUTO:
+0022   1A06           00060     BTFSC PORTB,4
+0023   2???           00061     GOTO CAMBIO_AUTO
+0024   30FF           00062     MOVLW MODO_AUTO
+0025   0099           00063     MOVWF TXREG
+0026   2???           00064     CALL RETARDO_20MS
+0027   2???           00065     GOTO PROGRAMA
+                      00066 
+0028                  00067 RETARDO_20MS:                           ; La llamada "call" aporta 2 ciclos máquina.
+0028   3014           00068     MOVLW       D'20'                   ; Aporta 1 ciclo máquina. Este es el valor de "M".
+0029   00A1           00069     MOVWF       R_CONTB                 ; Aporta 1 ciclo máquina.
+002A                  00070 R1MS_BUCLEEXTERNO:
+002A   30F9           00071     MOVLW       D'249'                  ; Aporta Mx1 ciclos máquina. Este es el valor de "K".   
+002B   00A0           00072     MOVWF       R_CONTA                 ; Aporta Mx1 ciclos máquina.
+002C                  00073 R1MS_BUCLEINTERNO:
+002C   0000           00074     NOP                         ; Aporta KxMx1 ciclos máquina.
+002D   0BA0           00075     DECFSZ      R_CONTA,F               ; (K-1)xMx1 cm (cuando no salta) + Mx2 cm (al saltar).
+002E   2???           00076     GOTO        R1MS_BUCLEINTERNO       ; Aporta (K-1)xMx2 ciclos máquina.
+002F   0BA1           00077     DECFSZ      R_CONTB,F               ; (M-1)x1 cm (cuando no salta) + 2 cm (al saltar).
+0030   2???           00078     GOTO        R1MS_BUCLEEXTERNO       ; Aporta (M-1)x2 ciclos máquina.
+0031   0008           00079     RETURN
+3F42                  00080     END
+MPASM 5.86                       RX_628A.ASM   9-12-2020  22:53:19         PAGE  3
 
 
 SYMBOL TABLE
@@ -117,11 +119,11 @@ C1INV                             00000004
 C1OUT                             00000006
 C2INV                             00000005
 C2OUT                             00000007
-CAMBIO_AUTO                       0000001C
+CAMBIO_AUTO                       00000022
 CAMBIO_BRILLO                     000000AA
 CAMBIO_COLOR                      00000055
-CAMBIO_PWM                        00000016
-CAMBIO_RGB                        00000010
+CAMBIO_PWM                        0000001C
+CAMBIO_RGB                        00000015
 CCP1CON                           00000017
 CCP1IE                            00000002
 CCP1IF                            00000002
@@ -162,7 +164,7 @@ INTE                              00000004
 INTEDG                            00000006
 INTF                              00000001
 IRP                               00000007
-MPASM 5.86                       RX_628A.ASM   9-12-2020  18:57:47         PAGE  4
+MPASM 5.86                       RX_628A.ASM   9-12-2020  22:53:19         PAGE  4
 
 
 SYMBOL TABLE
@@ -189,13 +191,13 @@ PIR1                              0000000C
 PORTA                             00000005
 PORTB                             00000006
 PR2                               00000092
-PROGRAMA                          00000009
+PROGRAMA                          0000000E
 PS0                               00000000
 PS1                               00000001
 PS2                               00000002
 PSA                               00000003
-R1MS_BUCLEEXTERNO                 00000024
-R1MS_BUCLEINTERNO                 00000026
+R1MS_BUCLEEXTERNO                 0000002A
+R1MS_BUCLEINTERNO                 0000002C
 RA0                               00000000
 RA1                               00000001
 RA2                               00000002
@@ -219,9 +221,9 @@ RCIF                              00000005
 RCREG                             0000001A
 RCSTA                             00000018
 RD                                00000000
-RETARDO_20MS                      00000022
+RETARDO_20MS                      00000028
 RP0                               00000005
-MPASM 5.86                       RX_628A.ASM   9-12-2020  18:57:47         PAGE  5
+MPASM 5.86                       RX_628A.ASM   9-12-2020  22:53:19         PAGE  5
 
 
 SYMBOL TABLE
@@ -280,7 +282,7 @@ TRISB                             00000086
 TRISB0                            00000000
 TRISB1                            00000001
 TRISB2                            00000002
-MPASM 5.86                       RX_628A.ASM   9-12-2020  18:57:47         PAGE  6
+MPASM 5.86                       RX_628A.ASM   9-12-2020  22:53:19         PAGE  6
 
 
 SYMBOL TABLE
@@ -339,7 +341,7 @@ _IDLOC1                           00002001
 _IDLOC2                           00002002
 _IDLOC3                           00002003
 _INTOSC_OSC_CLKOUT                00003FFD
-MPASM 5.86                       RX_628A.ASM   9-12-2020  18:57:47         PAGE  7
+MPASM 5.86                       RX_628A.ASM   9-12-2020  22:53:19         PAGE  7
 
 
 SYMBOL TABLE
@@ -365,7 +367,7 @@ _XT_OSC                           00003FED
 __16F628A                         00000001
 
 Errors   :     0
-Warnings :     6 reported,     0 suppressed
-Messages :     3 reported,     0 suppressed
+Warnings :     1 reported,     0 suppressed
+Messages :     4 reported,     0 suppressed
 
 

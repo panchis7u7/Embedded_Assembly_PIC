@@ -1,9 +1,5 @@
-Warning[215] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 1 : Processor superseded by command line.  Verify processor symbol.
-Warning[215] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 3 : Processor superseded by command line.  Verify processor symbol.
-Warning[207] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 8 : Found label after column 1. (CAMBIO_COLOR)
-Warning[207] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 9 : Found label after column 1. (CAMBIO_BRILLO)
-Warning[207] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 10 : Found label after column 1. (MODO_AUTO)
-Warning[202] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 21 : Argument out of range.  Least significant bits used.
-Message[302] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 22 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 24 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 26 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[215] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 2 : Processor superseded by command line.  Verify processor symbol.
+Message[302] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 21 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 23 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 25 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\EUSART (COMUNICACION SERIAL ENTRE 2 PIC)\EUSART_628A.X\RX_628A.ASM 27 : Register in operand not in bank 0.  Ensure that bank bits are correct.

@@ -1,10 +1,8 @@
-Warning[215] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 1 : Processor superseded by command line.  Verify processor symbol.
-Warning[207] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 11 : Found label after column 1. (TEMP)
+Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 25 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 27 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 28 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 29 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 30 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 31 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 33 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 34 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 36 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[207] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 114 : Found label after column 1. (EXIT)
