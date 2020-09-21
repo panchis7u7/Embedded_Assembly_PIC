@@ -1,4 +1,4 @@
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE  1
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0018   2???           00040     CALL ESCRIBIR_CARACTER
 0019   304D           00041     MOVLW 'M'
 001A   2???           00042     CALL ESCRIBIR_CARACTER
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE  2
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0032   0000           00033     NOP                         ; Aporta 1 ciclo máquina.
 0033                  00034 RETARDO_5MICROS:                ; La llamada "call" aporta 2 ciclos máquina.
 0033   0000           00035     NOP                         ; Aporta 1 ciclo máquina.
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE  3
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 004F                  00086 RETARDO_5MS:                            ; La llamada "call" aporta 2 ciclos máquina.
 004F   3005           00087     MOVLW       D'5'                    ; Aporta 1 ciclo máquina. Este es el valor de "M".
 0050   2???           00088     GOTO        RETARDOS_MS             ; Aporta 2 ciclos máquina.
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE  4
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00139 ;   + (M-1)xN + Nx2 + (M-1)xNx2 + (N-1) + 2 + (N-1)x2 + 2 =
                       00140 ; = (2 + 4M + 4MN + 4KM) ciclos máquina. Para K=249, M=100 y N=1 supone 100011
                       00141 ; ciclos máquina que a 4 MHz son 100011 µs = 100 ms = 0,1 s = 1 décima de segundo.
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE  5
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00013  
   0000000F            00014 ON_DISPLAY_CURSOR_BLINK EQU 0FH ;ACTIVA EL DISPLAY, EL CURSOR Y HACE PARPADEO
   0000000C            00015 SOLO_DISPLAY EQU 0CH            ;APAGA EL CURSOR Y SU PARPADEO
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE  6
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 0099   0000           00065     NOP
 009A   0E08           00066     SWAPF DATOS,W
 009B   1188           00067     BCF PINLCD,E
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE  7
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 00C9   0088           00117     MOVWF TRISD
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE  8
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -464,7 +464,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 00F4   2???           00160     CALL ESCRIBIR_COMANDO
 00F5   0008           00161     RETURN
 23E2 3FFF             00062     END
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE  9
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE  9
 
 
 SYMBOL TABLE
@@ -523,7 +523,7 @@ BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE 10
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE 10
 
 
 SYMBOL TABLE
@@ -582,7 +582,7 @@ CCPR2L                            0000001B
 CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE 11
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE 11
 
 
 SYMBOL TABLE
@@ -641,7 +641,7 @@ I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
 INDF                              00000000
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE 12
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE 12
 
 
 SYMBOL TABLE
@@ -700,7 +700,7 @@ NOT_WRITE                         00000002
 OERR                              00000001
 OFF                               00000000
 ON                                00000001
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE 13
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE 13
 
 
 SYMBOL TABLE
@@ -759,7 +759,7 @@ R1DECIMA_BUCLEINTERNO             0000006D
 R1MS_BUCLEEXTERNO                 00000055
 R1MS_BUCLEINTERNO                 00000057
 RA0                               00000000
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE 14
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE 14
 
 
 SYMBOL TABLE
@@ -818,7 +818,7 @@ RETARDOS_MS                       00000054
 RETARDO_100MICROS                 0000003B
 RETARDO_100MS                     00000047
 RETARDO_10MICROS                  0000002E
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE 15
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE 15
 
 
 SYMBOL TABLE
@@ -877,7 +877,7 @@ SREN                              00000005
 SSPADD                            00000093
 SSPBUF                            00000013
 SSPCON                            00000014
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE 16
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE 16
 
 
 SYMBOL TABLE
@@ -936,7 +936,7 @@ TMR2IF                            00000001
 TMR2ON                            00000002
 TOUTPS0                           00000003
 TOUTPS1                           00000004
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE 17
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE 17
 
 
 SYMBOL TABLE
@@ -995,7 +995,7 @@ TX8_9                             00000006
 TX9                               00000006
 TX9D                              00000000
 TXD8                              00000000
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE 18
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE 18
 
 
 SYMBOL TABLE
@@ -1054,7 +1054,7 @@ _BOR_NSLEEP                       00003EFF
 _BOR_OFF                          00003CFF
 _BOR_ON                           00003FFF
 _BOR_SBODEN                       00003DFF
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE 19
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE 19
 
 
 SYMBOL TABLE
@@ -1113,7 +1113,7 @@ _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
 caractertemp                      00000025
-MPASM 5.86                      LCD_20X4.ASM   8-24-2020  15:13:38         PAGE 20
+MPASM 5.86                      LCD_20X4.ASM   9-20-2020  20:31:57         PAGE 20
 
 
 SYMBOL TABLE
