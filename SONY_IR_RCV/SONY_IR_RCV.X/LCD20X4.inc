@@ -38,26 +38,26 @@ on				EQU  1
 ;Esta subrutina se encarga de enmascarar el byte para en primer lugar
 ;A los bits de mayor peso y luego de un impulso en el pin de Enable
 ;Enviará el segundo.
-ESCRIBIRCOMANDO:				   ;Subrutina para separar en 2 grupos un byte y enviarlos al controlador por partes.
-	movwf   memocaracter       ;Desde la macro llegamos con un valor en w, ahora lo guardaremos el registro memocaracter.
-	call    COMPROBARSIOCUPADO ;Llamamos a la subrutina que comprueba que el controlador está desocupado.
-	movf    memocaracter,w     ;Extraemos en W el valor que guardamos en el registro memocaracter. 
-	andlw   b'11110000'        ;El código de enmascaramiento que nos permitirá quedarnos con los 4bits MSB.
-	movwf   DATOS              ;Guardamos el valor del enmasacaramiento en un registro llamado DATOS.
-	bcf     pinlcd,RW          ;Para que el LCD reciba comandos RW se encuentre en 0.
-	bcf     pinlcd,RS          ;Otro pin que debemos poner a 0 para que el modulo trabaje en modo comando.
-	nop						   ;Esperamos un pequeño tiempo 0.2uS.
-	bsf     pinlcd,E           ;Realizamos el impulso en el pin de Enable para realizar la transferencia del Dato.
-	nop						   ; Ancho del impulso 0.2uS.					
-	bcf     pinlcd,E           ; Fin del impulso. 
-	swapf   memocaracter,w     ;Ahora nos queda extraer los 4LSB, los intercambiamos con los de MSB y almacenamos en W.
-	andlw   b'11110000'         ;Volvemos a realizar el enmascaramiento de los 4MSB despues del intercambio con swapf.
-	movwf   DATOS              ;El resultado lo guardamos en el registro DATOS.
-	nop						   ; Esperamos un pequeño tiempo 0.2uS.
-	bsf     pinlcd,E           ;Realizamos el impulso en el pin de Enable para enviar la segunda parte del comando.
-	nop						   ; Ancho del impulso 0.2uS.
-	bcf     pinlcd,E           ;Fin del impulso.
-RETURN					   ; Regresamos a donde nos han llamado.
+ESCRIBIRCOMANDO:		    ;Subrutina para separar en 2 grupos un byte y enviarlos al controlador por partes.
+	MOVWF   memocaracter	    ;Desde la macro llegamos con un valor en w, ahora lo guardaremos el registro memocaracter.
+	CALL    COMPROBARSIOCUPADO  ;Llamamos a la subrutina que comprueba que el controlador está desocupado.
+	MOVF    memocaracter,w	    ;Extraemos en W el valor que guardamos en el registro memocaracter. 
+	ANDLW   b'11110000'	    ;El código de enmascaramiento que nos permitirá quedarnos con los 4bits MSB.
+	MOVWF   DATOS		    ;Guardamos el valor del enmasacaramiento en un registro llamado DATOS.
+	BCF     pinlcd,RW	    ;Para que el LCD reciba comandos RW se encuentre en 0.
+	BCF     pinlcd,RS	    ;Otro pin que debemos poner a 0 para que el modulo trabaje en modo comando.
+	NOP			    ;Esperamos un pequeño tiempo 0.2uS.
+	BSF     pinlcd,E	    ;Realizamos el impulso en el pin de Enable para realizar la transferencia del Dato.
+	NOP			    ;Ancho del impulso 0.2uS.					
+	BCF     pinlcd,E	    ;Fin del impulso. 
+	SWAPF   memocaracter,w	    ;Ahora nos queda extraer los 4LSB, los intercambiamos con los de MSB y almacenamos en W.
+	ANDLW   b'11110000'         ;Volvemos a realizar el enmascaramiento de los 4MSB despues del intercambio con swapf.
+	MOVWF   DATOS		    ;El resultado lo guardamos en el registro DATOS.
+	NOP			    ;Esperamos un pequeño tiempo 0.2uS.
+	BSF     pinlcd,E	    ;Realizamos el impulso en el pin de Enable para enviar la segunda parte del comando.
+	NOP			    ;Ancho del impulso 0.2uS.
+	BCF     pinlcd,E	    ;Fin del impulso.
+	RETURN			    ;Regresamos a donde nos han llamado.
 
 ESCRIBIRCARACTER:				;Subrutina para separar en 2 grupos un byte y enviarlos al controlador por partes.
 	movwf	memoriaw			;Posiblemente se llegue a la subrutina con un valor en W, vamos a guardarlo y devolverlo al final.
@@ -82,13 +82,13 @@ ESCRIBIRCARACTER:				;Subrutina para separar en 2 grupos un byte y enviarlos al 
 	nop							;Ancho del impulso 0.2uS.
 	bcf     pinlcd,E			;Fin del impulso
 	movf	memoriaw,W			;Finalizada la subrutina devolvemos el valor de W para que no modifique el proceso
-RETURN						;Fin de la subrutina
+	RETURN						;Fin de la subrutina
 	
 COMPROBARSIOCUPADO: 				;Subrutina Testeará la bandera de Busy para saber si el controlador del módulo está ocupado.
-	banco	1					;Vamos al banco 1 para cambiar los pines D4 a D7 como entrada, por ahi recibiremos el dato
+	SEL_BANK 1					;Vamos al banco 1 para cambiar los pines D4 a D7 como entrada, por ahi recibiremos el dato
 	movlw	b'11110000'			;Pines D4 a D7 como entrada
 	movwf	TRISD				;Conectados al puerto D
-	banco	0					;Volvemos al banco 0 para realizar el testeo
+	SEL_BANK 0					;Volvemos al banco 0 para realizar el testeo
 	bcf     pinlcd,RS        	;Configuramos el controlador en modo Comando
 	bsf     pinlcd,RW        	;Configuramos el LCD para que nos envie datos.
 	nop							;Esperamos un pequeño tiempo 0.2uS
@@ -108,27 +108,27 @@ COMPROBARSIOCUPADO: 				;Subrutina Testeará la bandera de Busy para saber si el 
 	btfsc   caractertemp,7      ;Comprobamos el pin 7 de la respuesta, esta es la bandera de busy, si se encuentra en 1=ocupado
 	goto    COMPROBARSIOCUPADO  ;Si la respuesta es ocupado repetiremos todo el proceso denuevo
 	bcf     pinlcd,RW        	;Si la respuesta es desocupado Continuamos, en este caso apagamos el bit de intercambio de datos
-	banco	1					;Vamos al banco 1 para dejar las cosas como estaban antes
+	SEL_BANK 1					;Vamos al banco 1 para dejar las cosas como estaban antes
 	movlw	0x00				;Ahora todos los pines como Salida
 	movwf	TRISD				;Del puerto D
-	banco	0					;Vamos al banco 0
-RETURN						;Salimos de la subrutina
+	SEL_BANK	0					;Vamos al banco 0
+	RETURN						;Salimos de la subrutina
 
 Inicio_lcd:						; Esta es la subrutina de secuencia para iniciar el LCD
-	banco 0					    ; Nos dirijimos al banco 0 para manipular pines
+	SEL_BANK 0					    ; Nos dirijimos al banco 0 para manipular pines
 	bcf	pinlcd,E				; Apagamos el pin de E
 	bcf	pinlcd,RW				; Apagamos el pin de RW
 	bcf	pinlcd,RS				; Apagamos el pin de RS
 	movlw	0x0F				; Encendemos los pines del LCD
 	movwf	DATOS				; En el puerto D
 
-	banco 1					    ; Vamos al banco 1
+	SEL_BANK 1					    ; Vamos al banco 1
 	movlw B'00001111'     	;Declaramos Todos los pines como salida 
 	movwf TRISD				;Del puerto D
 	bcf	TRISD,E					;Aseguramos que el Pin E sea salida	
 	bcf	TRISD,RW				;Aseguramos que el pin RW sea salida
 	bcf	TRISD,RS				;Aseguramos que el pin RS sea salida
-	banco	0					;Regresamos al banco 0
+	SEL_BANK 0					;Regresamos al banco 0
 
 ; ///////////Comienza la secuencia de inicialización de la pantalla LCD//////////////////////
 	milisegundo .20				;Despues de encendido tengo que esperar un tiempo mayor a 15ms
@@ -197,19 +197,19 @@ PARAESCR1B1RREGISTRO:		;título de subrutina
 	SUBWF Varregcomp,0	  ;En una variable de comparación	
 	BTFSS STATUS,C		  ;El resultado es mayor a 200?
 	GOTO TRESD1G          ;Caso falso. Va a la subrutina de escribir 3 dig   
-	FUERALIM1T3           ;título de finalización de subrutina
+FUERALIM1T3:           ;título de finalización de subrutina
 	RETURN           ; <------- El return está ahí
-	UND1G		           ;Subrutina para escribir 1 dígito
+UND1G:	           ;Subrutina para escribir 1 dígito
 	WRITE_LCD ' '           ;Escribe 2 espacios 
 	WRITE_LCD ' '
 	WRITE_LCD_REG BCD_UNIDAD ;Escribe el digito
 	GOTO FUERALIM1T3       ;Se va a finalizar la subrutina 
-	D0SDIG                 ;Subrutina para escribir 2 dígitos 
+D0SDIG:                 ;Subrutina para escribir 2 dígitos 
 	WRITE_LCD ' '           ;Escribe un espacio  
 	WRITE_LCD_REG BCD_DECENA ;Escribe el penúltimo digito
 	WRITE_LCD_REG BCD_UNIDAD ;Escribe el último digito
 	GOTO FUERALIM1T3       ;Se va a finalizar la subrutina
-	TRESD1G                ;Subrutina para escribir 3 dígitos
+TRESD1G:                ;Subrutina para escribir 3 dígitos
 	WRITE_LCD_REG BCD_CENTENA;Escribe el antepenúltimo digito
 	WRITE_LCD_REG BCD_DECENA ;Escribe el penúltimo digito
 	WRITE_LCD_REG BCD_UNIDAD ;Escribe el penúltimo digito
@@ -217,8 +217,8 @@ PARAESCR1B1RREGISTRO:		;título de subrutina
 ;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ;\\\\\\\\\\\\\\\\\\\\\\\Subrutina para borrar fila \\\\\\\\\\\\\\\\\
 
-	subp4arab0rf1l
-	cargarvalor .16,indice
+subp4arab0rf1l:
+	MOV_VAL .16,indice
 	WRITE_LCD ' '
 	DECFSZ indice,1
 	GOTO $-2	

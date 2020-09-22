@@ -1,95 +1,85 @@
-;;: :::::::::::::::::::::: www.rodrigocarita.com ::::::::::::::::::::::::::::::::::::::
-; Macro de comandos y librerías para el Pic16f877A
-; archivo : mimacro.INC
-; Versión : 1.2
-; ------------------------------------------------------------------------------
 puertoa EQU PORTA
 puertob EQU PORTB
 puertoc EQU PORTC
 puertod EQU PORTD
 puertoe EQU PORTE
-;////////////////////////////////////////////
 
-ON macro pin,puerto
-    bsf puerto,pin
-    endm
-OFF macro pin,puerto
-    bcf puerto,pin
-    endm
-SETF macro registr0
-	MOVLW d'255'
-	MOVWF registr0
-endm	
-;......................................................................................................	
-cargarvalor macro valor,registro
-	MOVLW valor
-	MOVWF registro
-endm
+;-------------------------------- MACRO PINES ----------------------------------
+ON MACRO PIN,PORT
+	BSF PORT,PIN
+	ENDM
+OFF MACRO PIN,PORT
+	BCF PORT,PIN
+	ENDM
+SETF MACRO REG0
+	MOVLW D'255'
+	MOVWF REG0
+	ENDM
 
-copiarregistro macro registrode,registrohacia
-	MOVF registrode,0
-	MOVWF registrohacia
-endm
-;.....................................................................................................	
-;//////////////////////////////////
+;--------------------------------- MACRO REG -----------------------------------
+MOV_VAL MACRO VALUE,REG
+	MOVLW VALUE
+	MOVWF REG
+	ENDM
 
-banco macro payasito
-;banco 0
-if payasito==0
-BCF STATUS, RP0
-BCF STATUS, RP1
-endif
+COPY_REG MACRO REG_SRC,REG_DEST
+	MOVF REG_SRC,0
+	MOVWF REG_DEST
+	ENDM
 
-if payasito==1
-;banco 1
-BSF STATUS, RP0
-BCF STATUS, RP1
-endif
+;--------------------------------- MACRO REG -----------------------------------
+SEL_BANK MACRO NO_BANK
+	IF NO_BANK==0
+	BCF STATUS, RP0
+	BCF STATUS, RP1
+	ENDIF
 
-if payasito==2
-;banco 2
-BCF STATUS, RP0
-BSF STATUS, RP1
-endif
+	IF NO_BANK==1
+	BSF STATUS, RP0
+	BCF STATUS, RP1
+	ENDIF
 
-if payasito==3
-;banco 3
-BSF STATUS, RP0
-BSF STATUS, RP1
-endif
+	IF NO_BANK==2
+	BCF STATUS, RP0
+	BSF STATUS, RP1
+	ENDIF
 
-endm
+	IF NO_BANK==3
+	BSF STATUS, RP0
+	BSF STATUS, RP1
+	ENDIF
+	ENDM
 
-;//////////////////////////////////////////// compara entre registros y salta si son iguales /////////
+;----------------------------- REG COMPARE EQUAL -------------------------------
 REG_EQUAL_JMP MACRO REG1,REG2,LABEL
 	MOVF	REG2,0
 	SUBWF	REG1,0
 	BTFSC	STATUS,Z
 	GOTO	LABEL
-    ENDM
-;//////////////////////////////////////////// compara entre registros y salta si no son iguales /////////
-REG_NE_JUMP MACRO REG1,REG2,LABEL
+	ENDM
+;---------------------------- REG COMPARE !EQUAL -------------------------------
+REG_NE_JMP MACRO REG1,REG2,LABEL
 	MOVF	REG2,0
 	SUBWF	REG1,0
 	BTFSC	STATUS,Z
 	GOTO	LABEL
-    ENDM
+	ENDM
 
-; Compara registro con un valor y se va a la rutina direccion si son iguales
-
-csi          macro	registro1,valor,direccion
-		movlw	valor
-	         subwf	registro1,0
-	         btfsc	STATUS,Z
-	         goto	direccion
-endm
-;Compara registro con un valor y se va a la rutina si no son iguales
-csni macro registro1,valor,direccion
-			movlw valor
-			subwf registro1,0
-			btfss STATUS,Z
-			goto direccion
-endm
+;-------------------------- REG COMPARE EQUAL VALUE ----------------------------
+REG_VAL_EQ_JMP MACRO REG1,VAL,DIR
+	MOVLW	VAL
+	SUBWF	REG1,0
+        BTFSC	STATUS,Z
+        GOTO	DIR
+	ENDM
+	
+;------------------------- REG COMPARE EQUAL !VALUE ----------------------------
+REG_VAL_NEQ_JMP MACRO REG1,VAL,DIR
+	MOVLW VAL
+	SUBWF REG1,0
+	BTFSS STATUS,Z
+	GOTO DIR
+	ENDM
 
 ; Compara registro con un valor y si  se cumple la condicion Reg>valor se va a la subrutina
 mayorque macro registro1,valor ,subrutina
