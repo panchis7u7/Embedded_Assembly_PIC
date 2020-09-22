@@ -1,4 +1,4 @@
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE  1
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (LIST)
                       00037         IF NO_BANK==1
                       00038         BSF STATUS, RP0
                       00039         BCF STATUS, RP1
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE  2
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 Warning[205]: Found directive in column 1. (endm)
                       00090 endm
                       00091 ; Compara registro con un valor y si  se cumple la condicion Reg<valor se va a la subrutina
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE  3
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ Warning[205]: Found directive in column 1. (endm)
 Warning[205]: Found directive in column 1. (endm)
                       00136 endm
                       00137 ;...............................................///////////////////////////////////.....................
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE  4
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ Warning[205]: Found directive in column 1. (endm)
                       00185                    CALL PARAESCR1B1RREGISTRO
 Warning[205]: Found directive in column 1. (endm)
                       00186 endm
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE  5
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ Warning[205]: Found directive in column 1. (endm)
                       00234         endif
                       00235                 if x==.3
                       00236         call SubirCarActer3
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE  6
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00285                 MESSG "Revisa el comando ir_a_fila que el valor sea"
                       00286                 MESSG "de 1 a 4 solamente."
                       00287         endif
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE  7
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ Warning[205]: Found directive in column 1. (endm)
                       00333 ;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\               
                       00334 
                       00335 ;Desde aquí los comandos para manipulación del display //////////////////////////////////////////
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE  8
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ Warning[207]: Found label after column 1. (PULSOSUB)
 Warning[205]: Found directive in column 1. (endm)
                       00381 endm
                       00382 
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE  9
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -529,7 +529,7 @@ Warning[205]: Found directive in column 1. (endm)
                       00426         MOVF valaux04,0        ;Extrae el valor de la respuesta en W 
                       00427         MOVWF Rresulm3edid4    ;Guarda la respuesta en el indicador de registro 
 Warning[205]: Found directive in column 1. (endm)
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 10
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -588,7 +588,7 @@ Warning[205]: Found directive in column 1. (endm)
   00000022            00014     CONTADOR
   00000023            00015     REC_BYTE1
   00000024            00016     REC_BYTE2
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 11
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -626,10 +626,10 @@ Warning[205]: Found directive in column 1. (ENDC)
 000F   303A               M         MOVLW ':'
 0010   2???               M         CALL  ESCRIBIRCARACTER  ;Subrutina en la librería que me permite enviar el caracter
 0011   01A2           00032     CLRF CONTADOR
-0012   0823           00033     MOVFW REC_BYTE1
+0012   0824           00033     MOVFW REC_BYTE2
 0013   00A1           00034     MOVWF TEMP
 0014   2???           00035     CALL IMPRIMIR_VAR
-0015   0824           00036     MOVFW REC_BYTE2
+0015   0823           00036     MOVFW REC_BYTE1
 0016   00A1           00037     MOVWF TEMP
 0017   2???           00038     CALL IMPRIMIR_VAR
                       00039     ORIGIN_LCD
@@ -639,148 +639,169 @@ Warning[205]: Found directive in column 1. (ENDC)
 001A   300C               M         MOVLW solo_display
 001B   2???               M         CALL ESCRIBIRCOMANDO
 001C   2???           00041     CALL IR_RCV
-001D   2???           00042     GOTO START
-                      00043 
-001E                  00044 IMPRIMIR_VAR:
+001D   1003           00042     BCF STATUS,C
 Message[305]: Using default destination of 1 (file).
-001E   0AA2           00045     INCF CONTADOR
-001F   3009           00046     MOVLW D'9'
-0020   00A0           00047     MOVWF DIGITO
-0021   0EA1           00048     SWAPF TEMP,1
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 12
+001E   0CA3           00043     RRF REC_BYTE1
+Message[305]: Using default destination of 1 (file).
+001F   0CA4           00044     RRF REC_BYTE2
+0020   1003           00045     BCF STATUS,C
+Message[305]: Using default destination of 1 (file).
+0021   0CA3           00046     RRF REC_BYTE1
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 12
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0022   0821           00049     MOVFW TEMP
-0023   390F           00050     ANDLW 0xF
-0024   02A0           00051     SUBWF DIGITO,1
-0025   1803           00052     BTFSC STATUS,C
-0026   2???           00053     GOTO DECIMAL
-0027   2???           00054     GOTO HEXADECIMAL
-0028                  00055 DECIMAL:
-0028   00A0           00056     MOVWF DIGITO
-                      00057     WRITE_LCD_REG DIGITO
-0029   3030               M         MOVLW .48
-002A   0720               M         ADDWF DIGITO,0
-002B   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
-002C   2???           00058     GOTO VERIFICACION
-002D                  00059 HEXADECIMAL:
+Message[305]: Using default destination of 1 (file).
+0022   0CA4           00047     RRF REC_BYTE2
+0023   1003           00048     BCF STATUS,C
+Message[305]: Using default destination of 1 (file).
+0024   0CA3           00049     RRF REC_BYTE1
+Message[305]: Using default destination of 1 (file).
+0025   0CA4           00050     RRF REC_BYTE2
+0026   1003           00051     BCF STATUS,C
+Message[305]: Using default destination of 1 (file).
+0027   0DA3           00052     RLF REC_BYTE1
+Message[305]: Using default destination of 1 (file).
+0028   0DA3           00053     RLF REC_BYTE1
+0029   1003           00054     BCF STATUS,C
+002A   2???           00055     GOTO START
+                      00056 
+002B                  00057 IMPRIMIR_VAR:
+Message[305]: Using default destination of 1 (file).
+002B   0AA2           00058     INCF CONTADOR
+002C   3009           00059     MOVLW D'9'
 002D   00A0           00060     MOVWF DIGITO
-                      00061     WRITE_LCD_REG_HEX DIGITO
-002E   3037               M         MOVLW .55
-002F   0720               M         ADDWF DIGITO,0
-0030   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
-0031                  00062 VERIFICACION:
-0031   3002           00063     MOVLW D'2'
-0032   0222           00064     SUBWF CONTADOR,0
-0033   1D03           00065     BTFSS STATUS,Z
-0034   2???           00066     GOTO IMPRIMIR_VAR
-0035   01A2           00067     CLRF CONTADOR
-0036   0008           00068     RETURN
-                      00069     
-0037                  00070 IR_INIT: 
-0037   1683           00071     BSF STATUS,RP0
-0038   1703           00072     BSF STATUS,RP1
+002E   0EA1           00061     SWAPF TEMP,1
+002F   0821           00062     MOVFW TEMP
+0030   390F           00063     ANDLW 0xF
+0031   02A0           00064     SUBWF DIGITO,1
+0032   1803           00065     BTFSC STATUS,C
+0033   2???           00066     GOTO DECIMAL
+0034   2???           00067     GOTO HEXADECIMAL
+0035                  00068 DECIMAL:
+0035   00A0           00069     MOVWF DIGITO
+                      00070     WRITE_LCD_REG DIGITO
+0036   3030               M         MOVLW .48
+0037   0720               M         ADDWF DIGITO,0
+0038   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
+0039   2???           00071     GOTO VERIFICACION
+003A                  00072 HEXADECIMAL:
+003A   00A0           00073     MOVWF DIGITO
+                      00074     WRITE_LCD_REG_HEX DIGITO
+003B   3037               M         MOVLW .55
+003C   0720               M         ADDWF DIGITO,0
+003D   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
+003E                  00075 VERIFICACION:
+003E   3002           00076     MOVLW D'2'
+003F   0222           00077     SUBWF CONTADOR,0
+0040   1D03           00078     BTFSS STATUS,Z
+0041   2???           00079     GOTO IMPRIMIR_VAR
+0042   01A2           00080     CLRF CONTADOR
+0043   0008           00081     RETURN
+                      00082     
+0044                  00083 IR_INIT: 
+0044   1683           00084     BSF STATUS,RP0
+0045   1703           00085     BSF STATUS,RP1
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0039   0188           00073     CLRF ANSEL
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-003A   0189           00074     CLRF ANSELH
-003B   1683           00075     BSF STATUS,RP0
-003C   1303           00076     BCF STATUS,RP1
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-003D   1606           00077     BSF TRISB,4         ; IR is input
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-003E   0188           00078     CLRF TRISD
-003F   30D3           00079     MOVLW B'11010011'   ;PRESCALLER:16.
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0040   0081           00080     MOVWF OPTION_REG
-0041   1283           00081     BCF STATUS,RP0      ; Select memory bank 0
-0042   0188           00082     CLRF PORTD
-0043   01A3           00083     CLRF REC_BYTE1
-0044   01A4           00084     CLRF REC_BYTE2
-0045   01A2           00085     CLRF CONTADOR
-0046   0008           00086     RETURN
-                      00087 
-0047                  00088 IR_RCV:
-0047   2???           00089     CALL RETARDO_50MICROS
-0048   1A06           00090     BTFSC PORTB,4
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 13
+0046   0188           00086     CLRF ANSEL
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0049   2???           00091     GOTO IR_RCV
-004A   2???           00092     CALL RETARDO_1200MICROS
-004B   1E06           00093     BTFSS PORTB,4
-004C   2???           00094     GOTO IR_RCV
-004D   2???           00095     CALL RETARDO_600MICROS
-004E                  00096 BUCLE:
-004E   2???           00097     CALL RETARDO_600MICROS
-004F   1A06           00098     BTFSC PORTB,4
-0050   2???           00099     GOTO CERO
-0051                  00100 UNO:
-0051   1403           00101     BSF STATUS,C
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0047   0189           00087     CLRF ANSELH
+0048   1683           00088     BSF STATUS,RP0
+0049   1303           00089     BCF STATUS,RP1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+004A   1606           00090     BSF TRISB,4         ; IR is input
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+004B   0188           00091     CLRF TRISD
+004C   30D3           00092     MOVLW B'11010011'   ;PRESCALLER:16.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+004D   0081           00093     MOVWF OPTION_REG
+004E   1283           00094     BCF STATUS,RP0      ; Select memory bank 0
+004F   0188           00095     CLRF PORTD
+0050   01A3           00096     CLRF REC_BYTE1
+0051   01A4           00097     CLRF REC_BYTE2
+0052   01A2           00098     CLRF CONTADOR
+0053   0008           00099     RETURN
+                      00100 
+0054                  00101 IR_RCV:
+0054                  00102 BEGIN:
+0054   1A06           00103     BTFSC PORTB,4
+0055   2???           00104     GOTO BEGIN
+0056   2???           00105     CALL RETARDO_1200MICROS
+0057   1E06           00106     BTFSS PORTB,4
+0058   2???           00107     GOTO BEGIN
+0059   2???           00108     CALL RETARDO_600MICROS
+005A                  00109 BUCLE:
+005A   2???           00110     CALL RETARDO_600MICROS
+005B   1E06           00111     BTFSS PORTB,4
+005C   2???           00112     GOTO UNO
+005D                  00113 CERO: 
+005D   1003           00114     BCF STATUS,C
 Message[305]: Using default destination of 1 (file).
-0052   0DA3           00102     RLF REC_BYTE1
+005E   0CA3           00115     RRF REC_BYTE1
 Message[305]: Using default destination of 1 (file).
-0053   0DA4           00103     RLF REC_BYTE2
-0054   0AA2           00104     INCF CONTADOR,1
-0055   2???           00105     CALL RETARDO_600MICROS
-0056   2???           00106     GOTO VERIFICACION_2
-0057                  00107 CERO: 
-0057   1003           00108     BCF STATUS,C
+005F   0CA4           00116     RRF REC_BYTE2
+0060   2???           00117     CALL RETARDO_600MICROS
+0061   2???           00118     GOTO VERIFICACION_2
+0062                  00119 UNO:
+0062   1403           00120     BSF STATUS,C
 Message[305]: Using default destination of 1 (file).
-0058   0DA3           00109     RLF REC_BYTE1
+0063   0CA3           00121     RRF REC_BYTE1
 Message[305]: Using default destination of 1 (file).
-0059   0DA4           00110     RLF REC_BYTE2
-005A   0AA2           00111     INCF CONTADOR,1
-005B                  00112 VERIFICACION_2:
-005B   300C           00113     MOVLW D'12'
-005C   0222           00114     SUBWF CONTADOR,0
-005D   1D03           00115     BTFSS STATUS,Z
-005E   2???           00116     GOTO BUCLE
-005F   0008           00117     RETURN
-                      00118 
-                      00119 ;RETARDO DE 1.2MS USANDO TIMER0.
-0060                  00120 RETARDO_1200MICROS:
-0060   110B           00121     BCF INTCON,T0IF
-0061   306A           00122     MOVLW D'106'
-0062   0081           00123     MOVWF TMR0
-0063                  00124 COMPROBAR:
-0063   1D0B           00125     BTFSS INTCON,T0IF
-0064   2???           00126     GOTO COMPROBAR
-0065   0008           00127     RETURN
-                      00128     
-                      00129 ;RETARDO DE 600 MICROS USANDO TIMER0.
-0066                  00130 RETARDO_600MICROS:
-0066   110B           00131     BCF INTCON,T0IF
-0067   30DB           00132     MOVLW D'219'
-0068   0081           00133     MOVWF TMR0
-0069                  00134 COMPROBAR_2:
-0069   1D0B           00135     BTFSS INTCON,T0IF
-006A   2???           00136     GOTO COMPROBAR_2
-006B   0008           00137     RETURN
-                      00138     
-                      00139 ;RETARDO DE 50 MICROS USANDO TIMER0.
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 14
+0064   0CA4           00122     RRF REC_BYTE2
+0065   2???           00123     CALL RETARDO_1200MICROS
+0066                  00124 VERIFICACION_2:
+0066   0AA2           00125     INCF CONTADOR,1
+0067   300B           00126     MOVLW D'11'
+0068   0222           00127     SUBWF CONTADOR,0
+0069   1D03           00128     BTFSS STATUS,Z
+006A   2???           00129     GOTO BUCLE
+006B   0008           00130     RETURN
+                      00131 
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 14
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-006C                  00140 RETARDO_50MICROS:
-006C   110B           00141     BCF INTCON,T0IF
-006D   30FD           00142     MOVLW D'253'
-006E   0081           00143     MOVWF TMR0
-006F                  00144 COMPROBAR_3:
-006F   1D0B           00145     BTFSS INTCON,T0IF
-0070   2???           00146     GOTO COMPROBAR_3
-0071   0008           00147     RETURN
-                      00148     
-                      00149     #INCLUDE <RETARDOS.inc>
+                      00132 ;RETARDO DE 1.2MS USANDO TIMER0.
+006C                  00133 RETARDO_1200MICROS:
+006C   110B           00134     BCF INTCON,T0IF
+006D   306A           00135     MOVLW D'106'
+006E   0081           00136     MOVWF TMR0
+006F                  00137 COMPROBAR:
+006F   1D0B           00138     BTFSS INTCON,T0IF
+0070   2???           00139     GOTO COMPROBAR
+0071   0008           00140     RETURN
+                      00141     
+                      00142 ;RETARDO DE 600 MICROS USANDO TIMER0.
+0072                  00143 RETARDO_600MICROS:
+0072   110B           00144     BCF INTCON,T0IF
+0073   30DB           00145     MOVLW D'219'
+0074   0081           00146     MOVWF TMR0
+0075                  00147 COMPROBAR_2:
+0075   1D0B           00148     BTFSS INTCON,T0IF
+0076   2???           00149     GOTO COMPROBAR_2
+0077   0008           00150     RETURN
+                      00151     
+                      00152 ;RETARDO DE 50 MICROS USANDO TIMER0.
+0078                  00153 RETARDO_50MICROS:
+0078   110B           00154     BCF INTCON,T0IF
+0079   30FD           00155     MOVLW D'253'
+007A   0081           00156     MOVWF TMR0
+007B                  00157 COMPROBAR_3:
+007B   1D0B           00158     BTFSS INTCON,T0IF
+007C   2???           00159     GOTO COMPROBAR_3
+007D   0008           00160     RETURN
+                      00161     
+                      00162     #INCLUDE <RETARDOS.inc>
                       00001 ;::::::::::::: www.rodrigocarita.com ::::::::::::::::::::::::::
                       00002 ;                       Retardos.asm   Versión: 1.0
                       00003 
@@ -798,70 +819,76 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000028            00015         memo_tiemp_4
                       00016         endc
                       00017 
-0072                  00018 milisegundos
-0072   00A5           00019          movwf  memo_tiemp_1
+007E                  00018 milisegundos
+007E   00A5           00019          movwf  memo_tiemp_1
 Warning[207]: Found label after column 1. (retbucle1)
-0073                  00020     retbucle1
-0073   3011           00021          movlw  .17
-0074   00A6           00022          movwf  memo_tiemp_2 
-Warning[207]: Found label after column 1. (retbucle2)
-0075                  00023     retbucle2
-0075   303A           00024          movlw  .58
-0076   00A7           00025          movwf  memo_tiemp_3     
-Warning[207]: Found label after column 1. (retbucle3)
-0077                  00026     retbucle3
-0077   0000           00027          nop
-0078   0000           00028          nop
-0079   0BA7           00029          decfsz memo_tiemp_3,1     
-007A   2???           00030          goto   retbucle3
-007B   0BA6           00031          decfsz memo_tiemp_2,1
-007C   2???           00032          goto   retbucle2
-007D   0BA5           00033          decfsz memo_tiemp_1,1
-007E   2???           00034          goto   retbucle1
-Warning[203]: Found opcode in column 1. (RETURN)
-007F   0008           00035 RETURN
-0080                  00036 segundos
-0080   00A5           00037          movwf  memo_tiemp_1
-Warning[207]: Found label after column 1. (retbucle1a)
-0081                  00038     retbucle1a
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 15
+007F                  00020     retbucle1
+007F   3011           00021          movlw  .17
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 15
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0081   30FA           00039          movlw  .250
-0082   00A6           00040          movwf  memo_tiemp_2 
-Warning[207]: Found label after column 1. (retbucle2a)
-0083                  00041     retbucle2a
-0083   30FA           00042          movlw  .250
-0084   00A7           00043          movwf  memo_tiemp_3     
-Warning[207]: Found label after column 1. (retbucle3a)
-0085                  00044     retbucle3a
-0085   3013           00045          movlw  .19
-0086   00A8           00046          movwf  memo_tiemp_4 
-Warning[207]: Found label after column 1. (retbucle4a)
-0087                  00047     retbucle4a
-0087   0000           00048          nop
-0088   0BA8           00049          decfsz memo_tiemp_4,1 
-0089   2???           00050          goto   retbucle4a
-008A   0BA7           00051          decfsz memo_tiemp_3,1    
-008B   2???           00052          goto   retbucle3a
-008C   0BA6           00053          decfsz memo_tiemp_2,1
-008D   2???           00054          goto   retbucle2a
-008E   0BA5           00055          decfsz memo_tiemp_1,1
-008F   2???           00056          goto   retbucle1a
+0080   00A6           00022          movwf  memo_tiemp_2 
+Warning[207]: Found label after column 1. (retbucle2)
+0081                  00023     retbucle2
+0081   303A           00024          movlw  .58
+0082   00A7           00025          movwf  memo_tiemp_3     
+Warning[207]: Found label after column 1. (retbucle3)
+0083                  00026     retbucle3
+0083   0000           00027          nop
+0084   0000           00028          nop
+0085   0BA7           00029          decfsz memo_tiemp_3,1     
+0086   2???           00030          goto   retbucle3
+0087   0BA6           00031          decfsz memo_tiemp_2,1
+0088   2???           00032          goto   retbucle2
+0089   0BA5           00033          decfsz memo_tiemp_1,1
+008A   2???           00034          goto   retbucle1
 Warning[203]: Found opcode in column 1. (RETURN)
-0090   0008           00057 RETURN
+008B   0008           00035 RETURN
+008C                  00036 segundos
+008C   00A5           00037          movwf  memo_tiemp_1
+Warning[207]: Found label after column 1. (retbucle1a)
+008D                  00038     retbucle1a
+008D   30FA           00039          movlw  .250
+008E   00A6           00040          movwf  memo_tiemp_2 
+Warning[207]: Found label after column 1. (retbucle2a)
+008F                  00041     retbucle2a
+008F   30FA           00042          movlw  .250
+0090   00A7           00043          movwf  memo_tiemp_3     
+Warning[207]: Found label after column 1. (retbucle3a)
+0091                  00044     retbucle3a
+0091   3013           00045          movlw  .19
+0092   00A8           00046          movwf  memo_tiemp_4 
+Warning[207]: Found label after column 1. (retbucle4a)
+0093                  00047     retbucle4a
+0093   0000           00048          nop
+0094   0BA8           00049          decfsz memo_tiemp_4,1 
+0095   2???           00050          goto   retbucle4a
+0096   0BA7           00051          decfsz memo_tiemp_3,1    
+0097   2???           00052          goto   retbucle3a
+0098   0BA6           00053          decfsz memo_tiemp_2,1
+0099   2???           00054          goto   retbucle2a
+009A   0BA5           00055          decfsz memo_tiemp_1,1
+009B   2???           00056          goto   retbucle1a
+Warning[203]: Found opcode in column 1. (RETURN)
+009C   0008           00057 RETURN
                       00058 
                       00059 
-                      00150     #INCLUDE <LCD20X4.inc>
+                      00163     #INCLUDE <LCD20X4.inc>
 Warning[205]: Found directive in column 1. (CBLOCK)
                       00001 CBLOCK
   00000029            00002         NumCadena               ;número de la cadena 
   0000002A            00003         indice
   0000002B            00004         memocaracter            
   0000002C            00005         memoriaw
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
   0000002D            00006         caractertemp
   0000002E            00007         ubicacionlcdfcr
   0000002F            00008         ubicacionlcdccr
@@ -883,12 +910,6 @@ Warning[205]: Found directive in column 1. (ENDC)
   00000008            00022 apagar_el_display       EQU     08H             ; apaga la pantalla
   000000C0            00023 salto_enter             EQU     0C0H    ; Se dirije a la segunda línea
   00000002            00024 home_inicio             EQU     02H     ; Vuelve al inicio
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 16
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                       00025 
   00000010            00026 mover_cursor_izquierda  EQU     10H     ; Mueve el cursor a la izquierda
   00000014            00027 mover_cursor_derecha    EQU     14H     ; Mueve el cursor a la derecha
@@ -905,84 +926,90 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00038 ;Esta subrutina se encarga de enmascarar el byte para en primer lugar
                       00039 ;A los bits de mayor peso y luego de un impulso en el pin de Enable
                       00040 ;Enviará el segundo.
-0091                  00041 ESCRIBIRCOMANDO:                    ;Subrutina para separar en 2 grupos un byte y enviarlos al controlad
+009D                  00041 ESCRIBIRCOMANDO:                    ;Subrutina para separar en 2 grupos un byte y enviarlos al controlad
                             or por partes.
-0091   00AB           00042         MOVWF   memocaracter        ;Desde la macro llegamos con un valor en w, ahora lo guardaremos el 
+009D   00AB           00042         MOVWF   memocaracter        ;Desde la macro llegamos con un valor en w, ahora lo guardaremos el 
                             registro memocaracter.
-0092   2???           00043         CALL    COMPROBARSIOCUPADO  ;Llamamos a la subrutina que comprueba que el controlador está desoc
+009E   2???           00043         CALL    COMPROBARSIOCUPADO  ;Llamamos a la subrutina que comprueba que el controlador está desoc
                             upado.
-0093   082B           00044         MOVF    memocaracter,w      ;Extraemos en W el valor que guardamos en el registro memocaracter. 
-0094   39F0           00045         ANDLW   b'11110000'         ;El código de enmascaramiento que nos permitirá quedarnos con los 4b
+009F   082B           00044         MOVF    memocaracter,w      ;Extraemos en W el valor que guardamos en el registro memocaracter. 
+00A0   39F0           00045         ANDLW   b'11110000'         ;El código de enmascaramiento que nos permitirá quedarnos con los 4b
                             its MSB.
-0095   0088           00046         MOVWF   DATOS               ;Guardamos el valor del enmasacaramiento en un registro llamado DATO
+00A1   0088           00046         MOVWF   DATOS               ;Guardamos el valor del enmasacaramiento en un registro llamado DATO
                             S.
-0096   1108           00047         BCF     pinlcd,RW           ;Para que el LCD reciba comandos RW se encuentre en 0.
-0097   1088           00048         BCF     pinlcd,RS           ;Otro pin que debemos poner a 0 para que el modulo trabaje en modo c
+00A2   1108           00047         BCF     pinlcd,RW           ;Para que el LCD reciba comandos RW se encuentre en 0.
+00A3   1088           00048         BCF     pinlcd,RS           ;Otro pin que debemos poner a 0 para que el modulo trabaje en modo c
                             omando.
-0098   0000           00049         NOP                         ;Esperamos un pequeño tiempo 0.2uS.
-0099   1588           00050         BSF     pinlcd,E            ;Realizamos el impulso en el pin de Enable para realizar la transfer
-                            encia del Dato.
-009A   0000           00051         NOP                         ;Ancho del impulso 0.2uS.                                   
-009B   1188           00052         BCF     pinlcd,E            ;Fin del impulso. 
-009C   0E2B           00053         SWAPF   memocaracter,w      ;Ahora nos queda extraer los 4LSB, los intercambiamos con los de MSB
-                             y almacenamos en W.
-009D   39F0           00054         ANDLW   b'11110000'         ;Volvemos a realizar el enmascaramiento de los 4MSB despues del inte
-                            rcambio con swapf.
-009E   0088           00055         MOVWF   DATOS               ;El resultado lo guardamos en el registro DATOS.
-009F   0000           00056         NOP                         ;Esperamos un pequeño tiempo 0.2uS.
-00A0   1588           00057         BSF     pinlcd,E            ;Realizamos el impulso en el pin de Enable para enviar la segunda pa
-                            rte del comando.
-00A1   0000           00058         NOP                         ;Ancho del impulso 0.2uS.
-00A2   1188           00059         BCF     pinlcd,E            ;Fin del impulso.
-00A3   0008           00060         RETURN                      ;Regresamos a donde nos han llamado.
-                      00061 
-00A4                  00062 ESCRIBIRCARACTER:                               ;Subrutina para separar en 2 grupos un byte y enviarlos 
-                            al controlador por partes.
-00A4   00AC           00063         movwf   memoriaw                        ;Posiblemente se llegue a la subrutina con un valor en W
-                            , vamos a guardarlo y devolverlo al final.
-00A5   00AB           00064         movwf   memocaracter        ;Desde la macro llegamos con un valor en w, ahora lo guardaremos el 
-                            registro memocaracter.
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 17
+00A4   0000           00049         NOP                         ;Esperamos un pequeño tiempo 0.2uS.
+00A5   1588           00050         BSF     pinlcd,E            ;Realizamos el impulso en el pin de Enable para realizar la transfer
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 17
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-00A6   2???           00065         call    COMPROBARSIOCUPADO  ;Llamamos a la subrutina que comprueba que el controlador está desoc
+                            encia del Dato.
+00A6   0000           00051         NOP                         ;Ancho del impulso 0.2uS.                                   
+00A7   1188           00052         BCF     pinlcd,E            ;Fin del impulso. 
+00A8   0E2B           00053         SWAPF   memocaracter,w      ;Ahora nos queda extraer los 4LSB, los intercambiamos con los de MSB
+                             y almacenamos en W.
+00A9   39F0           00054         ANDLW   b'11110000'         ;Volvemos a realizar el enmascaramiento de los 4MSB despues del inte
+                            rcambio con swapf.
+00AA   0088           00055         MOVWF   DATOS               ;El resultado lo guardamos en el registro DATOS.
+00AB   0000           00056         NOP                         ;Esperamos un pequeño tiempo 0.2uS.
+00AC   1588           00057         BSF     pinlcd,E            ;Realizamos el impulso en el pin de Enable para enviar la segunda pa
+                            rte del comando.
+00AD   0000           00058         NOP                         ;Ancho del impulso 0.2uS.
+00AE   1188           00059         BCF     pinlcd,E            ;Fin del impulso.
+00AF   0008           00060         RETURN                      ;Regresamos a donde nos han llamado.
+                      00061 
+00B0                  00062 ESCRIBIRCARACTER:                               ;Subrutina para separar en 2 grupos un byte y enviarlos 
+                            al controlador por partes.
+00B0   00AC           00063         movwf   memoriaw                        ;Posiblemente se llegue a la subrutina con un valor en W
+                            , vamos a guardarlo y devolverlo al final.
+00B1   00AB           00064         movwf   memocaracter        ;Desde la macro llegamos con un valor en w, ahora lo guardaremos el 
+                            registro memocaracter.
+00B2   2???           00065         call    COMPROBARSIOCUPADO  ;Llamamos a la subrutina que comprueba que el controlador está desoc
                             upado.
-00A7   082B           00066         movf    memocaracter,w      ;Extraemos en W el valor que guardamos en el registro memocaracter. 
+00B3   082B           00066         movf    memocaracter,w      ;Extraemos en W el valor que guardamos en el registro memocaracter. 
                                
-00A8   39F0           00067         andlw   b'11110000'         ;El código de enmascaramiento que nos permitirá quedarnos con los 4b
+00B4   39F0           00067         andlw   b'11110000'         ;El código de enmascaramiento que nos permitirá quedarnos con los 4b
                             its MSB.
-00A9   0088           00068         movwf   DATOS                   ;Guardamos el valor del enmasacaramiento en un registro llamado 
+00B5   0088           00068         movwf   DATOS                   ;Guardamos el valor del enmasacaramiento en un registro llamado 
                             DATOS.
-00AA   1108           00069         bcf     pinlcd,RW               ;Para que el LCD reciba datos RW se encuentre en 0.
-00AB   1488           00070         bsf     pinlcd,RS               ;Pin que debemos poner a 1 para que el modulo trabaje en modo vi
+00B6   1108           00069         bcf     pinlcd,RW               ;Para que el LCD reciba datos RW se encuentre en 0.
+00B7   1488           00070         bsf     pinlcd,RS               ;Pin que debemos poner a 1 para que el modulo trabaje en modo vi
                             sualización. 
-00AC   0000           00071         nop                                                     ;Esperamos un pequeño tiempo 0.2uS.
-00AD   1588           00072         bsf     pinlcd,E                ;Realizamos el impulso en el pin de Enable para realizar la tran
+00B8   0000           00071         nop                                                     ;Esperamos un pequeño tiempo 0.2uS.
+00B9   1588           00072         bsf     pinlcd,E                ;Realizamos el impulso en el pin de Enable para realizar la tran
                             sferencia del Dato.
-00AE   0000           00073         nop                                                     ;Ancho del impulso 0.2uS.
-00AF   1188           00074         bcf     pinlcd,E                        ;Fin del impulso.       
-00B0   0E2B           00075         swapf   memocaracter,w          ;Ahora nos queda extraer los 4LSB, los intercambiamos con los de
+00BA   0000           00073         nop                                                     ;Ancho del impulso 0.2uS.
+00BB   1188           00074         bcf     pinlcd,E                        ;Fin del impulso.       
+00BC   0E2B           00075         swapf   memocaracter,w          ;Ahora nos queda extraer los 4LSB, los intercambiamos con los de
                              MSB y almacenamos en W.
-00B1   39F0           00076         andlw   b'11110000'             ;Volvemos a realizar el enmascaramiento de los 4MSB despues del 
+00BD   39F0           00076         andlw   b'11110000'             ;Volvemos a realizar el enmascaramiento de los 4MSB despues del 
                             intercambio con swapf.
-00B2   0088           00077         movwf   DATOS                   ;El resultado lo guardamos en el registro DATOS.
-00B3   1108           00078         bcf     pinlcd,RW               ;Aseguramos que el pin RW se encuenre en 0 para empezar a recibi
+00BE   0088           00077         movwf   DATOS                   ;El resultado lo guardamos en el registro DATOS.
+00BF   1108           00078         bcf     pinlcd,RW               ;Aseguramos que el pin RW se encuenre en 0 para empezar a recibi
                             r datos.
-00B4   1488           00079         bsf     pinlcd,RS               ;Aseguramos que el Pin RS se encuentre en modo visualización. (r
+00C0   1488           00079         bsf     pinlcd,RS               ;Aseguramos que el Pin RS se encuentre en modo visualización. (r
                             ecibe caracteres).
-00B5   0000           00080         nop                                                     ;Esperamos un pequeño tiempo 0.2uS.
-00B6   1588           00081         bsf     pinlcd,E                ;Realizamos el impulso en el pin de Enable para realizar la tran
+00C1   0000           00080         nop                                                     ;Esperamos un pequeño tiempo 0.2uS.
+00C2   1588           00081         bsf     pinlcd,E                ;Realizamos el impulso en el pin de Enable para realizar la tran
                             sferencia del Dato.
-00B7   0000           00082         nop                                                     ;Ancho del impulso 0.2uS.
-00B8   1188           00083         bcf     pinlcd,E                        ;Fin del impulso
-00B9   082C           00084         movf    memoriaw,W                      ;Finalizada la subrutina devolvemos el valor de W para q
+00C3   0000           00082         nop                                                     ;Ancho del impulso 0.2uS.
+00C4   1188           00083         bcf     pinlcd,E                        ;Fin del impulso
+00C5   082C           00084         movf    memoriaw,W                      ;Finalizada la subrutina devolvemos el valor de W para q
                             ue no modifique el proceso
-00BA   0008           00085         RETURN                                          ;Fin de la subrutina
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00C6   0008           00085         RETURN                                          ;Fin de la subrutina
                       00086         
-00BB                  00087 COMPROBARSIOCUPADO:                             ;Subrutina Testeará la bandera de Busy para saber si el 
+00C7                  00087 COMPROBARSIOCUPADO:                             ;Subrutina Testeará la bandera de Busy para saber si el 
                             controlador del módulo está ocupado.
                       00088         SEL_BANK 1                                      ;Vamos al banco 1 para cambiar los pines D4 a D7
                              como entrada, por ahi recibiremos el dato
@@ -992,8 +1019,8 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                           M         ENDIF
                           M 
                           M         IF 1==1
-00BB   1683               M         BSF STATUS, RP0
-00BC   1303               M         BCF STATUS, RP1
+00C7   1683               M         BSF STATUS, RP0
+00C8   1303               M         BCF STATUS, RP1
                           M         ENDIF
                           M 
                           M         IF 1==2
@@ -1001,23 +1028,17 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                           M         BSF STATUS, RP1
                           M         ENDIF
                           M 
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 18
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                           M         IF 1==3
                           M         BSF STATUS, RP0
                           M         BSF STATUS, RP1
                           M         ENDIF
-00BD   30F0           00089         movlw   b'11110000'                     ;Pines D4 a D7 como entrada
+00C9   30F0           00089         movlw   b'11110000'                     ;Pines D4 a D7 como entrada
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-00BE   0088           00090         movwf   TRISD                           ;Conectados al puerto D
+00CA   0088           00090         movwf   TRISD                           ;Conectados al puerto D
                       00091         SEL_BANK 0                                      ;Volvemos al banco 0 para realizar el testeo
                           M         IF 0==0
-00BF   1283               M         BCF STATUS, RP0
-00C0   1303               M         BCF STATUS, RP1
+00CB   1283               M         BCF STATUS, RP0
+00CC   1303               M         BCF STATUS, RP1
                           M         ENDIF
                           M 
                           M         IF 0==1
@@ -1034,38 +1055,38 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                           M         BSF STATUS, RP0
                           M         BSF STATUS, RP1
                           M         ENDIF
-00C1   1088           00092         bcf     pinlcd,RS               ;Configuramos el controlador en modo Comando
-00C2   1508           00093         bsf     pinlcd,RW               ;Configuramos el LCD para que nos envie datos.
-00C3   0000           00094         nop                                                     ;Esperamos un pequeño tiempo 0.2uS
-00C4   1588           00095         bsf     pinlcd,E                ;Activamos el pin de Enable para que empiece la transferencia y 
+00CD   1088           00092         bcf     pinlcd,RS               ;Configuramos el controlador en modo Comando
+00CE   1508           00093         bsf     pinlcd,RW               ;Configuramos el LCD para que nos envie datos.
+00CF   0000           00094         nop                                                     ;Esperamos un pequeño tiempo 0.2uS
+00D0   1588           00095         bsf     pinlcd,E                ;Activamos el pin de Enable para que empiece la transferencia y 
                             el módulo nos responda.
-00C5   0000           00096         nop                                                     ;Esperamos un prqueño tiempo de 0.2uS
-00C6   0808           00097         movf    DATOS,W                 ;Extrae el valor del registro DATOS (4msb) y lo guarda en W está
-                             es la primera respuesta
-00C7   1188           00098         bcf     pinlcd,E                ;Apagamos el pin de Enable para leer los 4lsb restantes.
-00C8   39F0           00099         andlw   0F0h                    ;La respuesta anterior la enmascaramos
-00C9   00AD           00100         movwf   caractertemp            ;Almacenamos el caracter temporalmente
-00CA   0000           00101         nop                                                     ;Esperamos un pequeño tiempo            
-                                                    
-00CB   1588           00102         bsf     pinlcd,E                        ;Activamos el pin de Enable para que comience la transfe
-                            rencia.
-00CC   0000           00103         nop                                                     ;Esperamos otro pequeño tiempo
-00CD   0E08           00104         swapf   DATOS,w                 ;Leemos la respuesta y lo intercambiamos con los 4msb para guard
-                            arlo en W
-00CE   1188           00105         bcf     pinlcd,E                ;Apagamos la transferencia.
-00CF   390F           00106         andlw   00Fh                    ;Enmascaramos la segunda respuesta
-00D0   04AD           00107         iorwf   caractertemp,1      ;Combina nibbles Juntamos la primera con la segunda respuesta para f
-                            ormar la respuesta gral
-00D1   1BAD           00108         btfsc   caractertemp,7      ;Comprobamos el pin 7 de la respuesta, esta es la bandera de busy, s
-                            i se encuentra en 1=ocupado
-00D2   2???           00109         goto    COMPROBARSIOCUPADO  ;Si la respuesta es ocupado repetiremos todo el proceso denuevo
-00D3   1108           00110         bcf     pinlcd,RW               ;Si la respuesta es desocupado Continuamos, en este caso apagamo
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 19
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 19
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+00D1   0000           00096         nop                                                     ;Esperamos un prqueño tiempo de 0.2uS
+00D2   0808           00097         movf    DATOS,W                 ;Extrae el valor del registro DATOS (4msb) y lo guarda en W está
+                             es la primera respuesta
+00D3   1188           00098         bcf     pinlcd,E                ;Apagamos el pin de Enable para leer los 4lsb restantes.
+00D4   39F0           00099         andlw   0F0h                    ;La respuesta anterior la enmascaramos
+00D5   00AD           00100         movwf   caractertemp            ;Almacenamos el caracter temporalmente
+00D6   0000           00101         nop                                                     ;Esperamos un pequeño tiempo            
+                                                    
+00D7   1588           00102         bsf     pinlcd,E                        ;Activamos el pin de Enable para que comience la transfe
+                            rencia.
+00D8   0000           00103         nop                                                     ;Esperamos otro pequeño tiempo
+00D9   0E08           00104         swapf   DATOS,w                 ;Leemos la respuesta y lo intercambiamos con los 4msb para guard
+                            arlo en W
+00DA   1188           00105         bcf     pinlcd,E                ;Apagamos la transferencia.
+00DB   390F           00106         andlw   00Fh                    ;Enmascaramos la segunda respuesta
+00DC   04AD           00107         iorwf   caractertemp,1      ;Combina nibbles Juntamos la primera con la segunda respuesta para f
+                            ormar la respuesta gral
+00DD   1BAD           00108         btfsc   caractertemp,7      ;Comprobamos el pin 7 de la respuesta, esta es la bandera de busy, s
+                            i se encuentra en 1=ocupado
+00DE   2???           00109         goto    COMPROBARSIOCUPADO  ;Si la respuesta es ocupado repetiremos todo el proceso denuevo
+00DF   1108           00110         bcf     pinlcd,RW               ;Si la respuesta es desocupado Continuamos, en este caso apagamo
                             s el bit de intercambio de datos
                       00111         SEL_BANK 1                                      ;Vamos al banco 1 para dejar las cosas como esta
                             ban antes
@@ -1075,8 +1096,8 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                           M         ENDIF
                           M 
                           M         IF 1==1
-00D4   1683               M         BSF STATUS, RP0
-00D5   1303               M         BCF STATUS, RP1
+00E0   1683               M         BSF STATUS, RP0
+00E1   1303               M         BCF STATUS, RP1
                           M         ENDIF
                           M 
                           M         IF 1==2
@@ -1088,44 +1109,44 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                           M         BSF STATUS, RP0
                           M         BSF STATUS, RP1
                           M         ENDIF
-00D6   3000           00112         movlw   0x00                            ;Ahora todos los pines como Salida
+00E2   3000           00112         movlw   0x00                            ;Ahora todos los pines como Salida
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-00D7   0088           00113         movwf   TRISD                           ;Del puerto D
+00E3   0088           00113         movwf   TRISD                           ;Del puerto D
                       00114         SEL_BANK        0                                       ;Vamos al banco 0
                           M         IF 0==0
-00D8   1283               M         BCF STATUS, RP0
-00D9   1303               M         BCF STATUS, RP1
+00E4   1283               M         BCF STATUS, RP0
+00E5   1303               M         BCF STATUS, RP1
                           M         ENDIF
                           M 
                           M         IF 0==1
-                          M         BSF STATUS, RP0
-                          M         BCF STATUS, RP1
-                          M         ENDIF
-                          M 
-                          M         IF 0==2
-                          M         BCF STATUS, RP0
-                          M         BSF STATUS, RP1
-                          M         ENDIF
-                          M 
-                          M         IF 0==3
-                          M         BSF STATUS, RP0
-                          M         BSF STATUS, RP1
-                          M         ENDIF
-00DA   0008           00115         RETURN                                          ;Salimos de la subrutina
-                      00116 
-00DB                  00117 Inicio_lcd:                                             ; Esta es la subrutina de secuencia para iniciar
-                             el LCD
-                      00118         SEL_BANK 0                                          ; Nos dirijimos al banco 0 para manipular pi
-                            nes
-                          M         IF 0==0
-00DB   1283               M         BCF STATUS, RP0
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 20
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 20
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-00DC   1303               M         BCF STATUS, RP1
+                          M         BSF STATUS, RP0
+                          M         BCF STATUS, RP1
+                          M         ENDIF
+                          M 
+                          M         IF 0==2
+                          M         BCF STATUS, RP0
+                          M         BSF STATUS, RP1
+                          M         ENDIF
+                          M 
+                          M         IF 0==3
+                          M         BSF STATUS, RP0
+                          M         BSF STATUS, RP1
+                          M         ENDIF
+00E6   0008           00115         RETURN                                          ;Salimos de la subrutina
+                      00116 
+00E7                  00117 Inicio_lcd:                                             ; Esta es la subrutina de secuencia para iniciar
+                             el LCD
+                      00118         SEL_BANK 0                                          ; Nos dirijimos al banco 0 para manipular pi
+                            nes
+                          M         IF 0==0
+00E7   1283               M         BCF STATUS, RP0
+00E8   1303               M         BCF STATUS, RP1
                           M         ENDIF
                           M 
                           M         IF 0==1
@@ -1142,11 +1163,11 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                           M         BSF STATUS, RP0
                           M         BSF STATUS, RP1
                           M         ENDIF
-00DD   1188           00119         bcf     pinlcd,E                                ; Apagamos el pin de E
-00DE   1108           00120         bcf     pinlcd,RW                               ; Apagamos el pin de RW
-00DF   1088           00121         bcf     pinlcd,RS                               ; Apagamos el pin de RS
-00E0   300F           00122         movlw   0x0F                            ; Encendemos los pines del LCD
-00E1   0088           00123         movwf   DATOS                           ; En el puerto D
+00E9   1188           00119         bcf     pinlcd,E                                ; Apagamos el pin de E
+00EA   1108           00120         bcf     pinlcd,RW                               ; Apagamos el pin de RW
+00EB   1088           00121         bcf     pinlcd,RS                               ; Apagamos el pin de RS
+00EC   300F           00122         movlw   0x0F                            ; Encendemos los pines del LCD
+00ED   0088           00123         movwf   DATOS                           ; En el puerto D
                       00124 
                       00125         SEL_BANK 1                                          ; Vamos al banco 1
                           M         IF 1==0
@@ -1155,8 +1176,14 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                           M         ENDIF
                           M 
                           M         IF 1==1
-00E2   1683               M         BSF STATUS, RP0
-00E3   1303               M         BCF STATUS, RP1
+00EE   1683               M         BSF STATUS, RP0
+00EF   1303               M         BCF STATUS, RP1
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 21
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                           M         ENDIF
                           M 
                           M         IF 1==2
@@ -1168,25 +1195,19 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                           M         BSF STATUS, RP0
                           M         BSF STATUS, RP1
                           M         ENDIF
-00E4   300F           00126         movlw B'00001111'       ;Declaramos Todos los pines como salida 
+00F0   300F           00126         movlw B'00001111'       ;Declaramos Todos los pines como salida 
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-00E5   0088           00127         movwf TRISD                             ;Del puerto D
+00F1   0088           00127         movwf TRISD                             ;Del puerto D
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-00E6   1188           00128         bcf     TRISD,E                                 ;Aseguramos que el Pin E sea salida     
+00F2   1188           00128         bcf     TRISD,E                                 ;Aseguramos que el Pin E sea salida     
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-00E7   1108           00129         bcf     TRISD,RW                                ;Aseguramos que el pin RW sea salida
+00F3   1108           00129         bcf     TRISD,RW                                ;Aseguramos que el pin RW sea salida
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-00E8   1088           00130         bcf     TRISD,RS                                ;Aseguramos que el pin RS sea salida
+00F4   1088           00130         bcf     TRISD,RS                                ;Aseguramos que el pin RS sea salida
                       00131         SEL_BANK 0                                      ;Regresamos al banco 0
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 21
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                           M         IF 0==0
-00E9   1283               M         BCF STATUS, RP0
-00EA   1303               M         BCF STATUS, RP1
+00F5   1283               M         BCF STATUS, RP0
+00F6   1303               M         BCF STATUS, RP1
                           M         ENDIF
                           M 
                           M         IF 0==1
@@ -1207,64 +1228,64 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00133 ; ///////////Comienza la secuencia de inicialización de la pantalla LCD//////////////////////
                       00134         milisegundo .20                         ;Despues de encendido tengo que esperar un tiempo mayor 
                             a 15ms
-00EB   3014               M                          movlw .20
-00EC   2???               M                          call  milisegundos
-00ED   3030           00135         movlw   B'00110000'             ;Primer valor pedido por el fabricante
-00EE   0088           00136         movwf   DATOS                           ;Lo escribimos en el Puerto D
-00EF   0000           00137         nop                                                     ;Esperamos un pequeño tiempo
-00F0   1588           00138         bsf     pinlcd,E                ;Enviamos un impulso al pin de Enable para enviar el dato
-00F1   0000           00139         nop                                                     ;Ancho del impulso 0,2 uS
-00F2   1188           00140         bcf     pinlcd,E                        ;Fin del impulso        
+00F7   3014               M                          movlw .20
+00F8   2???               M                          call  milisegundos
+00F9   3030           00135         movlw   B'00110000'             ;Primer valor pedido por el fabricante
+00FA   0088           00136         movwf   DATOS                           ;Lo escribimos en el Puerto D
+00FB   0000           00137         nop                                                     ;Esperamos un pequeño tiempo
+00FC   1588           00138         bsf     pinlcd,E                ;Enviamos un impulso al pin de Enable para enviar el dato
+00FD   0000           00139         nop                                                     ;Ancho del impulso 0,2 uS
+00FE   1188           00140         bcf     pinlcd,E                        ;Fin del impulso        
                       00141         milisegundo .10                         ;Antes de pasar al siguiente paso debo esperar más de 5m
-                            s
-00F3   300A               M                          movlw .10
-00F4   2???               M                          call  milisegundos
-00F5   3030           00142         movlw   B'00110000'             ;Segundo valor pedido por el fabricante
-00F6   0088           00143         movwf   DATOS                   ;Lo escribimos en el Puerto D
-00F7   0000           00144         nop                                                     ;Esperamos un pequeño tiempo
-00F8   1588           00145         bsf     pinlcd,E                ;Enviamos un impulso al pin de Enable para enviar el dato
-00F9   0000           00146         nop                                                     ;Ancho del impulso 0,2 uS
-00FA   1188           00147         bcf     pinlcd,E                        ;Fin del impulso        
-00FB   3030           00148         movlw   B'00110000'             ;Tercer valor pedido por el fabricante
-00FC   0088           00149         movwf   DATOS                   ;Lo escribimos en el Puerto D
-00FD   0000           00150         nop                                                     ;Esperamos un pequeño tiempo
-00FE   1588           00151         bsf     pinlcd,E                ;Enviamos un impulso al pin de Enable para enviar el dato
-00FF   0000           00152         nop                                                     ;Ancho del impulso 0,2 uS
-0100   1188           00153         bcf     pinlcd,E                        ;Fin del impulso
-                      00154         milisegundo .2                          ;Antes de pasar al siguiente paso debo esperar más de 10
-                            0uS
-0101   3002               M                          movlw .2
-0102   2???               M                          call  milisegundos
-0103   3020           00155         movlw   B'00100000'                     ;Cargamos comando de configuración de comunicación de 4b
-                            its
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 22
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 22
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0104   0088           00156         movwf   DATOS                           ;Escribimos el comando en el puerto D
-0105   0000           00157         nop                                                     ;Esperamos un tiempo antes de realizar l
+                            s
+00FF   300A               M                          movlw .10
+0100   2???               M                          call  milisegundos
+0101   3030           00142         movlw   B'00110000'             ;Segundo valor pedido por el fabricante
+0102   0088           00143         movwf   DATOS                   ;Lo escribimos en el Puerto D
+0103   0000           00144         nop                                                     ;Esperamos un pequeño tiempo
+0104   1588           00145         bsf     pinlcd,E                ;Enviamos un impulso al pin de Enable para enviar el dato
+0105   0000           00146         nop                                                     ;Ancho del impulso 0,2 uS
+0106   1188           00147         bcf     pinlcd,E                        ;Fin del impulso        
+0107   3030           00148         movlw   B'00110000'             ;Tercer valor pedido por el fabricante
+0108   0088           00149         movwf   DATOS                   ;Lo escribimos en el Puerto D
+0109   0000           00150         nop                                                     ;Esperamos un pequeño tiempo
+010A   1588           00151         bsf     pinlcd,E                ;Enviamos un impulso al pin de Enable para enviar el dato
+010B   0000           00152         nop                                                     ;Ancho del impulso 0,2 uS
+010C   1188           00153         bcf     pinlcd,E                        ;Fin del impulso
+                      00154         milisegundo .2                          ;Antes de pasar al siguiente paso debo esperar más de 10
+                            0uS
+010D   3002               M                          movlw .2
+010E   2???               M                          call  milisegundos
+010F   3020           00155         movlw   B'00100000'                     ;Cargamos comando de configuración de comunicación de 4b
+                            its
+0110   0088           00156         movwf   DATOS                           ;Escribimos el comando en el puerto D
+0111   0000           00157         nop                                                     ;Esperamos un tiempo antes de realizar l
                             a transferencia
-0106   1588           00158         bsf     pinlcd,E                ;Enviamos un impulso al pin de Enable para enviar el dato
-0107   0000           00159         nop                                                     ;Ancho del impulso 0,2 uS
-0108   1188           00160         bcf     pinlcd,E                        ;Fin del impulso
+0112   1588           00158         bsf     pinlcd,E                ;Enviamos un impulso al pin de Enable para enviar el dato
+0113   0000           00159         nop                                                     ;Ancho del impulso 0,2 uS
+0114   1188           00160         bcf     pinlcd,E                        ;Fin del impulso
                       00161 
-0109   3028           00162         movlw   B'00101000'     ;Interfaz de 4 bits, 2 lineas
-010A   2???           00163         call    ESCRIBIRCOMANDO         ; de caracteres de 5x7
+0115   3028           00162         movlw   B'00101000'     ;Interfaz de 4 bits, 2 lineas
+0116   2???           00163         call    ESCRIBIRCOMANDO         ; de caracteres de 5x7
                       00164         
-010B   300F           00165         movlw   on_display_cursor_blink     ;FH Display on, cursor on,blink
-010C   2???           00166         call    ESCRIBIRCOMANDO
+0117   300F           00165         movlw   on_display_cursor_blink     ;FH Display on, cursor on,blink
+0118   2???           00166         call    ESCRIBIRCOMANDO
                       00167         
-010D   3001           00168         movlw   limpiar_lcd             ; Limpia el LCD
-010E   2???           00169         call    ESCRIBIRCOMANDO
+0119   3001           00168         movlw   limpiar_lcd             ; Limpia el LCD
+011A   2???           00169         call    ESCRIBIRCOMANDO
                       00170         
-010F   3006           00171         movlw   B'00000110'     ; Configura para que cada que se escriba un caracter cursor aumente en 1
-0110   2???           00172         call    ESCRIBIRCOMANDO         
+011B   3006           00171         movlw   B'00000110'     ; Configura para que cada que se escriba un caracter cursor aumente en 1
+011C   2???           00172         call    ESCRIBIRCOMANDO         
                       00173         
-0111   3080           00174         movlw   B'10000000'     ; Vamos a HOME
-0112   2???           00175         call    ESCRIBIRCOMANDO
-0113   0008           00176         RETURN
+011D   3080           00174         movlw   B'10000000'     ; Vamos a HOME
+011E   2???           00175         call    ESCRIBIRCOMANDO
+011F   0008           00176         RETURN
                       00177 
                       00178 ;//////////////////////////////////////////// Tablas para posición de coordenadas //////////////////////
                             ///
@@ -1273,131 +1294,137 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00180 ;//////////////////////////////////////////////////////////////
                       00181 ;///// Comandos para escribir en el LCD un registro de 3 dígitos
                       00182 
-0114                  00183 PARAESCR1B1RREGISTRO:           ;título de subrutina
-0114   00B0           00184         MOVWF Varregcomp                        ;Guarda el valor de ingreso en un Registro
-                      00185         BCD_CONVERT Varregcomp  ;Separa en 3 registros (dígitos)el valor
-0115   0830               M         MOVF Varregcomp,0
-0116   2???               M         CALL BINARIO_BCD
-                      00186         
-                      00187         ;Para valores inferiores a 10
-0117   300A           00188         MOVLW d'10'           ;Carga el valor de 10 en una variable    
-0118   0230           00189         SUBWF Varregcomp,0    ;De comparación.
-0119   1C03           00190         BTFSS STATUS,C        ;El resultado es de 1 dígito?
-011A   2???           00191         GOTO UND1G            ;Caso verdadero subrutina para escribir 1 digito
-011B   3064           00192         MOVLW d'100'          ;Carga el valor de 100 en una variable
-011C   0230           00193         SUBWF Varregcomp,0    ;De comparación 
-011D   1C03           00194         BTFSS STATUS,C        ;El resultado es de dos digitos?
-011E   2???           00195         GOTO D0SDIG           ;Caso verdadero subrutina de escribir 2 digitos
-011F   30FF           00196         MOVLW d'255'          ;Carga el valor de 100 en una
-0120   0230           00197         SUBWF Varregcomp,0        ;En una variable de comparación       
-0121   1C03           00198         BTFSS STATUS,C            ;El resultado es mayor a 200?
-0122   2???           00199         GOTO TRESD1G          ;Caso falso. Va a la subrutina de escribir 3 dig   
-0123                  00200 FUERALIM1T3:           ;título de finalización de subrutina
-0123   0008           00201         RETURN           ; <------- El return está ahí
-0124                  00202 UND1G:             ;Subrutina para escribir 1 dígito
-                      00203         WRITE_LCD ' '           ;Escribe 2 espacios 
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 23
+0120                  00183 PARAESCR1B1RREGISTRO:           ;título de subrutina
+0120   00B0           00184         MOVWF Varregcomp                        ;Guarda el valor de ingreso en un Registro
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 23
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0124   3020               M         MOVLW ' '
-0125   2???               M         CALL  ESCRIBIRCARACTER  ;Subrutina en la librería que me permite enviar el caracter
+                      00185         BCD_CONVERT Varregcomp  ;Separa en 3 registros (dígitos)el valor
+0121   0830               M         MOVF Varregcomp,0
+0122   2???               M         CALL BINARIO_BCD
+                      00186         
+                      00187         ;Para valores inferiores a 10
+0123   300A           00188         MOVLW d'10'           ;Carga el valor de 10 en una variable    
+0124   0230           00189         SUBWF Varregcomp,0    ;De comparación.
+0125   1C03           00190         BTFSS STATUS,C        ;El resultado es de 1 dígito?
+0126   2???           00191         GOTO UND1G            ;Caso verdadero subrutina para escribir 1 digito
+0127   3064           00192         MOVLW d'100'          ;Carga el valor de 100 en una variable
+0128   0230           00193         SUBWF Varregcomp,0    ;De comparación 
+0129   1C03           00194         BTFSS STATUS,C        ;El resultado es de dos digitos?
+012A   2???           00195         GOTO D0SDIG           ;Caso verdadero subrutina de escribir 2 digitos
+012B   30FF           00196         MOVLW d'255'          ;Carga el valor de 100 en una
+012C   0230           00197         SUBWF Varregcomp,0        ;En una variable de comparación       
+012D   1C03           00198         BTFSS STATUS,C            ;El resultado es mayor a 200?
+012E   2???           00199         GOTO TRESD1G          ;Caso falso. Va a la subrutina de escribir 3 dig   
+012F                  00200 FUERALIM1T3:           ;título de finalización de subrutina
+012F   0008           00201         RETURN           ; <------- El return está ahí
+0130                  00202 UND1G:             ;Subrutina para escribir 1 dígito
+                      00203         WRITE_LCD ' '           ;Escribe 2 espacios 
+0130   3020               M         MOVLW ' '
+0131   2???               M         CALL  ESCRIBIRCARACTER  ;Subrutina en la librería que me permite enviar el caracter
                       00204         WRITE_LCD ' '
-0126   3020               M         MOVLW ' '
-0127   2???               M         CALL  ESCRIBIRCARACTER  ;Subrutina en la librería que me permite enviar el caracter
+0132   3020               M         MOVLW ' '
+0133   2???               M         CALL  ESCRIBIRCARACTER  ;Subrutina en la librería que me permite enviar el caracter
                       00205         WRITE_LCD_REG BCD_UNIDAD ;Escribe el digito
-0128   3030               M         MOVLW .48
-0129   0731               M         ADDWF BCD_UNIDAD,0
-012A   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
-012B   2???           00206         GOTO FUERALIM1T3       ;Se va a finalizar la subrutina 
-012C                  00207 D0SDIG:                 ;Subrutina para escribir 2 dígitos 
+0134   3030               M         MOVLW .48
+0135   0731               M         ADDWF BCD_UNIDAD,0
+0136   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
+0137   2???           00206         GOTO FUERALIM1T3       ;Se va a finalizar la subrutina 
+0138                  00207 D0SDIG:                 ;Subrutina para escribir 2 dígitos 
                       00208         WRITE_LCD ' '           ;Escribe un espacio  
-012C   3020               M         MOVLW ' '
-012D   2???               M         CALL  ESCRIBIRCARACTER  ;Subrutina en la librería que me permite enviar el caracter
+0138   3020               M         MOVLW ' '
+0139   2???               M         CALL  ESCRIBIRCARACTER  ;Subrutina en la librería que me permite enviar el caracter
                       00209         WRITE_LCD_REG BCD_DECENA ;Escribe el penúltimo digito
-012E   3030               M         MOVLW .48
-012F   0732               M         ADDWF BCD_DECENA,0
-0130   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
+013A   3030               M         MOVLW .48
+013B   0732               M         ADDWF BCD_DECENA,0
+013C   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
                       00210         WRITE_LCD_REG BCD_UNIDAD ;Escribe el último digito
-0131   3030               M         MOVLW .48
-0132   0731               M         ADDWF BCD_UNIDAD,0
-0133   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
-0134   2???           00211         GOTO FUERALIM1T3       ;Se va a finalizar la subrutina
-0135                  00212 TRESD1G:                ;Subrutina para escribir 3 dígitos
+013D   3030               M         MOVLW .48
+013E   0731               M         ADDWF BCD_UNIDAD,0
+013F   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
+0140   2???           00211         GOTO FUERALIM1T3       ;Se va a finalizar la subrutina
+0141                  00212 TRESD1G:                ;Subrutina para escribir 3 dígitos
                       00213         WRITE_LCD_REG BCD_CENTENA;Escribe el antepenúltimo digito
-0135   3030               M         MOVLW .48
-0136   0733               M         ADDWF BCD_CENTENA,0
-0137   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
+0141   3030               M         MOVLW .48
+0142   0733               M         ADDWF BCD_CENTENA,0
+0143   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
                       00214         WRITE_LCD_REG BCD_DECENA ;Escribe el penúltimo digito
-0138   3030               M         MOVLW .48
-0139   0732               M         ADDWF BCD_DECENA,0
-013A   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
+0144   3030               M         MOVLW .48
+0145   0732               M         ADDWF BCD_DECENA,0
+0146   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 24
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00215         WRITE_LCD_REG BCD_UNIDAD ;Escribe el penúltimo digito
-013B   3030               M         MOVLW .48
-013C   0731               M         ADDWF BCD_UNIDAD,0
-013D   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
-013E   2???           00216         GOTO FUERALIM1T3       ;Se va a finalizar la subrutina 
+0147   3030               M         MOVLW .48
+0148   0731               M         ADDWF BCD_UNIDAD,0
+0149   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
+014A   2???           00216         GOTO FUERALIM1T3       ;Se va a finalizar la subrutina 
                       00217 ;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
                       00218 ;\\\\\\\\\\\\\\\\\\\\\\\Subrutina para borrar fila \\\\\\\\\\\\\\\\\
                       00219 
-013F                  00220 subp4arab0rf1l:
+014B                  00220 subp4arab0rf1l:
                       00221         MOV_VAL .16,indice
-013F   3010               M         MOVLW .16
-0140   00AA               M         MOVWF indice
+014B   3010               M         MOVLW .16
+014C   00AA               M         MOVWF indice
                       00222         WRITE_LCD ' '
-0141   3020               M         MOVLW ' '
-0142   2???               M         CALL  ESCRIBIRCARACTER  ;Subrutina en la librería que me permite enviar el caracter
-0143   0BAA           00223         DECFSZ indice,1
-0144   2???           00224         GOTO $-2        
-0145   0008           00225         RETURN
+014D   3020               M         MOVLW ' '
+014E   2???               M         CALL  ESCRIBIRCARACTER  ;Subrutina en la librería que me permite enviar el caracter
+014F   0BAA           00223         DECFSZ indice,1
+0150   2???           00224         GOTO $-2        
+0151   0008           00225         RETURN
                       00226 ;................... Descarga la actualizaciones en: www.rodrigocarita.com      
                       00227         
                       00228 
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 24
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-                      00151     #INCLUDE <BCD.INC>
+                      00164     #INCLUDE <BCD.INC>
                       00001     CBLOCK
   00000031            00002     BCD_UNIDAD
   00000032            00003     BCD_DECENA
   00000033            00004     BCD_CENTENA
                       00005     ENDC
                       00006 
-0146                  00007 BINARIO_BCD:
-0146   00B1           00008     MOVWF  BCD_UNIDAD    ;Carga el número binario a convertir
-0147   01B3           00009     CLRF   BCD_CENTENA    ;Borra registro
-0148   01B2           00010     CLRF   BCD_DECENA     ;Borra registro
-0149                  00011 BCD_RESTA10:
-0149   300A           00012     MOVLW  .10             ;A las unidades de les va restando
-014A   0231           00013     SUBWF  BCD_UNIDAD,0  ;10 en cada pasada 
-014B   1C03           00014     BTFSS  STATUS,C        ;C=0? si- entonces bcd_unidad>=0
-014C   2???           00015     GOTO   BIN_BCD_Fin     ;No- entonces se acabo  
-014D                  00016 BCD_INC_DECENAS:     
-014D   00B1           00017     MOVWF  BCD_UNIDAD    ;Recupera lo que queda por restar
-014E   0AB2           00018     INCF   BCD_DECENA,1   ;Incrementa las decenas 
-014F   300A           00019     MOVLW  .10
-0150   0232           00020     SUBWF  BCD_DECENA,0   ;Comprueba si a llegado a 10
-0151   1C03           00021     BTFSS  STATUS,C        ;C=1? si- entonces bcd_decena>=0 
-0152   2???           00022     GOTO   BCD_RESTA10     ;No- entonces resta 10 a las unidades
-0153                  00023 BCD_INC_CENTENAS:
-0153   01B2           00024     CLRF   BCD_DECENA     ;Pone a cero las decenas
-0154   0AB3           00025     INCF   BCD_CENTENA,1  ;Incrementa las centenas
-0155   2???           00026     GOTO   BCD_RESTA10     ;Resta 10 al número a convertir
-0156                  00027 BIN_BCD_Fin:
-0156   0E32           00028     SWAPF  BCD_DECENA,0   ;Intercambia nibles
-0157   0731           00029     ADDWF  BCD_UNIDAD,0  ;Nible bajo=unidades / Nible alto=decenas
-0158   0008           00030     RETURN
+0152                  00007 BINARIO_BCD:
+0152   00B1           00008     MOVWF  BCD_UNIDAD    ;Carga el número binario a convertir
+0153   01B3           00009     CLRF   BCD_CENTENA    ;Borra registro
+0154   01B2           00010     CLRF   BCD_DECENA     ;Borra registro
+0155                  00011 BCD_RESTA10:
+0155   300A           00012     MOVLW  .10             ;A las unidades de les va restando
+0156   0231           00013     SUBWF  BCD_UNIDAD,0  ;10 en cada pasada 
+0157   1C03           00014     BTFSS  STATUS,C        ;C=0? si- entonces bcd_unidad>=0
+0158   2???           00015     GOTO   BIN_BCD_Fin     ;No- entonces se acabo  
+0159                  00016 BCD_INC_DECENAS:     
+0159   00B1           00017     MOVWF  BCD_UNIDAD    ;Recupera lo que queda por restar
+015A   0AB2           00018     INCF   BCD_DECENA,1   ;Incrementa las decenas 
+015B   300A           00019     MOVLW  .10
+015C   0232           00020     SUBWF  BCD_DECENA,0   ;Comprueba si a llegado a 10
+015D   1C03           00021     BTFSS  STATUS,C        ;C=1? si- entonces bcd_decena>=0 
+015E   2???           00022     GOTO   BCD_RESTA10     ;No- entonces resta 10 a las unidades
+015F                  00023 BCD_INC_CENTENAS:
+015F   01B2           00024     CLRF   BCD_DECENA     ;Pone a cero las decenas
+0160   0AB3           00025     INCF   BCD_CENTENA,1  ;Incrementa las centenas
+0161   2???           00026     GOTO   BCD_RESTA10     ;Resta 10 al número a convertir
+0162                  00027 BIN_BCD_Fin:
+0162   0E32           00028     SWAPF  BCD_DECENA,0   ;Intercambia nibles
+0163   0731           00029     ADDWF  BCD_UNIDAD,0  ;Nible bajo=unidades / Nible alto=decenas
+0164   0008           00030     RETURN
                       00031 
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 25
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00032 
                       00033 
                       00034 
-2FC2 3FFF             00152     END
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 25
+2FC2 3FFF             00165     END
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 26
 
 
 SYMBOL TABLE
@@ -1439,15 +1466,16 @@ BAUDCTL                           00000187
 BCD_CENTENA                       00000033
 BCD_CONVERT                       
 BCD_DECENA                        00000032
-BCD_INC_CENTENAS                  00000153
-BCD_INC_DECENAS                   0000014D
-BCD_RESTA10                       00000149
+BCD_INC_CENTENAS                  0000015F
+BCD_INC_DECENAS                   00000159
+BCD_RESTA10                       00000155
 BCD_UNIDAD                        00000031
 BCLIE                             00000003
 BCLIF                             00000003
+BEGIN                             00000054
 BF                                00000000
-BINARIO_BCD                       00000146
-BIN_BCD_Fin                       00000156
+BINARIO_BCD                       00000152
+BIN_BCD_Fin                       00000162
 BRG0                              00000000
 BRG1                              00000001
 BRG10                             00000002
@@ -1455,13 +1483,13 @@ BRG11                             00000003
 BRG12                             00000004
 BRG13                             00000005
 BRG14                             00000006
-BRG15                             00000007
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 26
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 27
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+BRG15                             00000007
 BRG16                             00000003
 BRG2                              00000002
 BRG3                              00000003
@@ -1472,7 +1500,7 @@ BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
 BRGH                              00000002
-BUCLE                             0000004E
+BUCLE                             0000005A
 C                                 00000000
 C1CH0                             00000000
 C1CH1                             00000001
@@ -1514,20 +1542,20 @@ CCP2M1                            00000001
 CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
-CCP2Y                             00000004
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 27
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 28
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+CCP2Y                             00000004
 CCPR1                             00000015
 CCPR1H                            00000016
 CCPR1L                            00000015
 CCPR2                             0000001B
 CCPR2H                            0000001C
 CCPR2L                            0000001B
-CERO                              00000057
+CERO                              0000005D
 CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
@@ -1538,10 +1566,10 @@ CLEAR_LCD
 CM1CON0                           00000107
 CM2CON0                           00000108
 CM2CON1                           00000109
-COMPROBAR                         00000063
-COMPROBARSIOCUPADO                000000BB
-COMPROBAR_2                       00000069
-COMPROBAR_3                       0000006F
+COMPROBAR                         0000006F
+COMPROBARSIOCUPADO                000000C7
+COMPROBAR_2                       00000075
+COMPROBAR_3                       0000007B
 CONTADOR                          00000022
 COPY_REG                          
 CREN                              00000004
@@ -1550,7 +1578,7 @@ CURSOR_LEFT
 CURSOR_OFF                        
 CURSOR_ON                         
 D                                 00000005
-D0SDIG                            0000012C
+D0SDIG                            00000138
 DATA_ADDRESS                      00000005
 DATOS                             00000008
 DC                                00000001
@@ -1558,7 +1586,7 @@ DC1B0                             00000004
 DC1B1                             00000005
 DC2B0                             00000004
 DC2B1                             00000005
-DECIMAL                           00000028
+DECIMAL                           00000035
 DIGITO                            00000020
 D_A                               00000005
 D_NOT_A                           00000005
@@ -1573,36 +1601,36 @@ EEADRH                            0000010F
 EECON1                            0000018C
 EECON2                            0000018D
 EEDAT                             0000010C
-EEDATA                            0000010C
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 28
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 29
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+EEDATA                            0000010C
 EEDATH                            0000010E
 EEIE                              00000004
 EEIF                              00000004
 EEPGD                             00000007
-ESCRIBIRCARACTER                  000000A4
-ESCRIBIRCOMANDO                   00000091
+ESCRIBIRCARACTER                  000000B0
+ESCRIBIRCOMANDO                   0000009D
 F                                 00000001
 FERR                              00000002
 FSR                               00000004
-FUERALIM1T3                       00000123
+FUERALIM1T3                       0000012F
 FVREN                             00000000
 GCEN                              00000007
 GIE                               00000007
 GO                                00000001
 GO_DONE                           00000001
 GO_NOT_DONE                       00000001
-HEXADECIMAL                       0000002D
+HEXADECIMAL                       0000003A
 HTS                               00000002
 I2C_DATA                          00000005
 I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
-IMPRIMIR_VAR                      0000001E
+IMPRIMIR_VAR                      0000002B
 INDF                              00000000
 INTCON                            0000000B
 INTE                              00000004
@@ -1621,9 +1649,9 @@ IRCF0                             00000004
 IRCF1                             00000005
 IRCF2                             00000006
 IRP                               00000007
-IR_INIT                           00000037
-IR_RCV                            00000047
-Inicio_lcd                        000000DB
+IR_INIT                           00000044
+IR_RCV                            00000054
+Inicio_lcd                        000000E7
 LCD_INIT                          
 LTS                               00000001
 MC1OUT                            00000007
@@ -1632,13 +1660,13 @@ MOV_VAL
 MSK                               00000093
 MSK0                              00000000
 MSK1                              00000001
-MSK2                              00000002
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 29
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 30
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+MSK2                              00000002
 MSK3                              00000003
 MSK4                              00000004
 MSK5                              00000005
@@ -1673,7 +1701,7 @@ OSTS                              00000003
 P                                 00000004
 P1M0                              00000006
 P1M1                              00000007
-PARAESCR1B1RREGISTRO              00000114
+PARAESCR1B1RREGISTRO              00000120
 PCL                               00000002
 PCLATH                            0000000A
 PCON                              0000008E
@@ -1691,13 +1719,13 @@ PIE2                              0000008D
 PIR1                              0000000C
 PIR2                              0000000D
 PORTA                             00000005
-PORTB                             00000006
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 30
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 31
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PORTB                             00000006
 PORTC                             00000007
 PORTD                             00000008
 PORTE                             00000009
@@ -1750,13 +1778,13 @@ RCEN                              00000003
 RCIDL                             00000006
 RCIE                              00000005
 RCIF                              00000005
-RCREG                             0000001A
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 31
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 32
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RCREG                             0000001A
 RCSTA                             00000018
 RD                                00000000
 RD0                               00000000
@@ -1778,9 +1806,9 @@ REG_EQUAL_JMP
 REG_NE_JMP                        
 REG_VAL_EQ_JMP                    
 REG_VAL_NEQ_JMP                   
-RETARDO_1200MICROS                00000060
-RETARDO_50MICROS                  0000006C
-RETARDO_600MICROS                 00000066
+RETARDO_1200MICROS                0000006C
+RETARDO_50MICROS                  00000078
+RETARDO_600MICROS                 00000072
 RP0                               00000005
 RP1                               00000006
 RS                                00000001
@@ -1809,13 +1837,13 @@ SRCON                             00000185
 SREN                              00000005
 SSPADD                            00000093
 SSPBUF                            00000013
-SSPCON                            00000014
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 32
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 33
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SSPCON                            00000014
 SSPCON2                           00000091
 SSPEN                             00000005
 SSPIE                             00000003
@@ -1868,17 +1896,17 @@ TMR2                              00000011
 TMR2IE                            00000001
 TMR2IF                            00000001
 TMR2ON                            00000002
-TOUTPS0                           00000003
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 33
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 34
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TOUTPS0                           00000003
 TOUTPS1                           00000004
 TOUTPS2                           00000005
 TOUTPS3                           00000006
-TRESD1G                           00000135
+TRESD1G                           00000141
 TRISA                             00000085
 TRISA0                            00000000
 TRISA1                            00000001
@@ -1927,13 +1955,13 @@ TUN2                              00000002
 TUN3                              00000003
 TUN4                              00000004
 TX8_9                             00000006
-TX9                               00000006
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 34
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 35
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TX9                               00000006
 TX9D                              00000000
 TXD8                              00000000
 TXEN                              00000005
@@ -1945,12 +1973,12 @@ UA                                00000001
 ULPWUE                            00000005
 ULPWUIE                           00000002
 ULPWUIF                           00000002
-UND1G                             00000124
-UNO                               00000051
+UND1G                             00000130
+UNO                               00000062
 VCFG0                             00000004
 VCFG1                             00000005
-VERIFICACION                      00000031
-VERIFICACION_2                    0000005B
+VERIFICACION                      0000003E
+VERIFICACION_2                    00000066
 VR0                               00000000
 VR1                               00000001
 VR2                               00000002
@@ -1985,14 +2013,14 @@ WRITE_LCD_REG
 WRITE_LCD_REG_HEX                 
 WUE                               00000001
 Z                                 00000002
-_.org_0_0144                      00000144
-_BOR21V                           00003EFF
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 35
+_.org_0_0150                      00000150
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 36
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_BOR21V                           00003EFF
 _BOR40V                           00003FFF
 _BOR4V_BOR21V                     00003EFF
 _BOR4V_BOR40V                     00003FFF
@@ -2045,13 +2073,13 @@ _LVP_ON                           00003FFF
 _MCLRE_OFF                        00003FDF
 _MCLRE_ON                         00003FFF
 _PWRTE_OFF                        00003FFF
-_PWRTE_ON                         00003FEF
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 36
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 37
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_PWRTE_ON                         00003FEF
 _WDTE_OFF                         00003FF7
 _WDTE_ON                          00003FFF
 _WDT_OFF                          00003FF7
@@ -2098,19 +2126,19 @@ menorque
 menorquereg                       
 mensaje                           
 milisegundo                       
-milisegundos                      00000072
+milisegundos                      0000007E
 mover_cursor_derecha              00000014
 mover_cursor_izquierda            00000010
 mover_pantalla_derecha            0000001C
 mover_pantalla_izquierda          00000018
 multiplicarreg                    
-off                               00000000
-MPASM 5.86                      RECEPTOR.ASM   9-22-2020  11:55:59         PAGE 37
+MPASM 5.86                      RECEPTOR.ASM   9-22-2020  17:29:20         PAGE 38
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+off                               00000000
 on                                00000001
 on_display_cursor_blink           0000000F
 on_lib_retardos_ms                
@@ -2124,24 +2152,24 @@ registroadisplay
 registrocdisplay                  
 restarreg                         
 retardo_ms                        
-retbucle1                         00000073
-retbucle1a                        00000081
-retbucle2                         00000075
-retbucle2a                        00000083
-retbucle3                         00000077
-retbucle3a                        00000085
-retbucle4a                        00000087
+retbucle1                         0000007F
+retbucle1a                        0000008D
+retbucle2                         00000081
+retbucle2a                        0000008F
+retbucle3                         00000083
+retbucle3a                        00000091
+retbucle4a                        00000093
 salto_enter                       000000C0
 segundo                           
-segundos                          00000080
+segundos                          0000008C
 solo_display                      0000000C
-subp4arab0rf1l                    0000013F
+subp4arab0rf1l                    0000014B
 sumarreg                          
 ubicacionlcdccr                   0000002F
 ubicacionlcdfcr                   0000002E
 
 Errors   :     0
 Warnings :    43 reported,     0 suppressed
-Messages :    16 reported,     0 suppressed
+Messages :    24 reported,     0 suppressed
 
 
