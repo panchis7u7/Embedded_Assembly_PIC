@@ -45,11 +45,10 @@ Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 100 : Regis
 Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 103 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 104 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 106 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 119 : Using default destination of 1 (file).
-Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 135 : Using default destination of 1 (file).
-Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 136 : Using default destination of 1 (file).
+Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 139 : Using default destination of 1 (file).
 Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 140 : Using default destination of 1 (file).
-Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 141 : Using default destination of 1 (file).
+Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 144 : Using default destination of 1 (file).
+Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 145 : Using default destination of 1 (file).
 Warning[207] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RETARDOS.INC 20 : Found label after column 1. (retbucle1)
 Warning[207] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RETARDOS.INC 23 : Found label after column 1. (retbucle2)
 Warning[207] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RETARDOS.INC 26 : Found label after column 1. (retbucle3)
