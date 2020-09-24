@@ -81,13 +81,13 @@ REG_VAL_NEQ_JMP MACRO REG1,VAL,DIR
 	GOTO DIR
 	ENDM
 
-; Compara registro con un valor y si  se cumple la condicion Reg>valor se va a la subrutina
-mayorque macro registro1,valor ,subrutina
-		MOVLW valor
-		SUBWF registro1,0
+;---------------------- REG COMPARE GREATER THAN VALUE -------------------------
+JG MACRO REG1,VAL ,FUNC
+		MOVLW VAL
+		SUBWF REG1,0
 		BTFSC STATUS,C
-		GOTO subrutina
-endm
+		GOTO FUNC
+		ENDM
 ; Compara registro con un valor y si  se cumple la condicion Reg<valor se va a la subrutina
 menorque macro registro1,valor ,subrutina
 		MOVLW valor
