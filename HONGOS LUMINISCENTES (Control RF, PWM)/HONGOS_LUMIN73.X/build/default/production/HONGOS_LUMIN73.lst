@@ -1,4 +1,4 @@
-MPASM 5.86                HONGOS_LUMIN73.ASM   9-17-2020  17:31:54         PAGE  1
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -21,205 +21,361 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00005 ; __config 0xFFF2
 2007   3FF2           00006  __CONFIG _FOSC_HS & _WDTE_OFF & _PWRTE_ON & _CP_OFF & _BOREN_ON
                       00007  
-                      00008  #DEFINE RX_BYTE 0x01
-                      00009  
-                      00010  CBLOCK 0x20
-  00000020            00011     CONTADOR
-  00000021            00012     UART
-  00000022            00013     GUARDA_W
-  00000023            00014     GUARDA_STATUS
-  00000024            00015     TEMP
-  00000025            00016     CONTADOR_TIEMPO
-                      00017  ENDC
-                      00018  
-                      00019     ORG 0
-0000   2???           00020     GOTO SETUP
-                      00021     ORG 4
-0004   2???           00022     GOTO INTERRUPCION
-0005                  00023 SETUP:
-0005   1683           00024     BSF STATUS,RP0          ;BANCO 1.
-0006   1303           00025     BCF STATUS, RP1         
-0007   3020           00026     MOVLW B'00100000'       ;HABILITA LA INTERRUPCION PARA RX (RECEPCION SERIAL) EN EUSART.
+Warning[207]: Found label after column 1. (START_PASSED)
+  00000001            00008  START_PASSED EQU 0x1
+Warning[207]: Found label after column 1. (END_RECV)
+  00000002            00009  END_RECV EQU 0x2
+                      00010  
+                      00011  CBLOCK 0x20
+  00000020            00012     IR_FLAGS
+  00000021            00013     CONTADOR
+  00000022            00014     CONTADOR_2
+  00000023            00015     REC_BYTE1
+  00000024            00016     REC_BYTE2
+                      00017     ;UART
+  00000025            00018     GUARDA_W
+  00000026            00019     GUARDA_STATUS
+                      00020     ;TEMP
+  00000027            00021     CONTADOR_TIEMPO
+                      00022  ENDC
+                      00023  
+                      00024     ORG 0
+0000   2???           00025     GOTO SETUP              ;PREPARACION.
+                      00026     ORG 4
+0004   2???           00027     GOTO INT_HANDLE         ;RECEPCION IR.
+                      00028     ;GOTO INTERRUPCION
+0005                  00029 SETUP:
+0005   1683           00030     BSF STATUS,RP0          ;BANCO 1.
+0006   1303           00031     BCF STATUS, RP1         
+                      00032     ;MOVLW B'00100000'      ;HABILITA LA INTERRUPCION PARA RX (RECEPCION SERIAL) EN EUSART.
+                      00033     ;MOVWF PIE1             ;HABILITACION DE INTERRUPCION PARA RX.
+0007   3003           00034     MOVLW B'00000011'       ;PRESCALLER:16.
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0008   008C           00027     MOVWF PIE1              ;HABILITACION DE INTERRUPCION PARA RX.
+0008   0081           00035     MOVWF OPTION_REG
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0009   018D           00028     CLRF PIE2
-000A   3080           00029     MOVLW B'10000000'       ;PUERTO RX COMO ENTRADA Y CCP1,CCP2/PWM 1KHz.
+0009   018D           00036     CLRF PIE2
+                      00037     ;MOVLW B'00000000'      ;PUERTO RX COMO ENTRADA Y CCP1,CCP2/PWM 1KHz.
+                      00038     ;MOVWF TRISC
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000B   0087           00030     MOVWF TRISC
-000C   3024           00031     MOVLW B'00100100'
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000D   0098           00032     MOVWF TXSTA
-000E   30CF           00033     MOVLW D'207'            ;RESULTADO DEL CALCULO PARA 2400 BAUDIOS.
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000F   0099           00034     MOVWF SPBRG
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0010   0186           00035     CLRF TRISB              ;SALIDA PARA LOS LEDS.
-0011   30F9           00036     MOVLW D'249'
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-MPASM 5.86                HONGOS_LUMIN73.ASM   9-17-2020  17:31:54         PAGE  2
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0012   0092           00037     MOVWF PR2
-0013   1283           00038     BCF STATUS,RP0          ;BANCO 0.
-0014   1303           00039     BCF STATUS,RP1          ;CONFIGURACION DEL PUERTO RX.
-0015   0190           00040     CLRF T1CON
-0016   018C           00041     CLRF PIR1
-0017   018D           00042     CLRF PIR2
-0018   3090           00043     MOVLW B'10010000'
-0019   0098           00044     MOVWF RCSTA
-001A   30C0           00045     MOVLW B'11000000'       ;CONFIGURACION PARA INTERRUPCION RX.
-001B   008B           00046     MOVWF INTCON            ;INTERRUPCION EUSART, PEIE Y GIE.
-001C   300C           00047     MOVLW B'00001100'
-001D   0097           00048     MOVWF CCP1CON
-001E   009D           00049     MOVWF CCP2CON
-001F   30CC           00050     MOVLW D'204'
-0020   0095           00051     MOVWF CCPR1L
-0021   3000           00052     MOVLW D'0'
-0022   009B           00053     MOVWF CCPR2L
-0023   3005           00054     MOVLW B'00000101'
-0024   0092           00055     MOVWF T2CON
-0025   0186           00056     CLRF PORTB
-0026   081A           00057     MOVF RCREG,W            ;Flush receive buffer
-0027   081A           00058     MOVF RCREG,W
-0028   081A           00059     MOVF RCREG,W
-0029   3000           00060     MOVLW 0x00
-002A   00A0           00061     MOVWF CONTADOR
-002B   2???           00062     GOTO PROGRAMA
-                      00063     
-                      00064         ;ESPERA AQUI HASTA QUE EL USUARIO HAGA UNA DESICION DEL MENU.
-                      00065         ;------------------------------------------------------------
-002C                  00066 ESPERA_CMD:
-002C   10A1           00067     BCF UART,RX_BYTE
-002D                  00068 ESPERA_CMD_NUEVO:
-002D   18A1           00069     BTFSC UART,RX_BYTE
-002E   2???           00070     GOTO PROGRAMA
-002F   2???           00071     GOTO ESPERA_CMD_NUEVO
-                      00072         ;MENU DE DESICIONES.
-                      00073         ;------------------------------------------------------------
-                      00074     
-0030                  00075 PROGRAMA:
-0030   1283 1303      00076     BANKSEL TEMP
-0032   0824           00077     MOVFW TEMP
-0033   3A55           00078     XORLW 0x55
-0034   1903           00079     BTFSC STATUS,Z
-0035   2???           00080     GOTO CAMBIO_COLOR
-                      00081     
-0036   0824           00082     MOVFW TEMP
-0037   3AAA           00083     XORLW 0xAA
-0038   1903           00084     BTFSC STATUS,Z
-0039   2???           00085     GOTO CAMBIO_DUTY
-                      00086     
-003A   0824           00087     MOVFW TEMP
-003B   3A33           00088     XORLW 0x33
-003C   1903           00089     BTFSC STATUS,Z
-MPASM 5.86                HONGOS_LUMIN73.ASM   9-17-2020  17:31:54         PAGE  3
+000A   0187           00039     CLRF TRISC
+                      00040     ;MOVLW B'00100100'
+                      00041     ;MOVWF TXSTA
+                      00042     ;MOVLW D'207'           ;RESULTADO DEL CALCULO PARA 2400 BAUDIOS. (RF).
+                      00043     ;MOVWF SPBRG
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000B   0186           00044     CLRF TRISB              ;SALIDA PARA LOS LEDS. (RB1, RB2 Y RB3)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000C   1406           00045     BSF TRISB,0             ;RBO/INT -> ENTRADA PARA INTERRUPCION PARA DETECCION DE CODIGO IR
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000D   1606           00046     BSF TRISB,4
+000E   30F9           00047     MOVLW D'249'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000F   0092           00048     MOVWF PR2
+0010   1283           00049     BCF STATUS,RP0          ;BANCO 0.
+0011   1303           00050     BCF STATUS,RP1          ;CONFIGURACION DEL PUERTO RX.
+0012   0190           00051     CLRF T1CON
+0013   018C           00052     CLRF PIR1
+0014   018D           00053     CLRF PIR2
+                      00054     ;MOVLW B'10010000'
+                      00055     ;MOVWF RCSTA
+                      00056     ;MOVLW B'11000000'      ;CONFIGURACION PARA INTERRUPCION RX.
+                      00057     ;MOVWF INTCON           ;INTERRUPCION EUSART, PEIE Y GIE. (RF)
+0015   3090           00058     MOVLW B'10010000'       ;HABILITACION DE INTERRUPCION EXTERNA (RBO/INT)
+0016   008B           00059     MOVWF INTCON
+0017   300C           00060     MOVLW B'00001100'
+0018   0097           00061     MOVWF CCP1CON
+0019   009D           00062     MOVWF CCP2CON
+001A   30CC           00063     MOVLW D'204'
+001B   0095           00064     MOVWF CCPR1L
+001C   3000           00065     MOVLW D'0'
+001D   009B           00066     MOVWF CCPR2L
+001E   3005           00067     MOVLW B'00000101'
+001F   0092           00068     MOVWF T2CON
+0020   0186           00069     CLRF PORTB
+                      00070     ;MOVF RCREG,W           ;Flush receive buffer
+                      00071     ;MOVF RCREG,W
+                      00072     ;MOVF RCREG,W
+0021   01A1           00073     CLRF CONTADOR
+0022   01A2           00074     CLRF CONTADOR_2
+0023   01A7           00075     CLRF CONTADOR_TIEMPO
+0024   01A3           00076     CLRF REC_BYTE1
+0025   01A4           00077     CLRF REC_BYTE2
+0026   01A0           00078     CLRF IR_FLAGS
+0027   01A5           00079     CLRF GUARDA_W
+0028   01A6           00080     CLRF GUARDA_STATUS
+0029   2???           00081     GOTO PROGRAMA
+                      00082 
+                      00083 ;-------------------------------------------------------------------------------
+                      00084 ;ESPERA AQUI HASTA QUE EL USUARIO HAGA UNA DESICION DEL MENU.
+002A                  00085 ESPERA_CMD:
+002A   1120           00086     BCF IR_FLAGS,END_RECV
+002B                  00087 ESPERA_CMD_NUEVO:
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-003D   2???           00090     GOTO CAMBIO_AUTO
-003E   01A4           00091     CLRF TEMP
-003F   2???           00092     GOTO ESPERA_CMD
+002B   1920           00088     BTFSC IR_FLAGS,END_RECV
+002C   2???           00089     GOTO PROGRAMA
+002D   2???           00090     GOTO ESPERA_CMD_NUEVO
+                      00091 ;MENU DE DESICIONES.
+                      00092 ;-------------------------------------------------------------------------------
                       00093 
-0040                  00094 CAMBIO_COLOR:
-0040   30FF           00095     MOVLW D'255'
-0041   009B           00096     MOVWF CCPR2L
-0042   3001           00097     MOVLW D'1'
-0043   07A0           00098     ADDWF CONTADOR,1
-0044   0820           00099     MOVFW CONTADOR
-0045   3907           00100     ANDLW D'7'
-0046   0086           00101     MOVWF PORTB
-0047   2???           00102     GOTO ESPERA_CMD
-                      00103     
-0048                  00104 CAMBIO_DUTY:
-0048   3033           00105     MOVLW D'51'
-0049   0795           00106     ADDWF CCPR1L,1
-004A   2???           00107     GOTO ESPERA_CMD
-                      00108     
-004B                  00109 CAMBIO_AUTO:
-004B   10A1           00110     BCF UART,RX_BYTE
-004C   3000           00111     MOVLW 0x00
-004D   009B           00112     MOVWF CCPR2L
-004E                  00113 REPETICION:
-004E   3001           00114     MOVLW D'1'
-004F   07A0           00115     ADDWF CONTADOR,1
-0050   0820           00116     MOVFW CONTADOR
-0051   3907           00117     ANDLW D'7'
-0052   0086           00118     MOVWF PORTB
-0053   30FF           00119     MOVLW 0xFF
-0054   00A5           00120     MOVWF CONTADOR_TIEMPO
-0055                  00121 LED_BRILLO:
-0055   18A1           00122     BTFSC UART,RX_BYTE
-0056   2???           00123     GOTO ESPERA_CMD_NUEVO
-0057   2???           00124     CALL CAMBIO_RETARDO_15MS
-0058   0A9B           00125     INCF CCPR2L,1
-0059   0BA5           00126     DECFSZ CONTADOR_TIEMPO,F
-005A   2???           00127     GOTO LED_BRILLO
-005B   2???           00128     CALL CAMBIO_RETARDO_15MS
-005C   30FF           00129     MOVLW 0xFF
-005D   00A5           00130     MOVWF CONTADOR_TIEMPO
-005E                  00131 LED_APAGADO:
-005E   18A1           00132     BTFSC UART,RX_BYTE
-005F   2???           00133     GOTO ESPERA_CMD_NUEVO
-0060   2???           00134     CALL CAMBIO_RETARDO_15MS
-0061   039B           00135     DECF CCPR2L,1
-0062   0BA5           00136     DECFSZ CONTADOR_TIEMPO,F
-0063   2???           00137     GOTO LED_APAGADO
-0064   2???           00138     GOTO REPETICION
-                      00139   
-0065                  00140 CAMBIO_RETARDO_15MS:   
-0065   1010           00141     BCF T1CON,TMR1ON
-0066   3065           00142     MOVLW 0x65
-MPASM 5.86                HONGOS_LUMIN73.ASM   9-17-2020  17:31:54         PAGE  4
+                      00094 ;-------------------------------------------------------------------------------
+                      00095 ;CHECAR SI LOS CODIGOS RECIBIDOS CORRESPONDEN A ALGUN COMANDO.
+002E                  00096 PROGRAMA:
+002E   01A2           00097     CLRF CONTADOR_2
+002F   1283 1303      00098     BANKSEL REC_BYTE1
+0031   0823           00099     MOVFW REC_BYTE1
+0032   3A00           00100     XORLW 0x00
+0033   1D03           00101     BTFSS STATUS,Z
+0034   2???           00102     GOTO CHECK_CAMBIO_DUTY
+0035   1283 1303      00103     BANKSEL REC_BYTE2
+0037   0824           00104     MOVFW REC_BYTE2
+0038   3A10           00105     XORLW 0x10
+0039   1903           00106     BTFSC STATUS,Z
+003A   2???           00107     GOTO CAMBIO_COLOR
+                      00108 
+003B                  00109 CHECK_CAMBIO_DUTY:
+003B   1283 1303      00110     BANKSEL REC_BYTE1
+003D   0823           00111     MOVFW REC_BYTE1
+003E   3A08           00112     XORLW 0x08
+003F   1D03           00113     BTFSS STATUS,Z
+0040   2???           00114     GOTO CHECK_CAMBIO_AUTO
+0041   1283 1303      00115     BANKSEL REC_BYTE2
+0043   0824           00116     MOVFW REC_BYTE2
+0044   3A10           00117     XORLW 0x10
+0045   1903           00118     BTFSC STATUS,Z
+0046   2???           00119     GOTO CAMBIO_DUTY
+                      00120 
+0047                  00121 CHECK_CAMBIO_AUTO:
+0047   1283 1303      00122     BANKSEL REC_BYTE1
+0049   0823           00123     MOVFW REC_BYTE1
+004A   3A04           00124     XORLW 0x04
+004B   1D03           00125     BTFSS STATUS,Z
+004C   2???           00126     GOTO ESPERA_CMD
+004D   1283 1303      00127     BANKSEL REC_BYTE2
+004F   0824           00128     MOVFW REC_BYTE2
+0050   3A10           00129     XORLW 0x10
+0051   1903           00130     BTFSC STATUS,Z
+0052   2???           00131     GOTO CAMBIO_AUTO
+0053   1283 1303      00132     BANKSEL REC_BYTE1
+0055   01A3           00133     CLRF REC_BYTE1
+0056   1283 1303      00134     BANKSEL REC_BYTE2
+0058   01A4           00135     CLRF REC_BYTE2
+0059   2???           00136     GOTO ESPERA_CMD
+                      00137 ;FIN DE COMPARACION DE CODIGOS DISPONIBLES.
+                      00138 ;-------------------------------------------------------------------------------
+                      00139 
+                      00140 ;-------------------------------------------------------------------------------
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0067   008F           00143     MOVWF TMR1H
-0068   3068           00144     MOVLW 0x68
-0069   008E           00145     MOVWF TMR1L
-006A   1410           00146     BSF T1CON,TMR1ON
-Warning[207]: Found label after column 1. (RETARDO_15MS_4_0)
-006B                  00147  RETARDO_15MS_4_0:
-006B   1C0C           00148     BTFSS PIR1,TMR1IF
-006C   2???           00149     GOTO RETARDO_15MS_4_0
-006D   1010           00150     BCF T1CON,TMR1ON
-006E   100C           00151     BCF PIR1,TMR1IF
-006F   0008           00152     RETURN
-                      00153     
-0070                  00154 INTERRUPCION:
-0070   00A2           00155     MOVWF GUARDA_W
-0071   0E03           00156     SWAPF STATUS,W
-0072   00A3           00157     MOVWF GUARDA_STATUS
-0073   1283           00158     BCF STATUS,RP0
-0074   1303           00159     BCF STATUS,RP1
-0075                  00160 GUARDADO:
-0075   1E8C           00161     BTFSS PIR1,RCIF         ;CHECAR SI LA INTERRUPCION ES DEL USART.
-0076   2???           00162     GOTO EXIT 
-0077   18A1           00163     BTFSC UART,RX_BYTE      ;SI RX_BIT ESTA ALTO, ENTONCES RXREG NO SE HA PROCESADO AUN.
-0078   2???           00164     GOTO EXIT
-0079   081A           00165     MOVFW RCREG             ;Read input byte into W
-007A   00A4           00166     MOVWF TEMP              ;Store received byte to shared RAM
-007B   14A1           00167     BSF UART,RX_BYTE
-007C   081A           00168     MOVFW RCREG             ;PUEDE HABER UN SEGUNDO BYTE.
-007D   1218           00169     BCF RCSTA,CREN
-007E   1618           00170     BSF RCSTA,CREN
-007F                  00171 EXIT:
-007F   081A           00172     MOVFW RCREG
-0080   081A           00173     MOVFW RCREG
-0081   0E23           00174     SWAPF GUARDA_STATUS,W
-0082   0083           00175     MOVWF STATUS
-0083   0EA2           00176     SWAPF GUARDA_W,F
-0084   0E22           00177     SWAPF GUARDA_W,W
-0085   0009           00178     RETFIE
-3FF2                  00179     END
-MPASM 5.86                HONGOS_LUMIN73.ASM   9-17-2020  17:31:54         PAGE  5
+                      00141 ;MODO MANUAL DE CAMBIO DE COLOR.
+005A                  00142 CAMBIO_COLOR:
+005A   30FF           00143     MOVLW D'255'
+005B   009B           00144     MOVWF CCPR2L
+005C   1283 1303      00145     BANKSEL CONTADOR
+005E   0AA1           00146     INCF CONTADOR,1
+005F   0821           00147     MOVFW CONTADOR
+0060   3907           00148     ANDLW D'7'
+Message[305]: Using default destination of 1 (file).
+0061   0D80           00149     RLF W
+0062   0086           00150     MOVWF PORTB
+0063   2???           00151     GOTO ESPERA_CMD
+                      00152 ;FIN FUNCION
+                      00153 ;-------------------------------------------------------------------------------
+                      00154 
+                      00155 ;-------------------------------------------------------------------------------
+                      00156 ;CAMBIO DE BRILLO DEL LED.
+0064                  00157 CAMBIO_DUTY:
+0064   3033           00158     MOVLW D'51'
+0065   0795           00159     ADDWF CCPR1L,1
+0066   2???           00160     GOTO ESPERA_CMD
+                      00161 ;FIN FUNCION.
+                      00162 ;-------------------------------------------------------------------------------
+                      00163 
+                      00164 ;-------------------------------------------------------------------------------
+                      00165 ;MODO DE CAMBIO AUTOMATICO DE COLORES.
+0067                  00166 CAMBIO_AUTO:
+0067   1120           00167     BCF IR_FLAGS,END_RECV
+0068   3000           00168     MOVLW 0x00
+0069   009B           00169     MOVWF CCPR2L
+006A                  00170 REPETICION:
+006A   1283 1303      00171     BANKSEL CONTADOR
+006C   0AA1           00172     INCF CONTADOR,1
+006D   0821           00173     MOVFW CONTADOR
+006E   3907           00174     ANDLW D'7'
+Message[305]: Using default destination of 1 (file).
+006F   0D80           00175     RLF W
+0070   0086           00176     MOVWF PORTB
+0071   1283 1303      00177     BANKSEL CONTADOR_TIEMPO
+0073   30FF           00178     MOVLW 0xFF
+0074   00A7           00179     MOVWF CONTADOR_TIEMPO
+0075                  00180 LED_BRILLO:
+0075   1920           00181     BTFSC IR_FLAGS,END_RECV
+0076   2???           00182     GOTO ESPERA_CMD
+0077   2???           00183     CALL CAMBIO_RETARDO_15MS
+0078   0A9B           00184     INCF CCPR2L,1
+0079   0BA7           00185     DECFSZ CONTADOR_TIEMPO,F
+007A   2???           00186     GOTO LED_BRILLO
+007B   2???           00187     CALL CAMBIO_RETARDO_15MS
+007C   30FF           00188     MOVLW 0xFF
+007D   00A7           00189     MOVWF CONTADOR_TIEMPO
+007E                  00190 LED_APAGADO:
+007E   1920           00191     BTFSC IR_FLAGS,END_RECV
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+007F   2???           00192     GOTO ESPERA_CMD
+0080   2???           00193     CALL CAMBIO_RETARDO_15MS
+0081   039B           00194     DECF CCPR2L,1
+0082   0BA7           00195     DECFSZ CONTADOR_TIEMPO,F
+0083   2???           00196     GOTO LED_APAGADO
+0084   2???           00197     GOTO REPETICION
+                      00198 ;FIN FUNCION.
+                      00199 ;-------------------------------------------------------------------------------
+                      00200 
+                      00201 ;INTERRUPCION PARA RECEPCION DE DATOS A TRAVES DEL USART. (RF)
+                      00202 ;INTERRUPCION:
+                      00203 ;    MOVWF GUARDA_W
+                      00204 ;    SWAPF STATUS,W
+                      00205 ;    MOVWF GUARDA_STATUS
+                      00206 ;    BCF STATUS,RP0
+                      00207 ;    BCF STATUS,RP1
+                      00208 ;GUARDADO:
+                      00209 ;    BTFSS PIR1,RCIF        ;CHECAR SI LA INTERRUPCION ES DEL USART.
+                      00210 ;    GOTO EXIT 
+                      00211 ;    BTFSC UART,RX_BYTE     ;SI RX_BIT ESTA ALTO, ENTONCES RXREG NO SE HA PROCESADO AUN.
+                      00212 ;    GOTO EXIT
+                      00213 ;    MOVFW RCREG                    ;Read input byte into W
+                      00214 ;    MOVWF TEMP             ;Store received byte to shared RAM
+                      00215 ;    BSF UART,RX_BYTE
+                      00216 ;    MOVFW RCREG                    ;PUEDE HABER UN SEGUNDO BYTE.
+                      00217 ;    BCF RCSTA,CREN
+                      00218 ;    BSF RCSTA,CREN
+                      00219 ;EXIT:
+                      00220 ;    MOVFW RCREG
+                      00221 ;    MOVFW RCREG
+                      00222 ;    SWAPF GUARDA_STATUS,W
+                      00223 ;    MOVWF STATUS
+                      00224 ;    SWAPF GUARDA_W,F
+                      00225 ;    SWAPF GUARDA_W,W
+                      00226 ;    RETFIE
+                      00227 
+                      00228 ;-------------------------------------------------------------------------------
+                      00229 ;INTERRUPCION PARA RECEPCION DE DATOS A TRAVES DE SALIDA EXTERNA. (IR)
+0085                  00230 INT_HANDLE:
+0085   00A5           00231     MOVWF GUARDA_W
+0086   0E03           00232     SWAPF STATUS,W
+0087   00A6           00233     MOVWF GUARDA_STATUS
+0088   1283           00234     BCF STATUS,RP0
+0089                  00235 HANDLE:
+0089   0AA2           00236     INCF CONTADOR_2,1
+008A   18A0           00237     BTFSC IR_FLAGS,START_PASSED
+008B   2???           00238     GOTO IR_RCV
+008C   2???           00239     CALL RETARDO_2500MICROS
+008D   1E06           00240     BTFSS PORTB,4
+008E   2???           00241     GOTO VERIFICACION_2
+008F   14A0           00242     BSF IR_FLAGS,START_PASSED
+0090   2???           00243     GOTO VERIFICACION_2
+0091                  00244 IR_RCV:
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0091   1120           00245     BCF IR_FLAGS,END_RECV
+0092   2???           00246     CALL RETARDO_900MICROS
+0093   1E06           00247     BTFSS PORTB,4
+0094   2???           00248     GOTO UNO
+0095                  00249 CERO:
+0095   1003           00250     BCF STATUS,C
+Message[305]: Using default destination of 1 (file).
+0096   0DA4           00251     RLF REC_BYTE2
+Message[305]: Using default destination of 1 (file).
+0097   0DA3           00252     RLF REC_BYTE1
+0098   1003           00253     BCF STATUS,C
+0099   2???           00254     GOTO VERIFICACION_2
+009A                  00255 UNO:
+009A   1403           00256     BSF STATUS,C
+Message[305]: Using default destination of 1 (file).
+009B   0DA4           00257     RLF REC_BYTE2
+Message[305]: Using default destination of 1 (file).
+009C   0DA3           00258     RLF REC_BYTE1
+009D   1003           00259     BCF STATUS,C
+009E                  00260 VERIFICACION_2:
+009E   1283 1303      00261     BANKSEL CONTADOR_2
+00A0   0822           00262     MOVFW CONTADOR_2
+00A1   3A0C           00263     XORLW D'12'
+00A2   1903           00264     BTFSC STATUS,Z
+00A3   1520           00265     BSF IR_FLAGS,END_RECV
+00A4   0E26           00266     SWAPF GUARDA_STATUS,W
+00A5   0083           00267     MOVWF STATUS
+00A6   0EA5           00268     SWAPF GUARDA_W,F
+00A7   0E25           00269     SWAPF GUARDA_W,W
+00A8   108B           00270     BCF INTCON,INTF
+00A9   0009           00271     RETFIE
+                      00272 ;FIN INTERRUPCION.
+                      00273 ;-------------------------------------------------------------------------------
+                      00274     
+                      00275 ;RETARDO DE 2.5MS USANDO TIMER0.
+00AA                  00276 RETARDO_2500MICROS:
+00AA   110B           00277     BCF INTCON,T0IF
+00AB   3064           00278     MOVLW D'100'
+00AC   0081           00279     MOVWF TMR0
+00AD                  00280 COMPROBAR:
+00AD   1D0B           00281     BTFSS INTCON,T0IF
+00AE   2???           00282     GOTO COMPROBAR
+00AF   0008           00283     RETURN
+                      00284     
+                      00285 ;RETARDO DE 900 MICROS USANDO TIMER0.
+00B0                  00286 RETARDO_900MICROS:
+00B0   110B           00287     BCF INTCON,T0IF
+00B1   30C8           00288     MOVLW D'200'
+00B2   0081           00289     MOVWF TMR0
+00B3                  00290 COMPROBAR_2:
+00B3   1D0B           00291     BTFSS INTCON,T0IF
+00B4   2???           00292     GOTO COMPROBAR_2
+00B5   0008           00293     RETURN
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00294 
+                      00295 ;TIEMPO ENTRE CAMBIO DE COLORES EN EL MODO AUTOMATICO DEL LED RGB.
+00B6                  00296 CAMBIO_RETARDO_15MS:   
+00B6   1010           00297     BCF T1CON,TMR1ON
+00B7   3065           00298     MOVLW 0x65
+00B8   008F           00299     MOVWF TMR1H
+00B9   3068           00300     MOVLW 0x68
+00BA   008E           00301     MOVWF TMR1L
+00BB   1410           00302     BSF T1CON,TMR1ON
+00BC                  00303 RETARDO_15MS_4_0:
+00BC   1C0C           00304     BTFSS PIR1,TMR1IF
+00BD   2???           00305     GOTO RETARDO_15MS_4_0
+00BE   1010           00306     BCF T1CON,TMR1ON
+00BF   100C           00307     BCF PIR1,TMR1IF
+00C0   0008           00308     RETURN
+                      00309     
+3FF2                  00310     END
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE  8
 
 
 SYMBOL TABLE
@@ -236,10 +392,10 @@ ADRES                             0000001E
 BF                                00000000
 BRGH                              00000002
 C                                 00000000
-CAMBIO_AUTO                       0000004B
-CAMBIO_COLOR                      00000040
-CAMBIO_DUTY                       00000048
-CAMBIO_RETARDO_15MS               00000065
+CAMBIO_AUTO                       00000067
+CAMBIO_COLOR                      0000005A
+CAMBIO_DUTY                       00000064
+CAMBIO_RETARDO_15MS               000000B6
 CCP1CON                           00000017
 CCP1IE                            00000002
 CCP1IF                            00000002
@@ -264,29 +420,35 @@ CCPR1L                            00000015
 CCPR2                             0000001B
 CCPR2H                            0000001C
 CCPR2L                            0000001B
+CERO                              00000095
+CHECK_CAMBIO_AUTO                 00000047
+CHECK_CAMBIO_DUTY                 0000003B
 CHS0                              00000003
 CHS1                              00000004
 CHS2                              00000005
 CKE                               00000006
 CKP                               00000004
-CONTADOR                          00000020
-CONTADOR_TIEMPO                   00000025
+COMPROBAR                         000000AD
+COMPROBAR_2                       000000B3
+CONTADOR                          00000021
+CONTADOR_2                        00000022
+CONTADOR_TIEMPO                   00000027
 CREN                              00000004
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 CSRC                              00000007
 D                                 00000005
 DATA_ADDRESS                      00000005
 DC                                00000001
 D_A                               00000005
 D_NOT_A                           00000005
-MPASM 5.86                HONGOS_LUMIN73.ASM   9-17-2020  17:31:54         PAGE  6
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
-ESPERA_CMD                        0000002C
-ESPERA_CMD_NUEVO                  0000002D
-EXIT                              0000007F
+END_RECV                          00000002
+ESPERA_CMD                        0000002A
+ESPERA_CMD_NUEVO                  0000002B
 F                                 00000001
 FERR                              00000002
 FSR                               00000004
@@ -294,9 +456,9 @@ GIE                               00000007
 GO                                00000002
 GO_DONE                           00000002
 GO_NOT_DONE                       00000002
-GUARDADO                          00000075
-GUARDA_STATUS                     00000023
-GUARDA_W                          00000022
+GUARDA_STATUS                     00000026
+GUARDA_W                          00000025
+HANDLE                            00000089
 I2C_DATA                          00000005
 I2C_READ                          00000002
 I2C_START                         00000003
@@ -305,11 +467,13 @@ INDF                              00000000
 INTCON                            0000000B
 INTE                              00000004
 INTEDG                            00000006
-INTERRUPCION                      00000070
 INTF                              00000001
+INT_HANDLE                        00000085
 IRP                               00000007
-LED_APAGADO                       0000005E
-LED_BRILLO                        00000055
+IR_FLAGS                          00000020
+IR_RCV                            00000091
+LED_APAGADO                       0000007E
+LED_BRILLO                        00000075
 NOT_A                             00000005
 NOT_ADDRESS                       00000005
 NOT_BO                            00000000
@@ -329,6 +493,12 @@ OPTION_REG                        00000081
 P                                 00000004
 PCFG0                             00000000
 PCFG1                             00000001
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 PCFG2                             00000002
 PCL                               00000002
 PCLATH                            0000000A
@@ -337,12 +507,6 @@ PEIE                              00000006
 PIE1                              0000008C
 PIE2                              0000008D
 PIR1                              0000000C
-MPASM 5.86                HONGOS_LUMIN73.ASM   9-17-2020  17:31:54         PAGE  7
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 PIR2                              0000000D
 PMADR                             0000010D
 PMADRH                            0000010F
@@ -353,7 +517,7 @@ PORTA                             00000005
 PORTB                             00000006
 PORTC                             00000007
 PR2                               00000092
-PROGRAMA                          00000030
+PROGRAMA                          0000002E
 PS0                               00000000
 PS1                               00000001
 PS2                               00000002
@@ -388,23 +552,26 @@ RC9                               00000006
 RCD8                              00000000
 RCIE                              00000005
 RCIF                              00000005
-RCREG                             0000001A
-RCSTA                             00000018
-RD                                00000000
-READ_WRITE                        00000002
-REPETICION                        0000004E
-RETARDO_15MS_4_0                  0000006B
-RP0                               00000005
-RP1                               00000006
-MPASM 5.86                HONGOS_LUMIN73.ASM   9-17-2020  17:31:54         PAGE  8
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+REC_BYTE1                         00000023
+REC_BYTE2                         00000024
+REPETICION                        0000006A
+RETARDO_15MS_4_0                  000000BC
+RETARDO_2500MICROS                000000AA
+RETARDO_900MICROS                 000000B0
+RP0                               00000005
+RP1                               00000006
 RX9                               00000006
 RX9D                              00000000
-RX_BYTE                           0x01
 R_NOT_W                           00000002
 R_W                               00000002
 S                                 00000003
@@ -425,6 +592,7 @@ SSPM2                             00000002
 SSPM3                             00000003
 SSPOV                             00000006
 SSPSTAT                           00000094
+START_PASSED                      00000001
 STATUS                            00000003
 SYNC                              00000004
 T0CS                              00000005
@@ -439,11 +607,16 @@ T1OSCEN                           00000003
 T2CKPS0                           00000000
 T2CKPS1                           00000001
 T2CON                             00000012
-TEMP                              00000024
 TMR0                              00000001
 TMR0IE                            00000005
 TMR0IF                            00000002
 TMR1                              0000000E
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 TMR1CS                            00000001
 TMR1H                             0000000F
 TMR1IE                            00000000
@@ -455,12 +628,6 @@ TMR2IE                            00000001
 TMR2IF                            00000001
 TMR2ON                            00000002
 TOUTPS0                           00000003
-MPASM 5.86                HONGOS_LUMIN73.ASM   9-17-2020  17:31:54         PAGE  9
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 TOUTPS1                           00000004
 TOUTPS2                           00000005
 TOUTPS3                           00000006
@@ -500,8 +667,15 @@ TXIF                              00000004
 TXREG                             00000019
 TXSTA                             00000098
 UA                                00000001
-UART                              00000021
+UNO                               0000009A
+VERIFICACION_2                    0000009E
 W                                 00000000
+MPASM 5.86                HONGOS_LUMIN73.ASM   9-24-2020  12:41:28         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 WCOL                              00000007
 Z                                 00000002
 _BODEN_OFF                        00003FBF
@@ -514,12 +688,6 @@ _CP_OFF                           00003FFF
 _CP_ON                            00003FEF
 _DEVID1                           00002006
 _FOSC_HS                          00003FFE
-MPASM 5.86                HONGOS_LUMIN73.ASM   9-17-2020  17:31:54         PAGE 10
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 _FOSC_LP                          00003FFC
 _FOSC_RC                          00003FFF
 _FOSC_XT                          00003FFD
@@ -540,7 +708,7 @@ _XT_OSC                           00003FFD
 __16F73                           00000001
 
 Errors   :     0
-Warnings :     1 reported,     0 suppressed
-Messages :     7 reported,     0 suppressed
+Warnings :     2 reported,     0 suppressed
+Messages :    13 reported,     0 suppressed
 
 

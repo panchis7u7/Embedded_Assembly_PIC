@@ -1,4 +1,4 @@
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE  1
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (LIST)
                       00037         IF NO_BANK==1
                       00038         BSF STATUS, RP0
                       00039         BCF STATUS, RP1
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE  2
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00090                 ENDM
                       00091 ; Compara registro con un valor y si  se cumple la condicion Reg<valor se va a la subrutina
                       00092 menorque macro registro1,valor ,subrutina
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE  3
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ Warning[205]: Found directive in column 1. (endm)
                       00136 endm
                       00137 ;...............................................///////////////////////////////////.....................
                             ..../////////////////////////
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE  4
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ Warning[205]: Found directive in column 1. (endm)
 Warning[205]: Found directive in column 1. (endm)
                       00186 endm
                       00187 escribirmensaje macro
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE  5
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ Warning[205]: Found directive in column 1. (endm)
                       00235                 if x==.3
                       00236         call SubirCarActer3
                       00237         endif
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE  6
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00286                 MESSG "de 1 a 4 solamente."
                       00287         endif
 Warning[205]: Found directive in column 1. (endm)
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE  7
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ Warning[205]: Found directive in column 1. (endm)
                       00334 
                       00335 ;Desde aquí los comandos para manipulación del display //////////////////////////////////////////
                       00336 CLEAR_LCD  MACRO                ;Borra todo lo de la pantalla
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE  8
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ Warning[205]: Found directive in column 1. (endm)
                       00381 endm
                       00382 
                       00383 restarreg macro registrox1,registrox2; Hay que asegurarse que el registro 1 sea mayor al registro2.
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE  9
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -529,7 +529,7 @@ Warning[205]: Found directive in column 1. (endm)
                       00427         MOVWF Rresulm3edid4    ;Guarda la respuesta en el indicador de registro 
 Warning[205]: Found directive in column 1. (endm)
                       00428 endm
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 10
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -588,7 +588,7 @@ Warning[207]: Found label after column 1. (START_PASSED)
   00000020            00014     IR_FLAGS
   00000021            00015     DIGITO
   00000022            00016     TEMP
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 11
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -647,209 +647,158 @@ Warning[205]: Found directive in column 1. (ENDC)
                       00049     ONLY_DISPLAY
 001F   300C               M         MOVLW solo_display
 0020   2???               M         CALL ESCRIBIRCOMANDO
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 12
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 12
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00050     ;CALL IR_RCV
-0021   1283 1303      00051     BANKSEL CONTADOR_2
-0023                  00052 PRUEBA:
-0023   0824           00053     MOVFW CONTADOR_2
-0024   3A0D           00054     XORLW D'13'
-0025   1D03           00055     BTFSS STATUS,Z
-0026   2???           00056     GOTO PRUEBA
-0027   10A0           00057     BCF IR_FLAGS,START_PASSED
-0028   01A4           00058     CLRF CONTADOR_2
-                      00059 ;    BCF STATUS,C
-                      00060 ;    RRF REC_BYTE1
-                      00061 ;    RRF REC_BYTE2
-                      00062 ;    BCF STATUS,C
-                      00063 ;    RRF REC_BYTE1
-                      00064 ;    RRF REC_BYTE2
-                      00065 ;    BCF STATUS,C
-                      00066 ;    RRF REC_BYTE1
-                      00067 ;    RRF REC_BYTE2
-                      00068 ;    BCF STATUS,C
-                      00069 ;    RLF REC_BYTE1
-                      00070 ;    RLF REC_BYTE1
-                      00071 ;    BCF STATUS,C
-0029   2???           00072     GOTO START
-                      00073 
-002A                  00074 IMPRIMIR_VAR:
-002A   1003           00075     BCF STATUS,C
-002B   0AA3           00076     INCF CONTADOR,1
-002C   3009           00077     MOVLW D'9'
-002D   00A1           00078     MOVWF DIGITO
-002E   0EA2           00079     SWAPF TEMP,1
-002F   0822           00080     MOVFW TEMP
-0030   390F           00081     ANDLW 0xF
-0031   02A1           00082     SUBWF DIGITO,1
-0032   1803           00083     BTFSC STATUS,C
-0033   2???           00084     GOTO DECIMAL
-0034   2???           00085     GOTO HEXADECIMAL
-0035                  00086 DECIMAL:
-0035   00A1           00087     MOVWF DIGITO
-                      00088     WRITE_LCD_REG DIGITO
+0021   1283 1303      00050     BANKSEL CONTADOR_2
+0023                  00051 PRUEBA:
+0023   0824           00052     MOVFW CONTADOR_2
+0024   3A0D           00053     XORLW D'13'
+0025   1D03           00054     BTFSS STATUS,Z
+0026   2???           00055     GOTO PRUEBA
+0027   10A0           00056     BCF IR_FLAGS,START_PASSED
+0028   01A4           00057     CLRF CONTADOR_2
+0029   2???           00058     GOTO START
+                      00059 
+002A                  00060 IMPRIMIR_VAR:
+002A   1003           00061     BCF STATUS,C
+002B   0AA3           00062     INCF CONTADOR,1
+002C   3009           00063     MOVLW D'9'
+002D   00A1           00064     MOVWF DIGITO
+002E   0EA2           00065     SWAPF TEMP,1
+002F   0822           00066     MOVFW TEMP
+0030   390F           00067     ANDLW 0xF
+0031   02A1           00068     SUBWF DIGITO,1
+0032   1803           00069     BTFSC STATUS,C
+0033   2???           00070     GOTO DECIMAL
+0034   2???           00071     GOTO HEXADECIMAL
+0035                  00072 DECIMAL:
+0035   00A1           00073     MOVWF DIGITO
+                      00074     WRITE_LCD_REG DIGITO
 0036   3030               M         MOVLW .48
 0037   0721               M         ADDWF DIGITO,0
 0038   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
-0039   2???           00089     GOTO VERIFICACION
-003A                  00090 HEXADECIMAL:
-003A   00A1           00091     MOVWF DIGITO
-                      00092     WRITE_LCD_REG_HEX DIGITO
+0039   2???           00075     GOTO VERIFICACION
+003A                  00076 HEXADECIMAL:
+003A   00A1           00077     MOVWF DIGITO
+                      00078     WRITE_LCD_REG_HEX DIGITO
 003B   3037               M         MOVLW .55
 003C   0721               M         ADDWF DIGITO,0
 003D   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
-003E                  00093 VERIFICACION:
-003E   0823           00094     MOVFW CONTADOR
-003F   3A02           00095     XORLW D'2'
-0040   1D03           00096     BTFSS STATUS,Z
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 13
+003E                  00079 VERIFICACION:
+003E   0823           00080     MOVFW CONTADOR
+003F   3A02           00081     XORLW D'2'
+0040   1D03           00082     BTFSS STATUS,Z
+0041   2???           00083     GOTO IMPRIMIR_VAR
+0042   01A3           00084     CLRF CONTADOR
+0043   0008           00085     RETURN
+                      00086     
+0044                  00087 IR_INIT: 
+0044   1683           00088     BSF STATUS,RP0
+0045   1703           00089     BSF STATUS,RP1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0046   0188           00090     CLRF ANSEL
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0047   0189           00091     CLRF ANSELH
+0048   1683           00092     BSF STATUS,RP0
+0049   1303           00093     BCF STATUS,RP1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0041   2???           00097     GOTO IMPRIMIR_VAR
-0042   01A3           00098     CLRF CONTADOR
-0043   0008           00099     RETURN
-                      00100     
-0044                  00101 IR_INIT: 
-0044   1683           00102     BSF STATUS,RP0
-0045   1703           00103     BSF STATUS,RP1
+004A   1406           00094     BSF TRISB,0         ; IR is input
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0046   0188           00104     CLRF ANSEL
+004B   1606           00095     BSF TRISB,4         ;Comparator Input
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0047   0189           00105     CLRF ANSELH
-0048   1683           00106     BSF STATUS,RP0
-0049   1303           00107     BCF STATUS,RP1
+004C   0188           00096     CLRF TRISD
+004D   3003           00097     MOVLW B'00000011'   ;PRESCALLER:16.
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-004A   1406           00108     BSF TRISB,0         ; IR is input
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-004B   1606           00109     BSF TRISB,4         ;Comparator Input
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-004C   0188           00110     CLRF TRISD
-004D   3003           00111     MOVLW B'00000011'   ;PRESCALLER:16.
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-004E   0081           00112     MOVWF OPTION_REG
-004F   1283           00113     BCF STATUS,RP0      ; Select memory bank 0
-0050   3090           00114     MOVLW B'10010000'
-0051   008B           00115     MOVWF INTCON
-0052   0188           00116     CLRF PORTD
-0053   01A5           00117     CLRF REC_BYTE1
-0054   01A6           00118     CLRF REC_BYTE2
-0055   01A3           00119     CLRF CONTADOR
-0056   01A4           00120     CLRF CONTADOR_2
-0057   01A0           00121     CLRF IR_FLAGS
-0058   0008           00122     RETURN
-                      00123     
-0059                  00124 INT_HANDLE:
-0059   00A7           00125     MOVWF GUARDA_W
-005A   0E03           00126     SWAPF STATUS,W
-005B   00A8           00127     MOVWF GUARDA_STATUS
-005C   1283           00128     BCF STATUS,RP0
-005D                  00129 HANDLE:
-005D   0AA4           00130     INCF CONTADOR_2,1
-005E   18A0           00131     BTFSC IR_FLAGS,START_PASSED
-005F   2???           00132     GOTO IR_RCV
-0060   2???           00133     CALL RETARDO_2500MICROS
-0061   1E06           00134     BTFSS PORTB,4
-0062   2???           00135     GOTO VERIFICACION_2
-0063   14A0           00136     BSF IR_FLAGS,START_PASSED
-0064   2???           00137     GOTO VERIFICACION_2
-0065                  00138 IR_RCV:
-0065   2???           00139     CALL RETARDO_900MICROS
-0066   1E06           00140     BTFSS PORTB,4
-0067   2???           00141     GOTO UNO
-0068                  00142 CERO:
-0068   1003           00143     BCF STATUS,C
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 14
+004E   0081           00098     MOVWF OPTION_REG
+004F   1283           00099     BCF STATUS,RP0      ; Select memory bank 0
+0050   3090           00100     MOVLW B'10010000'
+0051   008B           00101     MOVWF INTCON
+0052   0188           00102     CLRF PORTD
+0053   01A5           00103     CLRF REC_BYTE1
+0054   01A6           00104     CLRF REC_BYTE2
+0055   01A3           00105     CLRF CONTADOR
+0056   01A4           00106     CLRF CONTADOR_2
+0057   01A0           00107     CLRF IR_FLAGS
+0058   0008           00108     RETURN
+                      00109     
+0059                  00110 INT_HANDLE:
+0059   00A7           00111     MOVWF GUARDA_W
+005A   0E03           00112     SWAPF STATUS,W
+005B   00A8           00113     MOVWF GUARDA_STATUS
+005C   1283           00114     BCF STATUS,RP0
+005D                  00115 HANDLE:
+005D   0AA4           00116     INCF CONTADOR_2,1
+005E   18A0           00117     BTFSC IR_FLAGS,START_PASSED
+005F   2???           00118     GOTO IR_RCV
+0060   2???           00119     CALL RETARDO_2500MICROS
+0061   1E06           00120     BTFSS PORTB,4
+0062   2???           00121     GOTO VERIFICACION_2
+0063   14A0           00122     BSF IR_FLAGS,START_PASSED
+0064   2???           00123     GOTO VERIFICACION_2
+0065                  00124 IR_RCV:
+0065   2???           00125     CALL RETARDO_900MICROS
+0066   1E06           00126     BTFSS PORTB,4
+0067   2???           00127     GOTO UNO
+0068                  00128 CERO:
+0068   1003           00129     BCF STATUS,C
+Message[305]: Using default destination of 1 (file).
+0069   0DA6           00130     RLF REC_BYTE2
+Message[305]: Using default destination of 1 (file).
+006A   0DA5           00131     RLF REC_BYTE1
+006B   1003           00132     BCF STATUS,C
+006C   2???           00133     GOTO VERIFICACION_2
+006D                  00134 UNO:
+006D   1403           00135     BSF STATUS,C
+Message[305]: Using default destination of 1 (file).
+006E   0DA6           00136     RLF REC_BYTE2
+Message[305]: Using default destination of 1 (file).
+006F   0DA5           00137     RLF REC_BYTE1
+0070   1003           00138     BCF STATUS,C
+0071                  00139 VERIFICACION_2:
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 14
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-Message[305]: Using default destination of 1 (file).
-0069   0DA6           00144     RLF REC_BYTE2
-Message[305]: Using default destination of 1 (file).
-006A   0DA5           00145     RLF REC_BYTE1
-006B   1003           00146     BCF STATUS,C
-006C   2???           00147     GOTO VERIFICACION_2
-006D                  00148 UNO:
-006D   1403           00149     BSF STATUS,C
-Message[305]: Using default destination of 1 (file).
-006E   0DA6           00150     RLF REC_BYTE2
-Message[305]: Using default destination of 1 (file).
-006F   0DA5           00151     RLF REC_BYTE1
-0070   1003           00152     BCF STATUS,C
-0071                  00153 VERIFICACION_2:
-0071   0E28           00154     SWAPF GUARDA_STATUS,W
-0072   0083           00155     MOVWF STATUS
-0073   0EA7           00156     SWAPF GUARDA_W,F
-0074   0E27           00157     SWAPF GUARDA_W,W
-0075   108B           00158     BCF INTCON,INTF
-0076   0009           00159     RETFIE
-                      00160     
-                      00161 ;IR_RCV:
-                      00162 ;BEGIN:
-                      00163 ;    BTFSC PORTB,4
-                      00164 ;    GOTO BEGIN
-                      00165 ;    CALL RETARDO_1200MICROS
-                      00166 ;    BTFSS PORTB,4
-                      00167 ;    GOTO BEGIN
-                      00168 ;    CALL RETARDO_600MICROS
-                      00169 ;BUCLE:
-                      00170 ;    CALL RETARDO_600MICROS
-                      00171 ;    BTFSS PORTB,4
-                      00172 ;    GOTO UNO
-                      00173 ;CERO: 
-                      00174 ;    BCF STATUS,C
-                      00175 ;    RRF REC_BYTE1
-                      00176 ;    RRF REC_BYTE2
-                      00177 ;    CALL RETARDO_600MICROS
-                      00178 ;    GOTO VERIFICACION_2
-                      00179 ;UNO:
-                      00180 ;    BSF STATUS,C
-                      00181 ;    RRF REC_BYTE1
-                      00182 ;    RRF REC_BYTE2
-                      00183 ;    CALL RETARDO_1200MICROS
-                      00184 ;VERIFICACION_2:
-                      00185 ;    INCF CONTADOR,1
-                      00186 ;    MOVLW D'11'
-                      00187 ;    SUBWF CONTADOR,0
-                      00188 ;    BTFSS STATUS,Z
-                      00189 ;    GOTO BUCLE
-                      00190 ;    RETURN
-                      00191 
-                      00192 ;RETARDO DE 1.2MS USANDO TIMER0.
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 15
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-0077                  00193 RETARDO_2500MICROS:
-0077   110B           00194     BCF INTCON,T0IF
-0078   3064           00195     MOVLW D'100'
-0079   0081           00196     MOVWF TMR0
-007A                  00197 COMPROBAR:
-007A   1D0B           00198     BTFSS INTCON,T0IF
-007B   2???           00199     GOTO COMPROBAR
-007C   0008           00200     RETURN
-                      00201     
-                      00202 ;RETARDO DE 600 MICROS USANDO TIMER0.
-007D                  00203 RETARDO_900MICROS:
-007D   110B           00204     BCF INTCON,T0IF
-007E   30C8           00205     MOVLW D'200'
-007F   0081           00206     MOVWF TMR0
-0080                  00207 COMPROBAR_2:
-0080   1D0B           00208     BTFSS INTCON,T0IF
-0081   2???           00209     GOTO COMPROBAR_2
-0082   0008           00210     RETURN
-                      00211     
-                      00212     #INCLUDE <RETARDOS.inc>
+0071   0E28           00140     SWAPF GUARDA_STATUS,W
+0072   0083           00141     MOVWF STATUS
+0073   0EA7           00142     SWAPF GUARDA_W,F
+0074   0E27           00143     SWAPF GUARDA_W,W
+0075   108B           00144     BCF INTCON,INTF
+0076   0009           00145     RETFIE
+                      00146 
+                      00147 ;RETARDO DE 2.5MS USANDO TIMER0.
+0077                  00148 RETARDO_2500MICROS:
+0077   110B           00149     BCF INTCON,T0IF
+0078   3064           00150     MOVLW D'100'
+0079   0081           00151     MOVWF TMR0
+007A                  00152 COMPROBAR:
+007A   1D0B           00153     BTFSS INTCON,T0IF
+007B   2???           00154     GOTO COMPROBAR
+007C   0008           00155     RETURN
+                      00156     
+                      00157 ;RETARDO DE 900 MICROS USANDO TIMER0.
+007D                  00158 RETARDO_900MICROS:
+007D   110B           00159     BCF INTCON,T0IF
+007E   30C8           00160     MOVLW D'200'
+007F   0081           00161     MOVWF TMR0
+0080                  00162 COMPROBAR_2:
+0080   1D0B           00163     BTFSS INTCON,T0IF
+0081   2???           00164     GOTO COMPROBAR_2
+0082   0008           00165     RETURN
+                      00166     
+                      00167     #INCLUDE <RETARDOS.inc>
                       00001 ;::::::::::::: www.rodrigocarita.com ::::::::::::::::::::::::::
                       00002 ;                       Retardos.asm   Versión: 1.0
                       00003 
@@ -875,6 +824,12 @@ Warning[207]: Found label after column 1. (retbucle1)
 0085   00AA           00022          movwf  memo_tiemp_2 
 Warning[207]: Found label after column 1. (retbucle2)
 0086                  00023     retbucle2
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 0086   303A           00024          movlw  .58
 0087   00AB           00025          movwf  memo_tiemp_3     
 Warning[207]: Found label after column 1. (retbucle3)
@@ -883,12 +838,6 @@ Warning[207]: Found label after column 1. (retbucle3)
 0089   0000           00028          nop
 008A   0BAB           00029          decfsz memo_tiemp_3,1     
 008B   2???           00030          goto   retbucle3
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 16
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 008C   0BAA           00031          decfsz memo_tiemp_2,1
 008D   2???           00032          goto   retbucle2
 008E   0BA9           00033          decfsz memo_tiemp_1,1
@@ -924,7 +873,7 @@ Warning[203]: Found opcode in column 1. (RETURN)
 00A1   0008           00057 RETURN
                       00058 
                       00059 
-                      00213     #INCLUDE <LCD20X4.inc>
+                      00168     #INCLUDE <LCD20X4.inc>
 Warning[205]: Found directive in column 1. (CBLOCK)
                       00001 CBLOCK
   0000002D            00002         NumCadena               ;número de la cadena 
@@ -934,6 +883,12 @@ Warning[205]: Found directive in column 1. (CBLOCK)
   00000031            00006         caractertemp
   00000032            00007         ubicacionlcdfcr
   00000033            00008         ubicacionlcdccr
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
   00000034            00009         Varregcomp
 Warning[205]: Found directive in column 1. (ENDC)
                       00010 ENDC
@@ -942,12 +897,6 @@ Warning[205]: Found directive in column 1. (ENDC)
   00000008            00013 pinlcd EQU PORTD                ;lineas de control = portD
                       00014 
   00000001            00015 RS EQU 1 ;linea de control RS = bit1
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 17
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
   00000002            00016 RW EQU 2 ;linea de control RW = bit2
   00000003            00017 E EQU 3  ;linea de control E = bit3
                       00018 
@@ -993,6 +942,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             encia del Dato.
 00AB   0000           00051         NOP                         ;Ancho del impulso 0.2uS.                                   
 00AC   1188           00052         BCF     pinlcd,E            ;Fin del impulso. 
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 00AD   0E2F           00053         SWAPF   memocaracter,w      ;Ahora nos queda extraer los 4LSB, los intercambiamos con los de MSB
                              y almacenamos en W.
 00AE   39F0           00054         ANDLW   b'11110000'         ;Volvemos a realizar el enmascaramiento de los 4MSB despues del inte
@@ -1001,12 +956,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00B0   0000           00056         NOP                         ;Esperamos un pequeño tiempo 0.2uS.
 00B1   1588           00057         BSF     pinlcd,E            ;Realizamos el impulso en el pin de Enable para enviar la segunda pa
                             rte del comando.
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 18
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 00B2   0000           00058         NOP                         ;Ancho del impulso 0.2uS.
 00B3   1188           00059         BCF     pinlcd,E            ;Fin del impulso.
 00B4   0008           00060         RETURN                      ;Regresamos a donde nos han llamado.
@@ -1052,6 +1001,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00CB   0008           00085         RETURN                                          ;Fin de la subrutina
                       00086         
 00CC                  00087 COMPROBARSIOCUPADO:                             ;Subrutina Testeará la bandera de Busy para saber si el 
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                             controlador del módulo está ocupado.
                       00088         SEL_BANK 1                                      ;Vamos al banco 1 para cambiar los pines D4 a D7
                              como entrada, por ahi recibiremos el dato
@@ -1060,12 +1015,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                           M         BCF STATUS, RP1
                           M         ENDIF
                           M 
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 19
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                           M         IF 1==1
 00CC   1683               M         BSF STATUS, RP0
 00CD   1303               M         BCF STATUS, RP1
@@ -1111,6 +1060,12 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 00D6   0000           00096         nop                                                     ;Esperamos un prqueño tiempo de 0.2uS
 00D7   0808           00097         movf    DATOS,W                 ;Extrae el valor del registro DATOS (4msb) y lo guarda en W está
                              es la primera respuesta
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 19
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 00D8   1188           00098         bcf     pinlcd,E                ;Apagamos el pin de Enable para leer los 4lsb restantes.
 00D9   39F0           00099         andlw   0F0h                    ;La respuesta anterior la enmascaramos
 00DA   00B1           00100         movwf   caractertemp            ;Almacenamos el caracter temporalmente
@@ -1119,12 +1074,6 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 00DC   1588           00102         bsf     pinlcd,E                        ;Activamos el pin de Enable para que comience la transfe
                             rencia.
 00DD   0000           00103         nop                                                     ;Esperamos otro pequeño tiempo
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 20
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 00DE   0E08           00104         swapf   DATOS,w                 ;Leemos la respuesta y lo intercambiamos con los 4msb para guard
                             arlo en W
 00DF   1188           00105         bcf     pinlcd,E                ;Apagamos la transferencia.
@@ -1170,6 +1119,12 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                           M         BSF STATUS, RP0
                           M         BCF STATUS, RP1
                           M         ENDIF
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 20
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                           M 
                           M         IF 0==2
                           M         BCF STATUS, RP0
@@ -1178,12 +1133,6 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                           M 
                           M         IF 0==3
                           M         BSF STATUS, RP0
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 21
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                           M         BSF STATUS, RP1
                           M         ENDIF
 00EB   0008           00115         RETURN                                          ;Salimos de la subrutina
@@ -1229,6 +1178,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                           M         ENDIF
                           M 
                           M         IF 1==2
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 21
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                           M         BCF STATUS, RP0
                           M         BSF STATUS, RP1
                           M         ENDIF
@@ -1237,12 +1192,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                           M         BSF STATUS, RP0
                           M         BSF STATUS, RP1
                           M         ENDIF
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 22
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 00F5   300F           00126         movlw B'00001111'       ;Declaramos Todos los pines como salida 
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 00F6   0088           00127         movwf TRISD                             ;Del puerto D
@@ -1288,6 +1237,12 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                             s
 0104   300A               M                          movlw .10
 0105   2???               M                          call  milisegundos
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 22
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 0106   3030           00142         movlw   B'00110000'             ;Segundo valor pedido por el fabricante
 0107   0088           00143         movwf   DATOS                   ;Lo escribimos en el Puerto D
 0108   0000           00144         nop                                                     ;Esperamos un pequeño tiempo
@@ -1296,12 +1251,6 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 010B   1188           00147         bcf     pinlcd,E                        ;Fin del impulso        
 010C   3030           00148         movlw   B'00110000'             ;Tercer valor pedido por el fabricante
 010D   0088           00149         movwf   DATOS                   ;Lo escribimos en el Puerto D
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 23
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 010E   0000           00150         nop                                                     ;Esperamos un pequeño tiempo
 010F   1588           00151         bsf     pinlcd,E                ;Enviamos un impulso al pin de Enable para enviar el dato
 0110   0000           00152         nop                                                     ;Ancho del impulso 0,2 uS
@@ -1347,6 +1296,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00185         BCD_CONVERT Varregcomp  ;Separa en 3 registros (dígitos)el valor
 0126   0834               M         MOVF Varregcomp,0
 0127   2???               M         CALL BINARIO_BCD
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 23
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00186         
                       00187         ;Para valores inferiores a 10
 0128   300A           00188         MOVLW d'10'           ;Carga el valor de 10 en una variable    
@@ -1355,12 +1310,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 012B   2???           00191         GOTO UND1G            ;Caso verdadero subrutina para escribir 1 digito
 012C   3064           00192         MOVLW d'100'          ;Carga el valor de 100 en una variable
 012D   0234           00193         SUBWF Varregcomp,0    ;De comparación 
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 24
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 012E   1C03           00194         BTFSS STATUS,C        ;El resultado es de dos digitos?
 012F   2???           00195         GOTO D0SDIG           ;Caso verdadero subrutina de escribir 2 digitos
 0130   30FF           00196         MOVLW d'255'          ;Carga el valor de 100 en una
@@ -1406,6 +1355,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00215         WRITE_LCD_REG BCD_UNIDAD ;Escribe el penúltimo digito
 014C   3030               M         MOVLW .48
 014D   0735               M         ADDWF BCD_UNIDAD,0
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 24
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 014E   2???               M         CALL  ESCRIBIRCARACTER   ;Subrutina en la librería que me permite enviar el valor
 014F   2???           00216         GOTO FUERALIM1T3       ;Se va a finalizar la subrutina 
                       00217 ;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -1414,12 +1369,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0150                  00220 subp4arab0rf1l:
                       00221         MOV_VAL .16,indice
 0150   3010               M         MOVLW .16
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 25
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 0151   00AE               M         MOVWF indice
                       00222         WRITE_LCD ' '
 0152   3020               M         MOVLW ' '
@@ -1430,7 +1379,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00226 ;................... Descarga la actualizaciones en: www.rodrigocarita.com      
                       00227         
                       00228 
-                      00214     #INCLUDE <BCD.INC>
+                      00169     #INCLUDE <BCD.INC>
                       00001     CBLOCK
   00000035            00002     BCD_UNIDAD
   00000036            00003     BCD_DECENA
@@ -1465,8 +1414,14 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00032 
                       00033 
                       00034 
-2FC2 3FFF             00215     END
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 26
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 25
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+2FC2 3FFF             00170     END
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 26
 
 
 SYMBOL TABLE
@@ -1525,7 +1480,7 @@ BRG12                             00000004
 BRG13                             00000005
 BRG14                             00000006
 BRG15                             00000007
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 27
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 27
 
 
 SYMBOL TABLE
@@ -1584,7 +1539,7 @@ CCP2M3                            00000003
 CCP2X                             00000005
 CCP2Y                             00000004
 CCPR1                             00000015
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 28
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 28
 
 
 SYMBOL TABLE
@@ -1643,7 +1598,7 @@ EECON2                            0000018D
 EEDAT                             0000010C
 EEDATA                            0000010C
 EEDATH                            0000010E
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 29
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 29
 
 
 SYMBOL TABLE
@@ -1702,7 +1657,7 @@ LCD_INIT
 LTS                               00000001
 MC1OUT                            00000007
 MC2OUT                            00000006
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 30
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 30
 
 
 SYMBOL TABLE
@@ -1761,7 +1716,7 @@ PDC6                              00000006
 PEIE                              00000006
 PEN                               00000002
 PIE1                              0000008C
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 31
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 31
 
 
 SYMBOL TABLE
@@ -1820,7 +1775,7 @@ RC6                               00000006
 RC7                               00000007
 RC8_9                             00000006
 RC9                               00000006
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 32
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 32
 
 
 SYMBOL TABLE
@@ -1879,7 +1834,7 @@ SPBRGH                            0000009A
 SPEN                              00000007
 SR0                               00000006
 SR1                               00000007
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 33
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 33
 
 
 SYMBOL TABLE
@@ -1938,7 +1893,7 @@ TMR1H                             0000000F
 TMR1IE                            00000000
 TMR1IF                            00000000
 TMR1L                             0000000E
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 34
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 34
 
 
 SYMBOL TABLE
@@ -1997,7 +1952,7 @@ TRISE2                            00000002
 TRISE3                            00000003
 TRMT                              00000001
 TUN0                              00000000
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 35
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 35
 
 
 SYMBOL TABLE
@@ -2056,7 +2011,7 @@ WR                                00000001
 WREN                              00000002
 WRERR                             00000003
 WRITE_LCD                         
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 36
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 36
 
 
 SYMBOL TABLE
@@ -2115,7 +2070,7 @@ _INTOSCIO                         00003FFC
 _INTRC_OSC_CLKOUT                 00003FFD
 _INTRC_OSC_NOCLKOUT               00003FFC
 _LP_OSC                           00003FF8
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 37
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 37
 
 
 SYMBOL TABLE
@@ -2174,7 +2129,7 @@ mensaje
 milisegundo                       
 milisegundos                      00000083
 mover_cursor_derecha              00000014
-MPASM 5.86                      RECEPTOR.ASM   9-24-2020  10:56:51         PAGE 38
+MPASM 5.86                      RECEPTOR.ASM   9-24-2020  11:50:30         PAGE 38
 
 
 SYMBOL TABLE

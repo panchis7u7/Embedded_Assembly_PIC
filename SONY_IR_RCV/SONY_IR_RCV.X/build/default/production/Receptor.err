@@ -30,16 +30,16 @@ Warning[205] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\MACROS.INC 449 : Found d
 Warning[205] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\MACROS.INC 457 : Found directive in column 1. (endm)
 Warning[207] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 11 : Found label after column 1. (START_PASSED)
 Warning[205] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 23 : Found directive in column 1. (ENDC)
-Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 104 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 105 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 108 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 109 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 110 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 112 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 144 : Using default destination of 1 (file).
-Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 145 : Using default destination of 1 (file).
-Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 150 : Using default destination of 1 (file).
-Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 151 : Using default destination of 1 (file).
+Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 90 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 91 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 94 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 95 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 96 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 98 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 130 : Using default destination of 1 (file).
+Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 131 : Using default destination of 1 (file).
+Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 136 : Using default destination of 1 (file).
+Message[305] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RECEPTOR.ASM 137 : Using default destination of 1 (file).
 Warning[207] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RETARDOS.INC 20 : Found label after column 1. (retbucle1)
 Warning[207] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RETARDOS.INC 23 : Found label after column 1. (retbucle2)
 Warning[207] E:\PROYECTOS\PIC\SONY_IR_RCV\SONY_IR_RCV.X\RETARDOS.INC 26 : Found label after column 1. (retbucle3)

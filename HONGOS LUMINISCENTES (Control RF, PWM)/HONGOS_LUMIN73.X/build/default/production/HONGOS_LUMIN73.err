@@ -1,8 +1,15 @@
-Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 27 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 28 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 30 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 32 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 34 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 8 : Found label after column 1. (START_PASSED)
+Warning[207] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 9 : Found label after column 1. (END_RECV)
 Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 35 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 37 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[207] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 147 : Found label after column 1. (RETARDO_15MS_4_0)
+Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 36 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 39 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 44 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 45 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 46 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 48 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 149 : Using default destination of 1 (file).
+Message[305] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 175 : Using default destination of 1 (file).
+Message[305] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 251 : Using default destination of 1 (file).
+Message[305] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 252 : Using default destination of 1 (file).
+Message[305] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 257 : Using default destination of 1 (file).
+Message[305] E:\PROYECTOS\PIC\HONGOS LUMINISCENTES (CONTROL RF, PWM)\HONGOS_LUMIN73.X\HONGOS_LUMIN73.ASM 258 : Using default destination of 1 (file).
